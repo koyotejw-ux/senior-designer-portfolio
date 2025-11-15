@@ -312,8 +312,7 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage>
                 context.go('/cover-letter');
                 break;
               case DocumentType.portfolio:
-                // TODO: 포트폴리오 상세 페이지로 이동
-                setState(() => selectedDocumentId = doc.id);
+                context.go('/portfolio');
                 break;
             }
           },

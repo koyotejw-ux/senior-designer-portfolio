@@ -6,6 +6,8 @@ import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/widgets/app_header.dart';
 import '../../../../core/widgets/scroll_reveal_widget.dart';
 import 'dart:math' as math;
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
 /// 정재웅 이력서 - 실제 경력 기반 인터랙티브 웹 디자인
 class ResumePage extends ConsumerStatefulWidget {
@@ -1441,7 +1443,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
           const SizedBox(height: 56),
           ElevatedButton.icon(
             onPressed: () {
-              // TODO: PDF 다운로드 기능
+              html.window.print();
             },
             icon: const Icon(Icons.download, size: 24),
             label: Text(
