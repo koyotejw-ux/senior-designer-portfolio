@@ -1,0 +1,271 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_typography.dart';
+import '../../../../core/constants/app_constants.dart';
+import 'polygon_network_background.dart';
+
+class HeroSection extends StatefulWidget {
+  const HeroSection({super.key});
+
+  @override
+  State<HeroSection> createState() => _HeroSectionState();
+}
+
+class _HeroSectionState extends State<HeroSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 20),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final isMobile = size.width < AppConstants.mobileBreakpoint;
+
+    return Container(
+      height: size.height,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.deepSpace,
+            AppColors.darkNavy,
+            AppColors.charcoal,
+          ],
+        ),
+      ),
+      child: Stack(
+        children: [
+          // Animated Polygon Network Background
+          Positioned.fill(
+            child: PolygonNetworkBackground(controller: _controller),
+          ),
+
+          // Content
+          Center(
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: AppConstants.maxContentWidth),
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile
+                    ? AppConstants.spacingL
+                    : AppConstants.spacingXXXL,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Overline
+                  Text(
+                    '20 YEARS OF EXCELLENCE',
+                    style: AppTypography.overline.copyWith(
+                      color: AppColors.primaryBlue,
+                    ),
+                  )
+                      .animate()
+                      .fadeIn(duration: 600.ms, delay: 200.ms)
+                      .slideX(begin: -0.2, end: 0),
+
+                  const SizedBox(height: AppConstants.spacingM),
+
+                  // Main Title
+                  Text(
+                    AppConstants.designerName,
+                    style: isMobile
+                        ? AppTypography.display3
+                        : AppTypography.display1,
+                  )
+                      .animate()
+                      .fadeIn(duration: 800.ms, delay: 400.ms)
+                      .slideY(begin: 0.3, end: 0),
+
+                  const SizedBox(height: AppConstants.spacingL),
+
+                  // Tagline with gradient
+                  ShaderMask(
+                    shaderCallback: (bounds) => AppColors.accentGradient.createShader(
+                      Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                    ),
+                    child: Text(
+                      AppConstants.tagline,
+                      style: isMobile
+                          ? AppTypography.h5
+                          : AppTypography.h3,
+                    ),
+                  )
+                      .animate()
+                      .fadeIn(duration: 800.ms, delay: 600.ms)
+                      .slideY(begin: 0.3, end: 0),
+
+                  const SizedBox(height: AppConstants.spacingXXL),
+
+                  // Key Capabilities
+                  Wrap(
+                    spacing: AppConstants.spacingM,
+                    runSpacing: AppConstants.spacingM,
+                    children: [
+                      _buildCapabilityChip('Design Systems'),
+                      _buildCapabilityChip('Data-Driven Decisions'),
+                      _buildCapabilityChip('AI/ML Integration'),
+                      _buildCapabilityChip('User Research'),
+                    ]
+                        .animate(interval: 100.ms)
+                        .fadeIn(duration: 600.ms, delay: 800.ms)
+                        .scale(begin: const Offset(0.8, 0.8)),
+                  ),
+
+                  const SizedBox(height: AppConstants.spacingXXXL),
+
+                  // CTA Buttons
+                  Row(
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.work_outline),
+                        label: const Text('View Portfolio'),
+                        style: ElevatedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 20,
+                          ),
+                        ),
+                      )
+                          .animate()
+                          .fadeIn(duration: 600.ms, delay: 1000.ms)
+                          .slideX(begin: -0.2, end: 0),
+
+                      const SizedBox(width: AppConstants.spacingL),
+
+                      OutlinedButton.icon(
+                        onPressed: () {},
+                        icon: const Icon(Icons.download),
+                        label: const Text('Download Resume'),
+                        style: OutlinedButton.styleFrom(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 32,
+                            vertical: 20,
+                          ),
+                        ),
+                      )
+                          .animate()
+                          .fadeIn(duration: 600.ms, delay: 1100.ms)
+                          .slideX(begin: -0.2, end: 0),
+                    ],
+                  ),
+
+                  const SizedBox(height: AppConstants.spacingXXL),
+
+                  // Contact Info
+                  Row(
+                    children: [
+                      _buildContactInfo(Icons.email, AppConstants.email),
+                      const SizedBox(width: AppConstants.spacingXL),
+                      _buildContactInfo(Icons.phone, AppConstants.phone),
+                    ]
+                        .animate(interval: 100.ms)
+                        .fadeIn(duration: 600.ms, delay: 1200.ms)
+                        .slideY(begin: 0.2, end: 0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Scroll Indicator
+          Positioned(
+            bottom: AppConstants.spacingXXL,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Column(
+                children: [
+                  Text(
+                    'SCROLL TO EXPLORE',
+                    style: AppTypography.overline.copyWith(
+                      color: AppColors.gray400,
+                    ),
+                  ),
+                  const SizedBox(height: AppConstants.spacingS),
+                  Icon(
+                    Icons.keyboard_arrow_down,
+                    color: AppColors.primaryBlue,
+                    size: 32,
+                  )
+                      .animate(
+                        onPlay: (controller) => controller.repeat(),
+                      )
+                      .moveY(
+                        begin: 0,
+                        end: 10,
+                        duration: 1500.ms,
+                        curve: Curves.easeInOut,
+                      ),
+                ],
+              ),
+            ),
+          )
+              .animate()
+              .fadeIn(duration: 600.ms, delay: 1400.ms),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCapabilityChip(String label) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppConstants.spacingL,
+        vertical: AppConstants.spacingM,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.charcoal.withValues(alpha: 0.5),
+        border: Border.all(
+          color: AppColors.primaryBlue.withValues(alpha: 0.3),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(AppConstants.radiusL),
+      ),
+      child: Text(
+        label,
+        style: AppTypography.labelLarge.copyWith(
+          color: AppColors.primaryBlue,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContactInfo(IconData icon, String text) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          icon,
+          size: 20,
+          color: AppColors.gray300,
+        ),
+        const SizedBox(width: AppConstants.spacingS),
+        Text(
+          text,
+          style: AppTypography.bodyMedium.copyWith(
+            color: AppColors.gray300,
+          ),
+        ),
+      ],
+    );
+  }
+}
