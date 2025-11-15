@@ -215,6 +215,7 @@ class _PortfolioGallerySectionState extends ConsumerState<PortfolioGallerySectio
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: [
               // Category badge
               Container(
@@ -291,7 +292,7 @@ class _PortfolioGallerySectionState extends ConsumerState<PortfolioGallerySectio
                 overflow: TextOverflow.ellipsis,
               ),
 
-              const Spacer(),
+              const SizedBox(height: 20),
 
               // Tags
               Wrap(
