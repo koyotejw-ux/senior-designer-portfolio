@@ -16,9 +16,11 @@ class ResumeSection extends ConsumerWidget {
 
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 24 : size.width * 0.1,
-        vertical: 40,
+      padding: EdgeInsets.only(
+        left: isMobile ? 24 : size.width * 0.1,
+        right: isMobile ? 24 : size.width * 0.1,
+        top: isMobile ? 100 : 120,
+        bottom: 40,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

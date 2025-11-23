@@ -11,6 +11,74 @@ class AppHeader extends ConsumerWidget {
 
   const AppHeader({super.key, required this.showLogo, this.onMenuClick});
 
+  void _showMobileMenu(BuildContext context, bool isDark) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (context) => Container(
+        decoration: BoxDecoration(
+          color: isDark ? AppColors.deepSpace : Colors.white,
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          border: Border.all(
+            color: isDark
+                ? AppColors.primaryBlue.withValues(alpha: 0.3)
+                : AppColors.lightGray300,
+            width: 2,
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 12, bottom: 20),
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: isDark
+                    ? AppColors.gray100.withValues(alpha: 0.3)
+                    : AppColors.lightGray500,
+                borderRadius: BorderRadius.circular(2),
+              ),
+            ),
+            _buildBottomSheetItem(context, 'Resume', isDark),
+            _buildBottomSheetItem(context, 'Experience', isDark),
+            _buildBottomSheetItem(context, 'About', isDark),
+            _buildBottomSheetItem(context, 'Portfolio', isDark),
+            const SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBottomSheetItem(
+    BuildContext context,
+    String label,
+    bool isDark,
+  ) {
+    return InkWell(
+      onTap: () {
+        Navigator.pop(context);
+        if (onMenuClick != null) {
+          onMenuClick!(label);
+        }
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontFamily: 'Pretendard',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: isDark ? AppColors.gray100 : AppColors.lightText,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDark = ref.watch(themeModeProvider) == ThemeMode.dark;
@@ -19,17 +87,28 @@ class AppHeader extends ConsumerWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       height: isMobile ? 60 : 80,
-      color: showLogo
-          ? (isDark
-                ? AppColors.deepSpace.withValues(alpha: 0.9)
-                : Colors.white.withValues(alpha: 0.9))
-          : Colors.transparent,
+      decoration: BoxDecoration(
+        color: showLogo
+            ? (isDark
+                  ? AppColors.deepSpace.withValues(alpha: 0.9)
+                  : Colors.white.withValues(alpha: 0.9))
+            : Colors.transparent,
+        border: showLogo
+            ? Border(
+                bottom: BorderSide(
+                  color: isDark
+                      ? Colors.white.withValues(alpha: 0.1)
+                      : Colors.black.withValues(alpha: 0.1),
+                  width: 1,
+                ),
+              )
+            : null,
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 60),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            // Logo (animated reveal on scroll)
             AnimatedOpacity(
               opacity: showLogo ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 300),
@@ -38,19 +117,33 @@ class AppHeader extends ConsumerWidget {
                 offset: showLogo ? Offset.zero : const Offset(-0.3, 0),
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut,
-                child: SvgPicture.asset(
-                  'assets/images/logo.svg',
-                  width: isMobile ? 100 : 140,
-                  height: isMobile ? 33 : 47,
+                child: GestureDetector(
+                  onTap: () {
+                    if (onMenuClick != null) {
+                      onMenuClick!('Home');
+                    }
+                  },
+                  child: SvgPicture.asset(
+                    'assets/images/logo.svg',
+                    width: isMobile ? 70 : 85,
+                    height: isMobile ? 23 : 28,
+                  ),
                 ),
               ),
             ),
 
-            // Navigation + Theme Toggle
-            Row(
-              children: [
-                // Navigation Menu (desktop only)
-                if (!isMobile) ...[
+            if (isMobile)
+              IconButton(
+                icon: Icon(
+                  Icons.menu,
+                  color: isDark ? AppColors.gray100 : AppColors.lightText,
+                  size: 28,
+                ),
+                onPressed: () => _showMobileMenu(context, isDark),
+              )
+            else
+              Row(
+                children: [
                   _buildNavLink(context, 'Resume', '/resume', isDark),
                   const SizedBox(width: 32),
                   _buildNavLink(context, 'Experience', '/experience', isDark),
@@ -58,53 +151,8 @@ class AppHeader extends ConsumerWidget {
                   _buildNavLink(context, 'About', '/about', isDark),
                   const SizedBox(width: 32),
                   _buildNavLink(context, 'Portfolio', '/portfolio', isDark),
-                  const SizedBox(width: 40),
                 ],
-
-                // Theme Toggle Icon Button
-                Container(
-                  decoration: BoxDecoration(
-                    color: isDark
-                        ? AppColors.charcoal.withValues(alpha: 0.5)
-                        : AppColors.lightCard,
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: isDark
-                          ? AppColors.primaryBlue.withValues(alpha: 0.3)
-                          : AppColors.primaryBlue.withValues(alpha: 0.2),
-                      width: 1.5,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: isDark
-                            ? AppColors.primaryBlue.withValues(alpha: 0.2)
-                            : AppColors.primaryBlue.withValues(alpha: 0.1),
-                        blurRadius: 12,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: () =>
-                          ref.read(themeModeProvider.notifier).toggleTheme(),
-                      borderRadius: BorderRadius.circular(100),
-                      child: Padding(
-                        padding: EdgeInsets.all(isMobile ? 10 : 12),
-                        child: Icon(
-                          isDark ? Icons.light_mode : Icons.dark_mode,
-                          size: isMobile ? 20 : 24,
-                          color: isDark
-                              ? AppColors.highlightGreen
-                              : AppColors.primaryBlue,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
           ],
         ),
       ),
@@ -120,7 +168,6 @@ class AppHeader extends ConsumerWidget {
     return TextButton(
       onPressed: () {
         if (onMenuClick != null) {
-          // All these items are now sections on the home page
           onMenuClick!(label);
         } else {
           context.go(path);

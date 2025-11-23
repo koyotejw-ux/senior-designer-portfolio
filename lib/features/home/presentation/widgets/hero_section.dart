@@ -23,32 +23,115 @@ class _HeroSectionState extends ConsumerState<HeroSection>
         size.width >= AppConstants.mobileBreakpoint && size.width < 1000;
     final isDark = ref.watch(themeModeProvider) == ThemeMode.dark;
 
+    // Mobile: Vertical layout with 3D object on top
+    if (isMobile) {
+      return Container(
+        height: size.height,
+        width: double.infinity,
+        color: Colors.transparent,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // 3D Object at top-center
+            if (isDark)
+              SizedBox(
+                height: size.height * 0.35,
+                child: Center(
+                  child: InteractiveGeometricShape(
+                    size: size.width * 0.7,
+                    isDark: isDark,
+                  ),
+                ),
+              ),
+
+            const SizedBox(height: 40),
+
+            // Content below - centered
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // Logo
+                  SvgPicture.asset('assets/images/logo.svg', width: 240)
+                      .animate()
+                      .fadeIn(duration: 1000.ms)
+                      .slideY(begin: 0.2, end: 0),
+
+                  const SizedBox(height: 16),
+
+                  // Subtitle
+                  Text(
+                        'UX/UI Designer',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontSize: 28,
+                          fontWeight: FontWeight.w300,
+                          color: Color(0xFF8B95A1),
+                          letterSpacing: -0.5,
+                        ),
+                      )
+                      .animate()
+                      .fadeIn(duration: 1000.ms, delay: 300.ms)
+                      .slideY(begin: 0.2, end: 0),
+
+                  const SizedBox(height: 40),
+
+                  // Contact Info
+                  Column(
+                        children: [
+                          Text(
+                            'coyotejw@naver.com',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF8B95A1),
+                              decoration: TextDecoration.underline,
+                              decorationColor: Color(0xFF8B95A1),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            '+82 10 4375 3599',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF8B95A1),
+                            ),
+                          ),
+                        ],
+                      )
+                      .animate()
+                      .fadeIn(duration: 1000.ms, delay: 600.ms)
+                      .slideY(begin: 0.2, end: 0),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    // Desktop/Tablet: Original horizontal layout
     return Container(
       height: size.height,
       width: double.infinity,
       color: Colors.transparent,
       child: Stack(
         children: [
-          // Interactive 3D Shape - Responsive Positioning
+          // Interactive 3D Shape - Right side
           if (isDark)
             Positioned(
-              // On Mobile/Tablet: Top Right, smaller
-              // On Desktop: Right Center, larger
-              right: isMobile
-                  ? -size.width * 0.1
-                  : (isTablet ? 0 : size.width * 0.05),
-              top: isMobile
-                  ? size.height * 0.1
-                  : (isTablet ? size.height * 0.1 : size.height * 0.15),
-              bottom: isMobile ? null : size.height * 0.15,
+              right: isTablet ? 0 : size.width * 0.05,
+              top: isTablet ? size.height * 0.1 : size.height * 0.15,
+              bottom: size.height * 0.15,
               child: Center(
                 child: InteractiveGeometricShape(
-                  size: isMobile
-                      ? size.width *
-                            0.6 // Mobile: 60% width
-                      : (isTablet
-                            ? size.width * 0.5
-                            : size.width * 0.45), // Desktop: 45%
+                  size: isTablet ? size.width * 0.5 : size.width * 0.45,
                   isDark: isDark,
                 ),
               ),
@@ -56,19 +139,16 @@ class _HeroSectionState extends ConsumerState<HeroSection>
 
           // Main Content - Center Left
           Positioned(
-            left: isMobile ? 24 : size.width * 0.1,
+            left: size.width * 0.1,
             top: 0,
             bottom: 0,
-            right: isMobile ? 24 : size.width * 0.5,
+            right: size.width * 0.5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // CJW Logo
-                SvgPicture.asset(
-                      'assets/images/logo.svg',
-                      width: isMobile ? 200 : 420,
-                    )
+                // Logo
+                SvgPicture.asset('assets/images/logo.svg', width: 420)
                     .animate()
                     .fadeIn(duration: 1000.ms)
                     .slideX(begin: -0.2, end: 0),
@@ -81,11 +161,11 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                   child:
                       Text(
                             'UX/UI Designer',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'Pretendard',
-                              fontSize: isMobile ? 24 : 36,
+                              fontSize: 36,
                               fontWeight: FontWeight.w300,
-                              color: const Color(0xFF8B95A1),
+                              color: Color(0xFF8B95A1),
                               letterSpacing: -0.5,
                             ),
                           )
@@ -99,33 +179,29 @@ class _HeroSectionState extends ConsumerState<HeroSection>
 
           // Contact Info - Bottom Left
           Positioned(
-            left: isMobile ? 24 : size.width * 0.1,
+            left: size.width * 0.1,
             bottom: 80,
             child:
                 Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Email
                         Text(
                           'coyotejw@naver.com',
-                          style: TextStyle(
-                            fontSize: isMobile ? 14 : 16,
+                          style: const TextStyle(
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF8B95A1),
+                            color: Color(0xFF8B95A1),
                             decoration: TextDecoration.underline,
-                            decorationColor: const Color(0xFF8B95A1),
+                            decorationColor: Color(0xFF8B95A1),
                           ),
                         ),
-
                         const SizedBox(width: 60),
-
-                        // Phone
                         Text(
                           '+82 10 4375 3599',
-                          style: TextStyle(
-                            fontSize: isMobile ? 14 : 16,
+                          style: const TextStyle(
+                            fontSize: 16,
                             fontWeight: FontWeight.w400,
-                            color: const Color(0xFF8B95A1),
+                            color: Color(0xFF8B95A1),
                           ),
                         ),
                       ],

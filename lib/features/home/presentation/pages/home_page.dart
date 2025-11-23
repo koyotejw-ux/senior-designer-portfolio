@@ -86,6 +86,7 @@ class _HomePageState extends ConsumerState<HomePage>
         key!.currentContext!,
         duration: const Duration(milliseconds: 1200),
         curve: Curves.easeInOutCubic,
+        alignment: 0.0, // Position section at top, just below header
       );
       setState(() {
         _currentSectionIndex = index;
