@@ -6,8 +6,6 @@ import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/widgets/app_header.dart';
 import '../../../../core/widgets/scroll_reveal_widget.dart';
 import 'dart:math' as math;
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
 
 /// 정재웅 이력서 - 실제 경력 기반 인터랙티브 웹 디자인
 class ResumePage extends ConsumerStatefulWidget {
@@ -171,9 +169,11 @@ class _ResumePageState extends ConsumerState<ResumePage>
               child: AnimatedBuilder(
                 animation: _floatingController,
                 builder: (context, child) {
-                  final offset = math.sin(
-                          (_floatingController.value * 2 * math.pi) +
-                              (index * 0.5)) *
+                  final offset =
+                      math.sin(
+                        (_floatingController.value * 2 * math.pi) +
+                            (index * 0.5),
+                      ) *
                       20;
                   return Transform.translate(
                     offset: Offset(0, offset),
@@ -210,54 +210,70 @@ class _ResumePageState extends ConsumerState<ResumePage>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'RESUME',
-                  style: TextStyle(
-                    fontSize: isMobile ? 12 : 14,
-                    fontWeight: FontWeight.w700,
-                    color:
-                        isDark ? AppColors.accentCyan : AppColors.primaryBlue,
-                    letterSpacing: 4,
-                  ),
-                )
+                      'RESUME',
+                      style: TextStyle(
+                        fontSize: isMobile ? 12 : 14,
+                        fontWeight: FontWeight.w700,
+                        color: isDark
+                            ? AppColors.accentCyan
+                            : AppColors.primaryBlue,
+                        letterSpacing: 4,
+                      ),
+                    )
                     .animate()
                     .fadeIn(duration: 800.ms)
                     .slideY(begin: 0.5, end: 0, duration: 800.ms),
                 const SizedBox(height: 24),
                 Text(
-                  '정재웅',
-                  style: TextStyle(
-                    fontSize: isMobile ? 56 : (isTablet ? 72 : 96),
-                    fontWeight: FontWeight.w900,
-                    color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                    height: 1.0,
-                    letterSpacing: -3,
-                  ),
-                )
+                      '정재웅',
+                      style: TextStyle(
+                        fontSize: isMobile ? 56 : (isTablet ? 72 : 96),
+                        fontWeight: FontWeight.w900,
+                        color: isDark
+                            ? AppColors.gray100
+                            : AppColors.lightGray900,
+                        height: 1.0,
+                        letterSpacing: -3,
+                      ),
+                    )
                     .animate()
                     .fadeIn(duration: 800.ms, delay: 200.ms)
-                    .slideX(begin: -0.2, end: 0, duration: 800.ms, delay: 200.ms)
+                    .slideX(
+                      begin: -0.2,
+                      end: 0,
+                      duration: 800.ms,
+                      delay: 200.ms,
+                    )
                     .shimmer(
                       duration: 2000.ms,
                       delay: 1000.ms,
-                      color: (isDark
-                              ? AppColors.accentCyan
-                              : AppColors.primaryBlue)
-                          .withValues(alpha: 0.3),
+                      color:
+                          (isDark
+                                  ? AppColors.accentCyan
+                                  : AppColors.primaryBlue)
+                              .withValues(alpha: 0.3),
                     ),
                 const SizedBox(height: 16),
                 Text(
-                  'Senior Product Designer',
-                  style: TextStyle(
-                    fontSize: isMobile ? 24 : (isTablet ? 32 : 40),
-                    fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.gray200 : AppColors.lightGray800,
-                    height: 1.2,
-                    letterSpacing: -1,
-                  ),
-                )
+                      'Senior Product Designer',
+                      style: TextStyle(
+                        fontSize: isMobile ? 24 : (isTablet ? 32 : 40),
+                        fontWeight: FontWeight.w700,
+                        color: isDark
+                            ? AppColors.gray200
+                            : AppColors.lightGray800,
+                        height: 1.2,
+                        letterSpacing: -1,
+                      ),
+                    )
                     .animate()
                     .fadeIn(duration: 800.ms, delay: 400.ms)
-                    .slideX(begin: -0.2, end: 0, duration: 800.ms, delay: 400.ms),
+                    .slideX(
+                      begin: -0.2,
+                      end: 0,
+                      duration: 800.ms,
+                      delay: 400.ms,
+                    ),
                 const SizedBox(height: 32),
                 Wrap(
                   spacing: 16,
@@ -278,39 +294,40 @@ class _ResumePageState extends ConsumerState<ResumePage>
 
   Widget _buildHeroTag(bool isDark, bool isMobile, String text) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 20,
-        vertical: isMobile ? 10 : 12,
-      ),
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.blue900.withValues(alpha: 0.4)
-            : Colors.white.withValues(alpha: 0.8),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(
-          color:
-              isDark ? AppColors.accentCyan.withValues(alpha: 0.3) : AppColors.primaryBlue.withValues(alpha: 0.3),
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue)
-                .withValues(alpha: 0.1),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 16 : 20,
+            vertical: isMobile ? 10 : 12,
           ),
-        ],
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontSize: isMobile ? 14 : 16,
-          fontWeight: FontWeight.w600,
-          color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
-          letterSpacing: 0.5,
-        ),
-      ),
-    )
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.blue900.withValues(alpha: 0.4)
+                : Colors.white.withValues(alpha: 0.8),
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: isDark
+                  ? AppColors.accentCyan.withValues(alpha: 0.3)
+                  : AppColors.primaryBlue.withValues(alpha: 0.3),
+              width: 1.5,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue)
+                    .withValues(alpha: 0.1),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: isMobile ? 14 : 16,
+              fontWeight: FontWeight.w600,
+              color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
+              letterSpacing: 0.5,
+            ),
+          ),
+        )
         .animate()
         .fadeIn(duration: 800.ms, delay: 600.ms)
         .scale(begin: const Offset(0.8, 0.8), duration: 800.ms, delay: 600.ms);
@@ -340,9 +357,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
                     end: Alignment.bottomCenter,
                     colors: [
                       isDark ? AppColors.accentCyan : AppColors.primaryBlue,
-                      isDark
-                          ? AppColors.primaryBlue
-                          : AppColors.highlightGreen,
+                      isDark ? AppColors.primaryBlue : AppColors.highlightGreen,
                     ],
                   ),
                   borderRadius: BorderRadius.circular(2),
@@ -407,14 +422,42 @@ class _ResumePageState extends ConsumerState<ResumePage>
             crossAxisSpacing: 16,
             childAspectRatio: isMobile ? 1.1 : 1.2,
             children: [
-              _buildStatCard(isDark, isMobile, '19년', '경력', Icons.work_history,
-                  AppColors.primaryBlue, 0),
-              _buildStatCard(isDark, isMobile, '100+', '프로젝트',
-                  Icons.folder_special, AppColors.accentCyan, 100),
-              _buildStatCard(isDark, isMobile, '다양한', '플랫폼', Icons.devices,
-                  AppColors.highlightGreen, 200),
-              _buildStatCard(isDark, isMobile, '전문', 'Hi-Fi 프로토타입', Icons.code,
-                  const Color(0xFFFF9800), 300),
+              _buildStatCard(
+                isDark,
+                isMobile,
+                '19년',
+                '경력',
+                Icons.work_history,
+                AppColors.primaryBlue,
+                0,
+              ),
+              _buildStatCard(
+                isDark,
+                isMobile,
+                '100+',
+                '프로젝트',
+                Icons.folder_special,
+                AppColors.accentCyan,
+                100,
+              ),
+              _buildStatCard(
+                isDark,
+                isMobile,
+                '다양한',
+                '플랫폼',
+                Icons.devices,
+                AppColors.highlightGreen,
+                200,
+              ),
+              _buildStatCard(
+                isDark,
+                isMobile,
+                '전문',
+                'Hi-Fi 프로토타입',
+                Icons.code,
+                const Color(0xFFFF9800),
+                300,
+              ),
             ],
           ),
         ],
@@ -422,66 +465,70 @@ class _ResumePageState extends ConsumerState<ResumePage>
     );
   }
 
-  Widget _buildStatCard(bool isDark, bool isMobile, String value, String label,
-      IconData icon, Color color, int delay) {
+  Widget _buildStatCard(
+    bool isDark,
+    bool isMobile,
+    String value,
+    String label,
+    IconData icon,
+    Color color,
+    int delay,
+  ) {
     return Container(
-      padding: EdgeInsets.all(isMobile ? 20 : 24),
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.charcoal.withValues(alpha: 0.6)
-            : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-          width: 2,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: color.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+          padding: EdgeInsets.all(isMobile ? 20 : 24),
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.charcoal.withValues(alpha: 0.6)
+                : Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: color.withValues(alpha: 0.3), width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: color.withValues(alpha: 0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(
-            icon,
-            size: isMobile ? 32 : 40,
-            color: color,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(icon, size: isMobile ? 32 : 40, color: color),
+              const SizedBox(height: 16),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: isMobile ? 24 : 28,
+                  fontWeight: FontWeight.w900,
+                  color: color,
+                  height: 1.0,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  fontSize: isMobile ? 13 : 14,
+                  fontWeight: FontWeight.w600,
+                  color: isDark ? AppColors.gray400 : AppColors.lightGray600,
+                  height: 1.3,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: isMobile ? 24 : 28,
-              fontWeight: FontWeight.w900,
-              color: color,
-              height: 1.0,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            style: TextStyle(
-              fontSize: isMobile ? 13 : 14,
-              fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.gray400 : AppColors.lightGray600,
-              height: 1.3,
-            ),
-          ),
-        ],
-      ),
-    )
+        )
         .animate()
-        .fadeIn(duration: 600.ms, delay: Duration(milliseconds: delay))
+        .fadeIn(
+          duration: 600.ms,
+          delay: Duration(milliseconds: delay),
+        )
         .slideY(
-            begin: 0.3,
-            end: 0,
-            duration: 600.ms,
-            delay: Duration(milliseconds: delay))
+          begin: 0.3,
+          end: 0,
+          duration: 600.ms,
+          delay: Duration(milliseconds: delay),
+        )
         .shimmer(
           duration: 1500.ms,
           delay: Duration(milliseconds: 800 + delay),
@@ -532,10 +579,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
                   AppColors.deepSpace.withValues(alpha: 0.5),
                   AppColors.charcoal.withValues(alpha: 0.8),
                 ]
-              : [
-                  AppColors.lightBg,
-                  Colors.white,
-                ],
+              : [AppColors.lightBg, Colors.white],
         ),
       ),
       child: Column(
@@ -584,71 +628,81 @@ class _ResumePageState extends ConsumerState<ResumePage>
             itemBuilder: (context, index) {
               final comp = competencies[index];
               return Container(
-                padding: EdgeInsets.all(isMobile ? 24 : 32),
-                decoration: BoxDecoration(
-                  color: isDark
-                      ? AppColors.charcoal.withValues(alpha: 0.6)
-                      : Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: (comp['color'] as Color).withValues(alpha: 0.3),
-                    width: 2,
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: (comp['color'] as Color).withValues(alpha: 0.1),
-                      blurRadius: 24,
-                      offset: const Offset(0, 8),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        color: (comp['color'] as Color).withValues(alpha: 0.15),
-                        borderRadius: BorderRadius.circular(12),
+                    padding: EdgeInsets.all(isMobile ? 24 : 32),
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? AppColors.charcoal.withValues(alpha: 0.6)
+                          : Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: (comp['color'] as Color).withValues(alpha: 0.3),
+                        width: 2,
                       ),
-                      child: Icon(
-                        comp['icon'] as IconData,
-                        size: isMobile ? 32 : 40,
-                        color: comp['color'] as Color,
-                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: (comp['color'] as Color).withValues(
+                            alpha: 0.1,
+                          ),
+                          blurRadius: 24,
+                          offset: const Offset(0, 8),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 20),
-                    Text(
-                      comp['title'] as String,
-                      style: TextStyle(
-                        fontSize: isMobile ? 18 : 22,
-                        fontWeight: FontWeight.w800,
-                        color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                        height: 1.3,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: (comp['color'] as Color).withValues(
+                              alpha: 0.15,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Icon(
+                            comp['icon'] as IconData,
+                            size: isMobile ? 32 : 40,
+                            color: comp['color'] as Color,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          comp['title'] as String,
+                          style: TextStyle(
+                            fontSize: isMobile ? 18 : 22,
+                            fontWeight: FontWeight.w800,
+                            color: isDark
+                                ? AppColors.gray100
+                                : AppColors.lightGray900,
+                            height: 1.3,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          comp['description'] as String,
+                          style: TextStyle(
+                            fontSize: isMobile ? 14 : 15,
+                            color: isDark
+                                ? AppColors.gray400
+                                : AppColors.lightGray600,
+                            height: 1.6,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 12),
-                    Text(
-                      comp['description'] as String,
-                      style: TextStyle(
-                        fontSize: isMobile ? 14 : 15,
-                        color: isDark ? AppColors.gray400 : AppColors.lightGray600,
-                        height: 1.6,
-                      ),
-                    ),
-                  ],
-                ),
-              )
+                  )
                   .animate()
                   .fadeIn(
-                      duration: 600.ms,
-                      delay: Duration(milliseconds: index * 100))
+                    duration: 600.ms,
+                    delay: Duration(milliseconds: index * 100),
+                  )
                   .slideY(
-                      begin: 0.3,
-                      end: 0,
-                      duration: 600.ms,
-                      delay: Duration(milliseconds: index * 100));
+                    begin: 0.3,
+                    end: 0,
+                    duration: 600.ms,
+                    delay: Duration(milliseconds: index * 100),
+                  );
             },
           ),
         ],
@@ -694,9 +748,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
         'company': '블루스톤소프트',
         'position': '아트실 GUI파트 / 책임연구원',
         'period': '2016.05 - 2017.06',
-        'projects': [
-          'SOULARK 모바일 게임 UX/UI 개발',
-        ],
+        'projects': ['SOULARK 모바일 게임 UX/UI 개발'],
         'achievements': [
           '마일스톤 3/4/5단계 주요 목표 전 항목 100% 달성',
           '개발 프로세스 효율성 20% 향상',
@@ -798,156 +850,166 @@ class _ResumePageState extends ConsumerState<ResumePage>
     required int index,
   }) {
     return Container(
-      padding: EdgeInsets.all(isMobile ? 24 : 32),
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.blue900.withValues(alpha: 0.15)
-            : AppColors.lightGray100,
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-          width: 2,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: color.withValues(alpha: 0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+          padding: EdgeInsets.all(isMobile ? 24 : 32),
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.blue900.withValues(alpha: 0.15)
+                : AppColors.lightGray100,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: color.withValues(alpha: 0.3), width: 2),
+            boxShadow: [
+              BoxShadow(
+                color: color.withValues(alpha: 0.08),
+                blurRadius: 20,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      company,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          company,
+                          style: TextStyle(
+                            fontSize: isMobile ? 24 : 28,
+                            fontWeight: FontWeight.w900,
+                            color: color,
+                            height: 1.2,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          position,
+                          style: TextStyle(
+                            fontSize: isMobile ? 16 : 18,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? AppColors.gray200
+                                : AppColors.lightGray800,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      color: color.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text(
+                      period,
                       style: TextStyle(
-                        fontSize: isMobile ? 24 : 28,
-                        fontWeight: FontWeight.w900,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
                         color: color,
-                        height: 1.2,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      position,
-                      style: TextStyle(
-                        fontSize: isMobile ? 16 : 18,
-                        fontWeight: FontWeight.w600,
-                        color: isDark ? AppColors.gray200 : AppColors.lightGray800,
-                      ),
-                    ),
-                  ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Text(
+                '주요 프로젝트',
+                style: TextStyle(
+                  fontSize: isMobile ? 15 : 16,
+                  fontWeight: FontWeight.w700,
+                  color: isDark ? AppColors.gray100 : AppColors.lightGray900,
                 ),
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(8),
+              const SizedBox(height: 12),
+              ...projects.map(
+                (project) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 8),
+                        width: 6,
+                        height: 6,
+                        decoration: BoxDecoration(
+                          color: color,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          project,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: isDark
+                                ? AppColors.gray300
+                                : AppColors.lightGray700,
+                            height: 1.6,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Text(
-                  period,
-                  style: TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                    color: color,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                '주요 성과',
+                style: TextStyle(
+                  fontSize: isMobile ? 15 : 16,
+                  fontWeight: FontWeight.w700,
+                  color: isDark ? AppColors.gray100 : AppColors.lightGray900,
+                ),
+              ),
+              const SizedBox(height: 12),
+              ...achievements.map(
+                (achievement) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(Icons.star, size: 18, color: color),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          achievement,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: isDark
+                                ? AppColors.gray200
+                                : AppColors.lightGray800,
+                            height: 1.6,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          Text(
-            '주요 프로젝트',
-            style: TextStyle(
-              fontSize: isMobile ? 15 : 16,
-              fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-            ),
-          ),
-          const SizedBox(height: 12),
-          ...projects.map((project) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 8),
-                      width: 6,
-                      height: 6,
-                      decoration: BoxDecoration(
-                        color: color,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        project,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: isDark ? AppColors.gray300 : AppColors.lightGray700,
-                          height: 1.6,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-          const SizedBox(height: 20),
-          Text(
-            '주요 성과',
-            style: TextStyle(
-              fontSize: isMobile ? 15 : 16,
-              fontWeight: FontWeight.w700,
-              color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-            ),
-          ),
-          const SizedBox(height: 12),
-          ...achievements.map((achievement) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      Icons.star,
-                      size: 18,
-                      color: color,
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        achievement,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                          color: isDark ? AppColors.gray200 : AppColors.lightGray800,
-                          height: 1.6,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )),
-        ],
-      ),
-    )
+        )
         .animate()
-        .fadeIn(duration: 600.ms, delay: Duration(milliseconds: index * 150))
+        .fadeIn(
+          duration: 600.ms,
+          delay: Duration(milliseconds: index * 150),
+        )
         .slideX(
-            begin: -0.1,
-            end: 0,
-            duration: 600.ms,
-            delay: Duration(milliseconds: index * 150));
+          begin: -0.1,
+          end: 0,
+          duration: 600.ms,
+          delay: Duration(milliseconds: index * 150),
+        );
   }
 
   Widget _buildSkillsSection(bool isDark, bool isMobile, bool isTablet) {
@@ -977,12 +1039,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
       },
       {
         'category': 'Platforms',
-        'skills': [
-          'Android',
-          'iOS',
-          'Web (Responsive)',
-          'Linux (Custom ROM)',
-        ],
+        'skills': ['Android', 'iOS', 'Web (Responsive)', 'Linux (Custom ROM)'],
         'color': AppColors.highlightGreen,
       },
       {
@@ -1013,10 +1070,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
                   AppColors.deepSpace.withValues(alpha: 0.5),
                   AppColors.charcoal.withValues(alpha: 0.8),
                 ]
-              : [
-                  AppColors.lightBg,
-                  Colors.white,
-                ],
+              : [AppColors.lightBg, Colors.white],
         ),
       ),
       child: Column(
@@ -1088,10 +1142,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
             Container(
               width: 8,
               height: 8,
-              decoration: BoxDecoration(
-                color: color,
-                shape: BoxShape.circle,
-              ),
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
             ),
             const SizedBox(width: 12),
             Text(
@@ -1112,45 +1163,53 @@ class _ResumePageState extends ConsumerState<ResumePage>
             final index = entry.key;
             final skill = entry.value;
             return Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 16 : 20,
-                vertical: isMobile ? 12 : 14,
-              ),
-              decoration: BoxDecoration(
-                color: isDark
-                    ? AppColors.charcoal.withValues(alpha: 0.6)
-                    : Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: color.withValues(alpha: 0.4),
-                  width: 1.5,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: color.withValues(alpha: 0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 16 : 20,
+                    vertical: isMobile ? 12 : 14,
                   ),
-                ],
-              ),
-              child: Text(
-                skill,
-                style: TextStyle(
-                  fontSize: isMobile ? 14 : 15,
-                  fontWeight: FontWeight.w600,
-                  color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                ),
-              ),
-            )
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? AppColors.charcoal.withValues(alpha: 0.6)
+                        : Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: color.withValues(alpha: 0.4),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: color.withValues(alpha: 0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Text(
+                    skill,
+                    style: TextStyle(
+                      fontSize: isMobile ? 14 : 15,
+                      fontWeight: FontWeight.w600,
+                      color: isDark
+                          ? AppColors.gray100
+                          : AppColors.lightGray900,
+                    ),
+                  ),
+                )
                 .animate()
                 .fadeIn(
-                    duration: 500.ms,
-                    delay: Duration(milliseconds: categoryIndex * 200 + index * 50))
+                  duration: 500.ms,
+                  delay: Duration(
+                    milliseconds: categoryIndex * 200 + index * 50,
+                  ),
+                )
                 .scale(
-                    begin: const Offset(0.8, 0.8),
-                    end: const Offset(1.0, 1.0),
-                    duration: 500.ms,
-                    delay: Duration(milliseconds: categoryIndex * 200 + index * 50));
+                  begin: const Offset(0.8, 0.8),
+                  end: const Offset(1.0, 1.0),
+                  duration: 500.ms,
+                  delay: Duration(
+                    milliseconds: categoryIndex * 200 + index * 50,
+                  ),
+                );
           }).toList(),
         ),
       ],
@@ -1241,8 +1300,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
             style: TextStyle(
               fontSize: isMobile ? 20 : 24,
               fontWeight: FontWeight.w800,
-              color:
-                  isDark ? AppColors.accentCyan : AppColors.primaryBlue,
+              color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
             ),
           ),
           const SizedBox(height: 20),
@@ -1269,8 +1327,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
             style: TextStyle(
               fontSize: isMobile ? 20 : 24,
               fontWeight: FontWeight.w800,
-              color:
-                  isDark ? AppColors.accentCyan : AppColors.primaryBlue,
+              color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
             ),
           ),
           const SizedBox(height: 20),
@@ -1307,73 +1364,74 @@ class _ResumePageState extends ConsumerState<ResumePage>
     required int index,
   }) {
     return Container(
-      padding: EdgeInsets.all(isMobile ? 20 : 24),
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.blue900.withValues(alpha: 0.15)
-            : AppColors.lightGray100,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-          width: 1.5,
-        ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: color.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(
-              icon,
-              size: 24,
-              color: color,
-            ),
+          padding: EdgeInsets.all(isMobile ? 20 : 24),
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.blue900.withValues(alpha: 0.15)
+                : AppColors.lightGray100,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: isMobile ? 15 : 17,
-                    fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                  ),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  subtitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: isDark ? AppColors.gray400 : AppColors.lightGray600,
-                  ),
+                child: Icon(icon, size: 24, color: color),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: isMobile ? 15 : 17,
+                        fontWeight: FontWeight.w700,
+                        color: isDark
+                            ? AppColors.gray100
+                            : AppColors.lightGray900,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: isDark
+                            ? AppColors.gray400
+                            : AppColors.lightGray600,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Text(
+                period,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: color,
+                ),
+              ),
+            ],
           ),
-          Text(
-            period,
-            style: TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
-              color: color,
-            ),
-          ),
-        ],
-      ),
-    )
+        )
         .animate()
-        .fadeIn(duration: 500.ms, delay: Duration(milliseconds: index * 100))
+        .fadeIn(
+          duration: 500.ms,
+          delay: Duration(milliseconds: index * 100),
+        )
         .slideX(
-            begin: -0.1,
-            end: 0,
-            duration: 500.ms,
-            delay: Duration(milliseconds: index * 100));
+          begin: -0.1,
+          end: 0,
+          duration: 500.ms,
+          delay: Duration(milliseconds: index * 100),
+        );
   }
 
   Widget _buildContactSection(bool isDark, bool isMobile, bool isTablet) {
@@ -1388,28 +1446,24 @@ class _ResumePageState extends ConsumerState<ResumePage>
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: isDark
-              ? [
-                  AppColors.deepSpace,
-                  AppColors.charcoal,
-                ]
-              : [
-                  AppColors.lightBg,
-                  Colors.white,
-                ],
+              ? [AppColors.deepSpace, AppColors.charcoal]
+              : [AppColors.lightBg, Colors.white],
         ),
       ),
       child: Column(
         children: [
           Text(
-            'Let\'s Connect',
-            style: TextStyle(
-              fontSize: isMobile ? 40 : (isTablet ? 52 : 64),
-              fontWeight: FontWeight.w900,
-              color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-              letterSpacing: -2,
-            ),
-          ).animate().fadeIn(duration: 800.ms).scale(
-              begin: const Offset(0.9, 0.9), duration: 800.ms),
+                'Let\'s Connect',
+                style: TextStyle(
+                  fontSize: isMobile ? 40 : (isTablet ? 52 : 64),
+                  fontWeight: FontWeight.w900,
+                  color: isDark ? AppColors.gray100 : AppColors.lightGray900,
+                  letterSpacing: -2,
+                ),
+              )
+              .animate()
+              .fadeIn(duration: 800.ms)
+              .scale(begin: const Offset(0.9, 0.9), duration: 800.ms),
           const SizedBox(height: 16),
           Text(
             '새로운 기회와 협업을 기다립니다',
@@ -1442,33 +1496,37 @@ class _ResumePageState extends ConsumerState<ResumePage>
           ),
           const SizedBox(height: 56),
           ElevatedButton.icon(
-            onPressed: () {
-              html.window.print();
-            },
-            icon: const Icon(Icons.download, size: 24),
-            label: Text(
-              'PDF 이력서 다운로드',
-              style: TextStyle(
-                fontSize: isMobile ? 16 : 18,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.5,
-              ),
-            ),
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  isDark ? AppColors.primaryBlue : AppColors.primaryBlue,
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: isMobile ? 32 : 48,
-                vertical: isMobile ? 18 : 24,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              elevation: 8,
-              shadowColor: AppColors.primaryBlue.withValues(alpha: 0.4),
-            ),
-          )
+                onPressed: () {
+                  // html.window.print();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('PDF 다운로드는 준비 중입니다.')),
+                  );
+                },
+                icon: const Icon(Icons.download, size: 24),
+                label: Text(
+                  'PDF 이력서 다운로드',
+                  style: TextStyle(
+                    fontSize: isMobile ? 16 : 18,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: isDark
+                      ? AppColors.primaryBlue
+                      : AppColors.primaryBlue,
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 32 : 48,
+                    vertical: isMobile ? 18 : 24,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 8,
+                  shadowColor: AppColors.primaryBlue.withValues(alpha: 0.4),
+                ),
+              )
               .animate()
               .fadeIn(duration: 800.ms, delay: 600.ms)
               .slideY(begin: 0.3, end: 0, duration: 800.ms, delay: 600.ms)
@@ -1483,46 +1541,50 @@ class _ResumePageState extends ConsumerState<ResumePage>
   }
 
   Widget _buildContactItem(
-      bool isDark, bool isMobile, IconData icon, String text, Color color) {
+    bool isDark,
+    bool isMobile,
+    IconData icon,
+    String text,
+    Color color,
+  ) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 20 : 24,
-        vertical: isMobile ? 14 : 16,
-      ),
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.charcoal.withValues(alpha: 0.6)
-            : Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: color.withValues(alpha: 0.3),
-          width: 1.5,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: color.withValues(alpha: 0.1),
-            blurRadius: 12,
-            offset: const Offset(0, 4),
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 24,
+            vertical: isMobile ? 14 : 16,
           ),
-        ],
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 20, color: color),
-          const SizedBox(width: 12),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: isMobile ? 15 : 16,
-              fontWeight: FontWeight.w600,
-              color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-            ),
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.charcoal.withValues(alpha: 0.6)
+                : Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: color.withValues(alpha: 0.3), width: 1.5),
+            boxShadow: [
+              BoxShadow(
+                color: color.withValues(alpha: 0.1),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
-        ],
-      ),
-    ).animate().fadeIn(duration: 600.ms, delay: 400.ms).scale(
-        begin: const Offset(0.9, 0.9), duration: 600.ms, delay: 400.ms);
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(icon, size: 20, color: color),
+              const SizedBox(width: 12),
+              Text(
+                text,
+                style: TextStyle(
+                  fontSize: isMobile ? 15 : 16,
+                  fontWeight: FontWeight.w600,
+                  color: isDark ? AppColors.gray100 : AppColors.lightGray900,
+                ),
+              ),
+            ],
+          ),
+        )
+        .animate()
+        .fadeIn(duration: 600.ms, delay: 400.ms)
+        .scale(begin: const Offset(0.9, 0.9), duration: 600.ms, delay: 400.ms);
   }
 }
 
@@ -1531,10 +1593,7 @@ class BackgroundPainter extends CustomPainter {
   final bool isDark;
   final double animationValue;
 
-  BackgroundPainter({
-    required this.isDark,
-    required this.animationValue,
-  });
+  BackgroundPainter({required this.isDark, required this.animationValue});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1551,10 +1610,7 @@ class BackgroundPainter extends CustomPainter {
           .withValues(alpha: opacity);
 
       canvas.drawCircle(
-        Offset(
-          size.width * (0.2 + i * 0.3),
-          size.height * 0.3 + offset,
-        ),
+        Offset(size.width * (0.2 + i * 0.3), size.height * 0.3 + offset),
         100 + (i * 50),
         paint,
       );

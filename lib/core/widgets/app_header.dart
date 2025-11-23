@@ -5,68 +5,37 @@ import 'package:go_router/go_router.dart';
 import '../theme/app_colors.dart';
 import '../theme/theme_provider.dart';
 
-/// Professional App Header with scroll-based logo reveal
-class AppHeader extends ConsumerStatefulWidget {
+class AppHeader extends ConsumerWidget {
   final bool showLogo;
+  final Function(String)? onMenuClick;
 
-  const AppHeader({
-    super.key,
-    required this.showLogo,
-  });
+  const AppHeader({super.key, required this.showLogo, this.onMenuClick});
 
   @override
-  ConsumerState<AppHeader> createState() => _AppHeaderState();
-}
-
-class _AppHeaderState extends ConsumerState<AppHeader> {
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final isMobile = size.width < 768;
+  Widget build(BuildContext context, WidgetRef ref) {
     final isDark = ref.watch(themeModeProvider) == ThemeMode.dark;
+    final isMobile = MediaQuery.of(context).size.width < 1000;
 
-    return Container(
-      height: isMobile ? 64 : 80,
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.deepSpace.withValues(alpha: widget.showLogo ? 0.95 : 0.0)
-            : AppColors.lightBg.withValues(alpha: widget.showLogo ? 0.98 : 0.0),
-        border: widget.showLogo
-            ? Border(
-                bottom: BorderSide(
-                  color: isDark
-                      ? AppColors.primaryBlue.withValues(alpha: 0.2)
-                      : AppColors.lightGray300.withValues(alpha: 0.5),
-                  width: 1,
-                ),
-              )
-            : null,
-        boxShadow: widget.showLogo
-            ? [
-                BoxShadow(
-                  color: isDark
-                      ? Colors.black.withValues(alpha: 0.3)
-                      : Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 20,
-                  offset: const Offset(0, 2),
-                ),
-              ]
-            : null,
-      ),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      height: isMobile ? 60 : 80,
+      color: showLogo
+          ? (isDark
+                ? AppColors.deepSpace.withValues(alpha: 0.9)
+                : Colors.white.withValues(alpha: 0.9))
+          : Colors.transparent,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: isMobile ? 20 : 60,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: isMobile ? 20 : 60),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // Logo (animated reveal on scroll)
             AnimatedOpacity(
-              opacity: widget.showLogo ? 1.0 : 0.0,
+              opacity: showLogo ? 1.0 : 0.0,
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOut,
               child: AnimatedSlide(
-                offset: widget.showLogo ? Offset.zero : const Offset(-0.3, 0),
+                offset: showLogo ? Offset.zero : const Offset(-0.3, 0),
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut,
                 child: SvgPicture.asset(
@@ -82,11 +51,11 @@ class _AppHeaderState extends ConsumerState<AppHeader> {
               children: [
                 // Navigation Menu (desktop only)
                 if (!isMobile) ...[
-                  _buildNavLink(context, 'Home', '/', isDark),
-                  const SizedBox(width: 32),
                   _buildNavLink(context, 'Resume', '/resume', isDark),
                   const SizedBox(width: 32),
-                  _buildNavLink(context, 'Documents', '/documents', isDark),
+                  _buildNavLink(context, 'Experience', '/experience', isDark),
+                  const SizedBox(width: 32),
+                  _buildNavLink(context, 'About', '/about', isDark),
                   const SizedBox(width: 32),
                   _buildNavLink(context, 'Portfolio', '/portfolio', isDark),
                   const SizedBox(width: 40),
@@ -142,9 +111,21 @@ class _AppHeaderState extends ConsumerState<AppHeader> {
     );
   }
 
-  Widget _buildNavLink(BuildContext context, String label, String path, bool isDark) {
+  Widget _buildNavLink(
+    BuildContext context,
+    String label,
+    String path,
+    bool isDark,
+  ) {
     return TextButton(
-      onPressed: () => context.go(path),
+      onPressed: () {
+        if (onMenuClick != null) {
+          // All these items are now sections on the home page
+          onMenuClick!(label);
+        } else {
+          context.go(path);
+        }
+      },
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         foregroundColor: isDark ? AppColors.gray100 : AppColors.lightText,

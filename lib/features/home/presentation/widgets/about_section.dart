@@ -1,10 +1,10 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
-import '../../../../core/theme/theme_provider.dart';
-import '../../../../core/constants/app_constants.dart';
+import 'scroll_reveal_widget.dart';
+import 'holographic_card.dart';
 
 class AboutSection extends ConsumerWidget {
   const AboutSection({super.key});
@@ -12,234 +12,112 @@ class AboutSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final isMobile = size.width < AppConstants.mobileBreakpoint;
-    final isTablet = size.width < AppConstants.tabletBreakpoint;
-    final isDark = ref.watch(themeModeProvider) == ThemeMode.dark;
+    final isMobile = size.width < 1000;
 
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        vertical: isMobile ? 80 : 120,
-        horizontal: isMobile ? 24 : isTablet ? 60 : 100,
-      ),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.blue900 : const Color(0xFFF5F8FA),
-      ),
-      child: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 1200),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Section Header
-              Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: isMobile ? 32 : 40,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [AppColors.primaryBlue, AppColors.accentCyan],
-                      ),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Text(
-                    'About',
-                    style: (isMobile ? AppTypography.h3 : AppTypography.h2).copyWith(
-                      color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              )
-                  .animate()
-                  .fadeIn(duration: 600.ms)
-                  .slideX(begin: -0.2, end: 0),
-
-              SizedBox(height: isMobile ? 48 : 72),
-
-              // Main Content Grid
-              isMobile
-                  ? Column(
-                      children: [
-                        _buildStoryCard(isDark),
-                        const SizedBox(height: 32),
-                        _buildStatsGrid(isDark, isMobile),
-                      ],
-                    )
-                  : Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: _buildStoryCard(isDark),
-                        ),
-                        const SizedBox(width: 40),
-                        Expanded(
-                          flex: 2,
-                          child: _buildStatsGrid(isDark, isMobile),
-                        ),
-                      ],
-                    ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStoryCard(bool isDark) {
-    return Container(
-      padding: const EdgeInsets.all(40),
-      decoration: BoxDecoration(
-        color: isDark ? AppColors.charcoal.withValues(alpha: 0.5) : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: isDark
-              ? AppColors.primaryBlue.withValues(alpha: 0.2)
-              : AppColors.lightGray300,
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? Colors.black.withValues(alpha: 0.3)
-                : Colors.black.withValues(alpha: 0.05),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
-          ),
-        ],
+        horizontal: isMobile ? 24 : size.width * 0.1,
+        vertical: 40,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Design Leader',
-            style: AppTypography.h4.copyWith(
-              color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
-              fontWeight: FontWeight.w700,
+          // Header
+          ScrollRevealWidget(
+            index: 0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'ABOUT ME',
+                  style: AppTypography.h1.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 8,
+                    fontSize: isMobile ? 40 : 60,
+                    fontFamily: 'Courier',
+                  ),
+                ),
+                Container(
+                  width: 100,
+                  height: 8,
+                  margin: const EdgeInsets.only(top: 20, bottom: 60),
+                  color: AppColors.accentCyan,
+                ),
+              ],
             ),
           ),
-          const SizedBox(height: 24),
-          Text(
-            '기획부터 디자인, 협업까지 사용자 중심의 해결을 먼저 생각하는 디자이너입니다.',
-            style: AppTypography.bodyLarge.copyWith(
-              color: isDark ? AppColors.gray100 : AppColors.lightText,
-              height: 1.8,
-              fontSize: 18,
+
+          // 1. Introduction
+          ScrollRevealWidget(
+            index: 1,
+            child: HolographicCard(
+              title: 'INTRODUCTION',
+              accentColor: AppColors.primaryBlue,
+              child: Text(
+                '안녕하세요, 19년차 UX/UI 디자이너 정재웅입니다.\n\n'
+                '저는 사용자 경험을 깊이 있게 고민하고, 이를 직관적이고 아름다운 디자인으로 구현하는 것을 목표로 합니다. '
+                '다양한 산업 분야에서의 경험을 바탕으로 비즈니스 목표와 사용자 니즈를 조화롭게 연결하는 디자인 솔루션을 제공해 왔습니다.\n\n'
+                '단순히 보기 좋은 디자인을 넘어, 사용자가 편리함과 감동을 느낄 수 있는 경험을 만들기 위해 끊임없이 연구하고 도전합니다.',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  height: 1.8,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
             ),
           ),
-          const SizedBox(height: 24),
-          Text(
-            'NEXON, 현대HT, 블루스톤소프트 등 게임 엔터테인먼트부터 제조 디바이스까지 다양한 사업군에서 UX/UI 디자인을 수행해왔습니다. Web, Android, iOS, Linux 등 여러 플랫폼 환경에 맞춰 UX 기획부터 UI 설계, Hi-Fi 프로토타이핑, 디자인 시스템 구축까지 전반적인 과정을 수행합니다.',
-            style: AppTypography.bodyLarge.copyWith(
-              color: isDark
-                  ? AppColors.gray100.withValues(alpha: 0.8)
-                  : AppColors.lightText2,
-              height: 1.8,
-              fontSize: 16,
+          const SizedBox(height: 40),
+
+          // 2. Philosophy
+          ScrollRevealWidget(
+            index: 2,
+            child: HolographicCard(
+              title: 'PHILOSOPHY',
+              accentColor: AppColors.highlightGreen,
+              child: Text(
+                '디자인은 문제 해결의 과정이라고 생각합니다. '
+                '복잡한 문제를 단순하고 명쾌하게 풀어내는 것이 디자이너의 역할이며, 그 과정에서 사용자에 대한 배려가 가장 중요하다고 믿습니다.\n\n'
+                '또한, 디자인은 혼자 하는 것이 아니라 팀과 함께 만들어가는 것입니다. '
+                '원활한 소통과 협업을 통해 더 나은 결과물을 만들어낼 수 있다고 확신합니다.',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  height: 1.8,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
             ),
           ),
-          const SizedBox(height: 16),
-          Text(
-            '최근에는 Flutter, ChatGPT AI Studio, Stable Diffusion 등의 도구를 디자인 업무에 적극 활용하며, 개발자와의 원활한 협업을 위해 UI를 직접 구현하는 시도도 병행하고 있습니다.',
-            style: AppTypography.bodyLarge.copyWith(
-              color: isDark
-                  ? AppColors.gray100.withValues(alpha: 0.8)
-                  : AppColors.lightText2,
-              height: 1.8,
-              fontSize: 16,
+          const SizedBox(height: 40),
+
+          // 3. Aspirations
+          ScrollRevealWidget(
+            index: 3,
+            child: HolographicCard(
+              title: 'ASPIRATIONS',
+              accentColor: AppColors.accentCyan,
+              child: Text(
+                '목표를 향해 가는 길은 때로 멀고 험난할 수 있지만, 저는 그 과정을 새로운 기회이자 성장의 시간으로 여깁니다. '
+                '단순히 결과만을 쫓기보다, 과정 속에서 끊임없이 배우고 발전하며 완성된 결과에 도달하는 것을 중요하게 생각합니다.\n\n'
+                '채용 공고를 보며 저의 경험과 가치관이 이곳의 방향성과 잘 맞는다고 느꼈고, 함께 성장하고 싶다는 확신이 들었습니다.\n\n'
+                '어떤 환경이든 처음부터 완벽할 수는 없지만, 주어진 역할을 책임감 있게 완수해 온 경험을 바탕으로, '
+                '스스로 문제를 정의하고 해결하며 유연하게 움직이는 디자이너로 성장해 왔습니다.\n\n'
+                '기회를 주신다면, 지금까지 쌓아온 경험과 역량을 바탕으로 팀과 함께 의미 있는 성과를 만들어내기 위해 최선을 다하겠습니다.\n\n'
+                '감사합니다.',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  height: 1.8,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
             ),
           ),
         ],
       ),
-    )
-        .animate()
-        .fadeIn(duration: 800.ms, delay: 200.ms)
-        .slideY(begin: 0.1, end: 0);
-  }
-
-  Widget _buildStatsGrid(bool isDark, bool isMobile) {
-    final stats = [
-      {'number': '19', 'label': 'Years\nExperience'},
-      {'number': '100+', 'label': 'Projects\nCompleted'},
-      {'number': '350만+', 'label': 'Active\nUsers'},
-      {'number': '100%', 'label': 'Project\nCompletion'},
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: 1.2,
-      ),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        final stat = stats[index];
-        return Container(
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isDark
-                  ? [
-                      AppColors.primaryBlue.withValues(alpha: 0.15),
-                      AppColors.accentCyan.withValues(alpha: 0.1),
-                    ]
-                  : [
-                      AppColors.primaryBlue.withValues(alpha: 0.08),
-                      AppColors.accentCyan.withValues(alpha: 0.05),
-                    ],
-            ),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: isDark
-                  ? AppColors.primaryBlue.withValues(alpha: 0.25)
-                  : AppColors.primaryBlue.withValues(alpha: 0.15),
-              width: 1,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ShaderMask(
-                shaderCallback: (bounds) => LinearGradient(
-                  colors: [AppColors.primaryBlue, AppColors.accentCyan],
-                ).createShader(bounds),
-                child: Text(
-                  stat['number']!,
-                  style: AppTypography.h2.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                    fontSize: isMobile ? 32 : 40,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                stat['label']!,
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark ? AppColors.gray100 : AppColors.lightText,
-                  fontWeight: FontWeight.w600,
-                  height: 1.3,
-                ),
-              ),
-            ],
-          ),
-        )
-            .animate()
-            .fadeIn(duration: 600.ms, delay: (300 + index * 100).ms)
-            .slideY(begin: 0.1, end: 0);
-      },
     );
   }
 }
