@@ -6,8 +6,13 @@ import 'core/theme/theme_provider.dart';
 import 'core/router/app_router.dart';
 import 'core/constants/app_constants.dart';
 
-void main() {
+// import 'package:firebase_core/firebase_core.dart';
+// import 'firebase_options.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -16,11 +21,7 @@ void main() {
     DeviceOrientation.landscapeRight,
   ]);
 
-  runApp(
-    const ProviderScope(
-      child: PortfolioApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: PortfolioApp()));
 }
 
 class PortfolioApp extends ConsumerWidget {

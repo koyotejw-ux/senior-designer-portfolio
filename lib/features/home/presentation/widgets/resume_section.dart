@@ -1,8 +1,9 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
+import '../../data/providers/content_provider.dart';
+import '../../data/models/profile_model.dart';
 import 'scroll_reveal_widget.dart';
 import 'holographic_card.dart';
 
@@ -13,6 +14,11 @@ class ResumeSection extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final isMobile = size.width < 1000;
+
+    final profileAsync = ref.watch(profileProvider);
+    final educationAsync = ref.watch(educationProvider);
+    final experienceAsync = ref.watch(experienceProvider);
+    final skillsAsync = ref.watch(skillsProvider);
 
     return Container(
       width: double.infinity,
@@ -57,7 +63,14 @@ class ResumeSection extends ConsumerWidget {
             child: HolographicCard(
               title: 'PERSONAL INFO',
               accentColor: AppColors.primaryBlue,
-              child: _buildPersonalInfoGrid(isMobile),
+              child: profileAsync.when(
+                data: (profile) => _buildPersonalInfoGrid(isMobile, profile),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, _) => Text(
+                  'Error: $err',
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 40),
@@ -68,17 +81,22 @@ class ResumeSection extends ConsumerWidget {
             child: HolographicCard(
               title: 'EDUCATION',
               accentColor: AppColors.highlightGreen,
-              child: Column(
-                children: [
-                  _buildRowItem(
-                    '2006.08 ~ 2008.02',
-                    '시각디자인학 학사 (학점은행제) (4.25/4.5)',
-                  ),
-                  _buildRowItem(
-                    '1999.03 ~ 2004.02',
-                    '청강문화산업대학 애니메이션과 / 3D전공 (3.34/4.2)',
-                  ),
-                ],
+              child: educationAsync.when(
+                data: (educations) => Column(
+                  children: educations
+                      .map(
+                        (edu) => _buildRowItem(
+                          edu.period,
+                          '${edu.school} / ${edu.major} (${edu.gpa})',
+                        ),
+                      )
+                      .toList(),
+                ),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, _) => Text(
+                  'Error: $err',
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
@@ -90,37 +108,22 @@ class ResumeSection extends ConsumerWidget {
             child: HolographicCard(
               title: 'CAREER SUMMARY',
               accentColor: AppColors.accentCyan,
-              child: Column(
-                children: [
-                  _buildRowItem(
-                    '2025.01 ~ 2025.06',
-                    '아이엔지피플 / UX팀 / 부장 / UX/UI 기획 및 디자인',
-                  ),
-                  _buildRowItem(
-                    '2018.05 ~ 2024.03',
-                    '현대에이치티 / GUX디자인팀 / 수석연구원 / UX/UI 기획 및 디자인',
-                  ),
-                  _buildRowItem(
-                    '2016.05 ~ 2017.06',
-                    '블루스톤소프트 / 아트본부 GUI파트 / 책임연구원 / UX/UI 디자인',
-                  ),
-                  _buildRowItem(
-                    '2010.10 ~ 2015.12',
-                    '넥슨코리아 / 핏불팀 / 과장 / UX/UI 디자인, 3D Art',
-                  ),
-                  _buildRowItem(
-                    '2008.07 ~ 2010.10',
-                    'YNK KOREA / 웹팀 / 대리 / UX/UI 디자인',
-                  ),
-                  _buildRowItem(
-                    '2008.03 ~ 2008.07',
-                    '비엠소프트 / E-Sports 사업부 / 대리 / UX/UI 디자인',
-                  ),
-                  _buildRowItem(
-                    '2005.11 ~ 2006.12',
-                    '씨앤디 / 인테리어 사업부 / 사원 / UX/UI 디자인, 3D Art',
-                  ),
-                ],
+              child: experienceAsync.when(
+                data: (experiences) => Column(
+                  children: experiences
+                      .map(
+                        (exp) => _buildRowItem(
+                          exp.period,
+                          '${exp.company} / ${exp.role}',
+                        ),
+                      )
+                      .toList(),
+                ),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, _) => Text(
+                  'Error: $err',
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
@@ -132,20 +135,19 @@ class ResumeSection extends ConsumerWidget {
             child: HolographicCard(
               title: 'CORE COMPETENCIES',
               accentColor: const Color(0xFF9D00FF),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildBulletPoint(
-                    '에이전시, 게임 엔터테인먼트, 제조사 디바이스 등 다양한 UX/UI 경험 보유',
-                  ),
-                  _buildBulletPoint('UX/UI 기획 및 디자인 모두 수행 가능'),
-                  _buildBulletPoint(
-                    'Hi-Fi Prototyping 2D/3D (XD/Figma/Protopie/Flutter/3dmax/Aftereffect)',
-                  ),
-                  _buildBulletPoint(
-                    '디자인 조직 관리 (Directing/HR/Outsourcing/Scheduling/New Biz Creation)',
-                  ),
-                ],
+              child: skillsAsync.when(
+                data: (skills) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: skills
+                      .where((s) => s.category == 'competency')
+                      .map((s) => _buildBulletPoint(s.description))
+                      .toList(),
+                ),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, _) => Text(
+                  'Error: $err',
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
@@ -157,16 +159,19 @@ class ResumeSection extends ConsumerWidget {
             child: HolographicCard(
               title: 'QUALIFICATIONS',
               accentColor: AppColors.primaryBlue,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildBulletPoint('시각디자인산업기사 / 한국산업인력공단, 2006.05'),
-                  _buildBulletPoint('유통관리사 2급 / 대한상공회의소, 2006.11'),
-                  _buildBulletPoint('워드프로세서 1급 / 대한상공회의소, 2006.02'),
-                  _buildBulletPoint(
-                    'MS OFFICE : Expert Level (PPT 기획서 작성, 엑셀 VB 활용)',
-                  ),
-                ],
+              child: skillsAsync.when(
+                data: (skills) => Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: skills
+                      .where((s) => s.category == 'qualification')
+                      .map((s) => _buildBulletPoint(s.description))
+                      .toList(),
+                ),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, _) => Text(
+                  'Error: $err',
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ),
@@ -175,17 +180,24 @@ class ResumeSection extends ConsumerWidget {
     );
   }
 
-  Widget _buildPersonalInfoGrid(bool isMobile) {
+  Widget _buildPersonalInfoGrid(bool isMobile, ProfileModel? profile) {
+    if (profile == null) {
+      return const Text(
+        'No profile data',
+        style: TextStyle(color: Colors.white),
+      );
+    }
+
     return isMobile
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildInfoRow('NAME', '정재웅'),
-              _buildInfoRow('BIRTH', '1979. 08. 14'),
-              _buildInfoRow('ADDRESS', '경기도 고양시 덕양구 향동동'),
-              _buildInfoRow('MILITARY', '육군 병장 만기 제대'),
-              _buildInfoRow('PHONE', '010-4375-3599'),
-              _buildInfoRow('EMAIL', 'coyotejw@naver.com'),
+              _buildInfoRow('NAME', profile.name),
+              _buildInfoRow('BIRTH', profile.birth),
+              _buildInfoRow('ADDRESS', profile.address),
+              _buildInfoRow('MILITARY', profile.military),
+              _buildInfoRow('PHONE', profile.phone),
+              _buildInfoRow('EMAIL', profile.email),
             ],
           )
         : Row(
@@ -194,9 +206,9 @@ class ResumeSection extends ConsumerWidget {
               Expanded(
                 child: Column(
                   children: [
-                    _buildInfoRow('NAME', '정재웅'),
-                    _buildInfoRow('BIRTH', '1979. 08. 14'),
-                    _buildInfoRow('ADDRESS', '경기도 고양시 덕양구 향동동'),
+                    _buildInfoRow('NAME', profile.name),
+                    _buildInfoRow('BIRTH', profile.birth),
+                    _buildInfoRow('ADDRESS', profile.address),
                   ],
                 ),
               ),
@@ -204,9 +216,9 @@ class ResumeSection extends ConsumerWidget {
               Expanded(
                 child: Column(
                   children: [
-                    _buildInfoRow('MILITARY', '육군 병장 만기 제대'),
-                    _buildInfoRow('PHONE', '010-4375-3599'),
-                    _buildInfoRow('EMAIL', 'coyotejw@naver.com'),
+                    _buildInfoRow('MILITARY', profile.military),
+                    _buildInfoRow('PHONE', profile.phone),
+                    _buildInfoRow('EMAIL', profile.email),
                   ],
                 ),
               ),

@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/app_header.dart';
 import '../widgets/scroll_reveal_widget.dart';
 import '../widgets/geometric_network_background.dart';
+import '../widgets/floating_dots_background.dart';
+import '../widgets/loading_screen.dart';
 import '../../../../core/theme/theme_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/about_section.dart';
-import '../widgets/skills_section.dart';
 import '../widgets/experience_section.dart';
 import '../widgets/portfolio_gallery_section.dart';
-import '../widgets/project_story_section.dart';
 import '../widgets/contact_section.dart';
 import '../widgets/resume_section.dart';
 import '../widgets/section_indicator.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class HomePage extends ConsumerStatefulWidget {
-  const HomePage({super.key});
+  final String? initialSection;
+
+  const HomePage({super.key, this.initialSection});
 
   @override
   ConsumerState<HomePage> createState() => _HomePageState();
@@ -27,6 +30,8 @@ class _HomePageState extends ConsumerState<HomePage>
   final ScrollController _scrollController = ScrollController();
   bool _showHeaderLogo = false;
   bool _showFab = false;
+  bool _isLoading = false;
+  bool _showLoading = false;
   int _currentSectionIndex = 0;
 
   // Section Keys
@@ -44,10 +49,22 @@ class _HomePageState extends ConsumerState<HomePage>
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    // Start with loading state
+    _isLoading = true;
+    _showLoading = true;
 
     // Initial check after build
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _checkVisibility();
+
+      // Handle initial section scroll
+      if (widget.initialSection != null) {
+        if (widget.initialSection == 'contact') {
+          _scrollToSection('Contact');
+        } else if (widget.initialSection == 'portfolio') {
+          _scrollToSection('Portfolio');
+        }
+      }
     });
   }
 
@@ -63,7 +80,7 @@ class _HomePageState extends ConsumerState<HomePage>
         key = _resumeKey;
         index = 1;
         break;
-      case 'Experience': // Updated
+      case 'Experience':
         key = _experienceKey;
         index = 2;
         break;
@@ -86,7 +103,7 @@ class _HomePageState extends ConsumerState<HomePage>
         key!.currentContext!,
         duration: const Duration(milliseconds: 1200),
         curve: Curves.easeInOutCubic,
-        alignment: 0.0, // Position section at top, just below header
+        alignment: 0.0,
       );
       setState(() {
         _currentSectionIndex = index;
@@ -106,7 +123,6 @@ class _HomePageState extends ConsumerState<HomePage>
     final offset = _scrollController.offset;
     final height = MediaQuery.of(context).size.height;
 
-    // Header Logo & FAB Visibility
     final showThreshold = height * 0.8;
     if (_showHeaderLogo != (offset > showThreshold)) {
       setState(() {
@@ -115,7 +131,6 @@ class _HomePageState extends ConsumerState<HomePage>
       });
     }
 
-    // Update Section Indicator & Visibility
     _updateSectionIndex();
     _checkVisibility();
   }
@@ -212,55 +227,61 @@ class _HomePageState extends ConsumerState<HomePage>
       extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          // Geometric Network Background (Deep Space)
           Positioned.fill(
             child: GeometricNetworkBackground(
               scrollController: _scrollController,
               isDark: isDark,
             ),
           ),
-
-          // Main content
+          Positioned.fill(
+            child: FloatingDotsBackground(
+              scrollController: _scrollController,
+              isDark: isDark,
+            ),
+          ),
           SingleChildScrollView(
             controller: _scrollController,
             physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 HeroSection(key: _heroKey),
-
-                // Resume Section
                 ScrollRevealWidget(
                   key: _resumeKey,
                   isRevealed: _revealedSections.contains(_resumeKey),
                   child: const ResumeSection(),
                 ),
-
                 const SizedBox(height: 40),
-
-                // Experience Section
                 ScrollRevealWidget(
                   key: _experienceKey,
                   isRevealed: _revealedSections.contains(_experienceKey),
                   delay: const Duration(milliseconds: 100),
                   child: const ExperienceSection(),
                 ),
-
                 const SizedBox(height: 40),
-
-                // About Section
                 ScrollRevealWidget(
                   key: _aboutKey,
                   isRevealed: _revealedSections.contains(_aboutKey),
                   delay: const Duration(milliseconds: 200),
                   child: const AboutSection(),
                 ),
-
-                const SizedBox(height: 100), // Bottom padding
+                const SizedBox(height: 40),
+                ScrollRevealWidget(
+                  key: _portfolioKey,
+                  isRevealed: _revealedSections.contains(_portfolioKey),
+                  delay: const Duration(milliseconds: 300),
+                  child: const PortfolioGallerySection(),
+                ),
+                const SizedBox(height: 40),
+                ScrollRevealWidget(
+                  key: _contactKey,
+                  isRevealed: _revealedSections.contains(_contactKey),
+                  delay: const Duration(milliseconds: 400),
+                  child: const ContactSection(),
+                ),
+                const SizedBox(height: 100),
               ],
             ),
           ),
-
-          // Sticky Header
           Positioned(
             top: 0,
             left: 0,
@@ -270,56 +291,116 @@ class _HomePageState extends ConsumerState<HomePage>
               onMenuClick: _scrollToSection,
             ),
           ),
-
-          // Section Indicator (Right Center)
-          if (size.width > 1000)
-            Positioned(
-              right: 40,
-              top: size.height * 0.3,
-              bottom: size.height * 0.3,
-              child: Center(
-                child: SectionIndicator(
-                  currentIndex: _currentSectionIndex,
-                  totalSections: 4,
-                  onSelect: (index) {
-                    final sections = ['Home', 'Resume', 'Experience', 'About'];
-                    _scrollToSection(sections[index]);
+          Positioned(
+            right: size.width > 600 ? 40 : 10,
+            top: size.height * 0.3,
+            bottom: size.height * 0.3,
+            child: Center(
+              child: SectionIndicator(
+                currentIndex: _currentSectionIndex,
+                totalSections: 6,
+                onSelect: (index) {
+                  final sections = [
+                    'Home',
+                    'Resume',
+                    'Experience',
+                    'About',
+                    'Portfolio',
+                    'Contact',
+                  ];
+                  _scrollToSection(sections[index]);
+                },
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 40,
+            right: 40,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedScale(
+                  scale: _showFab ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 16),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primaryBlue.withValues(alpha: 0.6),
+                          blurRadius: 16,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: FloatingActionButton(
+                      heroTag: 'admin_fab',
+                      onPressed: () => GoRouter.of(context).go('/admin'),
+                      backgroundColor: AppColors.primaryBlue,
+                      shape: const CircleBorder(),
+                      child: const Icon(
+                        Icons.admin_panel_settings,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                ),
+                AnimatedScale(
+                  scale: _showFab ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 300),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.highlightGreen.withValues(
+                            alpha: 0.6,
+                          ),
+                          blurRadius: 16,
+                          spreadRadius: 2,
+                        ),
+                      ],
+                    ),
+                    child: FloatingActionButton(
+                      heroTag: 'scroll_top_fab',
+                      onPressed: _scrollToTop,
+                      backgroundColor: AppColors.highlightGreen,
+                      shape: const CircleBorder(),
+                      child: const Icon(
+                        Icons.arrow_upward,
+                        color: Colors.black,
+                        size: 28,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          if (_showLoading)
+            Positioned.fill(
+              child: AnimatedOpacity(
+                opacity: _isLoading ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 800),
+                curve: Curves.easeInOut,
+                onEnd: () {
+                  if (!_isLoading) {
+                    setState(() {
+                      _showLoading = false;
+                    });
+                  }
+                },
+                child: LoadingScreen(
+                  onCompleted: () {
+                    setState(() {
+                      _isLoading = false;
+                    });
                   },
                 ),
               ),
             ),
-
-          // FAB (Back to Top) - Brighter and Glowy
-          Positioned(
-            bottom: 40,
-            right: 40,
-            child: AnimatedScale(
-              scale: _showFab ? 1.0 : 0.0,
-              duration: const Duration(milliseconds: 300),
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.highlightGreen.withValues(alpha: 0.6),
-                      blurRadius: 16,
-                      spreadRadius: 2,
-                    ),
-                  ],
-                ),
-                child: FloatingActionButton(
-                  onPressed: _scrollToTop,
-                  backgroundColor: AppColors.highlightGreen, // Bright Green
-                  shape: const CircleBorder(), // Standard Circle
-                  child: const Icon(
-                    Icons.arrow_upward,
-                    color: Colors.black,
-                    size: 28,
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

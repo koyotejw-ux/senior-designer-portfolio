@@ -1,7 +1,5 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import '../../../../core/theme/app_colors.dart';
 
 class ScrollRevealWidget extends StatefulWidget {
   final Widget child;

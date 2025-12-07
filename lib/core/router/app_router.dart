@@ -3,10 +3,11 @@ import 'package:go_router/go_router.dart';
 import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/portfolio/presentation/pages/portfolio_page.dart';
 import '../../features/portfolio/presentation/pages/project_detail_page.dart';
-import '../../features/admin/presentation/pages/admin_dashboard_page.dart';
+
 import '../../features/admin/presentation/pages/admin_login_page.dart';
 import '../../features/documents/presentation/pages/documents_page.dart';
 import '../../features/resume/presentation/pages/resume_page.dart';
+import '../../features/admin/presentation/pages/admin_page.dart';
 import '../../features/career/presentation/pages/career_description_page.dart';
 import '../../features/cover_letter/presentation/pages/cover_letter_page.dart';
 
@@ -22,6 +23,10 @@ class AppRouter {
         path: '/',
         name: 'home',
         builder: (context, state) => const HomePage(),
+      ),
+      GoRoute(
+        path: '/contact',
+        builder: (context, state) => const HomePage(initialSection: 'contact'),
       ),
       GoRoute(
         path: '/portfolio',
@@ -60,28 +65,20 @@ class AppRouter {
       ),
 
       // Admin Routes
+      // Admin Routes
       GoRoute(
         path: '/admin/login',
         name: 'admin-login',
         builder: (context, state) => const AdminLoginPage(),
       ),
+      GoRoute(path: '/admin', redirect: (context, state) => '/admin/login'),
       GoRoute(
-        path: '/admin',
-        name: 'admin',
-        builder: (context, state) => const AdminDashboardPage(),
-        redirect: (context, state) {
-          // TODO: Add authentication check
-          // if (!isAuthenticated) {
-          //   return '/admin/login';
-          // }
-          return null;
-        },
+        path: '/admin/dashboard',
+        name: 'admin-dashboard',
+        builder: (context, state) => const AdminPage(),
       ),
     ],
-    errorBuilder: (context, state) => Scaffold(
-      body: Center(
-        child: Text('Page not found: ${state.uri}'),
-      ),
-    ),
+    errorBuilder: (context, state) =>
+        Scaffold(body: Center(child: Text('Page not found: ${state.uri}'))),
   );
 }

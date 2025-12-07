@@ -1,19 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../data/models/project_model.dart';
+import '../../data/providers/content_provider.dart';
+import '../pages/project_detail_page.dart';
+import 'holographic_card.dart';
 
 class PortfolioGallerySection extends ConsumerStatefulWidget {
   const PortfolioGallerySection({super.key});
 
   @override
-  ConsumerState<PortfolioGallerySection> createState() => _PortfolioGallerySectionState();
+  ConsumerState<PortfolioGallerySection> createState() =>
+      _PortfolioGallerySectionState();
 }
 
-class _PortfolioGallerySectionState extends ConsumerState<PortfolioGallerySection> {
+class _PortfolioGallerySectionState
+    extends ConsumerState<PortfolioGallerySection> {
   int _selectedIndex = 0;
 
   @override
@@ -22,68 +29,22 @@ class _PortfolioGallerySectionState extends ConsumerState<PortfolioGallerySectio
     final isMobile = size.width < AppConstants.mobileBreakpoint;
     final isTablet = size.width < AppConstants.tabletBreakpoint;
     final isDark = ref.watch(themeModeProvider) == ThemeMode.dark;
-
-    final projects = [
-      {
-        'title': 'AIA+ SENIOR MODE',
-        'subtitle': '고령자 전용 모드 UX/UI 디자인 시스템',
-        'company': 'ING People',
-        'year': '2025',
-        'category': 'Mobile App • Insurance',
-        'description': 'AIA 생명 앱의 고령자 전용 모드 메인 UX 기획 및 디자인 시스템 구축. 보험료 납입, 보험계약대출 상환, 자동부활 신청 등 핵심 GUI 정의.',
-        'tags': ['Mobile UX', 'Design System', 'Accessibility', 'Figma'],
-        'gradient': [AppColors.accentCyan, AppColors.blue400],
-      },
-      {
-        'title': 'WALLPAD',
-        'subtitle': '현대건설 전용 13.3인치 안드로이드 월패드',
-        'company': 'Hyundai HT',
-        'year': '2021-2023',
-        'category': 'IoT Device • Smart Home',
-        'description': 'HT 범용 월패드 디자인 시스템 구축. 현대/포스코/금호/한양/한화 등 고객사 맞춤형 월패드(7~24인치) UX/UI 기획 및 통합 디자인 시스템 적용.',
-        'tags': ['IoT UI/UX', 'Android', 'Design System', 'Figma'],
-        'gradient': [AppColors.primaryBlue, AppColors.accentCyan],
-      },
-      {
-        'title': 'HT HOME 2.0',
-        'subtitle': '주거전용 스마트홈 통합 앱',
-        'company': 'Hyundai HT',
-        'year': '2021-2023',
-        'category': 'Mobile App • Smart Home',
-        'description': 'HT HOME 및 HT Imazu 앱 앱스토어 론칭. 월패드와 통합 연동 최적화 및 사용자 접점 확대.',
-        'tags': ['Mobile App', 'iOS', 'Android', 'Smart Home'],
-        'gradient': [AppColors.blue400, AppColors.accentCyan],
-      },
-      {
-        'title': 'SOULARK',
-        'subtitle': '모바일 게임 UX/UI 디자인',
-        'company': 'BluestoneSoft',
-        'year': '2016-2017',
-        'category': 'Mobile Game',
-        'description': 'SOULARK 모바일 게임의 전반적인 UX/UI 개발. Unity3D 기반 GUI 인터랙션 및 애니메이션 설계.',
-        'tags': ['Game UI', 'Unity3D', 'Mobile', 'Photoshop'],
-        'gradient': [AppColors.highlightGreen, AppColors.accentCyan],
-      },
-      {
-        'title': 'CLOSERS',
-        'subtitle': '클로저스 웹사이트 UX/UI 디자인',
-        'company': 'NEXON Korea',
-        'year': '2014',
-        'category': 'Website • Game',
-        'description': '클로저스 CBT 반응형 웹사이트 UX/UI 개발. 사내 최초로 PC/태블릿/모바일 대상 반응형 웹 구현 적용.',
-        'tags': ['Web Design', 'Responsive', 'Game Promotion', 'HTML/CSS'],
-        'gradient': [AppColors.primaryBlue, AppColors.blue400],
-      },
-    ];
+    final projectsAsync = ref.watch(projectsProvider);
 
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
         vertical: isMobile ? 80 : 120,
-        horizontal: isMobile ? 24 : isTablet ? 60 : 100,
+        horizontal: isMobile
+            ? 24
+            : isTablet
+            ? 60
+            : 100,
       ),
       decoration: BoxDecoration(
-        color: isDark ? AppColors.deepSpace : Colors.white,
+        color: Colors.black.withValues(
+          alpha: 0.01,
+        ), // Faint color to ensure hit-testing/visibility
       ),
       child: Center(
         child: Container(
@@ -101,7 +62,10 @@ class _PortfolioGallerySectionState extends ConsumerState<PortfolioGallerySectio
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [AppColors.highlightGreen, AppColors.accentCyan],
+                        colors: [
+                          AppColors.highlightGreen,
+                          AppColors.accentCyan,
+                        ],
                       ),
                       borderRadius: BorderRadius.circular(2),
                     ),
@@ -109,54 +73,76 @@ class _PortfolioGallerySectionState extends ConsumerState<PortfolioGallerySectio
                   const SizedBox(width: 16),
                   Text(
                     'Featured Projects',
-                    style: (isMobile ? AppTypography.h3 : AppTypography.h2).copyWith(
-                      color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                      fontWeight: FontWeight.w800,
-                    ),
+                    style: (isMobile ? AppTypography.h3 : AppTypography.h2)
+                        .copyWith(
+                          color: isDark
+                              ? AppColors.gray100
+                              : AppColors.lightGray900,
+                          fontWeight: FontWeight.w800,
+                        ),
                   ),
                 ],
-              )
-                  .animate()
-                  .fadeIn(duration: 600.ms)
-                  .slideX(begin: -0.2, end: 0),
+              ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0),
 
               SizedBox(height: isMobile ? 48 : 72),
 
               // Project Grid/List
-              if (isMobile)
-                Column(
-                  children: projects.asMap().entries.map((entry) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 24),
-                      child: _buildProjectCard(
-                        entry.value,
-                        isDark,
-                        isMobile,
-                        entry.key,
+              projectsAsync.when(
+                data: (projects) {
+                  if (projects.isEmpty) {
+                    return Center(
+                      child: Text(
+                        'No projects yet.',
+                        style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black,
+                        ),
                       ),
                     );
-                  }).toList(),
-                )
-              else
-                GridView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: isTablet ? 1 : 2,
-                    crossAxisSpacing: 32,
-                    mainAxisSpacing: 32,
-                    childAspectRatio: isTablet ? 1.8 : 1.4,
-                  ),
-                  itemCount: projects.length,
-                  itemBuilder: (context, index) {
-                    return _buildProjectCard(
-                      projects[index],
-                      isDark,
-                      isMobile,
-                      index,
+                  }
+                  if (isMobile) {
+                    return Column(
+                      children: projects.asMap().entries.map((entry) {
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 24),
+                          child: _buildProjectCard(
+                            entry.value,
+                            isDark,
+                            isMobile,
+                            entry.key,
+                          ),
+                        );
+                      }).toList(),
                     );
-                  },
+                  } else {
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: isTablet ? 1 : 2,
+                        crossAxisSpacing: 32,
+                        mainAxisSpacing: 32,
+                        childAspectRatio: isTablet ? 1.8 : 1.4,
+                      ),
+                      itemCount: projects.length,
+                      itemBuilder: (context, index) {
+                        return _buildProjectCard(
+                          projects[index],
+                          isDark,
+                          isMobile,
+                          index,
+                        );
+                      },
+                    );
+                  }
+                },
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (err, stack) => Center(
+                  child: Text(
+                    'Error loading projects: $err',
+                    style: const TextStyle(color: Colors.red),
+                  ),
                 ),
+              ),
             ],
           ),
         ),
@@ -165,166 +151,242 @@ class _PortfolioGallerySectionState extends ConsumerState<PortfolioGallerySectio
   }
 
   Widget _buildProjectCard(
-    Map<String, dynamic> project,
+    ProjectModel project,
     bool isDark,
     bool isMobile,
     int index,
   ) {
     final isSelected = _selectedIndex == index;
+    final accentColor = project.gradientColors.isNotEmpty
+        ? project.gradientColors[0]
+        : AppColors.primaryBlue;
 
     return MouseRegion(
-      onEnter: (_) => setState(() => _selectedIndex = index),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-        transform: isSelected
-          ? (Matrix4.identity()..setTranslationRaw(0.0, -8.0, 0.0))
-          : Matrix4.identity(),
-        child: Container(
-          padding: const EdgeInsets.all(32),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isDark
-                  ? [
-                      (project['gradient'] as List<Color>)[0].withValues(alpha: 0.15),
-                      (project['gradient'] as List<Color>)[1].withValues(alpha: 0.08),
-                    ]
-                  : [
-                      (project['gradient'] as List<Color>)[0].withValues(alpha: 0.08),
-                      (project['gradient'] as List<Color>)[1].withValues(alpha: 0.04),
+          onEnter: (_) => setState(() => _selectedIndex = index),
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () {
+              // Navigate to detail page
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      ProjectDetailPage(projectId: project.id),
+                ),
+              );
+            },
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOut,
+              transform: isSelected
+                  ? (Matrix4.identity()..setTranslationRaw(0.0, -8.0, 0.0))
+                  : Matrix4.identity(),
+              child: HolographicCard(
+                accentColor: accentColor,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Image (if available)
+                    if (project.imageUrl != null) ...[
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: project.imageUrl!.toLowerCase().endsWith('.svg')
+                            ? SvgPicture.network(
+                                project.imageUrl!,
+                                height: 200,
+                                width: double.infinity,
+                                fit: BoxFit.contain,
+                                placeholderBuilder: (context) => Container(
+                                  height: 200,
+                                  color: AppColors.charcoal,
+                                  child: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                height: 200,
+                                width: double.infinity,
+                                color: AppColors.charcoal.withValues(
+                                  alpha: 0.3,
+                                ),
+                                child: Center(
+                                  child: Image.network(
+                                    project.imageUrl!,
+                                    fit: BoxFit.cover,
+                                    filterQuality: FilterQuality.high,
+                                    loadingBuilder: (context, child, loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Container(
+                                        height: 200,
+                                        width: double.infinity,
+                                        color: AppColors.charcoal,
+                                        child: Center(
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              CircularProgressIndicator(
+                                                value:
+                                                    loadingProgress
+                                                            .expectedTotalBytes !=
+                                                        null
+                                                    ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          loadingProgress
+                                                              .expectedTotalBytes!
+                                                    : null,
+                                              ),
+                                              const SizedBox(height: 8),
+                                              Text(
+                                                'Loading...',
+                                                style: AppTypography.bodySmall
+                                                    .copyWith(
+                                                      color: AppColors.gray100,
+                                                      fontSize: 10,
+                                                    ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        height: 200,
+                                        width: double.infinity,
+                                        color: AppColors.charcoal,
+                                        child: const Center(
+                                          child: Icon(
+                                            Icons.broken_image,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                      ),
+                      const SizedBox(height: 20),
                     ],
-            ),
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(
-              color: isDark
-                  ? (project['gradient'] as List<Color>)[0].withValues(alpha: 0.3)
-                  : (project['gradient'] as List<Color>)[0].withValues(alpha: 0.2),
-              width: isSelected ? 2 : 1,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: isDark
-                    ? (project['gradient'] as List<Color>)[0].withValues(alpha: 0.2)
-                    : Colors.black.withValues(alpha: 0.05),
-                blurRadius: isSelected ? 30 : 20,
-                offset: Offset(0, isSelected ? 12 : 8),
-              ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Category badge
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: project['gradient'] as List<Color>,
-                  ),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  project['category'] as String,
-                  style: AppTypography.labelSmall.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 11,
-                  ),
-                ),
-              ),
 
-              const SizedBox(height: 20),
-
-              // Title
-              ShaderMask(
-                shaderCallback: (bounds) => LinearGradient(
-                  colors: project['gradient'] as List<Color>,
-                ).createShader(bounds),
-                child: Text(
-                  project['title'] as String,
-                  style: AppTypography.h4.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 8),
-
-              // Subtitle
-              Text(
-                project['subtitle'] as String,
-                style: AppTypography.bodyMedium.copyWith(
-                  color: isDark ? AppColors.gray100 : AppColors.lightText,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-
-              const SizedBox(height: 4),
-
-              // Company & Year
-              Text(
-                '${project['company']} • ${project['year']}',
-                style: AppTypography.bodySmall.copyWith(
-                  color: isDark
-                      ? AppColors.gray100.withValues(alpha: 0.6)
-                      : AppColors.lightText2.withValues(alpha: 0.7),
-                  fontSize: 13,
-                ),
-              ),
-
-              const SizedBox(height: 16),
-
-              // Description
-              Text(
-                project['description'] as String,
-                style: AppTypography.bodyMedium.copyWith(
-                  color: isDark
-                      ? AppColors.gray100.withValues(alpha: 0.8)
-                      : AppColors.lightText2,
-                  height: 1.6,
-                  fontSize: 14,
-                ),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
-
-              const SizedBox(height: 20),
-
-              // Tags
-              Wrap(
-                spacing: 8,
-                runSpacing: 8,
-                children: (project['tags'] as List<String>).map((tag) {
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: isDark
-                          ? (project['gradient'] as List<Color>)[0].withValues(alpha: 0.2)
-                          : (project['gradient'] as List<Color>)[0].withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      tag,
-                      style: AppTypography.bodySmall.copyWith(
-                        color: isDark
-                            ? (project['gradient'] as List<Color>)[0]
-                            : (project['gradient'] as List<Color>)[0].withValues(alpha: 0.9),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 11,
+                    // Category badge
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      decoration: BoxDecoration(
+                        color: accentColor.withValues(alpha: 0.1),
+                        border: Border.all(
+                          color: accentColor.withValues(alpha: 0.3),
+                        ),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        project.category,
+                        style: AppTypography.labelSmall.copyWith(
+                          color: accentColor,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 11,
+                          letterSpacing: 1.2,
+                        ),
                       ),
                     ),
-                  );
-                }).toList(),
+
+                    const SizedBox(height: 20),
+
+                    // Title
+                    Text(
+                      project.title,
+                      style: AppTypography.h4.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1.0,
+                        shadows: [
+                          Shadow(
+                            color: accentColor.withValues(alpha: 0.5),
+                            blurRadius: 10,
+                          ),
+                        ],
+                      ),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    // Subtitle
+                    Text(
+                      project.subtitle,
+                      style: AppTypography.bodyMedium.copyWith(
+                        color: AppColors.gray100,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+
+                    const SizedBox(height: 4),
+
+                    // Company & Year
+                    Text(
+                      '${project.company} • ${project.year}',
+                      style: AppTypography.bodySmall.copyWith(
+                        color: AppColors.gray100.withValues(alpha: 0.6),
+                        fontSize: 13,
+                        fontFamily: 'Courier',
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Description
+                    Text(
+                      project.description,
+                      style: AppTypography.bodyMedium.copyWith(
+                        color: AppColors.gray100.withValues(alpha: 0.8),
+                        height: 1.6,
+                        fontSize: 14,
+                      ),
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Tags
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: project.tags.map((tag) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: accentColor.withValues(alpha: 0.2),
+                            ),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                          child: Text(
+                            tag.toUpperCase(),
+                            style: AppTypography.bodySmall.copyWith(
+                              color: accentColor.withValues(alpha: 0.8),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10,
+                              letterSpacing: 1.0,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
               ),
-            ],
+            ),
           ),
-        ),
-      ),
-    )
+        )
         .animate()
         .fadeIn(duration: 800.ms, delay: (200 + index * 100).ms)
         .slideY(begin: 0.2, end: 0);
