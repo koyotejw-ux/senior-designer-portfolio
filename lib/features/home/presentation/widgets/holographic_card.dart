@@ -84,15 +84,16 @@ class _TechHudBorderPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas.drawRect(Rect.fromLTWH(0, 0, w, h), bgPaint);
 
-    // 2. Simple Rectangular Outer Border (Thinner: 0.5)
+    // 2. Top & Bottom Horizontal Borders (Thinner: 0.5)
     final borderPaint = Paint()
       ..color = color.withValues(alpha: 0.25)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.5;
-    canvas.drawRect(
-      Rect.fromLTRB(padding, padding, w - padding, h - padding),
-      borderPaint,
-    );
+    
+    // Top border line
+    canvas.drawLine(Offset(0, padding), Offset(w, padding), borderPaint);
+    // Bottom border line
+    canvas.drawLine(Offset(0, h - padding), Offset(w, h - padding), borderPaint);
 
     // 3. Accent Corner Line Ticks (Thinner: 0.6)
     final linePaint = Paint()
