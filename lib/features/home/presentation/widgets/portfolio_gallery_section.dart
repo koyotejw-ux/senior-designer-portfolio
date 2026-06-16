@@ -375,19 +375,13 @@ class _PortfolioGallerySectionState
                       // Title
                       Text(
                         project.title,
-                        style: AppTypography.h3.copyWith(
+                        style: const TextStyle(
+                          fontFamily: 'Pretendard',
                           color: Colors.white,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 24,
+                          fontWeight: FontWeight.w900, // Pretendard Black
+                          fontSize: 20,
                           letterSpacing: -0.5,
                           height: 1.2,
-                          shadows: [
-                            Shadow(
-                              color: Colors.black.withOpacity(0.8),
-                              offset: const Offset(0, 2),
-                              blurRadius: 4,
-                            ),
-                          ],
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -398,10 +392,11 @@ class _PortfolioGallerySectionState
                       // Subtitle
                       Text(
                         project.subtitle,
-                        style: AppTypography.bodyLarge.copyWith(
-                          color: Colors.white.withOpacity(0.9),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          color: accentColor,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14,
                         ),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -414,25 +409,27 @@ class _PortfolioGallerySectionState
                         children: [
                           Icon(
                             Icons.business_center_outlined,
-                            size: 14,
-                            color: accentColor.withValues(alpha: 0.8),
+                            size: 12,
+                            color: const Color(0xFF64748B),
                           ),
                           const SizedBox(width: 4),
                           Text(
                             project.company,
-                            style: AppTypography.bodySmall.copyWith(
-                              color: accentColor.withValues(alpha: 0.9),
-                              fontWeight: FontWeight.w800,
-                              fontSize: 14,
+                            style: const TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Color(0xFF64748B),
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
                             ),
                           ),
                           const SizedBox(width: 12),
                           Text(
                             project.year,
-                            style: AppTypography.bodySmall.copyWith(
-                              color: Colors.white54,
+                            style: const TextStyle(
+                              fontFamily: 'Pretendard',
+                              color: Color(0xFF475569),
                               fontWeight: FontWeight.w600,
-                              fontSize: 13,
+                              fontSize: 11,
                             ),
                           ),
                         ],
@@ -443,10 +440,12 @@ class _PortfolioGallerySectionState
                       // Description
                       Text(
                         project.description,
-                        style: AppTypography.bodyMedium.copyWith(
-                          color: AppColors.gray100.withValues(alpha: 0.8),
-                          height: 1.5,
-                          fontSize: 13,
+                        style: const TextStyle(
+                          fontFamily: 'Pretendard',
+                          color: Color(0xFF94A3B8), // Level 4 Body
+                          height: 1.4,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -467,12 +466,14 @@ class _PortfolioGallerySectionState
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: accentColor.withValues(alpha: 0.2),
+                                width: 0.5,
                               ),
-                              borderRadius: BorderRadius.circular(2),
+                              borderRadius: BorderRadius.zero,
                             ),
                             child: Text(
                               tag.toUpperCase(),
-                              style: AppTypography.bodySmall.copyWith(
+                              style: TextStyle(
+                                fontFamily: 'Pretendard',
                                 color: accentColor.withValues(alpha: 0.8),
                                 fontWeight: FontWeight.w600,
                                 fontSize: 10,

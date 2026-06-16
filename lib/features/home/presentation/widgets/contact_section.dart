@@ -185,8 +185,10 @@ class ContactSection extends ConsumerWidget {
                   children: [
                     Text(
                       '© 2026 Jaewoong Jung. All rights reserved.',
-                      style: AppTypography.bodySmall.copyWith(
-                        color: AppColors.gray100.withValues(alpha: 0.5),
+                      style: const TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 11,
+                        color: Colors.white38,
                       ),
                       textAlign: TextAlign.center,
                     ),
