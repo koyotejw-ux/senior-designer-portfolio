@@ -66,6 +66,7 @@ class AboutSection extends ConsumerWidget {
               child: Text(
                 coverLetter.greeting,
                 style: const TextStyle(
+                  fontFamily: 'Pretendard',
                   color: Color(0xFFCBD5E1),
                   fontSize: 14,
                   height: 1.6,
@@ -86,6 +87,7 @@ class AboutSection extends ConsumerWidget {
               child: Text(
                 coverLetter.background,
                 style: const TextStyle(
+                  fontFamily: 'Pretendard',
                   color: Color(0xFFCBD5E1),
                   fontSize: 14,
                   height: 1.6,
@@ -106,6 +108,7 @@ class AboutSection extends ConsumerWidget {
               child: Text(
                 coverLetter.personality,
                 style: const TextStyle(
+                  fontFamily: 'Pretendard',
                   color: Color(0xFFCBD5E1),
                   fontSize: 14,
                   height: 1.6,
@@ -126,6 +129,7 @@ class AboutSection extends ConsumerWidget {
               child: Text(
                 coverLetter.hobbies,
                 style: const TextStyle(
+                  fontFamily: 'Pretendard',
                   color: Color(0xFFCBD5E1),
                   fontSize: 14,
                   height: 1.6,
@@ -146,6 +150,7 @@ class AboutSection extends ConsumerWidget {
               child: Text(
                 coverLetter.aspiration,
                 style: const TextStyle(
+                  fontFamily: 'Pretendard',
                   color: Color(0xFFCBD5E1),
                   fontSize: 14,
                   height: 1.6,

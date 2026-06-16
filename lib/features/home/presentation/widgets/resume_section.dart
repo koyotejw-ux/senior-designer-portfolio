@@ -195,10 +195,10 @@ class ResumeSection extends ConsumerWidget {
               label,
               style: TextStyle(
                 color: AppColors.accentCyan.withValues(alpha: 0.85),
-                fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w900, // Pretendard Black
                 fontSize: 13,
                 letterSpacing: 0.3,
-                fontFamily: 'Courier',
+                fontFamily: 'Pretendard',
               ),
             ),
           ),
@@ -210,6 +210,7 @@ class ResumeSection extends ConsumerWidget {
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.3,
+                fontFamily: 'Pretendard',
               ),
             ),
           ),
@@ -232,7 +233,7 @@ class ResumeSection extends ConsumerWidget {
                 color: AppColors.accentCyan,
                 fontSize: 13,
                 fontWeight: FontWeight.w700,
-                fontFamily: 'Courier',
+                fontFamily: 'Pretendard',
                 letterSpacing: 0.3,
               ),
             ),
@@ -245,6 +246,7 @@ class ResumeSection extends ConsumerWidget {
                 fontSize: 12,
                 height: 1.3,
                 fontWeight: FontWeight.w400,
+                fontFamily: 'Pretendard',
               ),
             ),
           ),
@@ -263,6 +265,7 @@ class ResumeSection extends ConsumerWidget {
           fontSize: 12,
           height: 1.3,
           fontWeight: FontWeight.w400,
+          fontFamily: 'Pretendard',
         ),
       ),
     );
@@ -277,7 +280,7 @@ class ResumeSection extends ConsumerWidget {
         borderRadius: BorderRadius.zero,
         border: Border.all(
           color: AppColors.primaryBlue.withValues(alpha: 0.3),
-          width: 1,
+          width: 0.5,
         ),
       ),
       child: Column(
@@ -300,7 +303,8 @@ class ResumeSection extends ConsumerWidget {
                   career.company,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w900, // Pretendard Black
+                    fontFamily: 'Pretendard',
                     fontSize: 16,
                     height: 1.3,
                   ),
@@ -313,6 +317,7 @@ class ResumeSection extends ConsumerWidget {
                   color: AppColors.accentCyan,
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
+                  fontFamily: 'Pretendard',
                   height: 1.3,
                 ),
               ),
@@ -321,7 +326,7 @@ class ResumeSection extends ConsumerWidget {
                 career.period,
                 style: const TextStyle(
                   color: Color(0xFF64748B),
-                  fontFamily: 'Courier',
+                  fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w600,
                   fontSize: 11,
                   height: 1.2,
@@ -341,6 +346,7 @@ class ResumeSection extends ConsumerWidget {
               fontSize: 12,
               height: 1.3,
               fontWeight: FontWeight.w400,
+              fontFamily: 'Pretendard',
             ),
           ),
           const SizedBox(height: 32),
@@ -358,6 +364,7 @@ class ResumeSection extends ConsumerWidget {
                       fontSize: 12,
                       height: 1.3,
                       fontWeight: FontWeight.w400,
+                      fontFamily: 'Pretendard',
                     ),
                   ),
                 )),
@@ -377,6 +384,7 @@ class ResumeSection extends ConsumerWidget {
                       fontSize: 12,
                       height: 1.3,
                       fontWeight: FontWeight.w400,
+                      fontFamily: 'Pretendard',
                     ),
                   ),
                 )),
@@ -412,6 +420,7 @@ class ResumeSection extends ConsumerWidget {
                       color: AppColors.accentCyan,
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
+                      fontFamily: 'Pretendard',
                     ),
                   ),
                 );
@@ -430,6 +439,7 @@ class ResumeSection extends ConsumerWidget {
                     color: Color(0xFF64748B),
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
+                    fontFamily: 'Pretendard',
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -440,6 +450,7 @@ class ResumeSection extends ConsumerWidget {
                       color: Color(0xFF94A3B8),
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
+                      fontFamily: 'Pretendard',
                     ),
                   ),
                 ),
@@ -458,9 +469,9 @@ class ResumeSection extends ConsumerWidget {
       style: TextStyle(
         color: AppColors.highlightGreen.withValues(alpha: 0.95),
         fontSize: 14,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w900, // Pretendard Black
         letterSpacing: 0.3,
-        fontFamily: 'Courier',
+        fontFamily: 'Pretendard',
       ),
     );
   }

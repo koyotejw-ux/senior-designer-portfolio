@@ -44,10 +44,11 @@ class HolographicCard extends StatelessWidget {
                 ).createShader(bounds),
                 child: Text(
                   title!,
-                  style: GoogleFonts.outfit(
+                  style: const TextStyle(
+                    fontFamily: 'Pretendard',
                     color: Colors.white,
                     fontSize: 18,
-                    fontWeight: FontWeight.w900,
+                    fontWeight: FontWeight.w900, // Pretendard Black
                     letterSpacing: 0.5,
                   ),
                 ),

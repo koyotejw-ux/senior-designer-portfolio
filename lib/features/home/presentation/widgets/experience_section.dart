@@ -127,6 +127,7 @@ class ExperienceSection extends ConsumerWidget {
           style: const TextStyle(
             color: AppColors.accentCyan,
             fontWeight: FontWeight.w800,
+            fontFamily: 'Pretendard',
             fontSize: 14,
             letterSpacing: 0.5,
             height: 1.3,
@@ -139,6 +140,7 @@ class ExperienceSection extends ConsumerWidget {
           role,
           style: const TextStyle(
             color: Color(0xFFE2E8F0),
+            fontFamily: 'Pretendard',
             fontSize: 13,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.3,
@@ -157,6 +159,7 @@ class ExperienceSection extends ConsumerWidget {
               position,
               style: const TextStyle(
                 color: Color(0xFF64748B),
+                fontFamily: 'Pretendard',
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
@@ -173,7 +176,7 @@ class ExperienceSection extends ConsumerWidget {
               period,
               style: const TextStyle(
                 color: Color(0xFF64748B),
-                fontFamily: 'Courier',
+                fontFamily: 'Pretendard',
                 fontWeight: FontWeight.w600,
                 fontSize: 11,
               ),
@@ -195,15 +198,15 @@ class ExperienceSection extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Level 3: Subheadings (Green, 14px)
+          // Level 3: Subheadings (Green, 14px, Pretendard Black)
           Text(
             title,
             style: TextStyle(
               color: AppColors.highlightGreen.withValues(alpha: 0.95),
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w900, // Pretendard Black
               fontSize: 14,
               letterSpacing: 0.3,
-              fontFamily: 'Courier',
+              fontFamily: 'Pretendard',
               height: 1.2,
             ),
           ),
@@ -215,6 +218,7 @@ class ExperienceSection extends ConsumerWidget {
                 item,
                 style: const TextStyle(
                   color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 12px)
+                  fontFamily: 'Pretendard',
                   height: 1.3,
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
