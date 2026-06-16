@@ -291,28 +291,29 @@ class _HomePageState extends ConsumerState<HomePage>
               onMenuClick: _scrollToSection,
             ),
           ),
-          Positioned(
-            right: size.width > 600 ? 40 : 10,
-            top: size.height * 0.3,
-            bottom: size.height * 0.3,
-            child: Center(
-              child: SectionIndicator(
-                currentIndex: _currentSectionIndex,
-                totalSections: 6,
-                onSelect: (index) {
-                  final sections = [
-                    'Home',
-                    'Resume',
-                    'Experience',
-                    'About',
-                    'Portfolio',
-                    'Contact',
-                  ];
-                  _scrollToSection(sections[index]);
-                },
+          if (size.width >= 1000)
+            Positioned(
+              right: 40,
+              top: size.height * 0.3,
+              bottom: size.height * 0.3,
+              child: Center(
+                child: SectionIndicator(
+                  currentIndex: _currentSectionIndex,
+                  totalSections: 6,
+                  onSelect: (index) {
+                    final sections = [
+                      'Home',
+                      'Resume',
+                      'Experience',
+                      'About',
+                      'Portfolio',
+                      'Contact',
+                    ];
+                    _scrollToSection(sections[index]);
+                  },
+                ),
               ),
             ),
-          ),
           Positioned(
             bottom: 40,
             right: 40,
