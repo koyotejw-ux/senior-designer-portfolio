@@ -158,36 +158,6 @@ class _TechHudBorderPainter extends CustomPainter {
     // Bottom-left tick
     canvas.drawLine(Offset(padding, h - padding), Offset(padding + tickLength, h - padding), linePaint);
     canvas.drawLine(Offset(padding, h - padding), Offset(padding, h - padding - tickLength), linePaint);
-
-    // 5. Draw Sci-Fi HUD telemetry labels
-    final textStyle = TextStyle(
-      color: color.withValues(alpha: 0.5),
-      fontFamily: 'Courier',
-      fontSize: 8.0,
-      fontWeight: FontWeight.bold,
-      letterSpacing: 1.0,
-    );
-
-    // Left Telemetry Label
-    final leftPainter = TextPainter(
-      text: TextSpan(text: '[SYS_SEC.0x8F]', style: textStyle),
-      textDirection: TextDirection.ltr,
-    )..layout();
-    // Offset slightly above the bottom line, next to the tick
-    leftPainter.paint(
-      canvas,
-      Offset(padding + 24.0, h - padding - leftPainter.height - 2.0),
-    );
-
-    // Right Telemetry Label
-    final rightPainter = TextPainter(
-      text: TextSpan(text: '[STATUS.ACTIVE]', style: textStyle),
-      textDirection: TextDirection.ltr,
-    )..layout();
-    rightPainter.paint(
-      canvas,
-      Offset(w - padding - 24.0 - rightPainter.width, h - padding - rightPainter.height - 2.0),
-    );
   }
 
   @override
