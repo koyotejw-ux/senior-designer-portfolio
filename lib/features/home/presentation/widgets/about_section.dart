@@ -82,7 +82,7 @@ class AboutSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 2,
             child: HolographicCard(
-              title: '20 Years of Impact',
+              title: '17 Years of Impact',
               accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.background,

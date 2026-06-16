@@ -530,7 +530,7 @@ class _ResumePrintDialogState extends State<ResumePrintDialog> {
         '        <div style="font-size: 10.5pt; line-height: 1.8; color: #334155;">',
       );
       buffer.writeln(
-        '          20년 경력의 시니어 UX 전문가로서 대형 제조사(현대HT), 게임 엔터테인먼트(넥슨), 핀테크 등 다양한 산업군에서 UX 전략 수립 및 디자인 리딩을 담당하였습니다. 비즈니스 가치와 사용자 중심 설계를 조화시키는 역량으로 성공적인 프로젝트 완결을 주도합니다.',
+        '          17년 경력의 시니어 UX 전문가로서 대형 제조사(현대HT), 게임 엔터테인먼트(넥슨), 핀테크 등 다양한 산업군에서 UX 전략 수립 및 디자인 리딩을 담당하였습니다. 비즈니스 가치와 사용자 중심 설계를 조화시키는 역량으로 성공적인 프로젝트 완결을 주도합니다.',
       );
       buffer.writeln('        </div>');
       buffer.writeln('      </div>');

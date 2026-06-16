@@ -195,7 +195,7 @@ final resumeProvider = Provider<ResumeModel>((ref) {
       ),
     ],
     coreCompetencies: const [
-      '20년의 실무 경력을 바탕으로 복잡한 비즈니스 요구사항을 명확한 UX 아키텍처와 장인정신이 담긴 UI로 구현하는 실무 역량',
+      '17년의 실무 경력을 바탕으로 복잡한 비즈니스 요구사항을 명확한 UX 아키텍처와 장인정신이 담긴 UI로 구현하는 실무 역량',
       'AI 시대의 선두에서 Gemini, Claude, ChatGPT 등 LLM과 Midjourney를 실무 디자인 워크플로우에 통합하여 생산성을 혁신하는 AI 리서치 역량',
       'Antigravity(Agentic Workflow)를 포함한 최신 AI 에이전트 기술을 연구하고, 이를 UX 설계 및 디자인 프로세스 자동화에 적용하는 미래 지향적 시도',
       '7인치부터 24인치까지 다양한 하드웨어 환경에서 최적의 사용성을 구현해내는 스마트 디바이스 설계 및 디자인 시스템 구축 전문가',
