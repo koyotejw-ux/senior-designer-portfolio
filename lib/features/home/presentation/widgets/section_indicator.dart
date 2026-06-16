@@ -17,9 +17,9 @@ class SectionIndicator extends ConsumerWidget {
 
   static const List<String> sectionNames = [
     "01.HERO_SYS",
-    "02.ABOUT_ME",
+    "02.RESUME_DB",
     "03.CAREER_EXP",
-    "04.EXT_SKILL",
+    "04.ABOUT_ME",
     "05.FEAT_PORT",
     "06.SYS_CONN",
   ];

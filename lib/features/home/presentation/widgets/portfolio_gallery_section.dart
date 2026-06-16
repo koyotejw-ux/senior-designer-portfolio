@@ -74,14 +74,14 @@ class _PortfolioGallerySectionState
                   ),
                   const SizedBox(width: 16),
                   Text(
-                    'Featured Projects',
-                    style: (isMobile ? AppTypography.h3 : AppTypography.h2)
-                        .copyWith(
-                          color: isDark
-                              ? AppColors.gray100
-                              : AppColors.lightGray900,
-                          fontWeight: FontWeight.w800,
-                        ),
+                    '05.FEAT_PORT',
+                    style: AppTypography.h1.copyWith(
+                      color: isDark ? Colors.white : AppColors.lightText,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 4,
+                      fontSize: isMobile ? 32 : 54,
+                      fontFamily: 'Courier',
+                    ),
                   ),
                 ],
               ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0),

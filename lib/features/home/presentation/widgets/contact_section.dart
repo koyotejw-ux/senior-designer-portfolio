@@ -45,15 +45,30 @@ class ContactSection extends ConsumerWidget {
           child: Column(
             children: [
               // Section Header
-              Text(
-                "Let's Work Together",
-                style: (isMobile ? AppTypography.h3 : AppTypography.h1)
-                    .copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.5,
+              Column(
+                children: [
+                  Text(
+                    '06.SYS_CONN',
+                    style: AppTypography.h1.copyWith(
+                      color: AppColors.accentCyan,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 4,
+                      fontSize: isMobile ? 32 : 54,
+                      fontFamily: 'Courier',
                     ),
-                textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    "Let's Work Together",
+                    style: (isMobile ? AppTypography.h3 : AppTypography.h1)
+                        .copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          letterSpacing: -0.5,
+                        ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.2, end: 0),
 
               SizedBox(height: isMobile ? 16 : 24),

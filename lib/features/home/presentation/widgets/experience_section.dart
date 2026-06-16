@@ -33,12 +33,12 @@ class ExperienceSection extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Experience',
+                  '03.CAREER_EXP',
                   style: AppTypography.h1.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 4,
-                    fontSize: isMobile ? 44 : 72,
+                    fontSize: isMobile ? 32 : 54,
                     fontFamily: 'Courier',
                   ),
                 ),
@@ -206,12 +206,12 @@ class ExperienceSection extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '· ',
+                    '■ ',
                     style: TextStyle(
                       color: AppColors.accentCyan,
                       fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      height: 1.5,
+                      fontSize: 10,
+                      height: 2.0,
                     ),
                   ),
                   Expanded(
