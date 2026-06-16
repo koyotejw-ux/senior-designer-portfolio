@@ -273,6 +273,7 @@ class ResumeSection extends ConsumerWidget {
 
   Widget _buildCareerDetailItem(Career career, bool isMobile) {
     return Container(
+      width: double.infinity,
       margin: const EdgeInsets.only(bottom: 32),
       padding: const EdgeInsets.all(28),
       decoration: BoxDecoration(
