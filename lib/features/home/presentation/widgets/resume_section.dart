@@ -440,25 +440,15 @@ class ResumeSection extends ConsumerWidget {
   }
 
   Widget _buildSectionTitle(String title) {
-    return Row(
-      children: [
-        Container(
-          width: 3,
-          height: 12,
-          color: AppColors.highlightGreen,
-        ),
-        const SizedBox(width: 8),
-        Text(
-          title,
-          style: TextStyle(
-            color: AppColors.highlightGreen.withValues(alpha: 0.95),
-            fontSize: 14,
-            fontWeight: FontWeight.w800,
-            letterSpacing: 1.0,
-            fontFamily: 'Courier',
-          ),
-        ),
-      ],
+    return Text(
+      title,
+      style: TextStyle(
+        color: AppColors.highlightGreen.withValues(alpha: 0.95),
+        fontSize: 14,
+        fontWeight: FontWeight.w800,
+        letterSpacing: 0.3,
+        fontFamily: 'Courier',
+      ),
     );
   }
 }

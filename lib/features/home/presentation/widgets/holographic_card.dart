@@ -32,48 +32,15 @@ class HolographicCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (title != null) ...[
-              Row(
-                children: [
-                  // Target Node Indicator
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: accentColor,
-                      boxShadow: [
-                        BoxShadow(
-                          color: accentColor.withValues(alpha: 0.6),
-                          blurRadius: 6,
-                          spreadRadius: 1,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  Text(
-                    title!,
-                    style: TextStyle(
-                      color: accentColor,
-                      fontFamily: 'Courier',
-                      fontSize: 18,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 1.5,
-                    ),
-                  ),
-                  const Spacer(),
-                  // Tech Line ticks
-                  Container(
-                    width: 50,
-                    height: 2,
-                    color: accentColor.withValues(alpha: 0.4),
-                  ),
-                  const SizedBox(width: 6),
-                  Container(
-                    width: 6,
-                    height: 6,
-                    color: accentColor.withValues(alpha: 0.6),
-                  ),
-                ],
+              Text(
+                title!,
+                style: TextStyle(
+                  color: accentColor,
+                  fontFamily: 'Courier',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 0.5,
+                ),
               ),
               const SizedBox(height: 24),
             ],
@@ -106,43 +73,23 @@ class _TechHudBorderPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas.drawRect(Rect.fromLTWH(0, 0, w, h), bgPaint);
 
-    // 2. Simple Rectangular Outer Border
+    // 2. Simple Rectangular Outer Border (Thinner: 0.5)
     final borderPaint = Paint()
-      ..color = color.withValues(alpha: 0.35)
+      ..color = color.withValues(alpha: 0.25)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.0;
+      ..strokeWidth = 0.5;
     canvas.drawRect(
       Rect.fromLTRB(padding, padding, w - padding, h - padding),
       borderPaint,
     );
 
-    // 3. Rectangular Point Markers (Tiny Solid Square Nodes at 4 Corners)
-    final nodePaint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-    const nodeSize = 5.0;
-
-    final corners = [
-      Offset(padding, padding),
-      Offset(w - padding, padding),
-      Offset(w - padding, h - padding),
-      Offset(padding, h - padding),
-    ];
-
-    for (final corner in corners) {
-      canvas.drawRect(
-        Rect.fromCenter(center: corner, width: nodeSize, height: nodeSize),
-        nodePaint,
-      );
-    }
-
-    // 4. Accent Corner Line Ticks (Simple Tech lines along borders)
+    // 3. Accent Corner Line Ticks (Thinner: 0.6)
     final linePaint = Paint()
-      ..color = color.withValues(alpha: 0.7)
+      ..color = color.withValues(alpha: 0.5)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.2;
+      ..strokeWidth = 0.6;
 
-    const tickLength = 16.0;
+    const tickLength = 12.0;
     // Top-left tick
     canvas.drawLine(Offset(padding, padding), Offset(padding + tickLength, padding), linePaint);
     canvas.drawLine(Offset(padding, padding), Offset(padding, padding + tickLength), linePaint);

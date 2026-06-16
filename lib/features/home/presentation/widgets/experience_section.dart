@@ -198,7 +198,7 @@ class ExperienceSection extends ConsumerWidget {
               color: AppColors.accentCyan.withValues(alpha: 0.9),
               fontWeight: FontWeight.w800,
               fontSize: 13,
-              letterSpacing: 1.5,
+              letterSpacing: 0.3,
               fontFamily: 'Courier',
               height: 1.2,
             ),
