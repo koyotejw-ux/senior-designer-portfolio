@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -47,25 +48,34 @@ class ContactSection extends ConsumerWidget {
               // Section Header
               Column(
                 children: [
-                  Text(
-                    '06.SYS_CONN',
-                    style: AppTypography.h1.copyWith(
-                      color: AppColors.accentCyan,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 4,
-                      fontSize: isMobile ? 32 : 54,
-                      fontFamily: 'Courier',
+                  ShaderMask(
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [
+                        AppColors.accentCyan,
+                        AppColors.highlightGreen,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ).createShader(bounds),
+                    child: Text(
+                      'Contact',
+                      style: GoogleFonts.outfit(
+                        fontSize: isMobile ? 40 : 64,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: -1.5,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   Text(
                     "Let's Work Together",
-                    style: (isMobile ? AppTypography.h3 : AppTypography.h1)
-                        .copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: -0.5,
-                        ),
+                    style: GoogleFonts.outfit(
+                      color: AppColors.accentCyan,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 2.0,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ],

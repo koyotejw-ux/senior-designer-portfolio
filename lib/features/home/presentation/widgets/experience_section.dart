@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../data/providers/resume_provider.dart';
@@ -32,14 +33,23 @@ class ExperienceSection extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  '03.CAREER_EXP',
-                  style: AppTypography.h1.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 4,
-                    fontSize: isMobile ? 32 : 54,
-                    fontFamily: 'Courier',
+                ShaderMask(
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [
+                      AppColors.accentCyan,
+                      AppColors.highlightGreen,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ).createShader(bounds),
+                  child: Text(
+                    'Experience',
+                    style: GoogleFonts.outfit(
+                      fontSize: isMobile ? 40 : 64,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: -1.5,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 Container(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -73,14 +74,23 @@ class _PortfolioGallerySectionState
                     ),
                   ),
                   const SizedBox(width: 16),
-                  Text(
-                    '05.FEAT_PORT',
-                    style: AppTypography.h1.copyWith(
-                      color: isDark ? Colors.white : AppColors.lightText,
-                      fontWeight: FontWeight.w900,
-                      letterSpacing: 4,
-                      fontSize: isMobile ? 32 : 54,
-                      fontFamily: 'Courier',
+                  ShaderMask(
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [
+                        AppColors.accentCyan,
+                        AppColors.highlightGreen,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ).createShader(bounds),
+                    child: Text(
+                      'Portfolio',
+                      style: GoogleFonts.outfit(
+                        fontSize: isMobile ? 40 : 64,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: -1.5,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],
