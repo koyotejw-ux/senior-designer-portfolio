@@ -55,45 +55,24 @@ class _PortfolioGallerySectionState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Section Header
-              Row(
-                children: [
-                  Container(
-                    width: 4,
-                    height: isMobile ? 32 : 40,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          AppColors.highlightGreen,
-                          AppColors.accentCyan,
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
+              ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [
+                    AppColors.accentCyan,
+                    AppColors.highlightGreen,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ).createShader(bounds),
+                child: Text(
+                  'PORTFOLIO',
+                  style: GoogleFonts.outfit(
+                    fontSize: isMobile ? 40 : 64,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -1.5,
+                    color: Colors.white,
                   ),
-                  const SizedBox(width: 16),
-                  ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [
-                        AppColors.accentCyan,
-                        AppColors.highlightGreen,
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ).createShader(bounds),
-                    child: Text(
-                      'Portfolio',
-                      style: GoogleFonts.outfit(
-                        fontSize: isMobile ? 40 : 64,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: -1.5,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ).animate().fadeIn(duration: 600.ms).slideX(begin: -0.2, end: 0),
 
               SizedBox(height: isMobile ? 48 : 72),

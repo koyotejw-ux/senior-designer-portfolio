@@ -58,7 +58,7 @@ class ContactSection extends ConsumerWidget {
                       end: Alignment.bottomRight,
                     ).createShader(bounds),
                     child: Text(
-                      'Contact',
+                      'CONTACT',
                       style: GoogleFonts.outfit(
                         fontSize: isMobile ? 40 : 64,
                         fontWeight: FontWeight.w900,

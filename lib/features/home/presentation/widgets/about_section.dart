@@ -43,7 +43,7 @@ class AboutSection extends ConsumerWidget {
                     end: Alignment.bottomRight,
                   ).createShader(bounds),
                   child: Text(
-                    'About Me',
+                    'ABOUT ME',
                     style: GoogleFonts.outfit(
                       fontSize: isMobile ? 40 : 64,
                       fontWeight: FontWeight.w900,
@@ -52,12 +52,7 @@ class AboutSection extends ConsumerWidget {
                     ),
                   ),
                 ),
-                Container(
-                  width: 80,
-                  height: 6,
-                  margin: const EdgeInsets.only(top: 16, bottom: 60),
-                  color: AppColors.accentCyan,
-                ),
+                const SizedBox(height: 40),
               ],
             ),
           ),
@@ -67,13 +62,13 @@ class AboutSection extends ConsumerWidget {
             index: 1,
             child: HolographicCard(
               title: 'Product Strategy',
-              accentColor: AppColors.primaryBlue,
+              accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.greeting,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  height: 1.9,
+                  color: Color(0xFFCBD5E1),
+                  fontSize: 14,
+                  height: 1.6,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 0.2,
                 ),
@@ -87,13 +82,13 @@ class AboutSection extends ConsumerWidget {
             index: 2,
             child: HolographicCard(
               title: '20 Years of Impact',
-              accentColor: AppColors.highlightGreen,
+              accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.background,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  height: 1.9,
+                  color: Color(0xFFCBD5E1),
+                  fontSize: 14,
+                  height: 1.6,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 0.2,
                 ),
@@ -111,9 +106,9 @@ class AboutSection extends ConsumerWidget {
               child: Text(
                 coverLetter.personality,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  height: 1.9,
+                  color: Color(0xFFCBD5E1),
+                  fontSize: 14,
+                  height: 1.6,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 0.2,
                 ),
@@ -127,13 +122,13 @@ class AboutSection extends ConsumerWidget {
             index: 4,
             child: HolographicCard(
               title: 'AI Workflow Research',
-              accentColor: const Color(0xFF9D00FF),
+              accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.hobbies,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  height: 1.9,
+                  color: Color(0xFFCBD5E1),
+                  fontSize: 14,
+                  height: 1.6,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 0.2,
                 ),
@@ -147,13 +142,13 @@ class AboutSection extends ConsumerWidget {
             index: 5,
             child: HolographicCard(
               title: 'Future Vision',
-              accentColor: AppColors.primaryBlue,
+              accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.aspiration,
                 style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 17,
-                  height: 1.9,
+                  color: Color(0xFFCBD5E1),
+                  fontSize: 14,
+                  height: 1.6,
                   fontWeight: FontWeight.w400,
                   letterSpacing: 0.2,
                 ),

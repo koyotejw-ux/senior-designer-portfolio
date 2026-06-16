@@ -45,7 +45,7 @@ class ResumeSection extends ConsumerWidget {
                     end: Alignment.bottomRight,
                   ).createShader(bounds),
                   child: Text(
-                    'Resume',
+                    'RESUME',
                     style: GoogleFonts.outfit(
                       fontSize: isMobile ? 40 : 64,
                       fontWeight: FontWeight.w900,
@@ -54,12 +54,7 @@ class ResumeSection extends ConsumerWidget {
                     ),
                   ),
                 ),
-                Container(
-                  width: 80,
-                  height: 6,
-                  margin: const EdgeInsets.only(top: 16, bottom: 60),
-                  color: AppColors.accentCyan,
-                ),
+                const SizedBox(height: 40),
               ],
             ),
           ),
@@ -211,8 +206,8 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               value,
               style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
+                color: Color(0xFFCBD5E1),
+                fontSize: 14,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.5,
               ),
@@ -246,9 +241,9 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               text,
               style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                height: 1.7,
+                color: Color(0xFFCBD5E1),
+                fontSize: 14,
+                height: 1.6,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -260,32 +255,15 @@ class ResumeSection extends ConsumerWidget {
 
   Widget _buildBulletPoint(String text) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 10),
-            width: 4,
-            height: 4,
-            decoration: BoxDecoration(
-              color: AppColors.accentCyan,
-              borderRadius: BorderRadius.zero,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Text(
-              text,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 15,
-                height: 1.7,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ],
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: Color(0xFFCBD5E1),
+          fontSize: 14,
+          height: 1.6,
+          fontWeight: FontWeight.w400,
+        ),
       ),
     );
   }
@@ -314,7 +292,7 @@ class ResumeSection extends ConsumerWidget {
                 style: AppTypography.h4.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.w800,
-                  fontSize: 22,
+                  fontSize: 17,
                   height: 1.3,
                 ),
               ),
@@ -323,7 +301,7 @@ class ResumeSection extends ConsumerWidget {
                 '${career.department} · ${career.position}',
                 style: TextStyle(
                   color: AppColors.accentCyan,
-                  fontSize: 15,
+                  fontSize: 13,
                   fontWeight: FontWeight.w700,
                   height: 1.3,
                 ),
@@ -335,7 +313,7 @@ class ResumeSection extends ConsumerWidget {
                   color: Color(0xFF8B95A1),
                   fontFamily: 'Courier',
                   fontWeight: FontWeight.w600,
-                  fontSize: 13,
+                  fontSize: 12,
                   height: 1.2,
                 ),
               ),
@@ -349,8 +327,8 @@ class ResumeSection extends ConsumerWidget {
           Text(
             career.role,
             style: const TextStyle(
-              color: Color(0xFFE2E8F0),
-              fontSize: 15,
+              color: Color(0xFFCBD5E1),
+              fontSize: 14,
               height: 1.5,
               fontWeight: FontWeight.w400,
             ),
@@ -362,32 +340,15 @@ class ResumeSection extends ConsumerWidget {
             _buildSectionTitle('주요 프로젝트'),
             const SizedBox(height: 8),
             ...career.projects.map((project) => Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        width: 4,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: AppColors.accentCyan,
-                          borderRadius: BorderRadius.zero,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          project,
-                          style: const TextStyle(
-                            color: Color(0xFFE2E8F0),
-                            fontSize: 15,
-                            height: 1.5,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ],
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    project,
+                    style: const TextStyle(
+                      color: Color(0xFFCBD5E1),
+                      fontSize: 14,
+                      height: 1.5,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 )),
             const SizedBox(height: 32),
@@ -398,32 +359,15 @@ class ResumeSection extends ConsumerWidget {
             _buildSectionTitle('주요 성과'),
             const SizedBox(height: 8),
             ...career.achievements.map((achievement) => Padding(
-                  padding: const EdgeInsets.only(bottom: 6),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 10),
-                        width: 4,
-                        height: 4,
-                        decoration: BoxDecoration(
-                          color: AppColors.highlightGreen,
-                          borderRadius: BorderRadius.zero,
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          achievement,
-                          style: const TextStyle(
-                            color: Color(0xFFE2E8F0),
-                            fontSize: 15,
-                            height: 1.5,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                    ],
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    achievement,
+                    style: const TextStyle(
+                      color: Color(0xFFCBD5E1),
+                      fontSize: 14,
+                      height: 1.5,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 )),
             const SizedBox(height: 32),
