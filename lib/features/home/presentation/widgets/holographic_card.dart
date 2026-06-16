@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class HolographicCard extends StatelessWidget {
@@ -43,9 +44,8 @@ class HolographicCard extends StatelessWidget {
                 ).createShader(bounds),
                 child: Text(
                   title!,
-                  style: const TextStyle(
+                  style: GoogleFonts.outfit(
                     color: Colors.white,
-                    fontFamily: 'Courier',
                     fontSize: 18,
                     fontWeight: FontWeight.w900,
                     letterSpacing: 0.5,
