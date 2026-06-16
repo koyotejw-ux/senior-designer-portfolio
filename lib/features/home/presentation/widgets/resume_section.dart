@@ -290,24 +290,14 @@ class ResumeSection extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ShaderMask(
-                shaderCallback: (bounds) => const LinearGradient(
-                  colors: [
-                    AppColors.accentCyan,
-                    Color(0xFFFF007F), // Neon Pink
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ).createShader(bounds),
-                child: Text(
-                  career.company,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900, // Pretendard Black
-                    fontFamily: 'Pretendard',
-                    fontSize: 16,
-                    height: 1.3,
-                  ),
+              Text(
+                career.company,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900, // Pretendard Black
+                  fontFamily: 'Pretendard',
+                  fontSize: 16,
+                  height: 1.3,
                 ),
               ),
               const SizedBox(height: 6),
