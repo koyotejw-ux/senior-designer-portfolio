@@ -89,4 +89,16 @@ class AppConstants {
     'Healthcare',
     'Final',
   ];
+
+  // API Configuration
+  static const String serverUrl = 'http://localhost:8080';  // Server URL
+  static const String apiBaseUrl = '$serverUrl/api';
+  static const String uploadEndpoint = '$serverUrl/upload';
+  static const String imagesPath = '$serverUrl/images';  // Full URL for images
+
+  // Image Upload Settings
+  static const int maxImageSizeBytes = 50 * 1024 * 1024;  // 50MB max
+  static const int thumbnailMaxWidth = 800;  // Thumbnail width for preview
+  static const int thumbnailMaxHeight = 600;  // Thumbnail height for preview
+  static const int thumbnailQuality = 85;  // JPEG quality for thumbnails
 }

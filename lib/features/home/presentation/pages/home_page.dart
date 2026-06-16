@@ -324,24 +324,17 @@ class _HomePageState extends ConsumerState<HomePage>
                   duration: const Duration(milliseconds: 300),
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 16),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primaryBlue.withValues(alpha: 0.6),
-                          blurRadius: 16,
-                          spreadRadius: 2,
-                        ),
-                      ],
-                    ),
                     child: FloatingActionButton(
                       heroTag: 'admin_fab',
                       onPressed: () => GoRouter.of(context).go('/admin'),
-                      backgroundColor: AppColors.primaryBlue,
-                      shape: const CircleBorder(),
+                      backgroundColor: Colors.black,
+                      shape: Border.all(
+                        color: AppColors.primaryBlue,
+                        width: 1.5,
+                      ),
                       child: const Icon(
                         Icons.admin_panel_settings,
-                        color: Colors.white,
+                        color: AppColors.primaryBlue,
                         size: 24,
                       ),
                     ),
@@ -351,26 +344,17 @@ class _HomePageState extends ConsumerState<HomePage>
                   scale: _showFab ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 300),
                   child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.highlightGreen.withValues(
-                            alpha: 0.6,
-                          ),
-                          blurRadius: 16,
-                          spreadRadius: 2,
-                        ),
-                      ],
-                    ),
                     child: FloatingActionButton(
                       heroTag: 'scroll_top_fab',
                       onPressed: _scrollToTop,
-                      backgroundColor: AppColors.highlightGreen,
-                      shape: const CircleBorder(),
+                      backgroundColor: Colors.black,
+                      shape: Border.all(
+                        color: AppColors.highlightGreen,
+                        width: 1.5,
+                      ),
                       child: const Icon(
                         Icons.arrow_upward,
-                        color: Colors.black,
+                        color: AppColors.highlightGreen,
                         size: 28,
                       ),
                     ),

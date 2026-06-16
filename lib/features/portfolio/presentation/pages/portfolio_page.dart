@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -6,18 +7,21 @@ import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/widgets/scroll_reveal_widget.dart';
+import '../../../home/data/providers/content_provider.dart';
 
 class PortfolioPage extends ConsumerStatefulWidget {
-  const PortfolioPage({super.key});
+  final String? initialTab;
+  const PortfolioPage({super.key, this.initialTab});
 
   @override
   ConsumerState<PortfolioPage> createState() => _PortfolioPageState();
 }
 
 class _PortfolioPageState extends ConsumerState<PortfolioPage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
-  int _selectedIndex = 0;
+  late TabController _tabController;
+  int _selectedIndex = -1;
   String _selectedCategory = 'All';
 
   final List<String> _categories = [
@@ -48,9 +52,14 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           '고령자 전용 접근성 가이드라인 수립',
           '터치 영역 44px 이상, 폰트 크기 18px 이상 적용',
           '핵심 기능 3단계 이내 도달 UX 설계',
-          'Figma 기반 디자인 시스템 구축'
+          'Figma 기반 디자인 시스템 구축',
         ],
-        'technologies': ['Figma', 'Mobile UX', 'Accessibility', 'Design System'],
+        'technologies': [
+          'Figma',
+          'Mobile UX',
+          'Accessibility',
+          'Design System',
+        ],
       },
     },
     {
@@ -72,7 +81,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           '5개 건설사 대응 가능한 범용 디자인 시스템 구축',
           '7인치~24인치 디바이스 대응 반응형 UI 설계',
           '월패드-앱 연동 UX 최적화',
-          '디자인 시스템 문서화 및 가이드라인 제작'
+          '디자인 시스템 문서화 및 가이드라인 제작',
         ],
         'technologies': ['Figma', 'Android', 'IoT', 'Design System', 'Zeplin'],
       },
@@ -96,14 +105,14 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           'iOS/Android 앱스토어 정식 론칭',
           '월패드-앱 실시간 연동 UX 설계',
           '스마트홈 기기 통합 제어 UI 구축',
-          '사용자 만족도 85% 달성'
+          '사용자 만족도 85% 달성',
         ],
         'technologies': [
           'Figma',
           'iOS',
           'Android',
           'Smart Home',
-          'IoT Integration'
+          'IoT Integration',
         ],
       },
     },
@@ -126,7 +135,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           'Unity3D 기반 GUI 시스템 구축',
           '게임 내 100+ UI 화면 디자인',
           '인터랙션 애니메이션 설계 및 구현',
-          'UI 최적화로 렌더링 성능 30% 향상'
+          'UI 최적화로 렌더링 성능 30% 향상',
         ],
         'technologies': ['Unity3D', 'Photoshop', 'Illustrator', 'Game UI'],
       },
@@ -150,14 +159,14 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           'NEXON 사내 최초 반응형 웹사이트 구축',
           'PC/태블릿/모바일 3단계 브레이크포인트 설계',
           'CBT 신청자 10만명 돌파',
-          '웹 접근성 인증 AA 등급 획득'
+          '웹 접근성 인증 AA 등급 획득',
         ],
         'technologies': [
           'HTML5',
           'CSS3',
           'JavaScript',
           'Responsive Design',
-          'Photoshop'
+          'Photoshop',
         ],
       },
     },
@@ -170,21 +179,97 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     )..forward();
+
+    int startIndex = 0;
+    if (widget.initialTab == 'corporate') {
+      startIndex = 1;
+    }
+
+    _tabController = TabController(
+      length: 2,
+      vsync: this,
+      initialIndex: startIndex,
+    );
+    _tabController.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 
-  List<Map<String, dynamic>> get _filteredProjects {
-    if (_selectedCategory == 'All') {
-      return _projects;
+  List<Map<String, dynamic>> get _allProjects {
+    final providerProjects = ref.watch(projectsProvider).valueOrNull ?? [];
+    final mappedProviderProjects = providerProjects
+        .map(
+          (p) => {
+            'id': p.id,
+            'title': p.title,
+            'subtitle': p.subtitle,
+            'company': p.company,
+            'year': p.year,
+            'category': p.category,
+            'description': p.description,
+            'tags': p.tags,
+            'gradient': p.gradientColors.isNotEmpty
+                ? p.gradientColors
+                : [AppColors.primaryBlue, AppColors.accentCyan],
+            'details': {
+              'role': p.role,
+              'duration': p.duration,
+              'teamSize': p.teamSize,
+              'achievements': <String>[],
+              'technologies': p.tags,
+            },
+            'imageUrl': p.imageUrl,
+            'isCorporate': p.isCorporate,
+          },
+        )
+        .toList();
+
+    // Avoid duplicates if same ID exists
+    final Map<String, Map<String, dynamic>> merged = {};
+    for (var p in _projects) {
+      merged[p['id'] as String] = p;
     }
-    return _projects
+    for (var p in mappedProviderProjects) {
+      merged[p['id'] as String] = p;
+    }
+
+    return merged.values.toList();
+  }
+
+  List<Map<String, dynamic>> get _filteredProjects {
+    // Top tab (Representative) shows ONLY projects where isCorporate is false
+    final all = _allProjects
+        .where((p) => (p['isCorporate'] ?? false) == false)
+        .toList();
+    if (_selectedCategory == 'All') {
+      return all;
+    }
+    return all
         .where((project) => project['category'] == _selectedCategory)
         .toList();
+  }
+
+  Map<String, List<Map<String, dynamic>>> get _corporateProjects {
+    final Map<String, List<Map<String, dynamic>>> grouped = {};
+    // Corporate tab shows ONLY projects where isCorporate is true
+    final corporateOnly = _allProjects
+        .where((p) => (p['isCorporate'] ?? false) == true)
+        .toList();
+    for (var project in corporateOnly) {
+      final company = project['company'] as String;
+      if (!grouped.containsKey(company)) {
+        grouped[company] = [];
+      }
+      grouped[company]!.add(project);
+    }
+    return grouped;
   }
 
   @override
@@ -206,25 +291,388 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
             size: Size.infinite,
           ),
 
-          // Main Content
-          SingleChildScrollView(
+          // Main Content (Tab Bar + Tab Bar View)
+          Column(
+            children: [
+              _buildTabBar(isMobile, isDark),
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    // Tab 1: Representative Portfolio
+                    _buildRepresentativeTab(isMobile, isTablet, isDark),
+                    // Tab 2: Corporate Portfolio
+                    _buildCorporateTab(isMobile, isTablet, isDark),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          // Back Button
+          _buildBackButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRepresentativeTab(bool isMobile, bool isTablet, bool isDark) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildHeroSection(isMobile, isTablet, isDark),
+          _buildCategoryFilter(isMobile, isTablet, isDark),
+          _buildProjectGrid(isMobile, isTablet, isDark),
+          _buildFooterCTA(isMobile, isTablet, isDark),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCorporateTab(bool isMobile, bool isTablet, bool isDark) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          _buildCorporateHeroSection(isMobile, isTablet, isDark),
+          _buildCorporateGallery(isMobile, isTablet, isDark),
+          _buildFooterCTA(isMobile, isTablet, isDark),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBackButton() {
+    return Positioned(
+      top: 20,
+      left: 20,
+      child: SafeArea(
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: GestureDetector(
+            onTap: () => context.go('/'),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withOpacity(0.1)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: Colors.white,
+                        size: 16,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'BACK',
+                        style: AppTypography.labelSmall.copyWith(
+                          color: Colors.white,
+                          letterSpacing: 1.2,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabBar(bool isMobile, bool isDark) {
+    return Container(
+      padding: EdgeInsets.only(top: isMobile ? 40 : 60, bottom: 20),
+      color: Colors.transparent,
+      child: Center(
+        child: Container(
+          width: isMobile ? 320 : 500,
+          padding: const EdgeInsets.all(4),
+          decoration: BoxDecoration(
+            color: isDark
+                ? AppColors.charcoal.withOpacity(0.5)
+                : AppColors.lightGray200,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: isDark
+                  ? AppColors.blue900.withOpacity(0.3)
+                  : AppColors.lightGray300,
+            ),
+          ),
+          child: TabBar(
+            controller: _tabController,
+            indicatorSize: TabBarIndicatorSize.tab,
+            dividerColor: Colors.transparent,
+            indicator: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [AppColors.primaryBlue, AppColors.accentCyan],
+              ),
+              borderRadius: BorderRadius.circular(26),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.primaryBlue.withOpacity(0.3),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            labelColor: Colors.white,
+            unselectedLabelColor: isDark
+                ? AppColors.gray100
+                : AppColors.lightText2,
+            labelStyle: AppTypography.bodyMedium.copyWith(
+              fontWeight: FontWeight.w900,
+              fontSize: 16,
+              letterSpacing: 1.1,
+            ),
+            unselectedLabelStyle: AppTypography.bodyMedium.copyWith(
+              fontWeight: FontWeight.w700,
+              fontSize: 15,
+            ),
+            tabs: const [
+              Tab(text: '대표 포트폴리오'),
+              Tab(text: '회사별 포트폴리오'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCorporateHeroSection(bool isMobile, bool isTablet, bool isDark) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        vertical: isMobile ? 40 : 60,
+        horizontal: isMobile
+            ? 24
+            : isTablet
+            ? 60
+            : 100,
+      ),
+      child: Center(
+        child: Column(
+          children: [
+            ScrollRevealWidget(
+              delay: Duration.zero,
+              child: ShaderMask(
+                shaderCallback: (bounds) => LinearGradient(
+                  colors: [AppColors.accentCyan, AppColors.highlightGreen],
+                ).createShader(bounds),
+                child: Text(
+                  'Corporate Journey',
+                  style: (isMobile ? AppTypography.h2 : AppTypography.h1)
+                      .copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w800,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              '회사별로 정리된 프로젝트 갤러리입니다',
+              style: AppTypography.bodyLarge.copyWith(
+                color: isDark ? AppColors.gray100 : AppColors.lightText2,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCorporateGallery(bool isMobile, bool isTablet, bool isDark) {
+    final corporateData = _corporateProjects;
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        vertical: 20,
+        horizontal: isMobile
+            ? 24
+            : isTablet
+            ? 60
+            : 100,
+      ),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1400),
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: corporateData.keys.length,
+            itemBuilder: (context, index) {
+              final company = corporateData.keys.elementAt(index);
+              final projects = corporateData[company]!;
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 4,
+                          height: 24,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                AppColors.primaryBlue,
+                                AppColors.accentCyan,
+                              ],
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                            ),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          company,
+                          style: AppTypography.h4.copyWith(
+                            color: isDark
+                                ? Colors.white
+                                : AppColors.lightGray900,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '(${projects.length})',
+                          style: AppTypography.bodySmall.copyWith(
+                            color: isDark
+                                ? AppColors.gray100.withOpacity(0.5)
+                                : AppColors.lightText2,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: isMobile ? 1 : (isTablet ? 2 : 3),
+                      crossAxisSpacing: 24,
+                      mainAxisSpacing: 24,
+                      childAspectRatio: 1.4,
+                    ),
+                    itemCount: projects.length,
+                    itemBuilder: (context, pIndex) {
+                      return _buildCorporateProjectCard(
+                        projects[pIndex],
+                        isDark,
+                        isMobile,
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 40),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCorporateProjectCard(
+    Map<String, dynamic> project,
+    bool isDark,
+    bool isMobile,
+  ) {
+    return ScrollRevealWidget(
+      delay: const Duration(milliseconds: 100),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: GestureDetector(
+          onTap: () => context.push('/portfolio/${project['id']}'),
+          child: Container(
+            decoration: BoxDecoration(
+              color: isDark
+                  ? AppColors.charcoal.withOpacity(0.4)
+                  : Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: (project['gradient'] as List<Color>)[0].withOpacity(0.2),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            ),
+            clipBehavior: Clip.antiAlias,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Hero Section
-                _buildHeroSection(isMobile, isTablet, isDark),
-
-                // Category Filter
-                _buildCategoryFilter(isMobile, isTablet, isDark),
-
-                // Project Grid
-                _buildProjectGrid(isMobile, isTablet, isDark),
-
-                // Footer CTA
-                _buildFooterCTA(isMobile, isTablet, isDark),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: project['gradient'] as List<Color>,
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.work_outline,
+                        color: Colors.white.withOpacity(0.5),
+                        size: 48,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        project['title'] as String,
+                        style: AppTypography.bodyLarge.copyWith(
+                          color: isDark ? Colors.white : AppColors.lightGray900,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        project['subtitle'] as String,
+                        style: AppTypography.caption.copyWith(
+                          color: isDark
+                              ? AppColors.gray100.withOpacity(0.7)
+                              : AppColors.lightText2,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
@@ -234,7 +682,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       width: double.infinity,
       padding: EdgeInsets.symmetric(
         vertical: isMobile ? 80 : 120,
-        horizontal: isMobile ? 24 : isTablet ? 60 : 100,
+        horizontal: isMobile
+            ? 24
+            : isTablet
+            ? 60
+            : 100,
       ),
       child: Center(
         child: Container(
@@ -253,11 +705,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                   ).createShader(bounds),
                   child: Text(
                     'Portfolio',
-                    style: (isMobile ? AppTypography.h1 : AppTypography.display1)
-                        .copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                    ),
+                    style:
+                        (isMobile ? AppTypography.h1 : AppTypography.display1)
+                            .copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                            ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -267,14 +720,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                 delay: const Duration(milliseconds: 200),
                 child: Text(
                   '19년 경력으로 축적한 실전 프로젝트',
-                  style: (isMobile
-                          ? AppTypography.bodyLarge
-                          : AppTypography.h4)
+                  style: (isMobile ? AppTypography.bodyLarge : AppTypography.h4)
                       .copyWith(
-                    color: isDark
-                        ? AppColors.gray100.withValues(alpha: 0.8)
-                        : AppColors.lightText2,
-                  ),
+                        color: isDark
+                            ? AppColors.gray100.withValues(alpha: 0.8)
+                            : AppColors.lightText2,
+                      ),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -306,7 +757,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
         width: double.infinity,
         padding: EdgeInsets.symmetric(
           vertical: isMobile ? 24 : 32,
-          horizontal: isMobile ? 24 : isTablet ? 60 : 100,
+          horizontal: isMobile
+              ? 24
+              : isTablet
+              ? 60
+              : 100,
         ),
         child: Center(
           child: Container(
@@ -343,15 +798,15 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                         color: isSelected
                             ? null
                             : (isDark
-                                ? AppColors.charcoal.withValues(alpha: 0.6)
-                                : AppColors.lightGray200),
+                                  ? AppColors.charcoal.withValues(alpha: 0.6)
+                                  : AppColors.lightGray200),
                         borderRadius: BorderRadius.circular(24),
                         border: Border.all(
                           color: isSelected
                               ? Colors.transparent
                               : (isDark
-                                  ? AppColors.blue900.withValues(alpha: 0.3)
-                                  : AppColors.lightGray300),
+                                    ? AppColors.blue900.withValues(alpha: 0.3)
+                                    : AppColors.lightGray300),
                           width: 1,
                         ),
                       ),
@@ -361,10 +816,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                           color: isSelected
                               ? Colors.white
                               : (isDark
-                                  ? AppColors.gray100
-                                  : AppColors.lightGray900),
-                          fontWeight:
-                              isSelected ? FontWeight.w700 : FontWeight.w600,
+                                    ? AppColors.gray100
+                                    : AppColors.lightGray900),
+                          fontWeight: isSelected
+                              ? FontWeight.w700
+                              : FontWeight.w600,
                         ),
                       ),
                     ),
@@ -385,7 +841,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       width: double.infinity,
       padding: EdgeInsets.symmetric(
         vertical: isMobile ? 40 : 60,
-        horizontal: isMobile ? 24 : isTablet ? 60 : 100,
+        horizontal: isMobile
+            ? 24
+            : isTablet
+            ? 60
+            : 100,
       ),
       child: Center(
         child: Container(
@@ -463,32 +923,39 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                   end: Alignment.bottomRight,
                   colors: isDark
                       ? [
-                          (project['gradient'] as List<Color>)[0]
-                              .withValues(alpha: 0.15),
-                          (project['gradient'] as List<Color>)[1]
-                              .withValues(alpha: 0.08),
+                          (project['gradient'] as List<Color>)[0].withValues(
+                            alpha: 0.15,
+                          ),
+                          (project['gradient'] as List<Color>)[1].withValues(
+                            alpha: 0.08,
+                          ),
                         ]
                       : [
-                          (project['gradient'] as List<Color>)[0]
-                              .withValues(alpha: 0.08),
-                          (project['gradient'] as List<Color>)[1]
-                              .withValues(alpha: 0.04),
+                          (project['gradient'] as List<Color>)[0].withValues(
+                            alpha: 0.08,
+                          ),
+                          (project['gradient'] as List<Color>)[1].withValues(
+                            alpha: 0.04,
+                          ),
                         ],
                 ),
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: isDark
-                      ? (project['gradient'] as List<Color>)[0]
-                          .withValues(alpha: isHovered ? 0.5 : 0.3)
-                      : (project['gradient'] as List<Color>)[0]
-                          .withValues(alpha: isHovered ? 0.3 : 0.2),
+                      ? (project['gradient'] as List<Color>)[0].withValues(
+                          alpha: isHovered ? 0.5 : 0.3,
+                        )
+                      : (project['gradient'] as List<Color>)[0].withValues(
+                          alpha: isHovered ? 0.3 : 0.2,
+                        ),
                   width: isHovered ? 2 : 1,
                 ),
                 boxShadow: [
                   BoxShadow(
                     color: isDark
-                        ? (project['gradient'] as List<Color>)[0]
-                            .withValues(alpha: isHovered ? 0.3 : 0.2)
+                        ? (project['gradient'] as List<Color>)[0].withValues(
+                            alpha: isHovered ? 0.3 : 0.2,
+                          )
                         : Colors.black.withValues(alpha: 0.05),
                     blurRadius: isHovered ? 30 : 20,
                     offset: Offset(0, isHovered ? 12 : 8),
@@ -500,8 +967,10 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                 children: [
                   // Category Badge
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: project['gradient'] as List<Color>,
@@ -527,13 +996,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                     ).createShader(bounds),
                     child: Text(
                       project['title'] as String,
-                      style: (isMobile
-                              ? AppTypography.h5
-                              : AppTypography.h4)
+                      style: (isMobile ? AppTypography.h5 : AppTypography.h4)
                           .copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                      ),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w800,
+                          ),
                     ),
                   ),
 
@@ -586,13 +1053,15 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                     children: (project['tags'] as List<String>).map((tag) {
                       return Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10, vertical: 4),
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: isDark
                               ? (project['gradient'] as List<Color>)[0]
-                                  .withValues(alpha: 0.2)
+                                    .withValues(alpha: 0.2)
                               : (project['gradient'] as List<Color>)[0]
-                                  .withValues(alpha: 0.1),
+                                    .withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
@@ -601,7 +1070,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                             color: isDark
                                 ? (project['gradient'] as List<Color>)[0]
                                 : (project['gradient'] as List<Color>)[0]
-                                    .withValues(alpha: 0.9),
+                                      .withValues(alpha: 0.9),
                             fontWeight: FontWeight.w600,
                             fontSize: 11,
                           ),
@@ -625,7 +1094,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
         width: double.infinity,
         padding: EdgeInsets.symmetric(
           vertical: isMobile ? 60 : 80,
-          horizontal: isMobile ? 24 : isTablet ? 60 : 100,
+          horizontal: isMobile
+              ? 24
+              : isTablet
+              ? 60
+              : 100,
         ),
         child: Center(
           child: Container(
@@ -649,11 +1122,13 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
               children: [
                 Text(
                   '더 자세한 프로젝트 경험이 궁금하신가요?',
-                  style:
-                      (isMobile ? AppTypography.h5 : AppTypography.h4).copyWith(
-                    color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  style: (isMobile ? AppTypography.h5 : AppTypography.h4)
+                      .copyWith(
+                        color: isDark
+                            ? AppColors.gray100
+                            : AppColors.lightGray900,
+                        fontWeight: FontWeight.w700,
+                      ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: isMobile ? 16 : 20),
@@ -690,8 +1165,9 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                             borderRadius: BorderRadius.circular(12),
                             boxShadow: [
                               BoxShadow(
-                                color:
-                                    AppColors.accentCyan.withValues(alpha: 0.3),
+                                color: AppColors.accentCyan.withValues(
+                                  alpha: 0.3,
+                                ),
                                 blurRadius: 20,
                                 offset: const Offset(0, 8),
                               ),
@@ -722,10 +1198,8 @@ class BackgroundPainter extends CustomPainter {
   final Animation<double> animation;
   final bool isDark;
 
-  BackgroundPainter({
-    required this.animation,
-    required this.isDark,
-  }) : super(repaint: animation);
+  BackgroundPainter({required this.animation, required this.isDark})
+    : super(repaint: animation);
 
   @override
   void paint(Canvas canvas, Size size) {

@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -16,24 +17,38 @@ class HolographicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _HolographicBorderPainter(color: accentColor),
+      painter: _TechHudBorderPainter(
+        color: accentColor,
+        animationValue: 0.0,
+      ),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(32),
         decoration: BoxDecoration(
-          color: const Color(
-            0xFF050508,
-          ).withValues(alpha: 0.6), // Semi-transparent dark
-          // No standard border, using CustomPainter for HUD look
+          color: const Color(0xFF04060A).withValues(alpha: 0.75), // Deep space semi-transparent
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
             if (title != null) ...[
               Row(
                 children: [
-                  // Tech Icon
-                  Container(width: 8, height: 8, color: accentColor),
+                  // Target Node Indicator
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: accentColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: accentColor.withValues(alpha: 0.6),
+                          blurRadius: 6,
+                          spreadRadius: 1,
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(width: 12),
                   Text(
                     title!,
@@ -42,15 +57,21 @@ class HolographicCard extends StatelessWidget {
                       fontFamily: 'Courier',
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
-                      letterSpacing: 2,
+                      letterSpacing: 1.5,
                     ),
                   ),
                   const Spacer(),
-                  // Decorative Line
+                  // Tech Line ticks
                   Container(
-                    width: 40,
+                    width: 50,
                     height: 2,
-                    color: accentColor.withValues(alpha: 0.5),
+                    color: accentColor.withValues(alpha: 0.4),
+                  ),
+                  const SizedBox(width: 6),
+                  Container(
+                    width: 6,
+                    height: 6,
+                    color: accentColor.withValues(alpha: 0.6),
                   ),
                 ],
               ),
@@ -64,73 +85,112 @@ class HolographicCard extends StatelessWidget {
   }
 }
 
-class _HolographicBorderPainter extends CustomPainter {
+class _TechHudBorderPainter extends CustomPainter {
   final Color color;
+  final double animationValue;
 
-  _HolographicBorderPainter({required this.color});
+  _TechHudBorderPainter({
+    required this.color,
+    required this.animationValue,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5;
-
-    final glowPaint = Paint()
-      ..color = color.withValues(alpha: 0.4)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 4
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 4);
-
-    final path = Path();
     final w = size.width;
     final h = size.height;
-    final cornerSize = 20.0;
+    const padding = 1.0;
 
-    // Top Left Corner
-    path.moveTo(0, cornerSize);
-    path.lineTo(0, 0);
-    path.lineTo(cornerSize, 0);
+    // 1. Simple Flat Background Plane
+    final bgPaint = Paint()
+      ..color = const Color(0xFF050811).withValues(alpha: 0.8)
+      ..style = PaintingStyle.fill;
+    canvas.drawRect(Rect.fromLTWH(0, 0, w, h), bgPaint);
 
-    // Top Right Corner
-    path.moveTo(w - cornerSize, 0);
-    path.lineTo(w, 0);
-    path.lineTo(w, cornerSize);
-
-    // Bottom Right Corner
-    path.moveTo(w, h - cornerSize);
-    path.lineTo(w, h);
-    path.lineTo(w - cornerSize, h);
-
-    // Bottom Left Corner
-    path.moveTo(cornerSize, h);
-    path.lineTo(0, h);
-    path.lineTo(0, h - cornerSize);
-
-    // Draw Glow
-    canvas.drawPath(path, glowPaint);
-    // Draw Sharp Line
-    canvas.drawPath(path, paint);
-
-    // Subtle Grid Lines (Optional decoration)
-    final gridPaint = Paint()
-      ..color = color.withValues(alpha: 0.1)
-      ..strokeWidth = 1;
-
-    // Top Line
-    canvas.drawLine(
-      Offset(cornerSize + 10, 0),
-      Offset(w - cornerSize - 10, 0),
-      gridPaint,
+    // 2. Simple Rectangular Outer Border
+    final borderPaint = Paint()
+      ..color = color.withValues(alpha: 0.35)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.0;
+    canvas.drawRect(
+      Rect.fromLTRB(padding, padding, w - padding, h - padding),
+      borderPaint,
     );
-    // Bottom Line
-    canvas.drawLine(
-      Offset(cornerSize + 10, h),
-      Offset(w - cornerSize - 10, h),
-      gridPaint,
+
+    // 3. Rectangular Point Markers (Tiny Solid Square Nodes at 4 Corners)
+    final nodePaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+    const nodeSize = 5.0;
+
+    final corners = [
+      Offset(padding, padding),
+      Offset(w - padding, padding),
+      Offset(w - padding, h - padding),
+      Offset(padding, h - padding),
+    ];
+
+    for (final corner in corners) {
+      canvas.drawRect(
+        Rect.fromCenter(center: corner, width: nodeSize, height: nodeSize),
+        nodePaint,
+      );
+    }
+
+    // 4. Accent Corner Line Ticks (Simple Tech lines along borders)
+    final linePaint = Paint()
+      ..color = color.withValues(alpha: 0.7)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.2;
+
+    const tickLength = 16.0;
+    // Top-left tick
+    canvas.drawLine(Offset(padding, padding), Offset(padding + tickLength, padding), linePaint);
+    canvas.drawLine(Offset(padding, padding), Offset(padding, padding + tickLength), linePaint);
+
+    // Top-right tick
+    canvas.drawLine(Offset(w - padding, padding), Offset(w - padding - tickLength, padding), linePaint);
+    canvas.drawLine(Offset(w - padding, padding), Offset(w - padding, padding + tickLength), linePaint);
+
+    // Bottom-right tick
+    canvas.drawLine(Offset(w - padding, h - padding), Offset(w - padding - tickLength, h - padding), linePaint);
+    canvas.drawLine(Offset(w - padding, h - padding), Offset(w - padding, h - padding - tickLength), linePaint);
+
+    // Bottom-left tick
+    canvas.drawLine(Offset(padding, h - padding), Offset(padding + tickLength, h - padding), linePaint);
+    canvas.drawLine(Offset(padding, h - padding), Offset(padding, h - padding - tickLength), linePaint);
+
+    // 5. Draw Sci-Fi HUD telemetry labels
+    final textStyle = TextStyle(
+      color: color.withValues(alpha: 0.5),
+      fontFamily: 'Courier',
+      fontSize: 8.0,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 1.0,
+    );
+
+    // Left Telemetry Label
+    final leftPainter = TextPainter(
+      text: TextSpan(text: '[SYS_SEC.0x8F]', style: textStyle),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    // Offset slightly above the bottom line, next to the tick
+    leftPainter.paint(
+      canvas,
+      Offset(padding + 24.0, h - padding - leftPainter.height - 2.0),
+    );
+
+    // Right Telemetry Label
+    final rightPainter = TextPainter(
+      text: TextSpan(text: '[STATUS.ACTIVE]', style: textStyle),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    rightPainter.paint(
+      canvas,
+      Offset(w - padding - 24.0 - rightPainter.width, h - padding - rightPainter.height - 2.0),
     );
   }
 
   @override
-  bool shouldRepaint(covariant _HolographicBorderPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _TechHudBorderPainter oldDelegate) =>
+      oldDelegate.color != color;
 }

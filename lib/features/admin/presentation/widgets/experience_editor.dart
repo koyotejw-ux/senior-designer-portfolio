@@ -8,6 +8,38 @@ import '../../../home/data/providers/content_provider.dart';
 class ExperienceEditor extends ConsumerWidget {
   const ExperienceEditor({super.key});
 
+  void _reorderExperiences(WidgetRef ref, List<ExperienceModel> experiences,
+      int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final updatedList = List<ExperienceModel>.from(experiences);
+    final item = updatedList.removeAt(oldIndex);
+    updatedList.insert(newIndex, item);
+
+    final reorderedList = updatedList
+        .asMap()
+        .entries
+        .map((entry) => ExperienceModel(
+              id: entry.value.id,
+              company: entry.value.company,
+              role: entry.value.role,
+              period: entry.value.period,
+              description: entry.value.description,
+              responsibilities: entry.value.responsibilities,
+              achievements: entry.value.achievements,
+              tools: entry.value.tools,
+              environment: entry.value.environment,
+              reasonForLeaving: entry.value.reasonForLeaving,
+              order: entry.key,
+              tags: entry.value.tags,
+            ))
+        .toList();
+
+    ref.read(contentRepositoryProvider).reorderExperiences(reorderedList);
+    ref.invalidate(experienceProvider);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final experienceAsync = ref.watch(experienceProvider);
@@ -16,38 +48,45 @@ class ExperienceEditor extends ConsumerWidget {
       data: (experiences) {
         return Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Experience',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Experience',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () => _showEditDialog(context, null, ref),
-                  icon: const Icon(Icons.add),
-                  label: const Text('Add Experience'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryBlue,
-                    foregroundColor: Colors.white,
+                  ElevatedButton.icon(
+                    onPressed: () => _showEditDialog(context, null, ref),
+                    icon: const Icon(Icons.add),
+                    label: const Text('Add Experience'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryBlue,
+                      foregroundColor: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            const SizedBox(height: 24),
             Expanded(
-              child: ListView.builder(
+              child: ReorderableListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: experiences.length,
+                onReorder: (oldIndex, newIndex) =>
+                    _reorderExperiences(ref, experiences, oldIndex, newIndex),
                 itemBuilder: (context, index) {
                   final exp = experiences[index];
                   return Card(
+                    key: ValueKey(exp.id),
                     color: AppColors.charcoal,
                     margin: const EdgeInsets.only(bottom: 16),
                     child: ListTile(
+                      leading: const Icon(Icons.drag_handle, color: Colors.grey),
                       title: Text(
                         exp.company,
                         style: const TextStyle(
@@ -56,7 +95,7 @@ class ExperienceEditor extends ConsumerWidget {
                         ),
                       ),
                       subtitle: Text(
-                        '${exp.role} | ${exp.period}',
+                        '${exp.role} | ${exp.period} • Order: ${exp.order}',
                         style: const TextStyle(color: Colors.grey),
                       ),
                       trailing: Row(
@@ -119,6 +158,7 @@ class ExperienceEditor extends ConsumerWidget {
           TextButton(
             onPressed: () {
               ref.read(contentRepositoryProvider).deleteExperience(id);
+              ref.invalidate(experienceProvider);
               Navigator.pop(context);
             },
             child: const Text('Delete', style: TextStyle(color: Colors.red)),
@@ -221,6 +261,8 @@ class _ExperienceDialogState extends ConsumerState<_ExperienceDialog> {
     } else {
       await repo.updateExperience(experience);
     }
+
+    ref.invalidate(experienceProvider);
 
     if (mounted) Navigator.pop(context);
   }

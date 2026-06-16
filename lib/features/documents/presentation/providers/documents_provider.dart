@@ -6,23 +6,25 @@ final documentsRepositoryProvider = Provider<DocumentsRepository>((ref) {
   return DocumentsRepository();
 });
 
-final documentsProvider = StreamProvider<List<DocumentModel>>((ref) {
+final documentsProvider = FutureProvider<List<DocumentModel>>((ref) async {
   final repository = ref.watch(documentsRepositoryProvider);
-  return repository.watchDocuments();
+  return repository.getDocuments();
 });
 
-final documentsNotifierProvider = StateNotifierProvider<DocumentsNotifier, AsyncValue<void>>((ref) {
-  return DocumentsNotifier(
-    repository: ref.watch(documentsRepositoryProvider),
-  );
-});
+final documentsNotifierProvider =
+    StateNotifierProvider<DocumentsNotifier, AsyncValue<void>>((ref) {
+      return DocumentsNotifier(
+        repository: ref.watch(documentsRepositoryProvider),
+        ref: ref,
+      );
+    });
 
 class DocumentsNotifier extends StateNotifier<AsyncValue<void>> {
   final DocumentsRepository repository;
+  final Ref ref;
 
-  DocumentsNotifier({
-    required this.repository,
-  }) : super(const AsyncValue.data(null));
+  DocumentsNotifier({required this.repository, required this.ref})
+    : super(const AsyncValue.data(null));
 
   Future<void> createDocument({
     required DocumentType type,
@@ -40,6 +42,7 @@ class DocumentsNotifier extends StateNotifier<AsyncValue<void>> {
         pdfUrl: pdfUrl,
         tags: tags,
       );
+      ref.invalidate(documentsProvider);
       state = const AsyncValue.data(null);
     } catch (e, stack) {
       state = AsyncValue.error(e, stack);
@@ -50,6 +53,7 @@ class DocumentsNotifier extends StateNotifier<AsyncValue<void>> {
     state = const AsyncValue.loading();
     try {
       await repository.updateDocument(document);
+      ref.invalidate(documentsProvider);
       state = const AsyncValue.data(null);
     } catch (e, stack) {
       state = AsyncValue.error(e, stack);
@@ -60,6 +64,7 @@ class DocumentsNotifier extends StateNotifier<AsyncValue<void>> {
     state = const AsyncValue.loading();
     try {
       await repository.deleteDocument(id);
+      ref.invalidate(documentsProvider);
       state = const AsyncValue.data(null);
     } catch (e, stack) {
       state = AsyncValue.error(e, stack);

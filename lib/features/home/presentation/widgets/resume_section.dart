@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
-import '../../data/providers/content_provider.dart';
-import '../../data/models/profile_model.dart';
+import '../../data/models/resume_model.dart';
+import '../../data/providers/resume_provider.dart';
 import 'scroll_reveal_widget.dart';
 import 'holographic_card.dart';
 
@@ -15,10 +15,7 @@ class ResumeSection extends ConsumerWidget {
     final size = MediaQuery.of(context).size;
     final isMobile = size.width < 1000;
 
-    final profileAsync = ref.watch(profileProvider);
-    final educationAsync = ref.watch(educationProvider);
-    final experienceAsync = ref.watch(experienceProvider);
-    final skillsAsync = ref.watch(skillsProvider);
+    final resume = ref.watch(resumeProvider);
 
     return Container(
       width: double.infinity,
@@ -38,19 +35,19 @@ class ResumeSection extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'RESUME',
+                  'Resume',
                   style: AppTypography.h1.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
-                    letterSpacing: 8,
-                    fontSize: isMobile ? 40 : 60,
+                    letterSpacing: 4,
+                    fontSize: isMobile ? 44 : 72,
                     fontFamily: 'Courier',
                   ),
                 ),
                 Container(
-                  width: 100,
-                  height: 8,
-                  margin: const EdgeInsets.only(top: 20, bottom: 60),
+                  width: 80,
+                  height: 6,
+                  margin: const EdgeInsets.only(top: 16, bottom: 60),
                   color: AppColors.accentCyan,
                 ),
               ],
@@ -61,16 +58,9 @@ class ResumeSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 1,
             child: HolographicCard(
-              title: 'PERSONAL INFO',
-              accentColor: AppColors.primaryBlue,
-              child: profileAsync.when(
-                data: (profile) => _buildPersonalInfoGrid(isMobile, profile),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Text(
-                  'Error: $err',
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
+              title: '인적사항',
+              accentColor: AppColors.highlightGreen,
+              child: _buildPersonalInfoGrid(isMobile, resume.personalInfo),
             ),
           ),
           const SizedBox(height: 40),
@@ -79,24 +69,17 @@ class ResumeSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 2,
             child: HolographicCard(
-              title: 'EDUCATION',
-              accentColor: AppColors.highlightGreen,
-              child: educationAsync.when(
-                data: (educations) => Column(
-                  children: educations
-                      .map(
-                        (edu) => _buildRowItem(
-                          edu.period,
-                          '${edu.school} / ${edu.major} (${edu.gpa})',
-                        ),
-                      )
-                      .toList(),
-                ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Text(
-                  'Error: $err',
-                  style: const TextStyle(color: Colors.white),
-                ),
+              title: '학력',
+              accentColor: AppColors.accentCyan,
+              child: Column(
+                children: resume.education
+                    .map(
+                      (edu) => _buildRowItem(
+                        edu.period,
+                        '${edu.institution} ${edu.major} ${edu.gpa}',
+                      ),
+                    )
+                    .toList(),
               ),
             ),
           ),
@@ -106,24 +89,13 @@ class ResumeSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 3,
             child: HolographicCard(
-              title: 'CAREER SUMMARY',
-              accentColor: AppColors.accentCyan,
-              child: experienceAsync.when(
-                data: (experiences) => Column(
-                  children: experiences
-                      .map(
-                        (exp) => _buildRowItem(
-                          exp.period,
-                          '${exp.company} / ${exp.role}',
-                        ),
-                      )
-                      .toList(),
-                ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Text(
-                  'Error: $err',
-                  style: const TextStyle(color: Colors.white),
-                ),
+              title: '경력사항',
+              accentColor: AppColors.primaryBlue,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: resume.careers
+                    .map((career) => _buildCareerDetailItem(career, isMobile))
+                    .toList(),
               ),
             ),
           ),
@@ -133,45 +105,32 @@ class ResumeSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 4,
             child: HolographicCard(
-              title: 'CORE COMPETENCIES',
-              accentColor: const Color(0xFF9D00FF),
-              child: skillsAsync.when(
-                data: (skills) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: skills
-                      .where((s) => s.category == 'competency')
-                      .map((s) => _buildBulletPoint(s.description))
-                      .toList(),
-                ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Text(
-                  'Error: $err',
-                  style: const TextStyle(color: Colors.white),
-                ),
+              title: '핵심역량',
+              accentColor: AppColors.highlightGreen,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: resume.coreCompetencies
+                    .map((comp) => _buildBulletPoint(comp))
+                    .toList(),
               ),
             ),
           ),
           const SizedBox(height: 40),
 
-          // 5. Qualifications
+          // 5. Certifications
           ScrollRevealWidget(
             index: 5,
             child: HolographicCard(
-              title: 'QUALIFICATIONS',
-              accentColor: AppColors.primaryBlue,
-              child: skillsAsync.when(
-                data: (skills) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: skills
-                      .where((s) => s.category == 'qualification')
-                      .map((s) => _buildBulletPoint(s.description))
-                      .toList(),
-                ),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Text(
-                  'Error: $err',
-                  style: const TextStyle(color: Colors.white),
-                ),
+              title: '자격사항',
+              accentColor: AppColors.accentCyan,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: resume.certifications
+                    .map(
+                      (cert) =>
+                          _buildBulletPoint('${cert.name} / ${cert.issuer}, ${cert.date}'),
+                    )
+                    .toList(),
               ),
             ),
           ),
@@ -180,24 +139,17 @@ class ResumeSection extends ConsumerWidget {
     );
   }
 
-  Widget _buildPersonalInfoGrid(bool isMobile, ProfileModel? profile) {
-    if (profile == null) {
-      return const Text(
-        'No profile data',
-        style: TextStyle(color: Colors.white),
-      );
-    }
-
+  Widget _buildPersonalInfoGrid(bool isMobile, personalInfo) {
     return isMobile
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildInfoRow('NAME', profile.name),
-              _buildInfoRow('BIRTH', profile.birth),
-              _buildInfoRow('ADDRESS', profile.address),
-              _buildInfoRow('MILITARY', profile.military),
-              _buildInfoRow('PHONE', profile.phone),
-              _buildInfoRow('EMAIL', profile.email),
+              _buildInfoRow('성명', personalInfo.name),
+              _buildInfoRow('생년월일', personalInfo.birthDate),
+              _buildInfoRow('주소', personalInfo.address),
+              _buildInfoRow('병역', personalInfo.militaryService),
+              _buildInfoRow('휴대번호', personalInfo.phone),
+              _buildInfoRow('이메일', personalInfo.email),
             ],
           )
         : Row(
@@ -206,9 +158,9 @@ class ResumeSection extends ConsumerWidget {
               Expanded(
                 child: Column(
                   children: [
-                    _buildInfoRow('NAME', profile.name),
-                    _buildInfoRow('BIRTH', profile.birth),
-                    _buildInfoRow('ADDRESS', profile.address),
+                    _buildInfoRow('성명', personalInfo.name),
+                    _buildInfoRow('생년월일', personalInfo.birthDate),
+                    _buildInfoRow('주소', personalInfo.address),
                   ],
                 ),
               ),
@@ -216,9 +168,9 @@ class ResumeSection extends ConsumerWidget {
               Expanded(
                 child: Column(
                   children: [
-                    _buildInfoRow('MILITARY', profile.military),
-                    _buildInfoRow('PHONE', profile.phone),
-                    _buildInfoRow('EMAIL', profile.email),
+                    _buildInfoRow('병역', personalInfo.militaryService),
+                    _buildInfoRow('휴대번호', personalInfo.phone),
+                    _buildInfoRow('이메일', personalInfo.email),
                   ],
                 ),
               ),
@@ -237,10 +189,10 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               label,
               style: TextStyle(
-                color: const Color(0xFF8B95A1), // Muted label
+                color: AppColors.accentCyan.withValues(alpha: 0.85),
                 fontWeight: FontWeight.w700,
-                fontSize: 14,
-                letterSpacing: 1,
+                fontSize: 13,
+                letterSpacing: 1.5,
                 fontFamily: 'Courier',
               ),
             ),
@@ -249,9 +201,9 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               value,
               style: const TextStyle(
-                color: Colors.white, // White text
+                color: Colors.white,
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600,
                 letterSpacing: 0.5,
               ),
             ),
@@ -272,10 +224,11 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               date,
               style: TextStyle(
-                color: AppColors.highlightGreen, // Green date
+                color: AppColors.accentCyan,
                 fontSize: 14,
+                fontWeight: FontWeight.w700,
                 fontFamily: 'Courier',
-                fontWeight: FontWeight.w900,
+                letterSpacing: 0.5,
               ),
             ),
           ),
@@ -283,9 +236,9 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               text,
               style: const TextStyle(
-                color: Colors.white, // White text
+                color: Colors.white,
                 fontSize: 15,
-                height: 1.6,
+                height: 1.7,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -303,24 +256,255 @@ class ResumeSection extends ConsumerWidget {
         children: [
           Container(
             margin: const EdgeInsets.only(top: 10),
-            width: 6,
-            height: 6,
-            color: AppColors.accentCyan, // Square bullet
+            width: 4,
+            height: 4,
+            decoration: BoxDecoration(
+              color: AppColors.accentCyan,
+              borderRadius: BorderRadius.zero,
+            ),
           ),
           const SizedBox(width: 16),
           Expanded(
             child: Text(
               text,
               style: const TextStyle(
-                color: Colors.white, // White text
+                color: Colors.white,
                 fontSize: 15,
-                height: 1.6,
-                fontWeight: FontWeight.w300,
+                height: 1.7,
+                fontWeight: FontWeight.w400,
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildCareerDetailItem(Career career, bool isMobile) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 32),
+      padding: const EdgeInsets.all(28),
+      decoration: BoxDecoration(
+        color: const Color(0xFF04060A).withValues(alpha: 0.6),
+        borderRadius: BorderRadius.zero,
+        border: Border.all(
+          color: AppColors.primaryBlue.withValues(alpha: 0.3),
+          width: 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 헤더: 회사명 및 기간
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                career.company,
+                style: AppTypography.h4.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 22,
+                  height: 1.3,
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                '${career.department} · ${career.position}',
+                style: TextStyle(
+                  color: AppColors.accentCyan,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  height: 1.3,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                career.period,
+                style: const TextStyle(
+                  color: Color(0xFF8B95A1),
+                  fontFamily: 'Courier',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                  height: 1.2,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 24),
+
+          // 역할
+          _buildSectionTitle('담당 업무'),
+          const SizedBox(height: 8),
+          Text(
+            career.role,
+            style: const TextStyle(
+              color: Color(0xFFE2E8F0),
+              fontSize: 15,
+              height: 1.5,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: 32),
+
+          // 주요 프로젝트
+          if (career.projects.isNotEmpty) ...[
+            _buildSectionTitle('주요 프로젝트'),
+            const SizedBox(height: 8),
+            ...career.projects.map((project) => Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: AppColors.accentCyan,
+                          borderRadius: BorderRadius.zero,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          project,
+                          style: const TextStyle(
+                            color: Color(0xFFE2E8F0),
+                            fontSize: 15,
+                            height: 1.5,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+            const SizedBox(height: 32),
+          ],
+
+          // 주요 성과
+          if (career.achievements.isNotEmpty) ...[
+            _buildSectionTitle('주요 성과'),
+            const SizedBox(height: 8),
+            ...career.achievements.map((achievement) => Padding(
+                  padding: const EdgeInsets.only(bottom: 6),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          color: AppColors.highlightGreen,
+                          borderRadius: BorderRadius.zero,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          achievement,
+                          style: const TextStyle(
+                            color: Color(0xFFE2E8F0),
+                            fontSize: 15,
+                            height: 1.5,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+            const SizedBox(height: 32),
+          ],
+
+          // 사용 도구
+          if (career.tools.isNotEmpty) ...[
+            _buildSectionTitle('사용 도구'),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: career.tools.map((tool) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF0A0E17),
+                    borderRadius: BorderRadius.zero,
+                    border: Border.all(
+                      color: AppColors.accentCyan.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Text(
+                    tool,
+                    style: TextStyle(
+                      color: AppColors.accentCyan,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 28),
+          ],
+
+          // 개발 환경
+          if (career.environment != null && career.environment!.isNotEmpty) ...[
+            Row(
+              children: [
+                Text(
+                  '개발환경',
+                  style: TextStyle(
+                    color: const Color(0xFF8B95A1),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    career.environment!,
+                    style: const TextStyle(
+                      color: Color(0xFFe0e4e8),
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Row(
+      children: [
+        Container(
+          width: 3,
+          height: 12,
+          color: AppColors.highlightGreen,
+        ),
+        const SizedBox(width: 8),
+        Text(
+          title,
+          style: TextStyle(
+            color: AppColors.highlightGreen.withValues(alpha: 0.95),
+            fontSize: 14,
+            fontWeight: FontWeight.w800,
+            letterSpacing: 1.0,
+            fontFamily: 'Courier',
+          ),
+        ),
+      ],
     );
   }
 }

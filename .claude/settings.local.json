@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dart run:*)",
+      "Bash(timeout /t 3)",
+      "Bash(flutter run:*)",
+      "Bash(timeout /t 5)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(taskkill /F /PID 38248)",
+      "Bash(dir:*)",
+      "Bash(flutter pub get:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(powershell -Command \"Stop-Process -Id 45120 -Force\")",
+      "Bash(timeout /t 15)",
+      "Bash(flutter doctor:*)",
+      "Bash(flutter devices:*)",
+      "Bash(flutter clean:*)",
+      "Bash(powershell -Command \"netstat -ano | findstr :8080\")",
+      "Bash(powershell -Command \"Stop-Process -Id 48624 -Force\")",
+      "Bash(timeout:*)",
+      "Bash(powershell -Command \"Get-Process | Where-Object {$_ProcessName -like ''*flutter*'' -or $_MainWindowTitle -like ''*senior_designer*''} | Select-Object Id,ProcessName,MainWindowTitle\")",
+      "Bash(powershell -Command \"Stop-Process -Id 109524 -Force\")",
+      "Bash(powershell -Command \"Get-Process | Where-Object {$_ProcessName -eq ''dart''} | Stop-Process -Force\")",
+      "Bash(powershell -Command \"Stop-Process -Id 55520 -Force\")",
+      "Bash(powershell -Command:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

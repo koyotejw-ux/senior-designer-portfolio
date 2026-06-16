@@ -228,6 +228,18 @@ class _DocumentCardState extends ConsumerState<DocumentCard>
         return isDark
             ? const Color(0xFFE91E63)
             : const Color(0xFFC2185B);
+      case DocumentType.requirements:
+      case DocumentType.userFlow:
+      case DocumentType.informationArchitecture:
+      case DocumentType.wireframe:
+        return isDark ? const Color(0xFF9C27B0) : const Color(0xFF7B1FA2);
+      case DocumentType.projectCharter:
+      case DocumentType.screenDesign:
+      case DocumentType.stakeholderMatrix:
+      case DocumentType.riskRegister:
+      case DocumentType.changeLog:
+      case DocumentType.lessonsLearned:
+        return isDark ? const Color(0xFF3F51B5) : const Color(0xFF303F9F);
     }
   }
 

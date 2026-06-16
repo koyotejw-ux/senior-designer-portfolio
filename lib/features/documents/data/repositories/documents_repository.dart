@@ -1,60 +1,57 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:uuid/uuid.dart';
 import '../../domain/models/document_model.dart';
 
 class DocumentsRepository {
-  final FirebaseFirestore _firestore;
-  static const String _collection = 'documents';
+  static const String _baseUrl = 'http://localhost:8080';
   final _uuid = const Uuid();
 
-  DocumentsRepository({
-    FirebaseFirestore? firestore,
-  }) : _firestore = firestore ?? FirebaseFirestore.instance;
+  Future<Map<String, dynamic>> _fetchData() async {
+    try {
+      final response = await http.get(Uri.parse('$_baseUrl/api/data'));
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body) as Map<String, dynamic>;
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+    return {};
+  }
+
+  Future<void> _saveData(Map<String, dynamic> data) async {
+    try {
+      await http.post(Uri.parse('$_baseUrl/api/data'), body: jsonEncode(data));
+    } catch (e) {
+      print('Error saving data: $e');
+      rethrow;
+    }
+  }
 
   /// 모든 문서 목록 가져오기
   Future<List<DocumentModel>> getDocuments() async {
-    try {
-      final snapshot = await _firestore
-          .collection(_collection)
-          .orderBy('updatedAt', descending: true)
-          .get();
-
-      return snapshot.docs
-          .map((doc) => DocumentModel.fromJson(doc.data()))
-          .toList();
-    } catch (e) {
-      throw Exception('문서 목록 불러오기 실패: $e');
-    }
+    final data = await _fetchData();
+    final list = (data['documents'] as List? ?? [])
+        .map((e) => DocumentModel.fromJson(e))
+        .toList();
+    // Sort desc by updatedAt
+    list.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+    return list;
   }
 
   /// 특정 타입의 문서 목록 가져오기
   Future<List<DocumentModel>> getDocumentsByType(DocumentType type) async {
-    try {
-      final snapshot = await _firestore
-          .collection(_collection)
-          .where('type', isEqualTo: type.name)
-          .orderBy('updatedAt', descending: true)
-          .get();
-
-      return snapshot.docs
-          .map((doc) => DocumentModel.fromJson(doc.data()))
-          .toList();
-    } catch (e) {
-      throw Exception('문서 목록 불러오기 실패: $e');
-    }
+    final docs = await getDocuments();
+    return docs.where((doc) => doc.type == type).toList();
   }
 
   /// 특정 문서 가져오기
   Future<DocumentModel?> getDocument(String id) async {
+    final docs = await getDocuments();
     try {
-      final doc = await _firestore.collection(_collection).doc(id).get();
-
-      if (doc.exists && doc.data() != null) {
-        return DocumentModel.fromJson(doc.data()!);
-      }
+      return docs.firstWhere((doc) => doc.id == id);
+    } catch (_) {
       return null;
-    } catch (e) {
-      throw Exception('문서 불러오기 실패: $e');
     }
   }
 
@@ -66,37 +63,39 @@ class DocumentsRepository {
     String? pdfUrl,
     List<String>? tags,
   }) async {
-    try {
-      final id = _uuid.v4();
-      final now = DateTime.now();
+    final data = await _fetchData();
+    final documents = (data['documents'] as List? ?? []).toList();
 
-      final document = DocumentModel(
-        id: id,
-        type: type,
-        title: title,
-        version: '1.0',
-        createdAt: now,
-        updatedAt: now,
-        pdfUrl: pdfUrl,
-        content: content,
-        tags: tags ?? [],
-      );
+    final id = _uuid.v4();
+    final now = DateTime.now();
 
-      await _firestore
-          .collection(_collection)
-          .doc(id)
-          .set(document.toJson());
+    final newDoc = DocumentModel(
+      id: id,
+      type: type,
+      title: title,
+      version: '1.0',
+      createdAt: now,
+      updatedAt: now,
+      pdfUrl: pdfUrl,
+      content: content,
+      tags: tags ?? [],
+    );
 
-      return document;
-    } catch (e) {
-      throw Exception('문서 생성 실패: $e');
-    }
+    documents.add(newDoc.toJson());
+    data['documents'] = documents;
+    await _saveData(data);
+
+    return newDoc;
   }
 
   /// 문서 업데이트
   Future<void> updateDocument(DocumentModel document) async {
-    try {
-      final updatedDocument = DocumentModel(
+    final data = await _fetchData();
+    final documents = (data['documents'] as List? ?? []).toList();
+
+    final index = documents.indexWhere((e) => e['id'] == document.id);
+    if (index != -1) {
+      final updatedDoc = DocumentModel(
         id: document.id,
         type: document.type,
         title: document.title,
@@ -108,44 +107,18 @@ class DocumentsRepository {
         tags: document.tags,
       );
 
-      await _firestore
-          .collection(_collection)
-          .doc(document.id)
-          .update(updatedDocument.toJson());
-    } catch (e) {
-      throw Exception('문서 업데이트 실패: $e');
+      documents[index] = updatedDoc.toJson();
+      data['documents'] = documents;
+      await _saveData(data);
     }
   }
 
   /// 문서 삭제
   Future<void> deleteDocument(String id) async {
-    try {
-      await _firestore.collection(_collection).doc(id).delete();
-    } catch (e) {
-      throw Exception('문서 삭제 실패: $e');
-    }
-  }
-
-  /// 문서 실시간 구독
-  Stream<List<DocumentModel>> watchDocuments() {
-    return _firestore
-        .collection(_collection)
-        .orderBy('updatedAt', descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => DocumentModel.fromJson(doc.data()))
-            .toList());
-  }
-
-  /// 특정 타입 문서 실시간 구독
-  Stream<List<DocumentModel>> watchDocumentsByType(DocumentType type) {
-    return _firestore
-        .collection(_collection)
-        .where('type', isEqualTo: type.name)
-        .orderBy('updatedAt', descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => DocumentModel.fromJson(doc.data()))
-            .toList());
+    final data = await _fetchData();
+    final documents = (data['documents'] as List? ?? []).toList();
+    documents.removeWhere((e) => e['id'] == id);
+    data['documents'] = documents;
+    await _saveData(data);
   }
 }

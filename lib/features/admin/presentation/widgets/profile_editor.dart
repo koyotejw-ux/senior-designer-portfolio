@@ -70,25 +70,30 @@ class _ProfileEditorState extends ConsumerState<ProfileEditor> {
     try {
       final profile = ProfileModel(
         id: 'profile', // Singleton ID
-        name: _nameController.text,
-        birth: _birthController.text,
-        address: _addressController.text,
-        military: _militaryController.text,
-        phone: _phoneController.text,
-        email: _emailController.text,
-        introduction: _introductionController.text,
-        philosophy: _philosophyController.text,
-        aspirations: _aspirationsController.text,
+        name: _nameController.text.trim(),
+        birth: _birthController.text.trim(),
+        address: _addressController.text.trim(),
+        military: _militaryController.text.trim(),
+        phone: _phoneController.text.trim(),
+        email: _emailController.text.trim(),
+        introduction: _introductionController.text.trim(),
+        philosophy: _philosophyController.text.trim(),
+        aspirations: _aspirationsController.text.trim(),
       );
 
+      print('Saving profile: ${profile.name}');
       await ref.read(contentRepositoryProvider).updateProfile(profile);
+      ref.invalidate(profileProvider);
+      print('Profile saved successfully');
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Profile updated successfully')),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('Error updating profile: $e');
+      print('Stack trace: $stackTrace');
       if (mounted) {
         ScaffoldMessenger.of(
           context,

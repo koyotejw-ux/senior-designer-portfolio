@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
+import 'package:image/image.dart' as img;
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/constants/app_constants.dart';
 import '../../../home/data/models/project_model.dart';
 import '../../../home/data/providers/content_provider.dart';
 
@@ -26,11 +28,19 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
   late TextEditingController _categoryController;
   late TextEditingController _descriptionController;
   late TextEditingController _tagsController;
+  late TextEditingController _orderController;
+  late TextEditingController _roleController;
+  late TextEditingController _durationController;
+  late TextEditingController _teamSizeController;
+  late TextEditingController _mainScreenImagesController;
 
   Uint8List? _imageBytes;
+  Uint8List? _thumbnailBytes; // For preview
   XFile? _pickedFile;
   String? _imageUrl;
   bool _isUploading = false;
+  bool _isProcessing = false;
+  bool _isCorporate = false;
 
   @override
   void initState() {
@@ -43,7 +53,15 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
     _categoryController = TextEditingController(text: p?.category ?? '');
     _descriptionController = TextEditingController(text: p?.description ?? '');
     _tagsController = TextEditingController(text: p?.tags.join(', ') ?? '');
+    _orderController = TextEditingController(text: (p?.order ?? 0).toString());
+    _roleController = TextEditingController(text: p?.role ?? '');
+    _durationController = TextEditingController(text: p?.duration ?? '');
+    _teamSizeController = TextEditingController(text: p?.teamSize ?? '');
+    _mainScreenImagesController = TextEditingController(
+      text: p?.mainScreenImages.join(', ') ?? '',
+    );
     _imageUrl = p?.imageUrl;
+    _isCorporate = p?.isCorporate ?? false;
   }
 
   @override
@@ -55,6 +73,11 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
     _categoryController.dispose();
     _descriptionController.dispose();
     _tagsController.dispose();
+    _orderController.dispose();
+    _roleController.dispose();
+    _durationController.dispose();
+    _teamSizeController.dispose();
+    _mainScreenImagesController.dispose();
     super.dispose();
   }
 
@@ -69,11 +92,89 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
     );
 
     if (pickedFile != null) {
-      final bytes = await pickedFile.readAsBytes();
-      setState(() {
-        _pickedFile = pickedFile;
-        _imageBytes = bytes;
-      });
+      setState(() => _isProcessing = true);
+
+      try {
+        final bytes = await pickedFile.readAsBytes();
+        final fileSize = bytes.length;
+
+        debugPrint(
+          'Selected image: ${pickedFile.name}, Size: ${(fileSize / 1024 / 1024).toStringAsFixed(2)} MB',
+        );
+
+        // Check file size
+        if (fileSize > AppConstants.maxImageSizeBytes) {
+          if (mounted) {
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                backgroundColor: AppColors.deepSpace,
+                title: const Text(
+                  'File Too Large',
+                  style: TextStyle(color: Colors.white),
+                ),
+                content: Text(
+                  'The selected image is ${(fileSize / 1024 / 1024).toStringAsFixed(2)} MB.\nMaximum allowed size is ${AppConstants.maxImageSizeBytes / 1024 / 1024} MB.',
+                  style: const TextStyle(color: Colors.white70),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            );
+          }
+          return;
+        }
+
+        // Create thumbnail for preview (faster display)
+        Uint8List? thumbnailBytes;
+        if (fileSize > 1024 * 1024) {
+          // If larger than 1MB, create thumbnail
+          try {
+            final image = img.decodeImage(bytes);
+            if (image != null) {
+              final thumbnail = img.copyResize(
+                image,
+                width: AppConstants.thumbnailMaxWidth,
+                height: AppConstants.thumbnailMaxHeight,
+                interpolation: img.Interpolation.linear,
+              );
+              thumbnailBytes = Uint8List.fromList(
+                img.encodeJpg(
+                  thumbnail,
+                  quality: AppConstants.thumbnailQuality,
+                ),
+              );
+              debugPrint(
+                'Created thumbnail: ${(thumbnailBytes.length / 1024).toStringAsFixed(2)} KB',
+              );
+            }
+          } catch (e) {
+            debugPrint('Failed to create thumbnail: $e');
+          }
+        }
+
+        setState(() {
+          _pickedFile = pickedFile;
+          _imageBytes = bytes;
+          _thumbnailBytes = thumbnailBytes;
+        });
+      } catch (e) {
+        debugPrint('Error processing image: $e');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to process image: $e'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      } finally {
+        setState(() => _isProcessing = false);
+      }
     }
   }
 
@@ -87,31 +188,62 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
         filename = _pickedFile!.name;
       }
 
-      final request = http.MultipartRequest(
-        'POST',
-        Uri.parse('http://localhost:8080/upload'),
+      // Use relative URL - works with current origin
+      final uri = Uri.parse(AppConstants.uploadEndpoint);
+      final request = http.MultipartRequest('POST', uri);
+
+      // Add the file with proper content type
+      final multipartFile = http.MultipartFile.fromBytes(
+        'file',
+        _imageBytes!,
+        filename: filename,
       );
 
-      request.files.add(
-        http.MultipartFile.fromBytes('file', _imageBytes!, filename: filename),
+      request.files.add(multipartFile);
+
+      debugPrint(
+        'Uploading image: $filename (${(_imageBytes!.length / 1024 / 1024).toStringAsFixed(2)} MB)',
+      );
+      debugPrint('Upload URL: $uri (relative)');
+
+      final streamedResponse = await request.send().timeout(
+        const Duration(seconds: 60),
+        onTimeout: () {
+          throw Exception(
+            'Upload timeout - file may be too large or server is slow',
+          );
+        },
       );
 
-      final response = await request.send();
+      debugPrint('Upload response status: ${streamedResponse.statusCode}');
 
-      if (response.statusCode == 200) {
-        final imageUrl = await response.stream.bytesToString();
-        return imageUrl;
+      if (streamedResponse.statusCode == 200) {
+        final imageUrl = await streamedResponse.stream.bytesToString();
+        debugPrint('Image uploaded successfully: $imageUrl');
+        return imageUrl.trim();
       } else {
-        throw Exception('Upload failed with status: ${response.statusCode}');
+        final errorBody = await streamedResponse.stream.bytesToString();
+        debugPrint('Upload failed: $errorBody');
+        throw Exception(
+          'Upload failed with status: ${streamedResponse.statusCode}',
+        );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
       debugPrint('Error uploading image: $e');
+      debugPrint('Stack trace: $stackTrace');
       if (mounted) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Upload Error'),
-            content: Text(e.toString()),
+            backgroundColor: AppColors.deepSpace,
+            title: const Text(
+              'Upload Error',
+              style: TextStyle(color: Colors.white),
+            ),
+            content: Text(
+              '$e\n\nPlease make sure:\n1. The server is running (dart run server/bin/server.dart)\n2. File size is under 50MB\n3. Network connection is stable',
+              style: const TextStyle(color: Colors.white70),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -134,6 +266,7 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
 
     try {
       final imageUrl = await _uploadImage();
+      debugPrint('Final image URL: $imageUrl');
 
       final tags = _tagsController.text
           .split(',')
@@ -143,25 +276,44 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
 
       final project = ProjectModel(
         id: widget.project?.id ?? const Uuid().v4(),
-        title: _titleController.text,
-        subtitle: _subtitleController.text,
-        company: _companyController.text,
-        year: _yearController.text,
-        category: _categoryController.text,
-        description: _descriptionController.text,
+        title: _titleController.text.trim(),
+        subtitle: _subtitleController.text.trim(),
+        company: _companyController.text.trim(),
+        year: _yearController.text.trim(),
+        category: _categoryController.text.trim(),
+        description: _descriptionController.text.trim(),
         tags: tags,
         imageUrl: imageUrl,
         gradientColors:
             widget.project?.gradientColors ??
             [AppColors.primaryBlue, AppColors.accentCyan],
+        order: int.tryParse(_orderController.text.trim()) ?? 0,
+        role: _roleController.text.trim(),
+        duration: _durationController.text.trim(),
+        teamSize: _teamSizeController.text.trim(),
+        mainScreenImages: _mainScreenImagesController.text
+            .split(',')
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList(),
+        designSystem: widget.project?.designSystem,
+        isCorporate: _isCorporate,
+      );
+
+      debugPrint(
+        'Saving project: ${project.title} with image: ${project.imageUrl}',
       );
 
       final repo = ref.read(contentRepositoryProvider);
       if (widget.project == null) {
         await repo.addProject(project);
+        debugPrint('Project added successfully');
       } else {
         await repo.updateProject(project);
+        debugPrint('Project updated successfully');
       }
+
+      ref.invalidate(projectsProvider); // Force refresh of project list
 
       if (mounted) {
         Navigator.pop(context);
@@ -172,7 +324,9 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
           ),
         );
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      debugPrint('Error saving project: $e');
+      debugPrint('Stack trace: $stackTrace');
       if (mounted) {
         showDialog(
           context: context,
@@ -222,23 +376,120 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
                 // Image Picker
                 Center(
                   child: GestureDetector(
-                    onTap: _pickImage,
+                    onTap: _isProcessing ? null : _pickImage,
                     child: Container(
-                      width: 200,
-                      height: 120,
+                      width: 400,
+                      height: 240,
                       decoration: BoxDecoration(
                         color: AppColors.charcoal,
-                        border: Border.all(color: Colors.grey),
+                        border: Border.all(
+                          color: _isProcessing
+                              ? AppColors.primaryBlue
+                              : Colors.grey,
+                          width: 2,
+                        ),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: _imageBytes != null
-                          ? Image.memory(_imageBytes!, fit: BoxFit.cover)
+                      child: _isProcessing
+                          ? const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircularProgressIndicator(),
+                                SizedBox(height: 16),
+                                Text(
+                                  'Processing image...',
+                                  style: TextStyle(color: Colors.white70),
+                                ),
+                              ],
+                            )
+                          : _thumbnailBytes != null
+                          ? Stack(
+                              children: [
+                                Center(
+                                  child: Image.memory(
+                                    _thumbnailBytes!,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 8,
+                                  right: 8,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.black54,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      '${(_imageBytes!.length / 1024 / 1024).toStringAsFixed(2)} MB',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          : _imageBytes != null
+                          ? Stack(
+                              children: [
+                                Center(
+                                  child: Image.memory(
+                                    _imageBytes!,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: 8,
+                                  right: 8,
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 8,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.black54,
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text(
+                                      '${(_imageBytes!.length / 1024 / 1024).toStringAsFixed(2)} MB',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                           : _imageUrl != null
-                          ? Image.network(_imageUrl!, fit: BoxFit.cover)
-                          : const Icon(
-                              Icons.add_photo_alternate,
-                              size: 40,
-                              color: Colors.grey,
+                          ? Image.network(_imageUrl!, fit: BoxFit.contain)
+                          : const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.add_photo_alternate,
+                                  size: 48,
+                                  color: Colors.grey,
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  'Click to select image',
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  'Max 50MB',
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
                             ),
                     ),
                   ),
@@ -274,6 +525,44 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
                 ),
                 const SizedBox(height: 16),
                 _buildTextField(_tagsController, 'Tags (comma separated)'),
+                const SizedBox(height: 16),
+                _buildTextField(
+                  _orderController,
+                  'Display Order (0 = first)',
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(child: _buildTextField(_roleController, 'Role')),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: _buildTextField(_durationController, 'Duration'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                _buildTextField(_teamSizeController, 'Team Size'),
+                const SizedBox(height: 16),
+                _buildTextField(
+                  _mainScreenImagesController,
+                  'Main Screen Images (comma separated URLs)',
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 16),
+                SwitchListTile(
+                  title: const Text(
+                    'Corporate Project',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  subtitle: const Text(
+                    'Show in the company-specific portfolio tab',
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                  value: _isCorporate,
+                  onChanged: (value) => setState(() => _isCorporate = value),
+                  activeColor: AppColors.primaryBlue,
+                ),
 
                 const SizedBox(height: 32),
                 Row(
@@ -315,11 +604,13 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
     TextEditingController controller,
     String label, {
     int maxLines = 1,
+    TextInputType? keyboardType,
   }) {
     return TextFormField(
       controller: controller,
       style: const TextStyle(color: Colors.white),
       maxLines: maxLines,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: const TextStyle(color: Colors.grey),

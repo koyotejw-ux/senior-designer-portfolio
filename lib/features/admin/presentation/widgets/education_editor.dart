@@ -8,6 +8,32 @@ import '../../../home/data/providers/content_provider.dart';
 class EducationEditor extends ConsumerWidget {
   const EducationEditor({super.key});
 
+  void _reorderEducations(WidgetRef ref, List<EducationModel> educations,
+      int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final updatedList = List<EducationModel>.from(educations);
+    final item = updatedList.removeAt(oldIndex);
+    updatedList.insert(newIndex, item);
+
+    final reorderedList = updatedList
+        .asMap()
+        .entries
+        .map((entry) => EducationModel(
+              id: entry.value.id,
+              period: entry.value.period,
+              school: entry.value.school,
+              major: entry.value.major,
+              gpa: entry.value.gpa,
+              order: entry.key,
+            ))
+        .toList();
+
+    ref.read(contentRepositoryProvider).reorderEducations(reorderedList);
+    ref.invalidate(educationProvider);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final educationAsync = ref.watch(educationProvider);
@@ -16,38 +42,45 @@ class EducationEditor extends ConsumerWidget {
       data: (educations) {
         return Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Education',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Education',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                ElevatedButton.icon(
-                  onPressed: () => _showEditDialog(context, null, ref),
-                  icon: const Icon(Icons.add),
-                  label: const Text('Add Education'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryBlue,
-                    foregroundColor: Colors.white,
+                  ElevatedButton.icon(
+                    onPressed: () => _showEditDialog(context, null, ref),
+                    icon: const Icon(Icons.add),
+                    label: const Text('Add Education'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryBlue,
+                      foregroundColor: Colors.white,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            const SizedBox(height: 24),
             Expanded(
-              child: ListView.builder(
+              child: ReorderableListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 itemCount: educations.length,
+                onReorder: (oldIndex, newIndex) =>
+                    _reorderEducations(ref, educations, oldIndex, newIndex),
                 itemBuilder: (context, index) {
                   final edu = educations[index];
                   return Card(
+                    key: ValueKey(edu.id),
                     color: AppColors.charcoal,
                     margin: const EdgeInsets.only(bottom: 16),
                     child: ListTile(
+                      leading: const Icon(Icons.drag_handle, color: Colors.grey),
                       title: Text(
                         edu.school,
                         style: const TextStyle(
@@ -56,7 +89,7 @@ class EducationEditor extends ConsumerWidget {
                         ),
                       ),
                       subtitle: Text(
-                        '${edu.major} | ${edu.period}',
+                        '${edu.major} | ${edu.period} • Order: ${edu.order}',
                         style: const TextStyle(color: Colors.grey),
                       ),
                       trailing: Row(
@@ -119,6 +152,7 @@ class EducationEditor extends ConsumerWidget {
           TextButton(
             onPressed: () {
               ref.read(contentRepositoryProvider).deleteEducation(id);
+              ref.invalidate(educationProvider);
               Navigator.pop(context);
             },
             child: const Text('Delete', style: TextStyle(color: Colors.red)),
@@ -185,6 +219,8 @@ class _EducationDialogState extends ConsumerState<_EducationDialog> {
     } else {
       await repo.updateEducation(education);
     }
+
+    ref.invalidate(educationProvider);
 
     if (mounted) Navigator.pop(context);
   }

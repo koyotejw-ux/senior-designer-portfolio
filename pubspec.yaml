@@ -26,6 +26,7 @@ dependencies:
   cloud_firestore: ^5.4.4
   
   pdf: ^3.11.1
+  printing: ^5.13.4
   visibility_detector: ^0.4.0+2
   
   # Local Server & Utilities
@@ -36,7 +37,9 @@ dependencies:
   mime: ^1.0.4
   uuid: ^4.3.3
   image_picker: ^1.1.2
+  image: ^4.1.7  # Image processing for thumbnails
   file_picker: ^8.1.2
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

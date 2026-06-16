@@ -144,16 +144,18 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
         'gradient': projectModel.gradientColors.isNotEmpty
             ? projectModel.gradientColors
             : [AppColors.primaryBlue, AppColors.accentCyan],
-        'role': 'Designer', // Default
-        'duration': projectModel.year,
-        'teamSize': '-',
+        'role': projectModel.role ?? 'Designer',
+        'duration': projectModel.duration ?? projectModel.year,
+        'teamSize': projectModel.teamSize ?? '-',
         'overview': projectModel.description,
         'challenges': <String>[],
         'solutions': <String>[],
         'achievements': <String>[],
         'technologies': projectModel.tags,
         'process': <Map<String, String>>[],
-        'imageUrl': projectModel.imageUrl, // Add image url
+        'imageUrl': projectModel.imageUrl,
+        'mainScreenImages': projectModel.mainScreenImages,
+        'designSystem': projectModel.designSystem,
       };
     }
 
@@ -224,7 +226,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 // Hero Section
                 _buildHeroSection(projectData, isMobile, isTablet, isDark),
 
-                // Project Image (New)
+                // Project Image
                 if (projectData['imageUrl'] != null)
                   _buildProjectImage(
                     projectData['imageUrl'],
@@ -247,6 +249,17 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                     isDark,
                   ),
 
+                // Main Screens Gallery (New)
+                _buildGallery(
+                  List<String>.from(projectData['mainScreenImages'] ?? []),
+                  isMobile,
+                  isTablet,
+                  isDark,
+                ),
+
+                // Design System Analysis (New)
+                _buildDesignSystem(projectData, isMobile, isTablet, isDark),
+
                 // Process (Only if available)
                 if ((projectData['process'] as List).isNotEmpty)
                   _buildProcess(projectData, isMobile, isTablet, isDark),
@@ -262,6 +275,238 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 // Navigation
                 _buildNavigation(isMobile, isTablet, isDark),
               ],
+            ),
+          ),
+
+          // AI Analysis Overlay (Optional, could be a FAB or a floating button)
+        ],
+      ),
+    );
+  }
+
+  bool _isAnalyzing = false;
+
+  void _analyzeDesignSystem(Map<String, dynamic> projectData) async {
+    setState(() => _isAnalyzing = true);
+
+    // Simulate AI Analysis
+    await Future.delayed(const Duration(seconds: 3));
+
+    // In a real app, this would call an API with projectData['mainScreenImages']
+    // For now, we simulate by adding mock design system data
+
+    if (mounted) {
+      setState(() {
+        _isAnalyzing = false;
+        projectData['designSystem'] = DesignSystemModel(
+          foundation: FoundationModel(
+            colors: [
+              '#0068B3 (Primary Blue)',
+              '#009DDC (Accent Cyan)',
+              '#F1F5F9 (Background)',
+              '#1E293B (Dark Text)',
+            ],
+            typography: [
+              'Pretendard 36pt (Display)',
+              'Pretendard 18pt (Body)',
+              'Pretendard 14pt (Label)',
+            ],
+            spacing: ['4px (XS)', '16px (MD)', '32px (XL)'],
+          ),
+          atomic: AtomicModel(
+            atoms: ['System Icons', 'Rounded Buttons', 'Text Inputs'],
+            molecules: ['Search Bar', 'Profile Card', 'Nav Item'],
+            organisms: [
+              'Main Header',
+              'Project Filter Grid',
+              'Bottom Navigation',
+            ],
+          ),
+        );
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('AI 디자인 시스템 분석이 완료되었습니다!'),
+          backgroundColor: AppColors.highlightGreen,
+        ),
+      );
+    }
+  }
+
+  Widget _buildGallery(
+    List<String> images,
+    bool isMobile,
+    bool isTablet,
+    bool isDark,
+  ) {
+    if (images.isEmpty) return const SizedBox.shrink();
+
+    return _buildSection(
+      title: 'Main Screens',
+      content: Column(
+        children: [
+          SizedBox(
+            height: 500,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: images.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 300,
+                  margin: const EdgeInsets.only(right: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: AppColors.lightGray300.withOpacity(0.1),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 10,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Image.network(images[index], fit: BoxFit.cover),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      isMobile: isMobile,
+      isTablet: isTablet,
+      isDark: isDark,
+      delay: const Duration(milliseconds: 1000),
+    );
+  }
+
+  Widget _buildDesignSystem(
+    Map<String, dynamic> projectData,
+    bool isMobile,
+    bool isTablet,
+    bool isDark,
+  ) {
+    final ds = projectData['designSystem'] as DesignSystemModel?;
+
+    return _buildSection(
+      title: 'Design System Analysis',
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (ds == null)
+            Center(
+              child: Column(
+                children: [
+                  const Text(
+                    '이미지를 분석하여 디자인 시스템을 도출할 수 있습니다.',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: _isAnalyzing
+                        ? null
+                        : () => _analyzeDesignSystem(projectData),
+                    icon: _isAnalyzing
+                        ? const SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(Icons.auto_awesome),
+                    label: Text(_isAnalyzing ? '분석 중...' : 'AI 분석 시작'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primaryBlue,
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          else
+            Column(
+              children: [
+                _buildDesignSystemSubSection('Foundation', [
+                  _buildDSItem('Colors', ds.foundation.colors, isDark),
+                  _buildDSItem('Typography', ds.foundation.typography, isDark),
+                  _buildDSItem('Spacing', ds.foundation.spacing, isDark),
+                ], isDark),
+                const SizedBox(height: 32),
+                _buildDesignSystemSubSection('Atomic Design', [
+                  _buildDSItem('Atoms', ds.atomic.atoms, isDark),
+                  _buildDSItem('Molecules', ds.atomic.molecules, isDark),
+                  _buildDSItem('Organisms', ds.atomic.organisms, isDark),
+                ], isDark),
+              ],
+            ),
+        ],
+      ),
+      isMobile: isMobile,
+      isTablet: isTablet,
+      isDark: isDark,
+      delay: const Duration(milliseconds: 1500),
+    );
+  }
+
+  Widget _buildDesignSystemSubSection(
+    String title,
+    List<Widget> children,
+    bool isDark,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: AppTypography.h5.copyWith(
+            color: isDark ? Colors.white : AppColors.lightGray900,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: children.map((e) => Expanded(child: e)).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDSItem(String label, List<String> items, bool isDark) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: isDark
+            ? AppColors.charcoal.withOpacity(0.5)
+            : AppColors.lightGray100,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+              color: AppColors.primaryBlue,
+            ),
+          ),
+          const SizedBox(height: 8),
+          ...items.map(
+            (e) => Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Text(
+                '• $e',
+                style: const TextStyle(fontSize: 12, height: 1.4),
+              ),
             ),
           ),
         ],

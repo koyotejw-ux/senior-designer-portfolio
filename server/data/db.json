@@ -1,1 +1,5098 @@
-{"projects":[],"profile":null,"experience":[],"education":[],"skills":[]}
+{
+  "projects": [
+    {
+      "id": "p1",
+      "title": "AIA+ SENIOR MODE",
+      "subtitle": "고령자 전용 모드 UX/UI 디자인 시스템",
+      "company": "ING People",
+      "year": "2025.02-2025.06",
+      "category": "Mobile App",
+      "description": "AIA 생명 앱 Phase2 고령자 전용 모드 메인 UX 기획 및 디자인 시스템 구축. 보험료 납입, 보험계약대출 상환, 자동부활 신청, 자동송금 신청 등 핵심 GUI 정의. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100% 달성.",
+      "tags": [
+        "Figma",
+        "Mobile UX",
+        "Design System",
+        "Accessibility"
+      ],
+      "imageUrl": "http://localhost:8080/images/1766237810979_aia_1.jpg",
+      "gradientColors": [
+        "#2196F3",
+        "#00BCD4"
+      ],
+      "order": 0
+    },
+    {
+      "id": "p2",
+      "title": "SMART HOME PLATFORM",
+      "subtitle": "차세대 스마트홈 통합 플랫폼",
+      "company": "Hyundai HT",
+      "year": "2022.01-2023.12",
+      "category": "IoT Device",
+      "description": "스마트홈 IoT 기기 통합 제어 플랫폼 구축. 월패드, 모바일 앱, 웹 대시보드 전반의 UX/UI 설계. 실시간 연동 및 시나리오 제어 기능 구현. 사용자 만족도 95% 달성.",
+      "tags": [
+        "IoT",
+        "Smart Home",
+        "Real-time",
+        "Dashboard"
+      ],
+      "imageUrl": "https://picsum.photos/seed/smart-home/800/600",
+      "gradientColors": [
+        "#1976D2",
+        "#42A5F5"
+      ],
+      "order": 1
+    },
+    {
+      "id": "p3",
+      "title": "E-COMMERCE REDESIGN",
+      "subtitle": "모바일 커머스 플랫폼 리뉴얼",
+      "company": "Commerce Co.",
+      "year": "2023.03-2023.09",
+      "category": "Mobile App",
+      "description": "전자상거래 모바일 앱 전면 리뉴얼. 사용자 여정 맵 재설계 및 구매 전환율 향상 UX 최적화. 리뉴얼 후 구매 전환율 35% 증가, 평균 체류 시간 40% 증가.",
+      "tags": [
+        "E-commerce",
+        "Mobile",
+        "Conversion",
+        "UX Research"
+      ],
+      "imageUrl": "https://picsum.photos/seed/ecommerce/800/600",
+      "gradientColors": [
+        "#4CAF50",
+        "#8BC34A"
+      ],
+      "order": 2
+    },
+    {
+      "id": "p4",
+      "title": "FINTECH DASHBOARD",
+      "subtitle": "금융 데이터 분석 대시보드",
+      "company": "FinTech Solutions",
+      "year": "2023.06-2024.02",
+      "category": "Web Design",
+      "description": "금융 데이터 시각화 및 분석 대시보드 구축. 실시간 차트, 알림 시스템, 커스터마이징 가능한 위젯 시스템 설계. 복잡한 금융 데이터를 직관적으로 표현.",
+      "tags": [
+        "Dashboard",
+        "Data Viz",
+        "Finance",
+        "React"
+      ],
+      "imageUrl": "https://picsum.photos/seed/fintech/800/600",
+      "gradientColors": [
+        "#673AB7",
+        "#9C27B0"
+      ],
+      "order": 3
+    },
+    {
+      "id": "p5",
+      "title": "HEALTH TRACKING APP",
+      "subtitle": "AI 기반 건강관리 앱",
+      "company": "HealthTech Inc",
+      "year": "2024.01-2024.06",
+      "category": "Mobile App",
+      "description": "AI 기반 개인 맞춤형 건강관리 모바일 앱. 운동, 식단, 수면 패턴 분석 및 추천 시스템. 머신러닝 모델 연동 UX 설계. 사용자 리텐션 80% 달성.",
+      "tags": [
+        "AI/ML",
+        "Healthcare",
+        "Personalization",
+        "Analytics"
+      ],
+      "imageUrl": "https://picsum.photos/seed/health/800/600",
+      "gradientColors": [
+        "#FF5722",
+        "#FF9800"
+      ],
+      "order": 4
+    }
+  ],
+  "profile": {
+    "id": "profile",
+    "name": "정재웅 (Jaewoong Jung)",
+    "birth": "1979.08.14",
+    "address": "고양시 덕양구 향기5로 66",
+    "military": "육군 병장 전역 (1999.11 - 2002.01)",
+    "phone": "010-4375-3599",
+    "email": "coyotejw@naver.com",
+    "introduction": "에이전시부터 게임 엔터테인먼트, 제조 디바이스까지 다양한 사업군에서 17년 이상의 UX/UI 수행 경험을 보유한 시니어 프로덕트 디자이너입니다. UX/UI 기획과 디자인 모두 수행 가능하며, Hi-Fi Prototyping 2D/3D 작업이 가능합니다.",
+    "philosophy": "사용자 중심의 디자인 철학을 바탕으로, 복잡한 시스템을 직관적이고 효율적인 인터페이스로 구현합니다. 디자인 시스템 구축과 일관된 사용자 경험 제공을 통해 비즈니스 가치를 창출합니다.",
+    "aspirations": "디자인 그룹 관리 경험(UX/UI 디렉팅/인력관리/외주관리/일정관리/신규업무 생성)을 바탕으로, 효율적인 디자인 프로세스를 체계화하고 조직의 디자인 역량을 강화하는 리더가 되고자 합니다."
+  },
+  "experience": [
+    {
+      "id": "e0",
+      "company": "(주)코드브릿지엑스",
+      "role": "팀원",
+      "period": "2025.10 - 2026.01",
+      "description": "제조 MES 및 ERP 시스템 UX/UI 기획 및 Claude/Gemini/Midjourney 활용 프로세스 혁신",
+      "tags": [
+        "Enterprise System",
+        "AI Workflow"
+      ],
+      "order": 0
+    },
+    {
+      "id": "e1",
+      "company": "ING People",
+      "role": "팀원",
+      "period": "2025.01 - 2025.06",
+      "description": "AIA 생명 앱 고령자 모드 및 토지개발 분석 솔루션 UX/UI 리딩",
+      "tags": [
+        "Fintech",
+        "UX Strategy"
+      ],
+      "order": 1
+    },
+    {
+      "id": "e2",
+      "company": "Hyundai HT",
+      "role": "팀장 (수석연구원)",
+      "period": "2018.05 - 2024.03",
+      "description": "스마트홈 월패드 및 모바일 앱 서비스 통합 UX/UI 디자인 총괄",
+      "tags": [
+        "Smart Home",
+        "IoT",
+        "Lead"
+      ],
+      "order": 2
+    },
+    {
+      "id": "e3",
+      "company": "BluestoneSoft",
+      "role": "차장",
+      "period": "2016.05 - 2017.06",
+      "description": "모바일 게임 SOULARK UX/UI 및 이펙트 디자인 리딩",
+      "tags": [
+        "Game UX",
+        "Effects"
+      ],
+      "order": 3
+    },
+    {
+      "id": "e4",
+      "company": "NEXON Korea",
+      "role": "과장",
+      "period": "2010.10 - 2016.01",
+      "description": "다양한 게임 웹사이트 및 프로모션 디자인, 반응형 웹 구축",
+      "tags": [
+        "Web Design",
+        "Promotion"
+      ],
+      "order": 4
+    },
+    {
+      "id": "e5",
+      "company": "YNK Korea",
+      "role": "대리",
+      "period": "2008.07 - 2010.10",
+      "description": "로한, 리블리아일랜드 웹사이트 및 Flash 웹게임 UX/UI 개발",
+      "tags": [
+        "Web Design",
+        "Flash Game",
+        "UX/UI"
+      ],
+      "order": 5
+    },
+    {
+      "id": "e6",
+      "company": "(주)비엠소프트",
+      "role": "대리",
+      "period": "2008.03 - 2008.07",
+      "description": "WAPL 아마추어 게임 리그 웹사이트 UX/UI 기획 및 디자인 개발",
+      "tags": [
+        "E-sports",
+        "Web Design",
+        "UX/UI"
+      ],
+      "order": 6
+    },
+    {
+      "id": "e7",
+      "company": "(주)씨앤디",
+      "role": "사원",
+      "period": "2005.12 - 2006.12",
+      "description": "인테리어/스포츠 웹사이트 및 3D 공간 디자인 개발",
+      "tags": [
+        "Web Design",
+        "3D Design",
+        "Interior"
+      ],
+      "order": 7
+    }
+  ],
+  "education": [
+    {
+      "id": "edu1",
+      "school": "학점은행제",
+      "degree": "학사",
+      "major": "시각디자인학과",
+      "period": "2006.08 - 2008.02",
+      "description": "학점은행제 시각디자인학과 졸업 (4.25/4.5)",
+      "order": 1
+    },
+    {
+      "id": "edu2",
+      "school": "청강문화산업대학교",
+      "degree": "전문학사",
+      "major": "애니메이션과 3D전공",
+      "period": "1999.03 - 2004.02",
+      "description": "청강문화산업대학교 애니메이션과 3D전공(주간) 졸업 (3.34/4.2)",
+      "order": 2
+    }
+  ],
+  "skills": [
+    {
+      "id": "s1",
+      "title": "Design Systems",
+      "iconName": "design_services",
+      "skills": [
+        "Figma",
+        "Adobe XD",
+        "Sketch",
+        "Design Tokens",
+        "Component Libraries"
+      ],
+      "order": 1
+    },
+    {
+      "id": "s2",
+      "title": "AI/ML Integration",
+      "iconName": "psychology",
+      "skills": [
+        "TensorFlow",
+        "AutoML",
+        "Generative AI",
+        "Neural Networks",
+        "Model Training"
+      ],
+      "order": 2
+    },
+    {
+      "id": "s3",
+      "title": "Data Analytics",
+      "iconName": "analytics",
+      "skills": [
+        "Google Analytics",
+        "Mixpanel",
+        "Amplitude",
+        "Data Visualization",
+        "A/B Testing"
+      ],
+      "order": 3
+    },
+    {
+      "id": "s4",
+      "title": "Development",
+      "iconName": "code",
+      "skills": [
+        "React",
+        "Flutter",
+        "TypeScript",
+        "HTML/CSS",
+        "Git"
+      ],
+      "order": 4
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc-current-02",
+      "type": "userFlow",
+      "title": "시니어 디자이너 포트폴리오 플랫폼 사용자 플로우",
+      "version": "1.0",
+      "createdAt": "2025-12-28T00:00:00.000Z",
+      "updatedAt": "2025-12-28T00:00:00.000Z",
+      "pdfUrl": null,
+      "content": {
+        "introduction": "시니어 디자이너 포트폴리오 플랫폼의 사용자 플로우는 크게 2개의 주요 사용자 그룹으로 구성됩니다:\n1. 방문자 (채용 담당자, HR, 동료 디자이너)\n2. 관리자 (포트폴리오 소유자)\n\n본 문서는 각 사용자 그룹의 주요 여정과 인터랙션 흐름을 상세히 기술합니다.",
+        "userPersonas": [
+          {
+            "id": "P1",
+            "name": "채용 담당자 / HR",
+            "goal": "지원자의 경력, 프로젝트 경험, 역량을 신속하게 파악",
+            "pain_points": [
+              "제한된 시간 내에 많은 지원자 검토 필요",
+              "실무 역량과 프로젝트 성과를 명확히 판단하기 어려움",
+              "PDF 이력서만으로는 인터랙티브한 포트폴리오 확인 불가"
+            ],
+            "needs": [
+              "핵심 정보를 빠르게 스캔할 수 있는 구조",
+              "프로젝트별 성과와 역할을 명확히 확인",
+              "필요 시 이력서/경력기술서 다운로드",
+              "모바일에서도 편리한 열람"
+            ]
+          },
+          {
+            "id": "P2",
+            "name": "포트폴리오 소유자 (관리자)",
+            "goal": "포트폴리오 콘텐츠를 효율적으로 관리하고 최신 상태 유지",
+            "pain_points": [
+              "매번 새로운 프로젝트마다 포트폴리오 사이트를 재구축하는 번거로움",
+              "정적 PDF는 업데이트가 어렵고 인터랙티브하지 않음",
+              "이력서, 경력기술서, 포트폴리오를 각각 따로 관리하는 비효율"
+            ],
+            "needs": [
+              "코드 수정 없이 콘텐츠 업데이트 가능한 관리자 페이지",
+              "프로젝트, 경력, 스킬 등을 통합 관리",
+              "PDF 자동 생성 기능",
+              "반응형 디자인으로 모든 기기 대응"
+            ]
+          }
+        ],
+        "userFlows": [
+          {
+            "flow_id": "UF-01",
+            "flow_name": "방문자 - 첫 방문 및 전체 탐색",
+            "persona": "P1 (채용 담당자)",
+            "trigger": "포트폴리오 URL 접속 (이력서, 링크드인, 이메일 등을 통해)",
+            "goal": "지원자의 전반적인 경력과 역량을 파악",
+            "steps": [
+              {
+                "step": 1,
+                "action": "홈페이지 접속",
+                "page": "/ (HomePage)",
+                "ui_elements": ["Loading screen with animated effects", "Navigation bar"],
+                "user_behavior": "로딩 애니메이션을 보며 대기 (1-2초)"
+              },
+              {
+                "step": 2,
+                "action": "Hero Section 확인",
+                "page": "/ (HomePage - Hero Section)",
+                "ui_elements": ["프로필 이미지", "이름/직함", "핵심 소개 문구", "CTA 버튼"],
+                "user_behavior": "첫인상 형성, 핵심 정보 스캔"
+              },
+              {
+                "step": 3,
+                "action": "Resume Section 스크롤",
+                "page": "/ (HomePage - Resume Section)",
+                "ui_elements": ["경력 요약", "핵심 역량", "PDF 다운로드 버튼"],
+                "user_behavior": "경력 연수, 주요 기술 스택 확인",
+                "decision_point": "상세 이력서 필요 시 → PDF 다운로드 | 계속 탐색 → 스크롤 다운"
+              },
+              {
+                "step": 4,
+                "action": "Experience Section 탐색",
+                "page": "/ (HomePage - Experience Section)",
+                "ui_elements": ["Timeline 형식 경력", "회사명/기간", "주요 성과"],
+                "user_behavior": "시간 순서대로 경력 흐름 파악"
+              },
+              {
+                "step": 5,
+                "action": "About Section 확인",
+                "page": "/ (HomePage - About Section)",
+                "ui_elements": ["자기소개", "Education", "추가 정보"],
+                "user_behavior": "개인 배경과 교육 이력 확인"
+              },
+              {
+                "step": 6,
+                "action": "Portfolio Gallery 탐색",
+                "page": "/ (HomePage - Portfolio Section)",
+                "ui_elements": ["프로젝트 카드 그리드", "Holographic effects", "태그/카테고리"],
+                "user_behavior": "대표 프로젝트 썸네일 스캔",
+                "decision_point": "관심 프로젝트 발견 → 클릭하여 상세 보기 | 전체 포트폴리오 → /portfolio 이동"
+              },
+              {
+                "step": 7,
+                "action": "Skills Section 확인",
+                "page": "/ (HomePage - Skills Section)",
+                "ui_elements": ["스킬 카테고리", "숙련도 표시", "기술 태그"],
+                "user_behavior": "기술 스택과 도구 숙련도 평가"
+              },
+              {
+                "step": 8,
+                "action": "Contact Section 도달",
+                "page": "/ (HomePage - Contact Section)",
+                "ui_elements": ["연락처 정보", "소셜 링크", "Contact form (선택)"],
+                "user_behavior": "필요 시 연락 방법 확인"
+              }
+            ],
+            "exit_points": [
+              "관심 프로젝트 클릭 → UF-02 (프로젝트 상세 탐색)",
+              "이력서 다운로드 → UF-03 (문서 다운로드)",
+              "Navigation 메뉴 클릭 → 다른 페이지 이동"
+            ],
+            "success_metrics": ["페이지 체류 시간 > 2분", "스크롤 깊이 > 80%", "프로젝트 클릭률 > 30%"]
+          },
+          {
+            "flow_id": "UF-02",
+            "flow_name": "방문자 - 프로젝트 상세 탐색",
+            "persona": "P1 (채용 담당자)",
+            "trigger": "포트폴리오 갤러리에서 프로젝트 카드 클릭",
+            "goal": "특정 프로젝트의 역할, 프로세스, 성과를 상세히 파악",
+            "steps": [
+              {
+                "step": 1,
+                "action": "프로젝트 카드 클릭",
+                "page": "/ or /portfolio",
+                "ui_elements": ["프로젝트 썸네일 카드"],
+                "user_behavior": "관심 있는 프로젝트 선택"
+              },
+              {
+                "step": 2,
+                "action": "프로젝트 상세 페이지 진입",
+                "page": "/portfolio/:projectId",
+                "ui_elements": ["Hero 이미지", "프로젝트 제목/부제", "회사/기간", "태그"],
+                "user_behavior": "프로젝트 개요 파악"
+              },
+              {
+                "step": 3,
+                "action": "프로젝트 내용 스크롤",
+                "page": "/portfolio/:projectId",
+                "ui_elements": ["프로젝트 배경", "역할 및 책임", "디자인 프로세스", "주요 성과", "이미지 갤러리"],
+                "user_behavior": "디자인 사고 과정과 실무 역량 평가",
+                "decision_point": "충분한 정보 획득 → 뒤로가기 | 더 많은 프로젝트 → Related projects 클릭"
+              },
+              {
+                "step": 4,
+                "action": "이미지/스크린샷 확대",
+                "page": "/portfolio/:projectId",
+                "ui_elements": ["이미지 갤러리", "Lightbox modal (선택)"],
+                "user_behavior": "디자인 디테일 확인"
+              },
+              {
+                "step": 5,
+                "action": "페이지 종료",
+                "page": "/portfolio/:projectId",
+                "ui_elements": ["뒤로가기 버튼", "다른 프로젝트 링크"],
+                "user_behavior": "포트폴리오 메인 또는 홈으로 복귀"
+              }
+            ],
+            "exit_points": [
+              "뒤로가기 → 이전 페이지 (포트폴리오 갤러리)",
+              "다른 프로젝트 클릭 → 다른 프로젝트 상세",
+              "Navigation 메뉴 → 다른 섹션 이동"
+            ],
+            "success_metrics": ["프로젝트 상세 페이지 체류 시간 > 1분", "이미지 클릭률 > 50%", "다른 프로젝트 탐색률 > 40%"]
+          },
+          {
+            "flow_id": "UF-03",
+            "flow_name": "방문자 - 이력서/경력기술서 다운로드",
+            "persona": "P1 (채용 담당자)",
+            "trigger": "이력서 또는 경력기술서 다운로드 필요",
+            "goal": "정형화된 문서 형식으로 경력 정보 획득",
+            "steps": [
+              {
+                "step": 1,
+                "action": "Resume 페이지 또는 Documents 페이지 접속",
+                "page": "/resume or /documents",
+                "ui_elements": ["Navigation 메뉴"],
+                "user_behavior": "문서 다운로드를 위한 페이지 이동"
+              },
+              {
+                "step": 2,
+                "action": "문서 목록 확인",
+                "page": "/documents",
+                "ui_elements": ["문서 카드 그리드", "문서 타입 필터", "검색 기능 (선택)"],
+                "user_behavior": "필요한 문서 타입 탐색 (이력서, 경력기술서, 자기소개서 등)"
+              },
+              {
+                "step": 3,
+                "action": "문서 선택 및 미리보기",
+                "page": "/documents",
+                "ui_elements": ["문서 카드", "미리보기 버튼", "다운로드 버튼"],
+                "user_behavior": "문서 내용 확인",
+                "decision_point": "미리보기 → 내용 확인 후 다운로드 | 직접 다운로드 → PDF 저장"
+              },
+              {
+                "step": 4,
+                "action": "PDF 다운로드",
+                "page": "/documents",
+                "ui_elements": ["다운로드 버튼"],
+                "user_behavior": "PDF 파일 로컬에 저장"
+              },
+              {
+                "step": 5,
+                "action": "다운로드 완료",
+                "page": "/documents",
+                "ui_elements": ["Success 메시지 (선택)"],
+                "user_behavior": "문서 확보 완료, 사이트 탐색 계속 또는 종료"
+              }
+            ],
+            "exit_points": [
+              "다운로드 후 사이트 계속 탐색",
+              "다운로드 후 사이트 종료",
+              "다른 문서 추가 다운로드"
+            ],
+            "success_metrics": ["다운로드 완료율 > 90%", "다운로드 후 사이트 재방문률 > 20%"]
+          },
+          {
+            "flow_id": "UF-04",
+            "flow_name": "방문자 - 모바일 탐색",
+            "persona": "P1 (채용 담당자)",
+            "trigger": "모바일 기기에서 포트폴리오 접속",
+            "goal": "이동 중 또는 모바일 환경에서 빠르게 경력 정보 파악",
+            "steps": [
+              {
+                "step": 1,
+                "action": "모바일 브라우저로 접속",
+                "page": "/ (HomePage)",
+                "ui_elements": ["모바일 최적화 레이아웃", "Hamburger 메뉴"],
+                "user_behavior": "모바일 화면에 최적화된 콘텐츠 확인"
+              },
+              {
+                "step": 2,
+                "action": "Hamburger 메뉴 열기",
+                "page": "/ (any page)",
+                "ui_elements": ["모바일 Navigation drawer"],
+                "user_behavior": "메뉴 펼쳐서 전체 구조 파악"
+              },
+              {
+                "step": 3,
+                "action": "섹션별 스와이프/스크롤",
+                "page": "/ (HomePage)",
+                "ui_elements": ["모바일 친화적 카드", "터치 인터랙션"],
+                "user_behavior": "수직 스크롤로 콘텐츠 탐색"
+              },
+              {
+                "step": 4,
+                "action": "프로젝트 카드 탭",
+                "page": "/portfolio",
+                "ui_elements": ["터치 최적화 카드", "큰 타겟 영역"],
+                "user_behavior": "손가락으로 탭하여 프로젝트 상세 진입"
+              },
+              {
+                "step": 5,
+                "action": "이미지 핀치 줌",
+                "page": "/portfolio/:projectId",
+                "ui_elements": ["터치 제스처 지원 이미지"],
+                "user_behavior": "디테일 확인을 위한 확대/축소"
+              }
+            ],
+            "exit_points": [
+              "모바일에서 이력서 다운로드 (나중에 PC에서 열람)",
+              "연락처 정보 확인 후 종료",
+              "북마크 후 종료"
+            ],
+            "success_metrics": ["모바일 Bounce rate < 40%", "모바일 평균 세션 시간 > 1분 30초", "모바일 전환율 (연락/다운로드) > 15%"]
+          },
+          {
+            "flow_id": "UF-05",
+            "flow_name": "관리자 - 로그인 및 대시보드 접근",
+            "persona": "P2 (포트폴리오 소유자)",
+            "trigger": "콘텐츠 업데이트 필요",
+            "goal": "관리자 페이지에 로그인하여 콘텐츠 관리 시작",
+            "steps": [
+              {
+                "step": 1,
+                "action": "관리자 로그인 페이지 접속",
+                "page": "/admin/login",
+                "ui_elements": ["이메일 입력 필드", "비밀번호 입력 필드", "로그인 버튼"],
+                "user_behavior": "관리자 계정 정보 입력"
+              },
+              {
+                "step": 2,
+                "action": "인증 정보 제출",
+                "page": "/admin/login",
+                "ui_elements": ["로그인 버튼", "로딩 인디케이터"],
+                "user_behavior": "로그인 버튼 클릭",
+                "decision_point": "인증 성공 → 대시보드 리다이렉트 | 인증 실패 → 오류 메시지 표시"
+              },
+              {
+                "step": 3,
+                "action": "관리자 대시보드 진입",
+                "page": "/admin/dashboard",
+                "ui_elements": ["탭 네비게이션 (11개 탭)", "콘텐츠 관리 영역"],
+                "user_behavior": "대시보드 전체 구조 파악"
+              },
+              {
+                "step": 4,
+                "action": "작업할 탭 선택",
+                "page": "/admin/dashboard",
+                "ui_elements": ["Profile, Projects, Experience, Education, Skills, Documents, Resume, Career Description, Cover Letter, Design System, Project Guide 탭"],
+                "user_behavior": "업데이트할 콘텐츠 영역 선택"
+              }
+            ],
+            "exit_points": [
+              "탭 선택 → UF-06, UF-07, UF-08 등 콘텐츠 편집 플로우",
+              "로그아웃 → 공개 페이지로 복귀"
+            ],
+            "success_metrics": ["로그인 성공률 > 95%", "로그인 후 콘텐츠 수정률 > 80%"]
+          },
+          {
+            "flow_id": "UF-06",
+            "flow_name": "관리자 - 프로젝트 추가/수정",
+            "persona": "P2 (포트폴리오 소유자)",
+            "trigger": "새 프로젝트 완료 또는 기존 프로젝트 정보 업데이트 필요",
+            "goal": "포트폴리오에 프로젝트 추가 또는 수정",
+            "steps": [
+              {
+                "step": 1,
+                "action": "Projects 탭 선택",
+                "page": "/admin/dashboard",
+                "ui_elements": ["Projects 탭"],
+                "user_behavior": "프로젝트 관리 영역 진입"
+              },
+              {
+                "step": 2,
+                "action": "프로젝트 목록 확인",
+                "page": "/admin/dashboard (Projects tab)",
+                "ui_elements": ["프로젝트 리스트", "추가 버튼", "편집/삭제 버튼"],
+                "user_behavior": "기존 프로젝트 확인",
+                "decision_point": "새 프로젝트 → 추가 버튼 클릭 | 기존 수정 → 편집 버튼 클릭"
+              },
+              {
+                "step": 3,
+                "action": "프로젝트 폼 작성",
+                "page": "/admin/dashboard (Project Editor)",
+                "ui_elements": ["제목", "부제목", "회사명", "기간", "카테고리", "설명", "태그", "이미지 업로드", "그라디언트 색상"],
+                "user_behavior": "프로젝트 정보 입력/수정"
+              },
+              {
+                "step": 4,
+                "action": "이미지 업로드",
+                "page": "/admin/dashboard (Project Editor)",
+                "ui_elements": ["파일 선택 버튼", "이미지 미리보기", "업로드 진행 상태"],
+                "user_behavior": "대표 이미지 선택 및 업로드"
+              },
+              {
+                "step": 5,
+                "action": "변경사항 저장",
+                "page": "/admin/dashboard (Project Editor)",
+                "ui_elements": ["저장 버튼", "취소 버튼"],
+                "user_behavior": "저장 버튼 클릭",
+                "decision_point": "저장 성공 → Success 메시지 | 실패 → 오류 메시지"
+              },
+              {
+                "step": 6,
+                "action": "변경사항 확인",
+                "page": "/admin/dashboard (Projects tab)",
+                "ui_elements": ["업데이트된 프로젝트 리스트"],
+                "user_behavior": "추가/수정된 프로젝트 확인"
+              },
+              {
+                "step": 7,
+                "action": "공개 페이지에서 검증",
+                "page": "/portfolio",
+                "ui_elements": ["새 프로젝트 카드"],
+                "user_behavior": "실제 포트폴리오 페이지에서 정상 노출 확인"
+              }
+            ],
+            "exit_points": [
+              "저장 후 다른 탭으로 이동",
+              "저장 후 로그아웃",
+              "공개 페이지 확인 후 추가 수정"
+            ],
+            "success_metrics": ["프로젝트 저장 성공률 > 98%", "이미지 업로드 성공률 > 95%", "평균 프로젝트 추가 시간 < 5분"]
+          },
+          {
+            "flow_id": "UF-07",
+            "flow_name": "관리자 - 이력서 생성 및 다운로드",
+            "persona": "P2 (포트폴리오 소유자)",
+            "trigger": "최신 이력서 PDF 필요 (지원서 제출, 네트워킹 등)",
+            "goal": "현재 콘텐츠 기반으로 이력서 PDF 생성 및 다운로드",
+            "steps": [
+              {
+                "step": 1,
+                "action": "Resume 탭 선택",
+                "page": "/admin/dashboard",
+                "ui_elements": ["Resume 탭"],
+                "user_behavior": "이력서 관리 영역 진입"
+              },
+              {
+                "step": 2,
+                "action": "이력서 내용 편집",
+                "page": "/admin/dashboard (Resume tab)",
+                "ui_elements": ["이력서 에디터", "섹션별 입력 필드"],
+                "user_behavior": "필요 시 이력서 내용 수정"
+              },
+              {
+                "step": 3,
+                "action": "PDF 생성 버튼 클릭",
+                "page": "/admin/dashboard (Resume tab)",
+                "ui_elements": ["PDF 생성 버튼", "인쇄 다이얼로그"],
+                "user_behavior": "PDF 생성 트리거"
+              },
+              {
+                "step": 4,
+                "action": "PDF 미리보기",
+                "page": "Print dialog",
+                "ui_elements": ["PDF 미리보기", "인쇄 설정"],
+                "user_behavior": "생성될 PDF 레이아웃 확인"
+              },
+              {
+                "step": 5,
+                "action": "PDF 저장",
+                "page": "Print dialog",
+                "ui_elements": ["저장 버튼", "파일명 입력"],
+                "user_behavior": "PDF 파일 로컬에 저장"
+              },
+              {
+                "step": 6,
+                "action": "저장된 PDF 확인",
+                "page": "Local file system",
+                "ui_elements": ["PDF 파일"],
+                "user_behavior": "PDF 뷰어로 최종 확인"
+              }
+            ],
+            "exit_points": [
+              "PDF 다운로드 후 대시보드 복귀",
+              "PDF 다운로드 후 로그아웃",
+              "필요 시 내용 수정 후 재생성"
+            ],
+            "success_metrics": ["PDF 생성 성공률 > 99%", "PDF 품질 만족도 > 95%", "평균 생성 시간 < 10초"]
+          },
+          {
+            "flow_id": "UF-08",
+            "flow_name": "관리자 - 경력/스킬 일괄 업데이트",
+            "persona": "P2 (포트폴리오 소유자)",
+            "trigger": "새로운 경력 또는 스킬 습득",
+            "goal": "경력 및 스킬 정보 업데이트",
+            "steps": [
+              {
+                "step": 1,
+                "action": "Experience 또는 Skills 탭 선택",
+                "page": "/admin/dashboard",
+                "ui_elements": ["Experience 탭", "Skills 탭"],
+                "user_behavior": "업데이트할 영역 선택"
+              },
+              {
+                "step": 2,
+                "action": "항목 추가/수정/삭제",
+                "page": "/admin/dashboard (Experience/Skills tab)",
+                "ui_elements": ["항목 리스트", "추가 버튼", "편집/삭제 버튼", "입력 폼"],
+                "user_behavior": "경력 항목 또는 스킬 추가/수정"
+              },
+              {
+                "step": 3,
+                "action": "변경사항 저장",
+                "page": "/admin/dashboard",
+                "ui_elements": ["저장 버튼"],
+                "user_behavior": "변경사항 확정"
+              },
+              {
+                "step": 4,
+                "action": "공개 페이지에서 검증",
+                "page": "/ (HomePage - Experience/Skills Section)",
+                "ui_elements": ["업데이트된 경력/스킬"],
+                "user_behavior": "홈페이지에서 정상 반영 확인"
+              }
+            ],
+            "exit_points": [
+              "저장 후 다른 섹션 업데이트",
+              "저장 후 로그아웃",
+              "필요 시 추가 수정"
+            ],
+            "success_metrics": ["저장 성공률 > 98%", "실시간 반영률 100%"]
+          },
+          {
+            "flow_id": "UF-09",
+            "flow_name": "관리자 - 기획 문서 생성 및 관리",
+            "persona": "P2 (포트폴리오 소유자)",
+            "trigger": "프로젝트 PM 역량 증명을 위한 기획 문서 추가 필요",
+            "goal": "요구사항 정의서, 사용자 플로우, IA, 와이어프레임 등 기획 문서 생성 및 관리",
+            "steps": [
+              {
+                "step": 1,
+                "action": "Documents 탭 선택",
+                "page": "/admin/dashboard",
+                "ui_elements": ["Documents 탭"],
+                "user_behavior": "문서 관리 영역 진입"
+              },
+              {
+                "step": 2,
+                "action": "새 문서 추가 버튼 클릭",
+                "page": "/admin/dashboard (Documents tab)",
+                "ui_elements": ["문서 추가 버튼", "문서 타입 선택 드롭다운"],
+                "user_behavior": "문서 타입 선택 (요구사항 정의서, 사용자 플로우, IA, 와이어프레임 등)"
+              },
+              {
+                "step": 3,
+                "action": "문서 정보 입력",
+                "page": "/admin/dashboard (Document Editor)",
+                "ui_elements": ["문서 제목", "버전", "내용 에디터", "태그"],
+                "user_behavior": "문서 내용 작성 (마크다운 또는 구조화된 JSON)"
+              },
+              {
+                "step": 4,
+                "action": "문서 내용 구조화",
+                "page": "/admin/dashboard (Document Editor)",
+                "ui_elements": ["섹션별 입력 필드", "리스트 관리", "첨부파일 업로드"],
+                "user_behavior": "기획 문서 표준 구조에 맞춰 입력"
+              },
+              {
+                "step": 5,
+                "action": "문서 저장",
+                "page": "/admin/dashboard (Document Editor)",
+                "ui_elements": ["저장 버튼", "미리보기 버튼"],
+                "user_behavior": "문서 저장 및 미리보기 확인"
+              },
+              {
+                "step": 6,
+                "action": "Documents 페이지에서 확인",
+                "page": "/documents",
+                "ui_elements": ["문서 카드 그리드", "새로 추가된 문서"],
+                "user_behavior": "공개 페이지에서 문서 정상 노출 확인"
+              },
+              {
+                "step": 7,
+                "action": "PDF 생성 (선택)",
+                "page": "/admin/dashboard (Documents tab)",
+                "ui_elements": ["PDF 생성 버튼"],
+                "user_behavior": "필요 시 문서를 PDF로 변환하여 다운로드"
+              }
+            ],
+            "exit_points": [
+              "문서 저장 후 다른 문서 추가",
+              "문서 저장 후 로그아웃",
+              "공개 페이지 확인 후 내용 수정"
+            ],
+            "success_metrics": ["문서 저장 성공률 > 98%", "문서 카테고리별 분류 정확도 100%", "평균 문서 작성 시간 < 30분"]
+          },
+          {
+            "flow_id": "UF-10",
+            "flow_name": "관리자 - 디자인 시스템 문서화",
+            "persona": "P2 (포트폴리오 소유자)",
+            "trigger": "프로젝트의 디자인 시스템 역량 증명 필요",
+            "goal": "Atomic Design 기반 디자인 시스템 문서화 및 관리",
+            "steps": [
+              {
+                "step": 1,
+                "action": "Design System 탭 선택",
+                "page": "/admin/dashboard",
+                "ui_elements": ["Design System 탭"],
+                "user_behavior": "디자인 시스템 문서 영역 진입"
+              },
+              {
+                "step": 2,
+                "action": "컴포넌트 카테고리 선택",
+                "page": "/admin/dashboard (Design System tab)",
+                "ui_elements": ["Atoms", "Molecules", "Organisms", "Templates", "Pages 네비게이션"],
+                "user_behavior": "문서화할 컴포넌트 레벨 선택"
+              },
+              {
+                "step": 3,
+                "action": "컴포넌트 문서 작성",
+                "page": "/admin/dashboard (Design System tab)",
+                "ui_elements": ["컴포넌트 이름", "설명", "Props", "사용 예시", "스크린샷"],
+                "user_behavior": "컴포넌트 사양 및 가이드라인 입력"
+              },
+              {
+                "step": 4,
+                "action": "Live Preview 확인",
+                "page": "/admin/dashboard (Design System tab)",
+                "ui_elements": ["실시간 미리보기 영역"],
+                "user_behavior": "작성한 문서의 렌더링 결과 확인"
+              },
+              {
+                "step": 5,
+                "action": "문서 저장 및 퍼블리시",
+                "page": "/admin/dashboard (Design System tab)",
+                "ui_elements": ["저장 버튼", "퍼블리시 버튼"],
+                "user_behavior": "디자인 시스템 문서 확정"
+              }
+            ],
+            "exit_points": [
+              "다른 컴포넌트 문서화",
+              "공개 페이지에서 디자인 시스템 확인",
+              "로그아웃"
+            ],
+            "success_metrics": ["컴포넌트 문서화 완성도 > 90%", "문서 업데이트 주기 < 2주"]
+          }
+        ],
+        "interactionPatterns": [
+          {
+            "pattern_id": "IP-01",
+            "pattern_name": "Scroll-based Navigation",
+            "description": "홈페이지의 주요 내비게이션 방식은 수직 스크롤입니다. 각 섹션이 순차적으로 배치되어 있으며, Navigation bar의 링크 클릭 시 해당 섹션으로 스크롤 애니메이션 이동합니다.",
+            "applies_to": ["UF-01", "UF-04"],
+            "ux_considerations": [
+              "스크롤 진행도 인디케이터 표시 (선택)",
+              "Sticky navigation bar로 섹션 간 빠른 이동 지원",
+              "각 섹션이 viewport에 진입 시 fade-in 애니메이션",
+              "모바일에서는 스크롤 속도 최적화"
+            ]
+          },
+          {
+            "pattern_id": "IP-02",
+            "pattern_name": "Card-based Exploration",
+            "description": "프로젝트, 문서, 스킬 등의 콘텐츠는 카드 형식으로 제공됩니다. 카드 호버 시 holographic effect나 그라디언트 애니메이션이 적용되어 인터랙티브한 경험을 제공합니다.",
+            "applies_to": ["UF-01", "UF-02", "UF-03"],
+            "ux_considerations": [
+              "카드 크기는 콘텐츠에 따라 적응형",
+              "호버 상태에서 추가 정보 표시 (툴팁, 프리뷰 등)",
+              "모바일에서는 탭 인터랙션으로 대체",
+              "로딩 시 Skeleton UI 표시"
+            ]
+          },
+          {
+            "pattern_id": "IP-03",
+            "pattern_name": "Modal/Dialog for Editing",
+            "description": "관리자 페이지에서 콘텐츠 편집 시 모달 또는 다이얼로그 형식을 사용하여 context를 유지하면서 편집 작업을 수행합니다.",
+            "applies_to": ["UF-06", "UF-07", "UF-08", "UF-09"],
+            "ux_considerations": [
+              "모달 외부 클릭 시 닫힘 경고 (변경사항 있을 경우)",
+              "ESC 키로 모달 닫기 지원",
+              "모달 내에서도 스크롤 가능",
+              "저장/취소 버튼 명확히 구분"
+            ]
+          },
+          {
+            "pattern_id": "IP-04",
+            "pattern_name": "Real-time Preview",
+            "description": "관리자가 콘텐츠를 수정할 때 변경사항을 실시간으로 미리보기하여 즉각적인 피드백을 제공합니다.",
+            "applies_to": ["UF-06", "UF-07", "UF-09", "UF-10"],
+            "ux_considerations": [
+              "debounce 적용으로 과도한 렌더링 방지",
+              "미리보기와 편집 영역 분할 (split view)",
+              "미리보기 모드 토글 (모바일/데스크톱)",
+              "변경사항 하이라이트 표시"
+            ]
+          },
+          {
+            "pattern_id": "IP-05",
+            "pattern_name": "Progressive Disclosure",
+            "description": "복잡한 정보는 단계적으로 노출하여 인지 부하를 줄입니다. 예: 프로젝트 카드에서는 요약 정보만 표시하고, 클릭 시 전체 상세 정보 제공.",
+            "applies_to": ["UF-01", "UF-02", "UF-03"],
+            "ux_considerations": [
+              "중요 정보는 항상 visible",
+              "부가 정보는 accordion, tooltip, expandable 등으로 제공",
+              "사용자가 정보 깊이를 제어할 수 있도록 설계",
+              "모바일에서는 더 강력한 progressive disclosure 적용"
+            ]
+          }
+        ],
+        "navigationMap": {
+          "description": "전체 사이트 네비게이션 구조",
+          "public_area": {
+            "/": {
+              "name": "홈페이지",
+              "sections": ["Hero", "Resume", "Experience", "About", "Portfolio", "Skills", "Contact"],
+              "navigation_to": ["/portfolio", "/documents", "/resume", "/career-description", "/cover-letter", "/contact"]
+            },
+            "/portfolio": {
+              "name": "포트폴리오 갤러리",
+              "navigation_to": ["/portfolio/:projectId", "/"]
+            },
+            "/portfolio/:projectId": {
+              "name": "프로젝트 상세",
+              "navigation_to": ["/portfolio", "/"]
+            },
+            "/documents": {
+              "name": "문서 목록",
+              "navigation_to": ["/", "/resume"]
+            },
+            "/resume": {
+              "name": "이력서",
+              "navigation_to": ["/", "/documents"]
+            },
+            "/career-description": {
+              "name": "경력기술서",
+              "navigation_to": ["/", "/documents"]
+            },
+            "/cover-letter": {
+              "name": "자기소개서",
+              "navigation_to": ["/", "/documents"]
+            },
+            "/contact": {
+              "name": "연락처 (섹션)",
+              "note": "홈페이지 내 섹션으로 구현, 별도 페이지 아님"
+            }
+          },
+          "admin_area": {
+            "/admin/login": {
+              "name": "관리자 로그인",
+              "navigation_to": ["/admin/dashboard", "/"]
+            },
+            "/admin/dashboard": {
+              "name": "관리자 대시보드",
+              "tabs": [
+                "Profile",
+                "Projects",
+                "Experience",
+                "Education",
+                "Skills",
+                "Documents",
+                "Resume",
+                "Career Description",
+                "Cover Letter",
+                "Design System",
+                "Project Guide"
+              ],
+              "navigation_to": ["/", "/admin/login (로그아웃)"]
+            }
+          }
+        },
+        "errorHandling": [
+          {
+            "error_scenario": "로그인 실패",
+            "flow": "UF-05",
+            "user_action": "잘못된 계정 정보 입력",
+            "system_response": "오류 메시지 표시: '이메일 또는 비밀번호가 올바르지 않습니다.'",
+            "recovery": "사용자가 정보를 수정하여 재시도"
+          },
+          {
+            "error_scenario": "이미지 업로드 실패",
+            "flow": "UF-06",
+            "user_action": "프로젝트 이미지 업로드 중 네트워크 오류",
+            "system_response": "오류 메시지 표시: '이미지 업로드에 실패했습니다. 다시 시도해주세요.'",
+            "recovery": "재업로드 버튼 제공, 또는 자동 재시도"
+          },
+          {
+            "error_scenario": "저장 실패",
+            "flow": "UF-06, UF-07, UF-08",
+            "user_action": "콘텐츠 저장 중 서버 오류",
+            "system_response": "오류 메시지 표시: '저장에 실패했습니다. 잠시 후 다시 시도해주세요.'",
+            "recovery": "로컬 스토리지에 임시 저장, 재시도 옵션 제공"
+          },
+          {
+            "error_scenario": "페이지 404 오류",
+            "flow": "UF-01, UF-02",
+            "user_action": "존재하지 않는 URL 접속",
+            "system_response": "404 페이지 표시: 'Page not found' 메시지",
+            "recovery": "홈페이지 또는 포트폴리오로 이동하는 링크 제공"
+          },
+          {
+            "error_scenario": "PDF 생성 실패",
+            "flow": "UF-07",
+            "user_action": "이력서 PDF 생성 중 오류",
+            "system_response": "오류 메시지 표시: 'PDF 생성에 실패했습니다.'",
+            "recovery": "재시도 버튼, 또는 브라우저 인쇄 기능 사용 가이드"
+          }
+        ],
+        "accessibility": {
+          "keyboard_navigation": "모든 인터랙티브 요소는 Tab 키로 접근 가능하며, Enter/Space로 활성화 가능합니다. Skip to content 링크 제공.",
+          "screen_reader": "모든 이미지에 alt 텍스트, 폼 필드에 label 연결, ARIA 속성 적용하여 스크린 리더 지원.",
+          "focus_management": "모달 열림/닫힘 시 포커스 이동 관리, 포커스 트랩 적용.",
+          "color_contrast": "WCAG AA 기준 이상의 색상 대비 유지, 다크모드 지원.",
+          "responsive_text": "텍스트 크기 조정 가능, 최소 16px 이상 유지."
+        },
+        "performanceConsiderations": [
+          "이미지 lazy loading 적용하여 초기 로딩 시간 단축",
+          "코드 스플리팅으로 필요한 페이지만 로드",
+          "캐싱 전략으로 반복 방문 시 로딩 속도 향상",
+          "애니메이션은 CSS transform/opacity 사용으로 GPU 가속",
+          "모바일에서는 이미지 해상도 최적화"
+        ]
+      },
+      "tags": ["user-flow", "ux-design", "portfolio", "current-project"]
+    },
+    {
+      "id": "doc-current-03",
+      "type": "informationArchitecture",
+      "title": "시니어 디자이너 포트폴리오 플랫폼 정보구조도 (IA)",
+      "version": "1.0",
+      "createdAt": "2025-12-28T00:00:00.000Z",
+      "updatedAt": "2025-12-28T00:00:00.000Z",
+      "pdfUrl": null,
+      "content": {
+        "overview": {
+          "purpose": "시니어 디자이너 포트폴리오 플랫폼의 정보구조(Information Architecture)는 콘텐츠를 체계적으로 조직하고, 사용자가 정보를 효율적으로 탐색할 수 있도록 설계되었습니다.",
+          "principles": [
+            "사용자 중심: 채용 담당자와 관리자의 니즈를 우선시한 구조",
+            "일관성: 전 영역에 걸쳐 일관된 네비게이션 패턴 유지",
+            "확장성: 새로운 프로젝트 및 문서 추가에 유연하게 대응",
+            "접근성: 모든 사용자가 쉽게 정보에 접근할 수 있는 명확한 계층 구조",
+            "역할 기반 분리: 공개 영역과 관리자 영역의 명확한 분리"
+          ],
+          "target_users": [
+            "일반 방문자 (채용 담당자, HR, 동료 디자이너)",
+            "포트폴리오 소유자 (관리자)"
+          ]
+        },
+        "siteMap": {
+          "description": "전체 사이트맵 구조 (계층적 표현)",
+          "structure": {
+            "level_0": {
+              "name": "Root",
+              "children": ["Public Area", "Admin Area"]
+            },
+            "public_area": {
+              "name": "Public Area (공개 영역)",
+              "access": "모든 사용자",
+              "children": [
+                {
+                  "id": "PA-01",
+                  "name": "Home (/)",
+                  "type": "Single Page with Sections",
+                  "priority": "Primary",
+                  "sections": [
+                    {
+                      "id": "SEC-01",
+                      "name": "Hero Section",
+                      "content": ["프로필 이미지", "이름 및 직함", "핵심 소개", "CTA 버튼"],
+                      "purpose": "첫인상 형성 및 핵심 정보 전달"
+                    },
+                    {
+                      "id": "SEC-02",
+                      "name": "Resume Section",
+                      "content": ["경력 요약", "핵심 역량", "PDF 다운로드 버튼"],
+                      "purpose": "경력 개요 제공 및 이력서 다운로드"
+                    },
+                    {
+                      "id": "SEC-03",
+                      "name": "Experience Section",
+                      "content": ["타임라인 형식 경력", "회사명/기간", "주요 성과"],
+                      "purpose": "시간 순서대로 경력 상세 정보 제공"
+                    },
+                    {
+                      "id": "SEC-04",
+                      "name": "About Section",
+                      "content": ["자기소개", "교육 배경", "추가 정보"],
+                      "purpose": "개인 배경 및 스토리 전달"
+                    },
+                    {
+                      "id": "SEC-05",
+                      "name": "Portfolio Section",
+                      "content": ["프로젝트 카드 그리드", "Holographic effects", "태그/카테고리 필터"],
+                      "purpose": "대표 프로젝트 갤러리 제공"
+                    },
+                    {
+                      "id": "SEC-06",
+                      "name": "Skills Section",
+                      "content": ["스킬 카테고리", "숙련도 표시", "기술 태그"],
+                      "purpose": "기술 스택 및 역량 시각화"
+                    },
+                    {
+                      "id": "SEC-07",
+                      "name": "Contact Section",
+                      "content": ["연락처 정보", "소셜 링크", "문의 폼"],
+                      "purpose": "연락 방법 제공"
+                    }
+                  ]
+                },
+                {
+                  "id": "PA-02",
+                  "name": "Portfolio (/portfolio)",
+                  "type": "Collection Page",
+                  "priority": "Primary",
+                  "content": ["프로젝트 전체 목록", "필터/정렬 기능", "카테고리 네비게이션"],
+                  "children": [
+                    {
+                      "id": "PA-02-01",
+                      "name": "Project Detail (/portfolio/:projectId)",
+                      "type": "Detail Page",
+                      "content": ["프로젝트 Hero 이미지", "상세 설명", "역할 및 프로세스", "이미지 갤러리", "성과 지표"]
+                    }
+                  ]
+                },
+                {
+                  "id": "PA-03",
+                  "name": "Documents (/documents)",
+                  "type": "Collection Page",
+                  "priority": "Secondary",
+                  "content": ["문서 목록 그리드", "문서 타입 필터", "검색 기능", "다운로드 버튼"],
+                  "document_types": [
+                    "이력서 (resume)",
+                    "자기소개서 (coverLetter)",
+                    "경력기술서 (careerDescription)",
+                    "포트폴리오 (portfolio)",
+                    "요구사항 정의서 (requirements)",
+                    "사용자 플로우 (userFlow)",
+                    "정보구조도 (informationArchitecture)",
+                    "와이어프레임 (wireframe)",
+                    "프로젝트 헌장 (projectCharter)",
+                    "화면설계서 (screenDesign)",
+                    "이해관계자 매트릭스 (stakeholderMatrix)",
+                    "리스크 등록부 (riskRegister)",
+                    "변경 이력 (changeLog)",
+                    "교훈 문서 (lessonsLearned)"
+                  ]
+                },
+                {
+                  "id": "PA-04",
+                  "name": "Resume (/resume)",
+                  "type": "Detail Page",
+                  "priority": "Secondary",
+                  "content": ["이력서 전체 내용", "PDF 다운로드 버튼", "인쇄 최적화 레이아웃"]
+                },
+                {
+                  "id": "PA-05",
+                  "name": "Career Description (/career-description)",
+                  "type": "Detail Page",
+                  "priority": "Secondary",
+                  "content": ["경력기술서 상세", "프로젝트별 상세 역할", "성과 지표", "PDF 다운로드"]
+                },
+                {
+                  "id": "PA-06",
+                  "name": "Cover Letter (/cover-letter)",
+                  "type": "Detail Page",
+                  "priority": "Tertiary",
+                  "content": ["자기소개서 내용", "지원 동기", "핵심 역량 강조", "PDF 다운로드"]
+                }
+              ]
+            },
+            "admin_area": {
+              "name": "Admin Area (관리자 영역)",
+              "access": "인증된 관리자만",
+              "authentication_required": true,
+              "children": [
+                {
+                  "id": "AA-01",
+                  "name": "Admin Login (/admin/login)",
+                  "type": "Authentication Page",
+                  "priority": "Critical",
+                  "content": ["로그인 폼", "이메일/비밀번호 입력", "로그인 버튼"],
+                  "redirect": "/admin/dashboard (성공 시)"
+                },
+                {
+                  "id": "AA-02",
+                  "name": "Admin Dashboard (/admin/dashboard)",
+                  "type": "Multi-Tab Management Interface",
+                  "priority": "Critical",
+                  "tabs": [
+                    {
+                      "id": "TAB-01",
+                      "name": "Profile",
+                      "content": ["프로필 정보 편집", "이미지 업로드", "연락처 관리"],
+                      "data_model": "ProfileModel"
+                    },
+                    {
+                      "id": "TAB-02",
+                      "name": "Projects",
+                      "content": ["프로젝트 목록", "추가/편집/삭제", "이미지 업로드", "순서 조정"],
+                      "data_model": "ProjectModel"
+                    },
+                    {
+                      "id": "TAB-03",
+                      "name": "Experience",
+                      "content": ["경력 항목 관리", "회사/기간/역할 입력", "타임라인 순서 조정"],
+                      "data_model": "ExperienceModel"
+                    },
+                    {
+                      "id": "TAB-04",
+                      "name": "Education",
+                      "content": ["학력 정보 관리", "학교/전공/기간 입력"],
+                      "data_model": "EducationModel"
+                    },
+                    {
+                      "id": "TAB-05",
+                      "name": "Skills",
+                      "content": ["스킬 카테고리 관리", "숙련도 설정", "태그 관리"],
+                      "data_model": "SkillModel"
+                    },
+                    {
+                      "id": "TAB-06",
+                      "name": "Documents",
+                      "content": ["문서 목록", "문서 추가/편집/삭제", "문서 타입 선택", "PDF 생성"],
+                      "data_model": "DocumentModel"
+                    },
+                    {
+                      "id": "TAB-07",
+                      "name": "Resume",
+                      "content": ["이력서 편집", "PDF 생성", "실시간 미리보기"],
+                      "data_model": "ResumeModel"
+                    },
+                    {
+                      "id": "TAB-08",
+                      "name": "Career Description",
+                      "content": ["경력기술서 편집", "프로젝트별 상세 작성"],
+                      "data_model": "CareerDescriptionModel"
+                    },
+                    {
+                      "id": "TAB-09",
+                      "name": "Cover Letter",
+                      "content": ["자기소개서 편집", "버전 관리"],
+                      "data_model": "CoverLetterModel"
+                    },
+                    {
+                      "id": "TAB-10",
+                      "name": "Design System",
+                      "content": ["Atomic Design 문서화", "컴포넌트 카탈로그", "스타일 가이드"],
+                      "data_model": "DesignSystemModel"
+                    },
+                    {
+                      "id": "TAB-11",
+                      "name": "Project Guide",
+                      "content": ["프로젝트 구조 문서", "개발 가이드", "배포 매뉴얼"],
+                      "data_model": "ProjectGuideModel"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "navigation": {
+          "primary_navigation": {
+            "description": "모든 페이지에서 접근 가능한 글로벌 네비게이션",
+            "location": "Header (Sticky)",
+            "type": "Horizontal Navigation Bar",
+            "items": [
+              {
+                "label": "Home",
+                "link": "/",
+                "description": "홈페이지로 이동"
+              },
+              {
+                "label": "Portfolio",
+                "link": "/portfolio",
+                "description": "전체 포트폴리오 갤러리"
+              },
+              {
+                "label": "Documents",
+                "link": "/documents",
+                "description": "문서 목록 페이지"
+              },
+              {
+                "label": "Resume",
+                "link": "/resume",
+                "description": "이력서 페이지"
+              },
+              {
+                "label": "Contact",
+                "link": "/#contact",
+                "description": "연락처 섹션으로 스크롤"
+              }
+            ],
+            "responsive_behavior": "모바일: Hamburger 메뉴로 변환"
+          },
+          "secondary_navigation": {
+            "description": "특정 페이지 내부 네비게이션",
+            "contexts": [
+              {
+                "page": "Home",
+                "type": "Anchor Links",
+                "items": ["Hero", "Resume", "Experience", "About", "Portfolio", "Skills", "Contact"],
+                "behavior": "클릭 시 해당 섹션으로 스크롤 애니메이션"
+              },
+              {
+                "page": "Documents",
+                "type": "Filter Navigation",
+                "items": ["All", "개인 문서", "기획/디자인 문서", "PM 문서"],
+                "behavior": "문서 타입별 필터링"
+              },
+              {
+                "page": "Admin Dashboard",
+                "type": "Tab Navigation",
+                "items": ["Profile", "Projects", "Experience", "Education", "Skills", "Documents", "Resume", "Career Description", "Cover Letter", "Design System", "Project Guide"],
+                "behavior": "탭 전환으로 콘텐츠 관리 영역 변경"
+              }
+            ]
+          },
+          "breadcrumbs": {
+            "description": "사용자 위치 표시 및 상위 페이지 복귀",
+            "implementation": [
+              {
+                "page": "/portfolio/:projectId",
+                "breadcrumb": "Home > Portfolio > [Project Title]"
+              },
+              {
+                "page": "/documents",
+                "breadcrumb": "Home > Documents"
+              },
+              {
+                "page": "/admin/dashboard",
+                "breadcrumb": "Admin > Dashboard > [Current Tab]"
+              }
+            ]
+          },
+          "footer_navigation": {
+            "description": "Footer에 위치한 보조 네비게이션",
+            "items": ["소셜 링크", "연락처 정보", "사이트맵", "Privacy Policy (선택)"]
+          }
+        },
+        "contentOrganization": {
+          "taxonomy": {
+            "description": "콘텐츠 분류 체계",
+            "categories": [
+              {
+                "name": "개인 문서",
+                "types": ["resume", "coverLetter", "careerDescription", "portfolio"],
+                "purpose": "개인 경력 및 역량 증명"
+              },
+              {
+                "name": "기획/디자인 문서",
+                "types": ["requirements", "userFlow", "informationArchitecture", "wireframe"],
+                "purpose": "기획 역량 및 UX 프로세스 증명"
+              },
+              {
+                "name": "PM 문서",
+                "types": ["projectCharter", "screenDesign", "stakeholderMatrix", "riskRegister", "changeLog", "lessonsLearned"],
+                "purpose": "프로젝트 관리 역량 증명"
+              }
+            ],
+            "tags": {
+              "description": "크로스 카테고리 분류를 위한 태그 시스템",
+              "examples": ["Figma", "Mobile UX", "Design System", "Accessibility", "IoT", "Real-time", "Dashboard"]
+            }
+          },
+          "metadata": {
+            "description": "모든 콘텐츠에 포함되는 메타데이터",
+            "common_fields": [
+              "id (고유 식별자)",
+              "title (제목)",
+              "createdAt (생성일)",
+              "updatedAt (수정일)",
+              "tags (태그)",
+              "category (카테고리)",
+              "type (타입)"
+            ],
+            "content_specific_fields": {
+              "projects": ["company", "year", "description", "imageUrl", "gradientColors", "order"],
+              "documents": ["version", "pdfUrl", "content"],
+              "experience": ["company", "period", "role", "achievements"],
+              "skills": ["category", "proficiency", "tools"]
+            }
+          }
+        },
+        "searchAndDiscovery": {
+          "search_functionality": {
+            "scope": "전체 콘텐츠 (프로젝트, 문서, 경력, 스킬)",
+            "search_fields": ["title", "description", "tags", "company", "content"],
+            "location": "Documents 페이지, Portfolio 페이지",
+            "type": "실시간 검색 (Debounced)",
+            "results": "관련성 순 정렬"
+          },
+          "filtering": {
+            "documents_page": {
+              "filters": ["문서 타입 (개인/기획/PM)", "태그", "날짜"],
+              "behavior": "다중 필터 지원"
+            },
+            "portfolio_page": {
+              "filters": ["카테고리 (Mobile App, IoT, E-commerce 등)", "태그", "연도"],
+              "behavior": "실시간 필터링"
+            }
+          },
+          "sorting": {
+            "options": ["최신순", "오래된순", "이름순", "관련성순"],
+            "default": "최신순 (updatedAt 기준)"
+          }
+        },
+        "userJourneys": {
+          "recruiter_journey": {
+            "entry_point": "/ (Home)",
+            "typical_path": "Home > Portfolio > Project Detail > Documents > Resume Download",
+            "key_pages": ["/", "/portfolio/:projectId", "/documents", "/resume"],
+            "exit_point": "연락처 정보 확인 또는 이력서 다운로드"
+          },
+          "admin_journey": {
+            "entry_point": "/admin/login",
+            "typical_path": "Login > Dashboard > [Tab] > Edit Content > Save > Preview",
+            "key_pages": ["/admin/login", "/admin/dashboard"],
+            "exit_point": "로그아웃 후 공개 페이지 확인"
+          }
+        },
+        "informationHierarchy": {
+          "level_1": {
+            "description": "최상위 레벨 - 주요 영역",
+            "items": ["Home", "Portfolio", "Documents", "Admin"]
+          },
+          "level_2": {
+            "description": "두 번째 레벨 - 섹션/페이지",
+            "items": ["Hero Section", "Resume Section", "Experience Section", "About Section", "Portfolio Section", "Skills Section", "Contact Section", "Project Detail", "Document List", "Resume Page", "Admin Dashboard"]
+          },
+          "level_3": {
+            "description": "세 번째 레벨 - 콘텐츠 블록",
+            "items": ["프로젝트 카드", "경력 항목", "스킬 카테고리", "문서 카드", "편집 폼", "탭 콘텐츠"]
+          },
+          "level_4": {
+            "description": "네 번째 레벨 - 개별 요소",
+            "items": ["버튼", "입력 필드", "이미지", "텍스트", "아이콘", "링크"]
+          }
+        },
+        "contentPriority": {
+          "critical": {
+            "description": "모든 사용자가 반드시 접근해야 하는 콘텐츠",
+            "items": ["Hero Section", "Portfolio Gallery", "Resume Section", "Contact Section", "Admin Login"]
+          },
+          "important": {
+            "description": "대부분의 사용자가 관심 있는 콘텐츠",
+            "items": ["Experience Section", "Skills Section", "Project Detail", "Documents Page"]
+          },
+          "optional": {
+            "description": "특정 사용자만 필요로 하는 콘텐츠",
+            "items": ["About Section", "Cover Letter", "Career Description", "Design System Documentation"]
+          }
+        },
+        "responsiveStrategy": {
+          "desktop": {
+            "breakpoint": "> 1024px",
+            "navigation": "Horizontal navigation bar",
+            "layout": "Grid layout (3-4 columns)",
+            "content_density": "높음 (많은 정보 동시 표시)"
+          },
+          "tablet": {
+            "breakpoint": "768px - 1024px",
+            "navigation": "Horizontal navigation bar (축소됨)",
+            "layout": "Grid layout (2-3 columns)",
+            "content_density": "중간"
+          },
+          "mobile": {
+            "breakpoint": "< 768px",
+            "navigation": "Hamburger menu",
+            "layout": "Single column",
+            "content_density": "낮음 (Progressive disclosure)"
+          }
+        },
+        "accessibilityConsiderations": {
+          "wcag_compliance": "WCAG 2.1 AA 준수",
+          "features": [
+            "Skip to content 링크",
+            "Keyboard navigation (Tab, Enter, Esc)",
+            "ARIA labels 및 roles",
+            "Alt text for images",
+            "Focus management (모달, 드롭다운 등)",
+            "Color contrast ratio > 4.5:1",
+            "Responsive text sizing"
+          ]
+        },
+        "futureExpansion": {
+          "planned_features": [
+            "블로그 섹션 추가",
+            "다국어 지원 (i18n)",
+            "검색 기능 고도화 (Algolia 등)",
+            "프로젝트 카테고리 확장",
+            "문서 버전 관리 시스템",
+            "댓글 및 피드백 기능 (선택)"
+          ],
+          "scalability": "문서 및 프로젝트 수가 증가해도 현재 IA 구조 유지 가능. 필요 시 하위 카테고리 추가로 대응."
+        }
+      },
+      "tags": ["information-architecture", "ia", "site-structure", "current-project"]
+    },
+    {
+      "id": "doc-current-04",
+      "type": "wireframe",
+      "title": "시니어 디자이너 포트폴리오 플랫폼 와이어프레임",
+      "version": "1.0",
+      "createdAt": "2025-12-28T00:00:00.000Z",
+      "updatedAt": "2025-12-28T00:00:00.000Z",
+      "pdfUrl": null,
+      "content": {
+        "introduction": {
+          "purpose": "시니어 디자이너 포트폴리오 플랫폼의 주요 화면에 대한 와이어프레임을 정의하여, UI 레이아웃 구조와 콘텐츠 배치를 명확히 합니다.",
+          "scope": "본 문서는 공개 영역(Public Area) 6개 페이지 및 관리자 영역(Admin Area) 2개 페이지의 와이어프레임을 텍스트 기반으로 상세히 기술합니다.",
+          "fidelity": "Low-fidelity 와이어프레임 (구조와 레이아웃 중심, 시각적 디자인 제외)",
+          "responsive_approach": "Desktop-first 접근법, 모바일 적응형 레이아웃 포함"
+        },
+        "designPrinciples": [
+          "명확한 시각적 계층: 중요한 정보를 우선적으로 배치",
+          "일관된 그리드 시스템: 전체 페이지에 걸쳐 12-column grid 사용",
+          "충분한 공백: 가독성과 집중도 향상을 위한 여백 확보",
+          "스캔 가능성: F-pattern 및 Z-pattern을 고려한 콘텐츠 배치",
+          "모바일 우선 사고: 모바일 화면에서도 핵심 정보 접근 보장"
+        ],
+        "wireframes": {
+          "public_area": [
+            {
+              "wireframe_id": "WF-PUB-01",
+              "page_name": "Home Page (/)",
+              "viewport": "Desktop (1440px)",
+              "description": "단일 페이지에 7개 섹션이 수직 스크롤로 배치된 홈페이지",
+              "layout": {
+                "header": {
+                  "position": "Fixed top (Sticky)",
+                  "height": "80px",
+                  "components": [
+                    {
+                      "element": "Logo / Name",
+                      "position": "Left (20% width)",
+                      "behavior": "클릭 시 페이지 최상단 스크롤"
+                    },
+                    {
+                      "element": "Navigation Menu",
+                      "position": "Right (60% width)",
+                      "items": ["Home", "Portfolio", "Documents", "Resume", "Contact"],
+                      "behavior": "Horizontal menu, 현재 섹션 하이라이트"
+                    },
+                    {
+                      "element": "Theme Toggle",
+                      "position": "Far right (10% width)",
+                      "behavior": "Light/Dark mode 전환"
+                    }
+                  ]
+                },
+                "sections": [
+                  {
+                    "section_id": "SEC-01",
+                    "name": "Hero Section",
+                    "height": "100vh (Full viewport height)",
+                    "layout_grid": "12-column",
+                    "components": [
+                      {
+                        "element": "Profile Image",
+                        "grid_position": "Columns 1-5 (Left)",
+                        "size": "400px x 400px",
+                        "style": "Holographic card effect"
+                      },
+                      {
+                        "element": "Text Content",
+                        "grid_position": "Columns 7-12 (Right)",
+                        "content": [
+                          "Name (H1, 48px)",
+                          "Job Title (H2, 32px)",
+                          "Tagline (P, 20px)",
+                          "CTA Button (Primary, 16px)"
+                        ]
+                      },
+                      {
+                        "element": "Animated Background",
+                        "position": "Full section background",
+                        "effect": "Pixel rain animation"
+                      }
+                    ]
+                  },
+                  {
+                    "section_id": "SEC-02",
+                    "name": "Resume Section",
+                    "height": "Auto (min 600px)",
+                    "layout_grid": "12-column",
+                    "components": [
+                      {
+                        "element": "Section Title",
+                        "grid_position": "Columns 1-12 (Full width)",
+                        "content": "Resume / 이력서 (H2, 40px)"
+                      },
+                      {
+                        "element": "Career Summary",
+                        "grid_position": "Columns 1-8",
+                        "content": ["총 경력 연수", "주요 역할", "핵심 성과"]
+                      },
+                      {
+                        "element": "PDF Download Button",
+                        "grid_position": "Columns 9-12",
+                        "size": "200px x 60px",
+                        "label": "이력서 다운로드 (PDF)"
+                      }
+                    ]
+                  },
+                  {
+                    "section_id": "SEC-03",
+                    "name": "Experience Section",
+                    "height": "Auto (min 800px)",
+                    "layout_grid": "12-column",
+                    "components": [
+                      {
+                        "element": "Section Title",
+                        "grid_position": "Columns 1-12",
+                        "content": "Experience / 경력 (H2, 40px)"
+                      },
+                      {
+                        "element": "Timeline",
+                        "grid_position": "Columns 2-11 (Centered)",
+                        "layout": "Vertical timeline",
+                        "items": [
+                          {
+                            "component": "Experience Card",
+                            "structure": [
+                              "Company Logo (Left, 80px x 80px)",
+                              "Company Name (H3, 28px)",
+                              "Period (P, 16px)",
+                              "Role (P, 18px)",
+                              "Achievements (UL, 14px)"
+                            ]
+                          }
+                        ],
+                        "repetition": "Multiple cards (5-10개)"
+                      }
+                    ]
+                  },
+                  {
+                    "section_id": "SEC-04",
+                    "name": "About Section",
+                    "height": "Auto (min 600px)",
+                    "layout_grid": "12-column",
+                    "components": [
+                      {
+                        "element": "Section Title",
+                        "grid_position": "Columns 1-12",
+                        "content": "About / 소개 (H2, 40px)"
+                      },
+                      {
+                        "element": "About Text",
+                        "grid_position": "Columns 1-7",
+                        "content": ["자기소개 (P, 16px)", "핵심 가치관 (P, 16px)"]
+                      },
+                      {
+                        "element": "Education",
+                        "grid_position": "Columns 8-12",
+                        "content": [
+                          "Education Title (H3, 24px)",
+                          "학교명 / 전공 (P, 16px)",
+                          "기간 (P, 14px)"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "section_id": "SEC-05",
+                    "name": "Portfolio Section",
+                    "height": "Auto (min 1000px)",
+                    "layout_grid": "12-column",
+                    "components": [
+                      {
+                        "element": "Section Title",
+                        "grid_position": "Columns 1-12",
+                        "content": "Portfolio / 포트폴리오 (H2, 40px)"
+                      },
+                      {
+                        "element": "Filter Tabs (선택)",
+                        "grid_position": "Columns 1-12",
+                        "items": ["All", "Mobile App", "Web", "IoT", "E-commerce"]
+                      },
+                      {
+                        "element": "Project Grid",
+                        "grid_position": "Columns 1-12",
+                        "layout": "3-column grid (각 4-column width)",
+                        "items": [
+                          {
+                            "component": "Project Card",
+                            "size": "400px x 300px",
+                            "structure": [
+                              "Thumbnail Image (Full card background)",
+                              "Gradient Overlay (Bottom)",
+                              "Project Title (H3, 24px)",
+                              "Company (P, 14px)",
+                              "Tags (Pills, 12px)"
+                            ],
+                            "hover_effect": "Holographic effect, scale 1.05"
+                          }
+                        ],
+                        "repetition": "6-9개 카드 (2-3 rows)"
+                      }
+                    ]
+                  },
+                  {
+                    "section_id": "SEC-06",
+                    "name": "Skills Section",
+                    "height": "Auto (min 700px)",
+                    "layout_grid": "12-column",
+                    "components": [
+                      {
+                        "element": "Section Title",
+                        "grid_position": "Columns 1-12",
+                        "content": "Skills / 기술 스택 (H2, 40px)"
+                      },
+                      {
+                        "element": "Skill Categories",
+                        "grid_position": "Columns 1-12",
+                        "layout": "2-column grid",
+                        "categories": [
+                          {
+                            "category": "Design Tools",
+                            "grid": "Columns 1-6",
+                            "items": ["Figma (90%)", "Sketch (85%)", "Adobe XD (80%)"]
+                          },
+                          {
+                            "category": "Prototyping",
+                            "grid": "Columns 7-12",
+                            "items": ["Principle (85%)", "ProtoPie (80%)", "Framer (75%)"]
+                          }
+                        ],
+                        "skill_display": "Skill name + Progress bar (Horizontal)"
+                      }
+                    ]
+                  },
+                  {
+                    "section_id": "SEC-07",
+                    "name": "Contact Section",
+                    "height": "Auto (min 500px)",
+                    "layout_grid": "12-column",
+                    "components": [
+                      {
+                        "element": "Section Title",
+                        "grid_position": "Columns 1-12",
+                        "content": "Contact / 연락처 (H2, 40px)"
+                      },
+                      {
+                        "element": "Contact Info",
+                        "grid_position": "Columns 1-6",
+                        "content": [
+                          "Email (Icon + Text)",
+                          "Phone (Icon + Text)",
+                          "Location (Icon + Text)"
+                        ]
+                      },
+                      {
+                        "element": "Social Links",
+                        "grid_position": "Columns 7-12",
+                        "layout": "Icon grid (4x2)",
+                        "items": ["LinkedIn", "Behance", "Dribbble", "GitHub", "Medium", "Twitter"]
+                      }
+                    ]
+                  }
+                ],
+                "footer": {
+                  "height": "100px",
+                  "components": [
+                    {
+                      "element": "Copyright",
+                      "position": "Center",
+                      "content": "© 2025 [Name]. All rights reserved."
+                    },
+                    {
+                      "element": "Footer Links",
+                      "position": "Right",
+                      "items": ["Privacy Policy", "Sitemap"]
+                    }
+                  ]
+                }
+              },
+              "mobile_adaptation": {
+                "viewport": "Mobile (375px)",
+                "changes": [
+                  "Header: Hamburger menu로 변환",
+                  "Hero: Single column, 이미지 상단 배치",
+                  "Portfolio Grid: 1-column (Full width cards)",
+                  "Skills: 1-column, 카테고리별 아코디언",
+                  "All sections: 패딩 축소 (20px)"
+                ]
+              }
+            },
+            {
+              "wireframe_id": "WF-PUB-02",
+              "page_name": "Portfolio Page (/portfolio)",
+              "viewport": "Desktop (1440px)",
+              "description": "전체 프로젝트 목록을 그리드로 표시하는 갤러리 페이지",
+              "layout": {
+                "header": "동일 (Sticky navigation)",
+                "main_content": {
+                  "page_title": {
+                    "grid_position": "Columns 1-12",
+                    "content": "Portfolio (H1, 56px)",
+                    "margin_bottom": "40px"
+                  },
+                  "filter_bar": {
+                    "grid_position": "Columns 1-12",
+                    "components": [
+                      {
+                        "element": "Category Tabs",
+                        "position": "Left",
+                        "items": ["All", "Mobile App", "Web", "IoT", "E-commerce", "Other"]
+                      },
+                      {
+                        "element": "Sort Dropdown",
+                        "position": "Right",
+                        "options": ["Latest", "Oldest", "Name (A-Z)"]
+                      }
+                    ]
+                  },
+                  "project_grid": {
+                    "grid_position": "Columns 1-12",
+                    "layout": "4-column grid (각 3-column width)",
+                    "card_size": "350px x 280px",
+                    "gap": "24px",
+                    "cards": "12-20개 프로젝트 카드"
+                  }
+                },
+                "footer": "동일"
+              }
+            },
+            {
+              "wireframe_id": "WF-PUB-03",
+              "page_name": "Project Detail Page (/portfolio/:projectId)",
+              "viewport": "Desktop (1440px)",
+              "description": "개별 프로젝트의 상세 정보를 표시하는 페이지",
+              "layout": {
+                "header": "동일 (Sticky navigation)",
+                "hero_section": {
+                  "height": "600px",
+                  "components": [
+                    {
+                      "element": "Hero Image",
+                      "position": "Full width background",
+                      "overlay": "Gradient overlay (Dark to transparent)"
+                    },
+                    {
+                      "element": "Project Title",
+                      "position": "Centered, bottom 100px",
+                      "content": "Project Name (H1, 64px, White)"
+                    },
+                    {
+                      "element": "Project Subtitle",
+                      "position": "Centered, below title",
+                      "content": "Subtitle (H2, 32px, White)"
+                    }
+                  ]
+                },
+                "project_info_section": {
+                  "grid_position": "Columns 2-11 (Centered)",
+                  "layout": "2-column",
+                  "components": [
+                    {
+                      "element": "Project Meta",
+                      "grid": "Columns 1-3",
+                      "content": [
+                        "Company (H3 + P)",
+                        "Year (H3 + P)",
+                        "Role (H3 + P)",
+                        "Tags (Pills)"
+                      ]
+                    },
+                    {
+                      "element": "Project Description",
+                      "grid": "Columns 4-12",
+                      "sections": [
+                        "Overview (H3 + P)",
+                        "Challenge (H3 + P)",
+                        "Solution (H3 + P)",
+                        "Results (H3 + UL)"
+                      ]
+                    }
+                  ]
+                },
+                "image_gallery_section": {
+                  "grid_position": "Columns 1-12",
+                  "layout": "Masonry grid or 2-column",
+                  "images": "5-10개 스크린샷/이미지",
+                  "image_size": "Variable (600px - 1200px width)",
+                  "lightbox": "클릭 시 확대 모달"
+                },
+                "navigation_section": {
+                  "grid_position": "Columns 1-12",
+                  "components": [
+                    {
+                      "element": "Previous Project Button",
+                      "position": "Left",
+                      "label": "← Previous Project"
+                    },
+                    {
+                      "element": "Back to Portfolio Button",
+                      "position": "Center",
+                      "label": "Back to Portfolio"
+                    },
+                    {
+                      "element": "Next Project Button",
+                      "position": "Right",
+                      "label": "Next Project →"
+                    }
+                  ]
+                },
+                "footer": "동일"
+              }
+            },
+            {
+              "wireframe_id": "WF-PUB-04",
+              "page_name": "Documents Page (/documents)",
+              "viewport": "Desktop (1440px)",
+              "description": "모든 문서를 타입별로 필터링하여 표시하는 페이지",
+              "layout": {
+                "header": "동일",
+                "main_content": {
+                  "page_title": {
+                    "grid_position": "Columns 1-12",
+                    "content": "Documents (H1, 56px)"
+                  },
+                  "filter_sidebar": {
+                    "grid_position": "Columns 1-3",
+                    "components": [
+                      {
+                        "element": "Document Type Filter",
+                        "items": [
+                          "All Documents",
+                          "개인 문서 (4)",
+                          "기획/디자인 문서 (4)",
+                          "PM 문서 (6)"
+                        ],
+                        "behavior": "Radio buttons, 선택 시 실시간 필터링"
+                      },
+                      {
+                        "element": "Search Box",
+                        "placeholder": "Search documents...",
+                        "behavior": "실시간 검색 (Debounced)"
+                      }
+                    ]
+                  },
+                  "document_grid": {
+                    "grid_position": "Columns 4-12",
+                    "layout": "3-column grid (각 3-column width)",
+                    "card_size": "350px x 200px",
+                    "cards": [
+                      {
+                        "component": "Document Card",
+                        "structure": [
+                          "Document Icon (Top, 64px)",
+                          "Document Title (H3, 20px)",
+                          "Document Type Badge (Pill, 12px)",
+                          "Last Updated (P, 12px, Gray)",
+                          "Download Button (Primary, Full width)"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "footer": "동일"
+              }
+            },
+            {
+              "wireframe_id": "WF-PUB-05",
+              "page_name": "Resume Page (/resume)",
+              "viewport": "Desktop (1440px)",
+              "description": "이력서 전체 내용을 표시하고 PDF 다운로드 기능을 제공하는 페이지",
+              "layout": {
+                "header": "동일",
+                "main_content": {
+                  "page_actions": {
+                    "grid_position": "Columns 1-12",
+                    "components": [
+                      {
+                        "element": "Page Title",
+                        "position": "Left",
+                        "content": "Resume / 이력서 (H1, 56px)"
+                      },
+                      {
+                        "element": "PDF Download Button",
+                        "position": "Right",
+                        "label": "Download PDF",
+                        "style": "Primary button, Icon + Text"
+                      }
+                    ]
+                  },
+                  "resume_content": {
+                    "grid_position": "Columns 3-10 (Centered, A4 비율)",
+                    "sections": [
+                      {
+                        "section": "Personal Info",
+                        "content": ["Name", "Contact", "Location"]
+                      },
+                      {
+                        "section": "Summary",
+                        "content": ["경력 요약 (3-4 문장)"]
+                      },
+                      {
+                        "section": "Experience",
+                        "content": ["회사별 경력 (최신순)", "각 항목: 회사명, 기간, 역할, 성과"]
+                      },
+                      {
+                        "section": "Education",
+                        "content": ["학력 정보"]
+                      },
+                      {
+                        "section": "Skills",
+                        "content": ["기술 스택 나열"]
+                      }
+                    ],
+                    "style": "인쇄 최적화 레이아웃 (깔끔한 타이포그래피)"
+                  }
+                },
+                "footer": "동일"
+              }
+            },
+            {
+              "wireframe_id": "WF-PUB-06",
+              "page_name": "Career Description Page (/career-description)",
+              "viewport": "Desktop (1440px)",
+              "description": "경력기술서를 프로젝트별로 상세히 표시하는 페이지",
+              "layout": {
+                "header": "동일",
+                "main_content": {
+                  "page_title": {
+                    "grid_position": "Columns 1-12",
+                    "content": "Career Description / 경력기술서 (H1, 56px)"
+                  },
+                  "content_area": {
+                    "grid_position": "Columns 2-11 (Centered)",
+                    "sections": [
+                      {
+                        "section": "프로젝트별 경력",
+                        "layout": "각 프로젝트를 카드 형태로 표시",
+                        "card_structure": [
+                          "프로젝트명 (H2)",
+                          "회사/기간 (P)",
+                          "역할 및 책임 (UL)",
+                          "주요 성과 (UL)",
+                          "사용 기술 (Pills)"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "footer": "동일"
+              }
+            }
+          ],
+          "admin_area": [
+            {
+              "wireframe_id": "WF-ADM-01",
+              "page_name": "Admin Login Page (/admin/login)",
+              "viewport": "Desktop (1440px)",
+              "description": "관리자 인증을 위한 로그인 페이지",
+              "layout": {
+                "centered_card": {
+                  "position": "Viewport center",
+                  "size": "500px x 600px",
+                  "components": [
+                    {
+                      "element": "Logo",
+                      "position": "Top center",
+                      "size": "100px x 100px"
+                    },
+                    {
+                      "element": "Page Title",
+                      "content": "Admin Login (H1, 32px)"
+                    },
+                    {
+                      "element": "Email Input",
+                      "label": "Email",
+                      "type": "text",
+                      "placeholder": "admin@example.com"
+                    },
+                    {
+                      "element": "Password Input",
+                      "label": "Password",
+                      "type": "password",
+                      "placeholder": "••••••••"
+                    },
+                    {
+                      "element": "Login Button",
+                      "style": "Primary, Full width",
+                      "label": "Log In"
+                    },
+                    {
+                      "element": "Error Message Area",
+                      "visibility": "Conditional (on error)",
+                      "style": "Red text, 14px"
+                    }
+                  ]
+                },
+                "background": "Gradient or subtle pattern"
+              }
+            },
+            {
+              "wireframe_id": "WF-ADM-02",
+              "page_name": "Admin Dashboard (/admin/dashboard)",
+              "viewport": "Desktop (1440px)",
+              "description": "11개 탭으로 구성된 관리자 대시보드",
+              "layout": {
+                "header": {
+                  "height": "80px",
+                  "components": [
+                    {
+                      "element": "Admin Logo",
+                      "position": "Left"
+                    },
+                    {
+                      "element": "Dashboard Title",
+                      "position": "Center-left",
+                      "content": "Admin Dashboard (H1, 24px)"
+                    },
+                    {
+                      "element": "User Info",
+                      "position": "Right",
+                      "content": "Admin Name + Avatar"
+                    },
+                    {
+                      "element": "Logout Button",
+                      "position": "Far right",
+                      "style": "Secondary button"
+                    }
+                  ]
+                },
+                "tab_navigation": {
+                  "position": "Below header",
+                  "height": "60px",
+                  "layout": "Horizontal scrollable tabs",
+                  "tabs": [
+                    "Profile",
+                    "Projects",
+                    "Experience",
+                    "Education",
+                    "Skills",
+                    "Documents",
+                    "Resume",
+                    "Career Description",
+                    "Cover Letter",
+                    "Design System",
+                    "Project Guide"
+                  ],
+                  "active_tab_style": "Underline, Bold, Primary color"
+                },
+                "tab_content_area": {
+                  "grid_position": "Columns 1-12",
+                  "padding": "40px",
+                  "example_tab": {
+                    "tab_name": "Projects Tab",
+                    "components": [
+                      {
+                        "element": "Tab Title",
+                        "content": "Manage Projects (H2, 32px)"
+                      },
+                      {
+                        "element": "Add New Button",
+                        "position": "Top right",
+                        "style": "Primary button",
+                        "label": "+ Add Project"
+                      },
+                      {
+                        "element": "Project List",
+                        "layout": "Table or Card list",
+                        "columns": ["Thumbnail", "Title", "Company", "Year", "Actions (Edit/Delete)"],
+                        "row_actions": ["Edit button", "Delete button", "Drag handle (for reordering)"]
+                      },
+                      {
+                        "element": "Edit Modal (on click)",
+                        "size": "800px x 900px (Modal overlay)",
+                        "form_fields": [
+                          "Title (Input)",
+                          "Subtitle (Input)",
+                          "Company (Input)",
+                          "Year (Input)",
+                          "Category (Dropdown)",
+                          "Description (Textarea)",
+                          "Tags (Multi-select)",
+                          "Image Upload (File input with preview)",
+                          "Gradient Colors (Color pickers x2)",
+                          "Save Button (Primary)",
+                          "Cancel Button (Secondary)"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "footer": "없음 (관리자 영역)"
+              },
+              "responsive_notes": "모바일: 탭 네비게이션 → 드롭다운 선택 방식으로 변환"
+            }
+          ]
+        },
+        "componentSpecifications": {
+          "buttons": {
+            "primary": {
+              "height": "48px",
+              "padding": "12px 24px",
+              "border_radius": "8px",
+              "font_size": "16px",
+              "font_weight": "600"
+            },
+            "secondary": {
+              "height": "48px",
+              "padding": "12px 24px",
+              "border_radius": "8px",
+              "font_size": "16px",
+              "font_weight": "500",
+              "style": "Outline or Ghost"
+            }
+          },
+          "cards": {
+            "project_card": {
+              "aspect_ratio": "4:3",
+              "border_radius": "12px",
+              "shadow": "0 4px 16px rgba(0,0,0,0.1)",
+              "hover_effect": "Scale 1.05, shadow increase"
+            },
+            "document_card": {
+              "aspect_ratio": "16:9",
+              "border_radius": "8px",
+              "shadow": "0 2px 8px rgba(0,0,0,0.08)"
+            }
+          },
+          "inputs": {
+            "text_input": {
+              "height": "48px",
+              "padding": "12px 16px",
+              "border_radius": "8px",
+              "border": "1px solid #E0E0E0",
+              "font_size": "16px"
+            },
+            "textarea": {
+              "min_height": "120px",
+              "padding": "12px 16px",
+              "border_radius": "8px",
+              "border": "1px solid #E0E0E0",
+              "font_size": "16px"
+            }
+          },
+          "typography": {
+            "h1": "56px / 700",
+            "h2": "40px / 700",
+            "h3": "28px / 600",
+            "h4": "24px / 600",
+            "body": "16px / 400",
+            "caption": "14px / 400"
+          },
+          "spacing": {
+            "section_padding": "80px (top/bottom), 120px (left/right)",
+            "card_gap": "24px",
+            "element_margin": "16px - 32px (depending on hierarchy)"
+          },
+          "grid": {
+            "columns": 12,
+            "gutter": "24px",
+            "max_width": "1440px",
+            "container_padding": "120px (Desktop), 40px (Tablet), 20px (Mobile)"
+          }
+        },
+        "interactionAnnotations": {
+          "hover_states": [
+            "Cards: Scale 1.05 + shadow increase",
+            "Buttons: Background color darken 10%",
+            "Links: Underline appear",
+            "Images: Slight zoom or overlay appearance"
+          ],
+          "click_actions": [
+            "프로젝트 카드 → /portfolio/:projectId 이동",
+            "문서 카드 → PDF 다운로드 또는 미리보기 모달",
+            "Navigation 링크 → 해당 페이지/섹션 이동",
+            "Admin Edit 버튼 → 편집 모달 열기"
+          ],
+          "animations": [
+            "페이지 로드: Fade-in (0.3s ease)",
+            "스크롤 섹션 진입: Fade-in from bottom (0.5s ease)",
+            "모달 열기/닫기: Scale + Fade (0.2s ease)",
+            "Holographic 효과: CSS gradient animation (continuous)"
+          ]
+        },
+        "responsiveBreakpoints": {
+          "desktop": "> 1024px (기본 와이어프레임)",
+          "tablet": "768px - 1024px (2-3 column grid, 패딩 축소)",
+          "mobile": "< 768px (Single column, Hamburger menu, 터치 최적화)"
+        },
+        "accessibilityNotes": [
+          "모든 인터랙티브 요소는 최소 44px x 44px 터치 영역 확보",
+          "포커스 표시: 2px solid outline",
+          "Skip to content 링크를 Header 최상단에 배치 (Tab 키로 첫 번째 접근)",
+          "이미지에 대체 텍스트 제공 (Alt text)",
+          "폼 필드에 명확한 레이블 연결"
+        ],
+        "notes": [
+          "본 와이어프레임은 Low-fidelity로, 실제 디자인 단계에서 색상, 타이포그래피, 이미지 등이 추가됩니다.",
+          "Holographic 효과 및 애니메이션은 High-fidelity 디자인 및 개발 단계에서 구현됩니다.",
+          "관리자 대시보드의 각 탭 콘텐츠는 유사한 패턴(리스트 + 편집 모달)을 따르므로, 대표 예시로 Projects 탭을 상세히 기술했습니다.",
+          "실제 구현 시 Flutter의 Responsive Framework 및 LayoutBuilder를 활용하여 반응형 레이아웃을 구현합니다."
+        ]
+      },
+      "tags": ["wireframe", "ui-design", "layout", "current-project"]
+    },
+    {
+      "id": "doc-plan-01",
+      "type": "requirements",
+      "title": "AIA+ SENIOR MODE 요구사항 정의서",
+      "version": "1.5",
+      "createdAt": "2025-02-01T00:00:00.000Z",
+      "updatedAt": "2025-02-28T00:00:00.000Z",
+      "tags": ["AIA+", "기획", "Requirements", "Specification"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "documentVersion": "1.5",
+        "author": "김시니어 (PM)",
+        "approver": "AIA 디지털본부장",
+        "lastUpdated": "2025-02-28",
+        "sections": [
+          {
+            "title": "1. 문서 개요",
+            "content": {
+              "purpose": "AIA+ 앱 고령자 전용 모드(SENIOR MODE)의 기능 및 비기능 요구사항을 상세히 정의하여 개발 및 디자인 방향성 제시",
+              "scope": "60세 이상 고령 사용자를 위한 전용 모드 전체 기능",
+              "targetUsers": "60세 이상 AIA+ 앱 사용자 (약 15만명 추정)",
+              "deliverables": ["기능 요구사항 명세", "비기능 요구사항 명세", "사용자 스토리", "인수 기준"]
+            }
+          },
+          {
+            "title": "2. 비즈니스 요구사항",
+            "requirements": [
+              {
+                "id": "BR-001",
+                "category": "비즈니스 목표",
+                "priority": "높음",
+                "requirement": "60세 이상 고령 고객의 AIA+ 앱 사용률을 현재 대비 30% 향상",
+                "rationale": "고령화 사회 진입으로 고령 고객 증가 추세. 디지털 금융 포용성 확대 필요",
+                "successCriteria": "SENIOR MODE 활성화 사용자 수 월 3만명 이상"
+              },
+              {
+                "id": "BR-002",
+                "category": "비즈니스 목표",
+                "priority": "높음",
+                "requirement": "고령 고객의 주요 업무(보험료 납입, 대출 상환) 완료율 50% 향상",
+                "rationale": "현재 고령 고객의 앱 내 업무 완료율 낮음 (평균 35%)",
+                "successCriteria": "SENIOR MODE 사용자의 업무 완료율 80% 이상"
+              },
+              {
+                "id": "BR-003",
+                "category": "사용성",
+                "priority": "높음",
+                "requirement": "고령 고객의 앱 사용 만족도 85% 이상 달성",
+                "rationale": "기존 앱에 대한 고령 고객 만족도 60% (낮음)",
+                "successCriteria": "사용자 테스트 만족도 85% 이상"
+              }
+            ]
+          },
+          {
+            "title": "3. 기능 요구사항",
+            "functionalRequirements": [
+              {
+                "id": "FR-001",
+                "feature": "SENIOR MODE 활성화/비활성화",
+                "priority": "필수",
+                "userStory": "60세 이상 사용자로서, 앱 설정에서 SENIOR MODE를 쉽게 활성화하여 큰 글씨와 단순한 화면을 사용하고 싶다.",
+                "acceptanceCriteria": [
+                  "설정 메뉴에서 SENIOR MODE ON/OFF 토글 제공",
+                  "활성화 시 즉시 화면 전환 (앱 재시작 불필요)",
+                  "설정 상태는 로컬에 저장되어 앱 종료 후에도 유지",
+                  "비활성화 시 일반 모드로 즉시 복귀"
+                ]
+              },
+              {
+                "id": "FR-002",
+                "feature": "SENIOR MODE 메인 화면",
+                "priority": "필수",
+                "userStory": "고령 사용자로서, 메인 화면에서 자주 사용하는 기능을 큰 위젯으로 한눈에 보고 쉽게 접근하고 싶다.",
+                "acceptanceCriteria": [
+                  "메인 화면에 4개 주요 위젯 표시 (보험료 납입, 보험금 청구, 계약 조회, 고객센터)",
+                  "각 위젯 크기: 최소 160dp 높이, 명확한 아이콘과 라벨",
+                  "터치 영역: 최소 48dp 이상",
+                  "위젯 간 간격: 16dp 이상 (오터치 방지)",
+                  "스크롤 가능한 수직 레이아웃"
+                ]
+              },
+              {
+                "id": "FR-003",
+                "feature": "보험료 납입",
+                "priority": "필수",
+                "userStory": "고령 사용자로서, 보험료를 쉽게 확인하고 간단한 단계로 납부하고 싶다.",
+                "acceptanceCriteria": [
+                  "납입 정보 확인 화면: 보험 상품명, 납입 금액(큰 글씨 28sp), 납입 기한 표시",
+                  "결제 수단 선택: 등록된 카드, 계좌이체, 간편결제 중 선택",
+                  "2단계 프로세스: 정보 확인 → 결제 (3단계 이상 금지)",
+                  "결제 완료 후 SMS/푸시 알림 발송",
+                  "납입 내역은 즉시 메인 화면 '최근 활동'에 표시"
+                ]
+              },
+              {
+                "id": "FR-004",
+                "feature": "보험계약대출 상환",
+                "priority": "필수",
+                "userStory": "고령 사용자로서, 현재 대출 잔액을 확인하고 원하는 금액만큼 쉽게 상환하고 싶다.",
+                "acceptanceCriteria": [
+                  "현재 대출 잔액, 월 이자 명확히 표시 (큰 글씨)",
+                  "상환 금액 직접 입력 또는 빠른 선택(50만원, 100만원, 전액 상환)",
+                  "입력 금액 > 대출 잔액 시 에러 메시지 표시",
+                  "상환 전 확인 다이얼로그 표시",
+                  "상환 완료 후 잔액 업데이트"
+                ]
+              },
+              {
+                "id": "FR-005",
+                "feature": "자동부활 신청",
+                "priority": "필수",
+                "userStory": "고령 사용자로서, 실효된 보험을 쉽게 이해하고 자동부활을 신청하고 싶다.",
+                "acceptanceCriteria": [
+                  "자동부활 제도 설명 카드 제공 (쉬운 언어)",
+                  "자동부활 가능 조건 체크리스트 표시",
+                  "실효된 보험 상품 선택 → 납부 금액 자동 계산",
+                  "2단계 프로세스: 조건 확인 → 신청",
+                  "신청 완료 후 AIA 담당자 연락 안내"
+                ]
+              },
+              {
+                "id": "FR-006",
+                "feature": "자동송금 신청",
+                "priority": "필수",
+                "userStory": "고령 사용자로서, 매월 보험료를 자동으로 이체하도록 설정하고 싶다.",
+                "acceptanceCriteria": [
+                  "은행 선택 (드롭다운: 주요 은행 10개)",
+                  "계좌번호 입력 (숫자 키패드 자동 표시)",
+                  "이체일 선택 (1일, 10일, 20일, 말일)",
+                  "이체 금액은 월 보험료로 자동 설정",
+                  "설정 완료 후 첫 이체일 안내"
+                ]
+              },
+              {
+                "id": "FR-007",
+                "feature": "접근성 지원",
+                "priority": "필수",
+                "userStory": "시력이 약한 고령 사용자로서, 스크린리더와 큰 글씨로 앱을 사용하고 싶다.",
+                "acceptanceCriteria": [
+                  "모든 UI 요소에 적절한 접근성 라벨 제공",
+                  "최소 글씨 크기 18sp (본문), 24sp (제목)",
+                  "색상 대비 4.5:1 이상 (WCAG 2.1 AA)",
+                  "터치 영역 최소 48dp",
+                  "키보드 네비게이션 지원",
+                  "스크린리더(TalkBack/VoiceOver) 완벽 지원"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "4. 비기능 요구사항",
+            "nonFunctionalRequirements": [
+              {
+                "id": "NFR-001",
+                "category": "성능",
+                "requirement": "화면 로딩 시간 2초 이내",
+                "priority": "높음",
+                "acceptanceCriteria": "모든 화면 로딩 시간 2초 이내 (Wi-Fi 환경)"
+              },
+              {
+                "id": "NFR-002",
+                "category": "성능",
+                "requirement": "API 응답 시간 1초 이내",
+                "priority": "높음",
+                "acceptanceCriteria": "보험료 조회, 납입, 상환 등 모든 API 호출 1초 이내 응답"
+              },
+              {
+                "id": "NFR-003",
+                "category": "사용성",
+                "requirement": "3단계 이상 깊이 금지",
+                "priority": "필수",
+                "acceptanceCriteria": "모든 기능은 메인 화면에서 최대 2단계 이내 접근"
+              },
+              {
+                "id": "NFR-004",
+                "category": "사용성",
+                "requirement": "오류 메시지 명확성",
+                "priority": "높음",
+                "acceptanceCriteria": "모든 오류 메시지는 고령 사용자가 이해 가능한 쉬운 한글로 표시"
+              },
+              {
+                "id": "NFR-005",
+                "category": "접근성",
+                "requirement": "WCAG 2.1 AA 준수",
+                "priority": "필수",
+                "acceptanceCriteria": "색상 대비, 키보드 네비게이션, 스크린리더 지원 100% 준수"
+              },
+              {
+                "id": "NFR-006",
+                "category": "보안",
+                "requirement": "생체 인증 지원",
+                "priority": "중간",
+                "acceptanceCriteria": "결제 시 지문인식 또는 얼굴인식 옵션 제공"
+              },
+              {
+                "id": "NFR-007",
+                "category": "보안",
+                "requirement": "개인정보 암호화",
+                "priority": "필수",
+                "acceptanceCriteria": "모든 개인정보(주민번호, 계좌번호)는 AES-256 암호화 전송/저장"
+              },
+              {
+                "id": "NFR-008",
+                "category": "호환성",
+                "requirement": "플랫폼 지원",
+                "priority": "필수",
+                "acceptanceCriteria": "iOS 14.0+, Android 9.0+ 지원"
+              },
+              {
+                "id": "NFR-009",
+                "category": "가용성",
+                "requirement": "서비스 가용성 99.9%",
+                "priority": "높음",
+                "acceptanceCriteria": "월간 다운타임 43분 이내"
+              }
+            ]
+          },
+          {
+            "title": "5. 제약사항",
+            "constraints": [
+              {
+                "type": "기술",
+                "constraint": "기존 AIA+ 앱 플랫폼 내에서 구현 (별도 앱 개발 불가)",
+                "impact": "기존 앱 아키텍처와 호환 필수"
+              },
+              {
+                "type": "일정",
+                "constraint": "2025년 6월 30일까지 완료",
+                "impact": "기능 범위 조정 필요 시 Phase 2 이관"
+              },
+              {
+                "type": "예산",
+                "constraint": "총 예산 1억 5천만 원 이내",
+                "impact": "외부 인력 투입 제한"
+              },
+              {
+                "type": "인력",
+                "constraint": "디자이너 2명, PM 1명",
+                "impact": "작업 우선순위 명확화 필요"
+              },
+              {
+                "type": "규제",
+                "constraint": "개인정보보호법, 금융감독 규정 준수",
+                "impact": "보안 요구사항 강화"
+              }
+            ]
+          },
+          {
+            "title": "6. 가정사항",
+            "assumptions": [
+              "60세 이상 사용자 10명 이상 사용자 테스트 참여 가능",
+              "AIA 내부 개발팀의 디자인 구현 능력 충분",
+              "기존 AIA+ 앱 API 활용 가능",
+              "Figma 협업 환경 원활히 제공",
+              "요구사항 변경 시 일정 조정 가능"
+            ]
+          },
+          {
+            "title": "7. 의존성",
+            "dependencies": [
+              {
+                "dependency": "AIA 백엔드 API",
+                "description": "보험료 조회, 납입, 대출 상환 등 모든 기능은 AIA 백엔드 API 의존",
+                "riskLevel": "높음",
+                "mitigation": "API 스펙 사전 확인 및 Mock API 준비"
+              },
+              {
+                "dependency": "결제 게이트웨이",
+                "description": "보험료 납입 시 외부 PG사 연동 필요",
+                "riskLevel": "중간",
+                "mitigation": "기존 AIA+ 앱 결제 시스템 재사용"
+              },
+              {
+                "dependency": "생체 인증 SDK",
+                "description": "지문/얼굴 인식 기능은 플랫폼 SDK 의존",
+                "riskLevel": "낮음",
+                "mitigation": "Flutter 표준 라이브러리 사용"
+              }
+            ]
+          },
+          {
+            "title": "8. 향후 확장 계획 (Phase 2)",
+            "futureEnhancements": [
+              "다크모드 지원",
+              "음성 안내 기능 (TTS)",
+              "화상 상담 기능",
+              "건강 체크업 연동",
+              "가족 공유 기능 (자녀가 부모 계약 관리)"
+            ]
+          },
+          {
+            "title": "9. 인수 기준",
+            "acceptanceCriteria": [
+              "모든 필수(Must) 기능 요구사항 100% 구현",
+              "WCAG 2.1 AA 접근성 기준 100% 준수",
+              "사용자 테스트 만족도 85% 이상",
+              "주요 기능 API 응답 시간 1초 이내",
+              "클라이언트 최종 승인 획득"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc-plan-02",
+      "type": "userFlow",
+      "title": "AIA+ SENIOR MODE 사용자 플로우",
+      "version": "1.2",
+      "createdAt": "2025-02-15T00:00:00.000Z",
+      "updatedAt": "2025-03-10T00:00:00.000Z",
+      "tags": ["AIA+", "기획", "User Flow", "Journey"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "documentVersion": "1.2",
+        "author": "김시니어",
+        "lastUpdated": "2025-03-10",
+        "flows": [
+          {
+            "flowId": "UF-001",
+            "flowName": "SENIOR MODE 최초 활성화",
+            "persona": "김영수 (65세, 스마트폰 초보)",
+            "scenario": "처음으로 AIA+ 앱을 설치한 김영수씨가 SENIOR MODE를 활성화하는 과정",
+            "steps": [
+              {
+                "stepNumber": 1,
+                "screen": "앱 첫 실행",
+                "userAction": "AIA+ 앱 아이콘 터치",
+                "systemResponse": "스플래시 화면 표시 (2초) → 일반 메인 화면 진입",
+                "emotionalState": "설렘, 약간의 긴장"
+              },
+              {
+                "stepNumber": 2,
+                "screen": "일반 메인 화면",
+                "userAction": "화면을 보며 당황 (글씨가 작고 메뉴가 많음)",
+                "systemResponse": "우측 상단 '설정' 아이콘 표시",
+                "emotionalState": "당황, 불편함",
+                "painPoint": "글씨가 작아서 읽기 어려움, 어디를 눌러야 할지 모르겠음"
+              },
+              {
+                "stepNumber": 3,
+                "screen": "일반 메인 화면",
+                "userAction": "'설정' 아이콘 터치 (우측 상단)",
+                "systemResponse": "설정 메뉴 화면으로 이동",
+                "emotionalState": "약간의 안도감"
+              },
+              {
+                "stepNumber": 4,
+                "screen": "설정 메뉴",
+                "userAction": "메뉴 목록에서 'SENIOR MODE' 항목 발견",
+                "systemResponse": "'SENIOR MODE' 토글 스위치 표시 (OFF 상태)",
+                "emotionalState": "흥미, 기대",
+                "insight": "'시니어 모드'라는 명확한 이름이 고령 사용자의 주목을 끔"
+              },
+              {
+                "stepNumber": 5,
+                "screen": "설정 메뉴",
+                "userAction": "'SENIOR MODE' 토글 ON",
+                "systemResponse": "확인 다이얼로그 표시: '큰 글씨와 단순한 화면으로 변경됩니다. 계속하시겠습니까?'",
+                "emotionalState": "확신"
+              },
+              {
+                "stepNumber": 6,
+                "screen": "확인 다이얼로그",
+                "userAction": "'확인' 버튼 터치",
+                "systemResponse": "즉시 SENIOR MODE 메인 화면으로 전환 (애니메이션 0.3초)",
+                "emotionalState": "만족, 안도"
+              },
+              {
+                "stepNumber": 7,
+                "screen": "SENIOR MODE 메인 화면",
+                "userAction": "큰 글씨와 명확한 위젯 확인",
+                "systemResponse": "4개 위젯 표시 (보험료 납입, 보험금 청구, 계약 조회, 고객센터)",
+                "emotionalState": "만족, 자신감",
+                "successMetric": "사용자가 '이제 사용할 수 있겠다'고 느낌"
+              }
+            ],
+            "successCriteria": "SENIOR MODE 활성화 완료율 95% 이상",
+            "averageTime": "60초"
+          },
+          {
+            "flowId": "UF-002",
+            "flowName": "보험료 납입 (Happy Path)",
+            "persona": "이순자 (62세, 스마트폰 중급)",
+            "scenario": "이순자씨가 월 보험료를 납부하는 과정",
+            "steps": [
+              {
+                "stepNumber": 1,
+                "screen": "SENIOR MODE 메인 화면",
+                "userAction": "'보험료 납입' 위젯 터치",
+                "systemResponse": "보험료 납입 화면으로 이동",
+                "emotionalState": "평온"
+              },
+              {
+                "stepNumber": 2,
+                "screen": "납입 정보 확인",
+                "userAction": "보험 상품명, 납입 금액, 기한 확인",
+                "systemResponse": "정보 표시: '건강보험 Plus / 150,000원 / 2025.06.30'",
+                "emotionalState": "확인 중",
+                "insight": "금액이 큰 글씨(28sp)로 강조되어 한눈에 들어옴"
+              },
+              {
+                "stepNumber": 3,
+                "screen": "납입 정보 확인",
+                "userAction": "'다음' 버튼 터치",
+                "systemResponse": "결제 수단 선택 화면으로 이동",
+                "emotionalState": "진행 중"
+              },
+              {
+                "stepNumber": 4,
+                "screen": "결제 수단 선택",
+                "userAction": "'등록 카드 (****1234)' 선택",
+                "systemResponse": "선택된 카드 하이라이트 표시",
+                "emotionalState": "확신"
+              },
+              {
+                "stepNumber": 5,
+                "screen": "결제 수단 선택",
+                "userAction": "'즉시 납부' 버튼 터치",
+                "systemResponse": "로딩 인디케이터 표시 (1초) → 결제 API 호출",
+                "emotionalState": "기대"
+              },
+              {
+                "stepNumber": 6,
+                "screen": "납입 완료",
+                "userAction": "완료 화면 확인",
+                "systemResponse": "성공 메시지: '보험료 납입이 완료되었습니다.' + 납입 영수증 표시",
+                "emotionalState": "만족, 성취감",
+                "successMetric": "사용자가 '간단하다'고 느낌"
+              },
+              {
+                "stepNumber": 7,
+                "screen": "납입 완료",
+                "userAction": "'확인' 버튼 터치",
+                "systemResponse": "메인 화면으로 복귀, '최근 활동'에 납입 내역 표시",
+                "emotionalState": "안도"
+              }
+            ],
+            "successCriteria": "보험료 납입 완료율 90% 이상",
+            "averageTime": "45초",
+            "alternativeFlows": [
+              {
+                "condition": "결제 실패",
+                "steps": [
+                  "결제 API 호출 실패",
+                  "에러 메시지 표시: '결제에 실패했습니다. 카드 정보를 확인해주세요.'",
+                  "'다시 시도' 또는 '취소' 버튼 제공"
+                ]
+              }
+            ]
+          },
+          {
+            "flowId": "UF-003",
+            "flowName": "보험계약대출 상환",
+            "persona": "박철수 (68세, 스마트폰 초보)",
+            "scenario": "박철수씨가 대출 100만원을 상환하는 과정",
+            "steps": [
+              {
+                "stepNumber": 1,
+                "screen": "SENIOR MODE 메인 화면",
+                "userAction": "'계약 조회' 위젯 터치 → '대출 상환' 선택",
+                "systemResponse": "대출 상환 화면으로 이동",
+                "emotionalState": "목적 지향적"
+              },
+              {
+                "stepNumber": 2,
+                "screen": "대출 정보 확인",
+                "userAction": "현재 대출 잔액, 월 이자 확인",
+                "systemResponse": "정보 표시: '대출 잔액 5,000,000원 / 월 이자 15,000원'",
+                "emotionalState": "정보 파악 중"
+              },
+              {
+                "stepNumber": 3,
+                "screen": "상환 금액 입력",
+                "userAction": "'100만원' 빠른 선택 버튼 터치",
+                "systemResponse": "상환 금액 입력 필드에 '1,000,000원' 자동 입력",
+                "emotionalState": "편리함 느낌",
+                "insight": "직접 입력 대신 빠른 선택 버튼이 고령 사용자에게 편리"
+              },
+              {
+                "stepNumber": 4,
+                "screen": "상환 금액 입력",
+                "userAction": "'상환하기' 버튼 터치",
+                "systemResponse": "확인 다이얼로그: '1,000,000원을 상환하시겠습니까?'",
+                "emotionalState": "신중함"
+              },
+              {
+                "stepNumber": 5,
+                "screen": "확인 다이얼로그",
+                "userAction": "'확인' 버튼 터치",
+                "systemResponse": "로딩 → 상환 API 호출 → 완료 화면",
+                "emotionalState": "기대"
+              },
+              {
+                "stepNumber": 6,
+                "screen": "상환 완료",
+                "userAction": "완료 화면 확인",
+                "systemResponse": "'상환이 완료되었습니다. 남은 잔액: 4,000,000원'",
+                "emotionalState": "만족",
+                "successMetric": "사용자가 잔액 감소를 명확히 인지"
+              }
+            ],
+            "successCriteria": "대출 상환 완료율 85% 이상",
+            "averageTime": "50초"
+          },
+          {
+            "flowId": "UF-004",
+            "flowName": "자동부활 신청",
+            "persona": "최명희 (63세, 스마트폰 중급)",
+            "scenario": "실효된 보험을 자동부활 신청하는 과정",
+            "steps": [
+              {
+                "stepNumber": 1,
+                "screen": "SENIOR MODE 메인 화면",
+                "userAction": "'계약 조회' 위젯 → '자동부활 신청' 선택",
+                "systemResponse": "자동부활 신청 화면으로 이동",
+                "emotionalState": "불안, 궁금증",
+                "painPoint": "'자동부활'이 무엇인지 모름"
+              },
+              {
+                "stepNumber": 2,
+                "screen": "자동부활 조건 확인",
+                "userAction": "Info Card 읽기: '자동부활이란? 보험료 미납으로 실효된 계약을 자동으로 부활시키는 제도입니다.'",
+                "systemResponse": "쉬운 설명 + 조건 체크리스트 표시",
+                "emotionalState": "이해, 안도",
+                "insight": "복잡한 보험 용어를 쉬운 언어로 설명하는 것이 중요"
+              },
+              {
+                "stepNumber": 3,
+                "screen": "자동부활 조건 확인",
+                "userAction": "체크리스트 확인 후 '다음' 터치",
+                "systemResponse": "신청 정보 입력 화면으로 이동",
+                "emotionalState": "진행 의지"
+              },
+              {
+                "stepNumber": 4,
+                "screen": "신청 정보 입력",
+                "userAction": "보험 상품 선택 (드롭다운에서 '건강보험 Plus')",
+                "systemResponse": "납부 금액 자동 계산 API 호출 → '350,000원' 표시",
+                "emotionalState": "확인 중"
+              },
+              {
+                "stepNumber": 5,
+                "screen": "신청 정보 입력",
+                "userAction": "'신청하기' 버튼 터치",
+                "systemResponse": "신청 API 호출 → 완료 화면",
+                "emotionalState": "기대"
+              },
+              {
+                "stepNumber": 6,
+                "screen": "신청 완료",
+                "userAction": "완료 화면 확인",
+                "systemResponse": "'신청이 완료되었습니다. 담당자가 1~2일 내 연락드립니다.'",
+                "emotionalState": "안도, 만족",
+                "successMetric": "다음 단계(담당자 연락) 명확히 안내"
+              }
+            ],
+            "successCriteria": "자동부활 신청 완료율 80% 이상",
+            "averageTime": "70초"
+          }
+        ],
+        "keyInsights": [
+          "고령 사용자는 '단순함'을 가장 중요하게 생각함. 2단계 이내 프로세스가 이상적",
+          "복잡한 금융 용어(자동부활, 보험계약대출 등)는 쉬운 설명 필수",
+          "빠른 선택 버튼(50만원, 100만원 등)이 직접 입력보다 훨씬 편리",
+          "완료 화면에서 '다음 단계' 명확히 안내하면 불안감 감소",
+          "에러 발생 시 '무엇이 잘못되었는지', '어떻게 해결하는지' 명확한 메시지 필요"
+        ]
+      }
+    },
+    {
+      "id": "doc-plan-03",
+      "type": "informationArchitecture",
+      "title": "AIA+ SENIOR MODE 정보구조도 (IA)",
+      "version": "1.0",
+      "createdAt": "2025-02-20T00:00:00.000Z",
+      "updatedAt": "2025-02-20T00:00:00.000Z",
+      "tags": ["AIA+", "기획", "IA", "Sitemap"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "documentVersion": "1.0",
+        "author": "김시니어",
+        "lastUpdated": "2025-02-20",
+        "principles": [
+          "최대 깊이 3단계 이내 (메인 → 기능 → 완료)",
+          "메인 화면에서 모든 주요 기능 1터치 접근",
+          "위젯 기반 대형 아이콘으로 시각적 인지 강화",
+          "일관된 네비게이션 패턴 (뒤로가기 항상 좌측 상단)"
+        ],
+        "structure": {
+          "level1": {
+            "name": "SENIOR MODE 메인 화면",
+            "description": "고령자 전용 홈 대시보드",
+            "components": [
+              "헤더 (환영 메시지, 설정)",
+              "주요 위젯 4개 (보험료 납입, 보험금 청구, 계약 조회, 고객센터)",
+              "최근 활동 (최근 거래 내역 3개)"
+            ],
+            "level2": [
+              {
+                "name": "보험료 납입",
+                "description": "보험료 납부 기능",
+                "navigation": "위젯 터치",
+                "level3": [
+                  {"name": "납입 정보 확인", "type": "정보 화면"},
+                  {"name": "결제 수단 선택", "type": "입력 화면"},
+                  {"name": "납입 완료", "type": "결과 화면"}
+                ]
+              },
+              {
+                "name": "보험금 청구",
+                "description": "보험금 청구 신청",
+                "navigation": "위젯 터치",
+                "level3": [
+                  {"name": "청구 대상 선택", "type": "선택 화면"},
+                  {"name": "서류 업로드", "type": "입력 화면"},
+                  {"name": "청구 완료", "type": "결과 화면"}
+                ]
+              },
+              {
+                "name": "계약 조회",
+                "description": "보험 계약 정보 확인 및 관리",
+                "navigation": "위젯 터치",
+                "level3": [
+                  {"name": "보험계약대출 상환", "type": "기능 화면"},
+                  {"name": "자동부활 신청", "type": "기능 화면"},
+                  {"name": "자동송금 신청", "type": "기능 화면"}
+                ]
+              },
+              {
+                "name": "고객센터",
+                "description": "상담 및 문의",
+                "navigation": "위젯 터치",
+                "level3": [
+                  {"name": "전화 상담", "type": "액션 (전화 앱 호출)"},
+                  {"name": "1:1 문의", "type": "입력 화면"},
+                  {"name": "자주 묻는 질문", "type": "정보 화면"}
+                ]
+              }
+            ]
+          },
+          "globalNavigation": {
+            "header": {
+              "left": "뒤로가기 (←)",
+              "center": "화면 제목",
+              "right": "설정 (⚙)"
+            },
+            "settings": {
+              "options": [
+                "SENIOR MODE ON/OFF",
+                "알림 설정",
+                "계정 정보",
+                "앱 정보",
+                "로그아웃"
+              ]
+            }
+          }
+        },
+        "contentInventory": {
+          "totalScreens": 13,
+          "screensByType": {
+            "메인": 1,
+            "정보 화면": 4,
+            "입력 화면": 5,
+            "결과 화면": 3
+          }
+        },
+        "navigationPatterns": {
+          "forward": "위젯 터치 → 기능 화면",
+          "backward": "헤더 좌측 '← 뒤로가기' 또는 Android 시스템 백 버튼",
+          "home": "Android 홈 버튼 → 앱 종료 후 재진입 시 SENIOR MODE 메인 화면"
+        }
+      }
+    },
+    {
+      "id": "doc-plan-04",
+      "type": "wireframe",
+      "title": "AIA+ SENIOR MODE 와이어프레임",
+      "version": "1.0",
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "updatedAt": "2025-03-01T00:00:00.000Z",
+      "tags": ["AIA+", "기획", "Wireframe", "Low-Fi"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "documentVersion": "1.0",
+        "author": "김시니어",
+        "lastUpdated": "2025-03-01",
+        "wireframeType": "Low-Fidelity (구조 중심)",
+        "tool": "Figma",
+        "wireframes": [
+          {
+            "wireframeId": "WF-001",
+            "screenName": "SENIOR MODE 메인 화면",
+            "description": "고령자 전용 홈 대시보드. 큰 위젯 4개로 주요 기능 노출",
+            "layout": {
+              "header": {
+                "height": "80dp",
+                "left": "[빈 공간]",
+                "center": "안녕하세요, OOO님 (18sp)",
+                "right": "[⚙ 설정 아이콘]"
+              },
+              "body": {
+                "type": "Vertical Scroll",
+                "padding": "24dp",
+                "sections": [
+                  {
+                    "name": "주요 위젯",
+                    "widgets": [
+                      {
+                        "id": "widget-1",
+                        "label": "보험료 납입",
+                        "icon": "[💳 아이콘]",
+                        "size": "328dp × 160dp",
+                        "description": "이번 달 보험료를 납부하세요"
+                      },
+                      {
+                        "id": "widget-2",
+                        "label": "보험금 청구",
+                        "icon": "[📄 아이콘]",
+                        "size": "328dp × 160dp",
+                        "description": "보험금을 청구하세요"
+                      },
+                      {
+                        "id": "widget-3",
+                        "label": "계약 조회",
+                        "icon": "[📋 아이콘]",
+                        "size": "328dp × 160dp",
+                        "description": "내 보험 계약을 확인하세요"
+                      },
+                      {
+                        "id": "widget-4",
+                        "label": "고객센터",
+                        "icon": "[☎ 아이콘]",
+                        "size": "328dp × 160dp",
+                        "description": "상담이 필요하신가요?"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "최근 활동",
+                    "content": [
+                      "[거래 1] 2025.06.20 보험료 납입 150,000원",
+                      "[거래 2] 2025.05.20 보험료 납입 150,000원",
+                      "[거래 3] 2025.04.20 보험료 납입 150,000원"
+                    ]
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              "위젯 간 간격 16dp 확보 (오터치 방지)",
+              "아이콘 크기 48dp (시인성 확보)",
+              "위젯 라벨 24sp Bold, 설명 16sp Regular"
+            ]
+          },
+          {
+            "wireframeId": "WF-002",
+            "screenName": "보험료 납입 - 정보 확인",
+            "description": "납입할 보험료 정보 확인 화면",
+            "layout": {
+              "header": {
+                "left": "[← 뒤로가기]",
+                "center": "보험료 납입 (20sp Bold)",
+                "right": "[빈 공간]"
+              },
+              "body": {
+                "type": "Single Scroll",
+                "sections": [
+                  {
+                    "name": "스텝 인디케이터",
+                    "content": "[●○] 1/2 (18sp)"
+                  },
+                  {
+                    "name": "납입 정보",
+                    "fields": [
+                      {"label": "보험 상품 (18sp)", "value": "건강보험 Plus (18sp)"},
+                      {"label": "납입 금액 (18sp)", "value": "150,000원 (28sp Bold Primary)"},
+                      {"label": "납입 기한 (18sp)", "value": "2025.06.30 (18sp)"}
+                    ]
+                  },
+                  {
+                    "name": "액션",
+                    "button": "[다음] Primary Button (Full Width × 56dp, 20sp Bold)"
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              "납입 금액을 큰 글씨로 강조 (28sp)",
+              "Primary Color로 시선 유도",
+              "버튼은 항상 화면 하단 고정"
+            ]
+          },
+          {
+            "wireframeId": "WF-003",
+            "screenName": "보험료 납입 - 결제 수단",
+            "description": "결제 수단 선택 및 납부 실행",
+            "layout": {
+              "header": {
+                "left": "[← 뒤로가기]",
+                "center": "보험료 납입 (20sp Bold)",
+                "right": "[빈 공간]"
+              },
+              "body": {
+                "sections": [
+                  {
+                    "name": "스텝 인디케이터",
+                    "content": "[●●] 2/2 (18sp)"
+                  },
+                  {
+                    "name": "결제 수단 선택",
+                    "type": "Radio Group",
+                    "options": [
+                      "[○] 등록 카드 (****1234) (18sp)",
+                      "[○] 계좌이체 (18sp)",
+                      "[○] 간편결제 (18sp)"
+                    ]
+                  },
+                  {
+                    "name": "액션",
+                    "button": "[즉시 납부] Primary Button (Full Width × 56dp, 20sp Bold)"
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              "라디오 버튼 크기 24dp (터치 용이)",
+              "선택된 옵션은 Primary Color로 강조",
+              "버튼 활성화 조건: 결제 수단 선택 시"
+            ]
+          },
+          {
+            "wireframeId": "WF-004",
+            "screenName": "보험계약대출 상환",
+            "description": "대출 잔액 확인 및 상환 금액 입력",
+            "layout": {
+              "header": {
+                "left": "[← 뒤로가기]",
+                "center": "대출 상환 (20sp Bold)",
+                "right": "[빈 공간]"
+              },
+              "body": {
+                "sections": [
+                  {
+                    "name": "대출 정보",
+                    "fields": [
+                      {"label": "현재 대출 잔액 (18sp)", "value": "5,000,000원 (28sp Bold)"},
+                      {"label": "월 이자 (18sp)", "value": "15,000원 (18sp)"}
+                    ]
+                  },
+                  {
+                    "name": "상환 금액 입력",
+                    "components": [
+                      {"type": "Number Input Field", "placeholder": "금액을 입력하세요 (20sp)", "height": "64dp"},
+                      {"type": "Chip Group", "chips": ["[50만원]", "[100만원]", "[전액 상환]"]}
+                    ]
+                  },
+                  {
+                    "name": "액션",
+                    "button": "[상환하기] Primary Button (Full Width × 56dp, 20sp Bold)"
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              "Chip 버튼 터치 시 입력 필드에 자동 입력",
+              "입력 금액 > 잔액 시 에러 메시지 표시 (빨간색)",
+              "숫자 입력 시 천 단위 콤마 자동 표시"
+            ]
+          },
+          {
+            "wireframeId": "WF-005",
+            "screenName": "완료 화면 (공통)",
+            "description": "모든 액션 완료 후 표시되는 결과 화면",
+            "layout": {
+              "header": {
+                "left": "[빈 공간]",
+                "center": "완료 (20sp Bold)",
+                "right": "[✕ 닫기]"
+              },
+              "body": {
+                "type": "Center Aligned",
+                "sections": [
+                  {
+                    "name": "성공 아이콘",
+                    "content": "[✓ 초록색 체크 아이콘] (80dp)"
+                  },
+                  {
+                    "name": "완료 메시지",
+                    "content": "보험료 납입이 완료되었습니다. (20sp Bold)"
+                  },
+                  {
+                    "name": "상세 정보",
+                    "fields": [
+                      {"label": "납입 금액", "value": "150,000원"},
+                      {"label": "납입 일시", "value": "2025.06.20 14:23"}
+                    ]
+                  },
+                  {
+                    "name": "액션",
+                    "button": "[확인] Primary Button (Full Width × 56dp, 20sp Bold)"
+                  }
+                ]
+              }
+            },
+            "annotations": [
+              "성공 아이콘으로 시각적 피드백 강화",
+              "'확인' 버튼 터치 시 메인 화면으로 복귀",
+              "완료 내역은 '최근 활동'에 자동 추가"
+            ]
+          }
+        ],
+        "designDecisions": [
+          {
+            "decision": "2단계 프로세스 원칙",
+            "rationale": "고령 사용자는 3단계 이상의 복잡한 절차를 어려워함. 모든 기능을 2단계 이내로 제한",
+            "impact": "사용성 대폭 향상, 완료율 증가"
+          },
+          {
+            "decision": "빠른 선택 버튼 (Chip)",
+            "rationale": "직접 입력보다 선택하는 것이 고령 사용자에게 편리",
+            "impact": "입력 오류 감소, 작업 시간 단축"
+          },
+          {
+            "decision": "큰 버튼 (56dp 높이)",
+            "rationale": "터치 정확도 향상, 오터치 방지",
+            "impact": "사용자 만족도 증가"
+          },
+          {
+            "decision": "명확한 피드백 (완료 화면)",
+            "rationale": "고령 사용자는 작업 완료 여부를 명확히 확인하고 싶어함",
+            "impact": "불안감 감소, 신뢰도 증가"
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc-current-01",
+      "type": "requirements",
+      "title": "시니어 디자이너 포트폴리오 플랫폼 요구사항 정의서",
+      "version": "1.0",
+      "createdAt": "2024-12-01T00:00:00.000Z",
+      "updatedAt": "2024-12-28T00:00:00.000Z",
+      "tags": ["Portfolio", "기획", "Requirements", "Flutter"],
+      "content": {
+        "projectName": "Senior Designer Portfolio Platform",
+        "projectDescription": "시니어 프로덕트 디자이너의 경력, 프로젝트, 문서를 체계적으로 관리하고 전시하는 웹/앱 통합 포트폴리오 플랫폼",
+        "documentVersion": "1.0",
+        "author": "김시니어 (Senior Product Designer)",
+        "lastUpdated": "2024-12-28",
+        "sections": [
+          {
+            "title": "1. 프로젝트 개요",
+            "content": {
+              "purpose": "시니어 디자이너의 전문성과 경력을 효과적으로 전달하고, 취업 담당자가 포트폴리오를 체계적으로 탐색할 수 있는 플랫폼 구축",
+              "scope": "개인 포트폴리오 웹사이트 + 관리자 CMS + 문서 관리 시스템",
+              "targetUsers": [
+                "1차 사용자: 취업 담당자, 리크루터, 채용 매니저",
+                "2차 사용자: 시니어 디자이너 본인 (콘텐츠 관리)",
+                "3차 사용자: 동료 디자이너, 업계 관계자"
+              ],
+              "technicalStack": {
+                "frontend": "Flutter (Web/Desktop/Mobile)",
+                "stateManagement": "Riverpod 2.5.1",
+                "routing": "GoRouter 14.2.7",
+                "backend": "Dart Shelf Server (localhost:8080)",
+                "database": "JSON File Storage",
+                "pdfGeneration": "pdf 3.11.1, printing 5.13.4",
+                "deployment": "Firebase Hosting (준비 중)"
+              }
+            }
+          },
+          {
+            "title": "2. 비즈니스 요구사항",
+            "requirements": [
+              {
+                "id": "BR-001",
+                "category": "비즈니스 목표",
+                "priority": "필수",
+                "requirement": "시니어 디자이너의 전문성을 시각적으로 효과적으로 전달",
+                "rationale": "포트폴리오는 디자이너의 능력을 보여주는 가장 중요한 도구",
+                "successCriteria": "취업 담당자의 평균 체류 시간 5분 이상, 포트폴리오 조회율 80% 이상"
+              },
+              {
+                "id": "BR-002",
+                "category": "비즈니스 목표",
+                "priority": "필수",
+                "requirement": "프로젝트 경험을 구조화하여 체계적으로 전시",
+                "rationale": "시니어급 경력은 다수의 프로젝트로 구성되며, 각 프로젝트의 역할과 성과를 명확히 전달 필요",
+                "successCriteria": "프로젝트별 상세 페이지 완독률 60% 이상"
+              },
+              {
+                "id": "BR-003",
+                "category": "사용성",
+                "priority": "필수",
+                "requirement": "직관적인 네비게이션으로 원하는 정보를 3클릭 이내 접근",
+                "rationale": "취업 담당자는 시간이 부족하므로 빠른 정보 탐색 필수",
+                "successCriteria": "모든 주요 정보 3클릭 이내 접근 가능"
+              },
+              {
+                "id": "BR-004",
+                "category": "관리 효율성",
+                "priority": "높음",
+                "requirement": "어드민 CMS를 통한 콘텐츠 실시간 관리",
+                "rationale": "코드 수정 없이 포트폴리오 업데이트 필요",
+                "successCriteria": "어드민을 통한 콘텐츠 업데이트 시 즉시 반영"
+              },
+              {
+                "id": "BR-005",
+                "category": "프로페셔널리티",
+                "priority": "높음",
+                "requirement": "전문가 수준의 시각 디자인과 UX",
+                "rationale": "디자이너의 포트폴리오 자체가 디자인 능력의 증거",
+                "successCriteria": "동료 디자이너 평가 4.5/5.0 이상"
+              }
+            ]
+          },
+          {
+            "title": "3. 기능 요구사항 - 공개 영역",
+            "functionalRequirements": [
+              {
+                "id": "FR-P-001",
+                "feature": "홈 페이지 (원페이지 스크롤)",
+                "priority": "필수",
+                "userStory": "취업 담당자로서, 한 페이지에서 디자이너의 전체 이력을 훑어보고 싶다.",
+                "acceptanceCriteria": [
+                  "6개 섹션 구성: Hero, Resume, Experience, About, Portfolio, Contact",
+                  "부드러운 스크롤 애니메이션 (Scroll Reveal)",
+                  "섹션 인디케이터로 현재 위치 표시",
+                  "각 섹션으로 직접 점프 가능 (앵커 링크)",
+                  "스크롤 진행률 표시",
+                  "배경 애니메이션 (Geometric Network, Floating Dots)"
+                ],
+                "technicalNotes": "HomePage with ScrollController, 6 section GlobalKeys"
+              },
+              {
+                "id": "FR-P-002",
+                "feature": "Hero 섹션",
+                "priority": "필수",
+                "userStory": "방문자로서, 첫 화면에서 디자이너가 누구인지 즉시 파악하고 싶다.",
+                "acceptanceCriteria": [
+                  "이름, 직책 (Senior Product Designer) 표시",
+                  "로고/아바타 이미지",
+                  "주요 연락처 (이메일, 전화, GitHub, LinkedIn)",
+                  "스크롤 유도 인디케이터",
+                  "홀로그래픽 효과 배경"
+                ],
+                "technicalNotes": "HeroSection widget with HolographicCard"
+              },
+              {
+                "id": "FR-P-003",
+                "feature": "Resume 섹션",
+                "priority": "필수",
+                "userStory": "취업 담당자로서, 디자이너의 핵심 역량과 경력 요약을 빠르게 확인하고 싶다.",
+                "acceptanceCriteria": [
+                  "핵심 역량 (Core Competencies) 표시",
+                  "경력 요약 (총 경력 년수, 주요 회사)",
+                  "'이력서 다운로드' 버튼 (PDF)",
+                  "간결한 레이아웃 (스캔 가능)"
+                ],
+                "technicalNotes": "ResumeSection with PDF generation"
+              },
+              {
+                "id": "FR-P-004",
+                "feature": "Experience 섹션",
+                "priority": "필수",
+                "userStory": "취업 담당자로서, 디자이너의 경력 타임라인을 시간순으로 확인하고 싶다.",
+                "acceptanceCriteria": [
+                  "경력 타임라인 (최신순)",
+                  "각 경력: 회사명, 기간, 역할, 주요 업무",
+                  "프로젝트별 성과 표시",
+                  "사용 도구/기술 스택",
+                  "카드 형태로 구조화",
+                  "호버 시 상세 정보 확장"
+                ],
+                "technicalNotes": "ExperienceSection with ExperienceModel list"
+              },
+              {
+                "id": "FR-P-005",
+                "feature": "About 섹션",
+                "priority": "높음",
+                "userStory": "취업 담당자로서, 디자이너의 성격과 업무 철학을 이해하고 싶다.",
+                "acceptanceCriteria": [
+                  "자기소개 (Introduction)",
+                  "디자인 철학 (Philosophy)",
+                  "업무 목표 (Aspirations)",
+                  "프로필 이미지",
+                  "읽기 쉬운 레이아웃"
+                ],
+                "technicalNotes": "AboutSection with ProfileModel"
+              },
+              {
+                "id": "FR-P-006",
+                "feature": "Portfolio Gallery 섹션",
+                "priority": "필수",
+                "userStory": "취업 담당자로서, 디자이너의 주요 프로젝트를 시각적으로 훑어보고 싶다.",
+                "acceptanceCriteria": [
+                  "프로젝트 카드 그리드 레이아웃 (반응형)",
+                  "각 카드: 프로젝트 이미지, 제목, 부제, 회사, 연도, 태그",
+                  "호버 시 그라데이션 오버레이 효과",
+                  "클릭 시 프로젝트 상세 페이지로 이동",
+                  "카테고리 필터링 (Mobile App, Web Design, IoT Device 등)",
+                  "홀로그래픽 카드 효과"
+                ],
+                "technicalNotes": "PortfolioGallerySection with HolographicCard"
+              },
+              {
+                "id": "FR-P-007",
+                "feature": "Contact 섹션",
+                "priority": "필수",
+                "userStory": "취업 담당자로서, 디자이너에게 쉽게 연락하고 싶다.",
+                "acceptanceCriteria": [
+                  "이메일 (클릭 시 메일 앱 자동 오픈)",
+                  "전화번호 (클릭 시 전화 앱 자동 오픈)",
+                  "GitHub, LinkedIn 링크",
+                  "소셜 아이콘 버튼",
+                  "문의 양식 (선택 사항)"
+                ],
+                "technicalNotes": "ContactSection with URL launchers"
+              },
+              {
+                "id": "FR-P-008",
+                "feature": "프로젝트 상세 페이지",
+                "priority": "필수",
+                "userStory": "취업 담당자로서, 특정 프로젝트의 상세 정보를 깊이 있게 확인하고 싶다.",
+                "acceptanceCriteria": [
+                  "프로젝트 개요 (제목, 부제, 회사, 연도, 카테고리)",
+                  "프로젝트 설명 (상세)",
+                  "역할 및 책임",
+                  "주요 성과 (KPI, 메트릭)",
+                  "사용 기술 스택",
+                  "프로젝트 이미지 갤러리",
+                  "'뒤로가기' 버튼"
+                ],
+                "technicalNotes": "ProjectDetailPage with projectId parameter"
+              },
+              {
+                "id": "FR-P-009",
+                "feature": "Documents 페이지",
+                "priority": "높음",
+                "userStory": "취업 담당자로서, 디자이너의 작성 문서들 (요구사항 정의서, 사용자 플로우 등)을 확인하고 싶다.",
+                "acceptanceCriteria": [
+                  "문서 목록 (카드 형태)",
+                  "문서 타입별 필터링 (개인 문서, 기획/디자인 문서, PM 문서)",
+                  "각 문서: 제목, 타입, 버전, 업데이트 날짜, 태그",
+                  "클릭 시 문서 상세 뷰어",
+                  "PDF 다운로드 (선택 사항)"
+                ],
+                "technicalNotes": "DocumentsPage with DocumentModel list, DocumentType enum"
+              },
+              {
+                "id": "FR-P-010",
+                "feature": "Resume 페이지",
+                "priority": "높음",
+                "userStory": "취업 담당자로서, 정형화된 이력서 포맷으로 경력을 확인하고 PDF로 다운로드하고 싶다.",
+                "acceptanceCriteria": [
+                  "표준 이력서 레이아웃",
+                  "개인 정보, 학력, 경력, 자격증, 핵심 역량",
+                  "'PDF 다운로드' 버튼",
+                  "프린트 가능한 레이아웃"
+                ],
+                "technicalNotes": "ResumePage with ResumeModel, PDF generation"
+              },
+              {
+                "id": "FR-P-011",
+                "feature": "경력기술서 페이지",
+                "priority": "중간",
+                "userStory": "취업 담당자로서, 프로젝트별 상세 경력 기술서를 확인하고 싶다.",
+                "acceptanceCriteria": [
+                  "프로젝트별 경력 상세 기술",
+                  "역할, 책임, 성과, 사용 도구",
+                  "PDF 다운로드 가능"
+                ],
+                "technicalNotes": "CareerDescriptionPage"
+              },
+              {
+                "id": "FR-P-012",
+                "feature": "자기소개서 페이지",
+                "priority": "중간",
+                "userStory": "취업 담당자로서, 디자이너의 인성과 동기를 이해하기 위한 자기소개서를 확인하고 싶다.",
+                "acceptanceCriteria": [
+                  "성장 배경",
+                  "성격 및 가치관",
+                  "취미 및 관심사",
+                  "지망 동기 및 포부",
+                  "PDF 다운로드 가능"
+                ],
+                "technicalNotes": "CoverLetterPage"
+              },
+              {
+                "id": "FR-P-013",
+                "feature": "반응형 디자인",
+                "priority": "필수",
+                "userStory": "방문자로서, 모바일, 태블릿, 데스크탑 어디서든 최적화된 경험을 원한다.",
+                "acceptanceCriteria": [
+                  "모바일 (< 600px): 1단 레이아웃, 햄버거 메뉴",
+                  "태블릿 (600-1024px): 2단 레이아웃",
+                  "데스크탑 (> 1024px): 다단 레이아웃, 고정 헤더",
+                  "이미지 최적화 (WebOptimizedImage)",
+                  "터치/마우스 인터랙션 대응"
+                ],
+                "technicalNotes": "Breakpoints in AppConstants, MediaQuery.of(context)"
+              },
+              {
+                "id": "FR-P-014",
+                "feature": "다크/라이트 테마",
+                "priority": "중간",
+                "userStory": "방문자로서, 선호하는 테마 (다크/라이트)를 선택하고 싶다.",
+                "acceptanceCriteria": [
+                  "테마 토글 버튼 (헤더)",
+                  "테마 전환 시 부드러운 애니메이션",
+                  "사용자 선택 저장 (Local Storage)",
+                  "시스템 테마 자동 감지 (기본값)"
+                ],
+                "technicalNotes": "ThemeModeProvider with AppTheme.lightTheme/darkTheme"
+              },
+              {
+                "id": "FR-P-015",
+                "feature": "시각 효과 및 애니메이션",
+                "priority": "높음",
+                "userStory": "방문자로서, 시각적으로 매력적이고 전문적인 포트폴리오를 경험하고 싶다.",
+                "acceptanceCriteria": [
+                  "배경 효과: Geometric Network, Floating Dots, Pixel Space",
+                  "스크롤 애니메이션: Scroll Reveal, Fade In",
+                  "카드 효과: Holographic Card (glassmorphism)",
+                  "호버 효과: 프로젝트 카드, 버튼",
+                  "로딩 화면: 커스텀 애니메이션",
+                  "페이지 전환: 부드러운 트랜지션"
+                ],
+                "technicalNotes": "Various background widgets, ScrollRevealWidget, HolographicCard"
+              }
+            ]
+          },
+          {
+            "title": "4. 기능 요구사항 - 관리자 영역",
+            "functionalRequirements": [
+              {
+                "id": "FR-A-001",
+                "feature": "어드민 로그인",
+                "priority": "필수",
+                "userStory": "시니어 디자이너로서, 안전하게 관리자 영역에 접근하고 싶다.",
+                "acceptanceCriteria": [
+                  "로그인 페이지 (/admin/login)",
+                  "아이디/비밀번호 입력",
+                  "인증 실패 시 에러 메시지",
+                  "인증 성공 시 어드민 대시보드로 리다이렉트",
+                  "세션 유지 (로컬 스토리지)"
+                ],
+                "technicalNotes": "AdminLoginPage, authentication provider"
+              },
+              {
+                "id": "FR-A-002",
+                "feature": "어드민 대시보드 (11개 탭)",
+                "priority": "필수",
+                "userStory": "시니어 디자이너로서, 모든 콘텐츠를 한 곳에서 관리하고 싶다.",
+                "acceptanceCriteria": [
+                  "11개 탭 메뉴: Projects, Profile, Experience, Education, Skills, Resume, Structure, Design System, UI Preview, Project Guide, Templates",
+                  "탭 전환 시 콘텐츠 즉시 로드",
+                  "현재 탭 하이라이트 표시",
+                  "로그아웃 버튼"
+                ],
+                "technicalNotes": "AdminPage with TabBar and TabBarView"
+              },
+              {
+                "id": "FR-A-003",
+                "feature": "Projects 관리",
+                "priority": "필수",
+                "userStory": "시니어 디자이너로서, 프로젝트를 추가/수정/삭제하고 순서를 조정하고 싶다.",
+                "acceptanceCriteria": [
+                  "프로젝트 목록 표시 (order 순서)",
+                  "'새 프로젝트 추가' 버튼",
+                  "각 프로젝트: 편집, 삭제 버튼",
+                  "드래그 앤 드롭으로 순서 변경",
+                  "프로젝트 편집 다이얼로그: 제목, 부제, 회사, 연도, 카테고리, 설명, 태그, 이미지 업로드, 그라데이션 색상",
+                  "벌크 선택 및 프린트",
+                  "즉시 저장 (API 호출)"
+                ],
+                "technicalNotes": "ProjectEditor with ContentRepository, UUID generation"
+              },
+              {
+                "id": "FR-A-004",
+                "feature": "Profile 관리",
+                "priority": "필수",
+                "userStory": "시니어 디자이너로서, 개인 프로필 정보를 업데이트하고 싶다.",
+                "acceptanceCriteria": [
+                  "프로필 편집 폼: 이름, 생년월일, 주소, 병역, 전화, 이메일",
+                  "자기소개, 디자인 철학, 포부",
+                  "'저장' 버튼",
+                  "즉시 저장 및 공개 페이지 반영"
+                ],
+                "technicalNotes": "ProfileEditor with ProfileModel"
+              },
+              {
+                "id": "FR-A-005",
+                "feature": "Experience 관리",
+                "priority": "필수",
+                "userStory": "시니어 디자이너로서, 경력 사항을 추가/수정/삭제하고 싶다.",
+                "acceptanceCriteria": [
+                  "경력 목록 표시",
+                  "'새 경력 추가' 버튼",
+                  "경력 편집 폼: 회사, 역할, 기간, 설명, 책임, 성과, 도구, 환경, 퇴사 사유",
+                  "드래그 앤 드롭 순서 변경",
+                  "즉시 저장"
+                ],
+                "technicalNotes": "ExperienceEditor with ExperienceModel list"
+              },
+              {
+                "id": "FR-A-006",
+                "feature": "Education 관리",
+                "priority": "높음",
+                "userStory": "시니어 디자이너로서, 학력 정보를 관리하고 싶다.",
+                "acceptanceCriteria": [
+                  "학력 목록 표시",
+                  "학력 편집: 학교, 전공, 학위, 기간, GPA",
+                  "순서 변경",
+                  "즉시 저장"
+                ],
+                "technicalNotes": "EducationEditor with EducationModel list"
+              },
+              {
+                "id": "FR-A-007",
+                "feature": "Skills 관리",
+                "priority": "높음",
+                "userStory": "시니어 디자이너로서, 보유 기술을 카테고리별로 관리하고 싶다.",
+                "acceptanceCriteria": [
+                  "스킬 카테고리 목록 (Design Systems, AI/ML Integration, Data Analytics, Development)",
+                  "카테고리별 스킬 리스트 편집",
+                  "아이콘 선택",
+                  "순서 변경",
+                  "즉시 저장"
+                ],
+                "technicalNotes": "SkillEditor with SkillModel list"
+              },
+              {
+                "id": "FR-A-008",
+                "feature": "Resume 편집 및 PDF 생성",
+                "priority": "높음",
+                "userStory": "시니어 디자이너로서, 이력서를 편집하고 PDF로 내보내고 싶다.",
+                "acceptanceCriteria": [
+                  "이력서 전체 편집 폼",
+                  "개인정보, 학력, 경력, 자격증, 핵심역량",
+                  "'PDF 생성' 버튼",
+                  "프로페셔널 PDF 레이아웃",
+                  "PDF 다운로드"
+                ],
+                "technicalNotes": "ResumeEditor with PDF generation (printing package)"
+              },
+              {
+                "id": "FR-A-009",
+                "feature": "프로젝트 구조 문서",
+                "priority": "중간",
+                "userStory": "시니어 디자이너로서, 프로젝트 아키텍처를 문서화하고 싶다.",
+                "acceptanceCriteria": [
+                  "프로젝트 폴더 구조 트리",
+                  "주요 파일 설명",
+                  "아키텍처 다이어그램",
+                  "마크다운 편집 가능"
+                ],
+                "technicalNotes": "ProjectStructurePage with markdown editor"
+              },
+              {
+                "id": "FR-A-010",
+                "feature": "디자인 시스템 문서",
+                "priority": "높음",
+                "userStory": "시니어 디자이너로서, Atomic Design 기반 디자인 시스템을 문서화하고 싶다.",
+                "acceptanceCriteria": [
+                  "7개 탭: Foundation, Design Tokens, Colors, Typography, Atoms, Molecules, Organisms",
+                  "각 탭: 디자인 원칙, 컴포넌트 예시, 코드 스니펫",
+                  "색상 팔레트 표시 (Primary Blue, Accent Cyan, Highlight Green)",
+                  "타이포그래피 시스템 (H1-H6, body styles)",
+                  "컴포넌트 프리뷰"
+                ],
+                "technicalNotes": "DesignSystemPage with Atomic Design documentation"
+              },
+              {
+                "id": "FR-A-011",
+                "feature": "UI 프리뷰",
+                "priority": "중간",
+                "userStory": "시니어 디자이너로서, 디자인 시스템 컴포넌트를 실시간으로 미리보고 싶다.",
+                "acceptanceCriteria": [
+                  "Atoms 프리뷰 (버튼, 입력 필드)",
+                  "Molecules 프리뷰 (카드)",
+                  "인터랙티브 프리뷰 (호버, 클릭 가능)",
+                  "다크/라이트 테마 토글"
+                ],
+                "technicalNotes": "UIPreviewPage with design_system components"
+              }
+            ]
+          },
+          {
+            "title": "5. 비기능 요구사항",
+            "nonFunctionalRequirements": [
+              {
+                "id": "NFR-001",
+                "category": "성능",
+                "requirement": "페이지 로딩 시간 3초 이내",
+                "priority": "높음",
+                "acceptanceCriteria": "First Contentful Paint (FCP) < 1.5초, Largest Contentful Paint (LCP) < 3초"
+              },
+              {
+                "id": "NFR-002",
+                "category": "성능",
+                "requirement": "이미지 최적화",
+                "priority": "필수",
+                "acceptanceCriteria": "WebP 포맷 사용, 지연 로딩 (Lazy Loading), 반응형 이미지 (srcset)"
+              },
+              {
+                "id": "NFR-003",
+                "category": "사용성",
+                "requirement": "직관적인 네비게이션",
+                "priority": "필수",
+                "acceptanceCriteria": "모든 주요 페이지 3클릭 이내 접근, 명확한 시각적 계층 구조"
+              },
+              {
+                "id": "NFR-004",
+                "category": "접근성",
+                "requirement": "WCAG 2.1 AA 준수",
+                "priority": "높음",
+                "acceptanceCriteria": "색상 대비 4.5:1 이상, 키보드 네비게이션 지원, Semantic HTML"
+              },
+              {
+                "id": "NFR-005",
+                "category": "반응성",
+                "requirement": "모바일 퍼스트 디자인",
+                "priority": "필수",
+                "acceptanceCriteria": "모바일(< 600px), 태블릿(600-1024px), 데스크탑(> 1024px) 완벽 대응"
+              },
+              {
+                "id": "NFR-006",
+                "category": "보안",
+                "requirement": "어드민 영역 인증",
+                "priority": "필수",
+                "acceptanceCriteria": "로그인 없이 /admin/dashboard 접근 불가, 세션 관리"
+              },
+              {
+                "id": "NFR-007",
+                "category": "호환성",
+                "requirement": "크로스 브라우저 지원",
+                "priority": "필수",
+                "acceptanceCriteria": "Chrome, Firefox, Safari, Edge 최신 2개 버전 완벽 동작"
+              },
+              {
+                "id": "NFR-008",
+                "category": "확장성",
+                "requirement": "모듈식 아키텍처",
+                "priority": "필수",
+                "acceptanceCriteria": "Feature-based 폴더 구조, 재사용 가능한 컴포넌트, Provider 기반 상태 관리"
+              },
+              {
+                "id": "NFR-009",
+                "category": "가용성",
+                "requirement": "99% 업타임",
+                "priority": "높음",
+                "acceptanceCriteria": "월간 다운타임 7.2시간 이내"
+              },
+              {
+                "id": "NFR-010",
+                "category": "SEO",
+                "requirement": "검색 엔진 최적화",
+                "priority": "중간",
+                "acceptanceCriteria": "Meta tags, Open Graph, Sitemap, Robots.txt"
+              }
+            ]
+          },
+          {
+            "title": "6. 데이터 모델",
+            "dataModels": [
+              {
+                "modelName": "ProfileModel",
+                "fields": ["id", "name", "birth", "address", "military", "phone", "email", "introduction", "philosophy", "aspirations"]
+              },
+              {
+                "modelName": "ProjectModel",
+                "fields": ["id", "title", "subtitle", "company", "year", "category", "description", "tags", "imageUrl", "gradientColors", "order"]
+              },
+              {
+                "modelName": "ExperienceModel",
+                "fields": ["id", "company", "role", "period", "description", "responsibilities", "achievements", "tools", "environment", "reasonForLeaving", "order", "tags"]
+              },
+              {
+                "modelName": "EducationModel",
+                "fields": ["id", "period", "school", "major", "gpa", "order"]
+              },
+              {
+                "modelName": "SkillModel",
+                "fields": ["id", "title", "skills (list)", "order", "iconName"]
+              },
+              {
+                "modelName": "ResumeModel",
+                "fields": ["PersonalInfo", "Education[]", "Career[]", "coreCompetencies[]", "Certification[]", "CoverLetterModel"]
+              },
+              {
+                "modelName": "DocumentModel",
+                "fields": ["id", "type (enum)", "title", "version", "createdAt", "updatedAt", "pdfUrl", "content (JSON)", "tags[]"]
+              }
+            ]
+          },
+          {
+            "title": "7. 기술 제약사항",
+            "constraints": [
+              {
+                "type": "기술",
+                "constraint": "Flutter 프레임워크 사용 (Web/Desktop/Mobile 크로스 플랫폼)",
+                "impact": "네이티브 브라우저 기능 제한, 번들 크기 고려"
+              },
+              {
+                "type": "백엔드",
+                "constraint": "로컬 Dart Shelf 서버 (localhost:8080), JSON 파일 기반 데이터베이스",
+                "impact": "실시간 동기화 제한, 확장성 제한"
+              },
+              {
+                "type": "배포",
+                "constraint": "Firebase Hosting (준비 중)",
+                "impact": "Firebase 설정 완료 필요"
+              },
+              {
+                "type": "인증",
+                "constraint": "간단한 로그인 (Firebase Auth 미사용)",
+                "impact": "고급 인증 기능 제한"
+              }
+            ]
+          },
+          {
+            "title": "8. 인수 기준",
+            "acceptanceCriteria": [
+              "모든 필수(Must) 기능 요구사항 100% 구현",
+              "반응형 디자인 (모바일/태블릿/데스크탑) 완벽 동작",
+              "페이지 로딩 시간 3초 이내",
+              "WCAG 2.1 AA 접근성 기준 80% 이상 준수",
+              "어드민 CMS를 통한 콘텐츠 관리 완벽 동작",
+              "PDF 생성 기능 완벽 동작",
+              "크로스 브라우저 테스트 통과 (Chrome, Firefox, Safari, Edge)"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc-pm-01",
+      "type": "projectCharter",
+      "title": "AIA+ SENIOR MODE 프로젝트 헌장",
+      "version": "1.0",
+      "createdAt": "2025-02-01T00:00:00.000Z",
+      "updatedAt": "2025-02-01T00:00:00.000Z",
+      "tags": ["AIA+", "PM", "Project Charter"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "projectCode": "AIA-SM-2025",
+        "projectManager": "김시니어",
+        "startDate": "2025-02-01",
+        "endDate": "2025-06-30",
+        "budget": "150,000,000원",
+        "sponsor": "AIA생명보험 디지털본부",
+        "sections": [
+          {
+            "title": "1. 프로젝트 배경",
+            "content": "고령화 사회 진입에 따라 60세 이상 고령 고객의 모바일 앱 사용이 증가하고 있으나, 기존 앱은 고령자 특성을 반영하지 못해 사용성이 낮음. 고령자 전용 모드를 통해 접근성을 개선하고 디지털 금융 포용성을 확대할 필요가 있음."
+          },
+          {
+            "title": "2. 프로젝트 목적",
+            "content": "AIA+ 앱에 고령자 전용 모드(SENIOR MODE)를 구축하여 60세 이상 고객의 앱 사용성을 개선하고, 보험료 납입/대출 상환 등 핵심 기능의 접근성을 향상시킴. 디지털 리터러시가 낮은 고령 고객도 쉽게 사용할 수 있는 UI/UX 제공."
+          },
+          {
+            "title": "3. 프로젝트 범위",
+            "content": "포함 범위:\n- 고령자 전용 메인 화면 UX 기획\n- 디자인 시스템 구축 (컬러, 타이포그래피, 컴포넌트)\n- 보험료 납입 GUI 설계\n- 보험계약대출 상환 GUI 설계\n- 자동부활 신청 GUI 설계\n- 자동송금 신청 GUI 설계\n- 접근성(WCAG 2.1 AA) 준수\n\n제외 범위:\n- 백엔드 개발\n- 보험 상품 설계\n- 마케팅 캠페인"
+          },
+          {
+            "title": "4. 주요 산출물",
+            "content": "1. 프로젝트 헌장 (Project Charter)\n2. 요구사항 정의서 (Requirements Document)\n3. 화면 설계서 (Wireframe & Mockup)\n4. 디자인 시스템 가이드\n5. 사용자 테스트 보고서\n6. 최종 프로토타입 (Figma)"
+          },
+          {
+            "title": "5. 주요 이정표",
+            "content": "- 2025.02.01 ~ 02.28: 사용자 조사 및 요구사항 분석\n- 2025.03.01 ~ 03.31: 와이어프레임 및 정보구조 설계\n- 2025.04.01 ~ 04.30: 디자인 시스템 구축\n- 2025.05.01 ~ 05.31: GUI 상세 설계 (4개 핵심 기능)\n- 2025.06.01 ~ 06.15: 사용자 테스트 및 피드백 반영\n- 2025.06.16 ~ 06.30: 최종 프로토타입 완성 및 인수인계"
+          },
+          {
+            "title": "6. 주요 이해관계자",
+            "content": "- 프로젝트 스폰서: AIA생명보험 디지털본부장\n- 프로젝트 매니저: 김시니어 (ING People)\n- 디자인 팀: 시니어 디자이너 1명, 주니어 디자이너 1명\n- 개발 팀: AIA 내부 개발팀 (협업)\n- 품질 보증 팀: QA 2명\n- 최종 사용자: 60세 이상 AIA+ 앱 사용자"
+          },
+          {
+            "title": "7. 성공 기준",
+            "content": "1. 디자인 개발 완성률 100% 달성\n2. 프로젝트 일정 준수율 100%\n3. 사용자 테스트 만족도 85% 이상\n4. WCAG 2.1 AA 접근성 기준 100% 준수\n5. 클라이언트 최종 승인 획득"
+          },
+          {
+            "title": "8. 주요 가정사항",
+            "content": "- AIA 내부 개발팀이 디자인 시스템을 정확히 구현 가능\n- 60세 이상 테스트 사용자 10명 이상 확보 가능\n- Figma 협업 환경이 원활히 제공됨\n- 요구사항 변경 시 일정 조정 가능"
+          },
+          {
+            "title": "9. 주요 제약사항",
+            "content": "- 예산: 1억 5천만 원 이내\n- 일정: 2025년 6월 30일까지 완료 필수\n- 기술: 기존 AIA+ 앱 플랫폼 내에서 구현\n- 인력: 디자이너 2명, 외부 협력 불가"
+          },
+          {
+            "title": "10. 승인",
+            "content": "프로젝트 스폰서: [서명]\n프로젝트 매니저: 김시니어\n승인 일자: 2025.02.01"
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc-pm-02",
+      "type": "screenDesign",
+      "title": "AIA+ SENIOR MODE 화면설계서",
+      "version": "2.3",
+      "createdAt": "2025-03-01T00:00:00.000Z",
+      "updatedAt": "2025-05-15T00:00:00.000Z",
+      "tags": ["AIA+", "PM", "Screen Design", "Wireframe", "UI/UX"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "documentVersion": "2.3",
+        "lastUpdated": "2025-05-15",
+        "designer": "김시니어",
+        "approver": "AIA 디지털본부장",
+        "sections": [
+          {
+            "title": "1. 문서 개요",
+            "content": {
+              "purpose": "AIA+ 앱 고령자 전용 모드(SENIOR MODE)의 UI/UX 화면 설계를 정의하고, 개발팀에게 명확한 GUI 스펙을 제공",
+              "scope": "메인 화면, 보험료 납입, 보험계약대출 상환, 자동부활 신청, 자동송금 신청 총 5개 주요 화면",
+              "targetUsers": "60세 이상 AIA+ 앱 사용자",
+              "platform": "iOS 14.0+, Android 9.0+",
+              "designTool": "Figma",
+              "figmaLink": "https://figma.com/aia-senior-mode-v2.3"
+            }
+          },
+          {
+            "title": "2. 디자인 원칙",
+            "principles": [
+              {
+                "name": "단순성 (Simplicity)",
+                "description": "복잡한 정보를 최소화하고 핵심 기능만 노출. 3단계 이상 깊이 금지",
+                "examples": ["메인 화면 위젯 4개 이하", "한 화면에 주요 액션 1-2개만"]
+              },
+              {
+                "name": "가독성 (Readability)",
+                "description": "큰 글씨(최소 18sp), 높은 명도 대비(4.5:1 이상), 명확한 레이블",
+                "examples": ["본문 18sp", "제목 24sp", "버튼 라벨 20sp"]
+              },
+              {
+                "name": "접근성 (Accessibility)",
+                "description": "WCAG 2.1 AA 기준 100% 준수, 스크린리더 지원, 키보드 네비게이션",
+                "examples": ["대체 텍스트 필수", "터치 영역 48dp 이상", "포커스 인디케이터"]
+              },
+              {
+                "name": "일관성 (Consistency)",
+                "description": "디자인 시스템 컴포넌트 재사용, 동일한 패턴 유지",
+                "examples": ["Primary 버튼 스타일 통일", "입력 필드 디자인 일관성"]
+              }
+            ]
+          },
+          {
+            "title": "3. 화면 구조 (Information Architecture)",
+            "content": {
+              "hierarchy": [
+                {
+                  "level": 1,
+                  "screen": "메인 화면 (SENIOR MODE)",
+                  "description": "고령자 전용 홈 대시보드",
+                  "children": [
+                    {
+                      "level": 2,
+                      "screen": "보험료 납입",
+                      "description": "보험료 납부 기능",
+                      "children": [
+                        {"level": 3, "screen": "납입 완료", "description": "납부 결과 확인"}
+                      ]
+                    },
+                    {
+                      "level": 2,
+                      "screen": "보험계약대출 상환",
+                      "description": "대출 상환 기능",
+                      "children": [
+                        {"level": 3, "screen": "상환 완료", "description": "상환 결과 확인"}
+                      ]
+                    },
+                    {
+                      "level": 2,
+                      "screen": "자동부활 신청",
+                      "description": "보험 자동부활 신청",
+                      "children": [
+                        {"level": 3, "screen": "신청 완료", "description": "신청 결과 확인"}
+                      ]
+                    },
+                    {
+                      "level": 2,
+                      "screen": "자동송금 신청",
+                      "description": "자동이체 설정",
+                      "children": [
+                        {"level": 3, "screen": "설정 완료", "description": "설정 결과 확인"}
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "maxDepth": 3,
+              "totalScreens": 13
+            }
+          },
+          {
+            "title": "4. 화면별 상세 설계",
+            "screens": [
+              {
+                "screenId": "SCR-001",
+                "screenName": "메인 화면 (SENIOR MODE)",
+                "wireframeUrl": "https://figma.com/aia-senior-mode/main",
+                "description": "고령자 전용 홈 대시보드. 큰 위젯과 명확한 라벨로 주요 기능 접근",
+                "layout": {
+                  "type": "Vertical Scroll",
+                  "sections": [
+                    {
+                      "name": "헤더",
+                      "height": "80dp",
+                      "elements": ["환영 메시지 (안녕하세요, OOO님)", "설정 아이콘"]
+                    },
+                    {
+                      "name": "위젯 영역",
+                      "height": "Auto",
+                      "elements": [
+                        "보험료 납입 위젯 (160dp)",
+                        "보험금 청구 위젯 (160dp)",
+                        "계약 조회 위젯 (160dp)",
+                        "고객센터 위젯 (160dp)"
+                      ]
+                    },
+                    {
+                      "name": "최근 활동",
+                      "height": "Auto",
+                      "elements": ["최근 거래 내역 (최대 3개)"]
+                    }
+                  ]
+                },
+                "components": [
+                  {
+                    "componentId": "COMP-001",
+                    "name": "대형 위젯 카드",
+                    "type": "Card",
+                    "dimensions": "328dp × 160dp",
+                    "padding": "24dp",
+                    "borderRadius": "16dp",
+                    "elevation": "4dp",
+                    "content": [
+                      {"element": "아이콘", "size": "48dp", "color": "Primary"},
+                      {"element": "제목", "fontSize": "24sp", "fontWeight": "Bold"},
+                      {"element": "설명", "fontSize": "16sp", "color": "Gray700"}
+                    ]
+                  }
+                ],
+                "interactions": [
+                  {
+                    "trigger": "위젯 카드 탭",
+                    "action": "해당 기능 화면으로 이동",
+                    "animation": "Fade transition (300ms)"
+                  }
+                ],
+                "accessibility": [
+                  "각 위젯에 명확한 라벨 제공",
+                  "터치 영역 48dp 이상 확보",
+                  "스크린리더 읽기 순서: 헤더 → 위젯 → 최근 활동"
+                ]
+              },
+              {
+                "screenId": "SCR-002",
+                "screenName": "보험료 납입",
+                "wireframeUrl": "https://figma.com/aia-senior-mode/payment",
+                "description": "보험료 납부 화면. 2단계 프로세스 (정보 확인 → 납부)",
+                "layout": {
+                  "type": "Step Form",
+                  "steps": [
+                    {
+                      "stepNumber": 1,
+                      "stepName": "납입 정보 확인",
+                      "fields": [
+                        {"label": "보험 상품", "type": "Text (읽기 전용)", "value": "건강보험 Plus"},
+                        {"label": "납입 금액", "type": "Text (읽기 전용)", "value": "150,000원", "fontSize": "28sp", "color": "Primary"},
+                        {"label": "납입 기한", "type": "Text (읽기 전용)", "value": "2025.06.30"}
+                      ]
+                    },
+                    {
+                      "stepNumber": 2,
+                      "stepName": "결제 수단 선택",
+                      "fields": [
+                        {"label": "결제 수단", "type": "Radio Group", "options": ["등록 카드 (****1234)", "계좌이체", "간편결제"]},
+                        {"label": "즉시 납부", "type": "Primary Button", "height": "56dp", "fontSize": "20sp"}
+                      ]
+                    }
+                  ]
+                },
+                "components": [
+                  {
+                    "componentId": "COMP-002",
+                    "name": "스텝 인디케이터",
+                    "type": "Stepper",
+                    "totalSteps": 2,
+                    "activeColor": "Primary",
+                    "inactiveColor": "Gray300",
+                    "fontSize": "18sp"
+                  },
+                  {
+                    "componentId": "COMP-003",
+                    "name": "Primary 버튼",
+                    "type": "Button",
+                    "dimensions": "Full width × 56dp",
+                    "backgroundColor": "Primary (#2196F3)",
+                    "textColor": "White",
+                    "fontSize": "20sp",
+                    "fontWeight": "Bold",
+                    "borderRadius": "12dp"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "trigger": "다음 버튼 탭",
+                    "action": "다음 단계로 이동",
+                    "validation": "필수 필드 입력 확인"
+                  },
+                  {
+                    "trigger": "즉시 납부 버튼 탭",
+                    "action": "결제 API 호출 → 완료 화면 이동",
+                    "loadingState": "로딩 인디케이터 표시"
+                  }
+                ],
+                "accessibility": [
+                  "각 입력 필드에 명확한 라벨",
+                  "에러 메시지는 필드 하단에 빨간색으로 표시",
+                  "버튼 비활성화 시 Gray400 배경, 라벨 텍스트로 이유 설명"
+                ]
+              },
+              {
+                "screenId": "SCR-003",
+                "screenName": "보험계약대출 상환",
+                "wireframeUrl": "https://figma.com/aia-senior-mode/loan-repay",
+                "description": "대출 상환 화면. 상환 금액 입력 및 확인",
+                "layout": {
+                  "type": "Single Form",
+                  "sections": [
+                    {
+                      "name": "대출 정보",
+                      "elements": [
+                        {"label": "현재 대출 잔액", "value": "5,000,000원", "fontSize": "28sp"},
+                        {"label": "월 이자", "value": "15,000원", "fontSize": "18sp"}
+                      ]
+                    },
+                    {
+                      "name": "상환 금액 입력",
+                      "elements": [
+                        {"label": "상환 금액", "type": "Number Input", "placeholder": "금액을 입력하세요", "fontSize": "24sp"},
+                        {"label": "빠른 선택", "type": "Chip Group", "options": ["50만원", "100만원", "전액 상환"]}
+                      ]
+                    },
+                    {
+                      "name": "액션",
+                      "elements": [
+                        {"label": "상환하기", "type": "Primary Button", "height": "56dp"}
+                      ]
+                    }
+                  ]
+                },
+                "components": [
+                  {
+                    "componentId": "COMP-004",
+                    "name": "숫자 입력 필드",
+                    "type": "TextField",
+                    "inputType": "Number",
+                    "fontSize": "24sp",
+                    "height": "64dp",
+                    "borderColor": "Gray400",
+                    "focusBorderColor": "Primary",
+                    "borderWidth": "2dp"
+                  },
+                  {
+                    "componentId": "COMP-005",
+                    "name": "Chip 버튼",
+                    "type": "Chip",
+                    "height": "48dp",
+                    "fontSize": "18sp",
+                    "backgroundColor": "Gray100",
+                    "selectedColor": "Primary",
+                    "borderRadius": "24dp"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "trigger": "빠른 선택 Chip 탭",
+                    "action": "해당 금액이 입력 필드에 자동 입력"
+                  },
+                  {
+                    "trigger": "상환하기 버튼 탭",
+                    "action": "확인 다이얼로그 표시 → 상환 API 호출 → 완료 화면",
+                    "validation": "입력 금액 > 0 && 입력 금액 <= 대출 잔액"
+                  }
+                ],
+                "accessibility": [
+                  "숫자 입력 시 천 단위 콤마 자동 표시",
+                  "잔액 초과 시 에러 메시지: '대출 잔액을 초과할 수 없습니다'",
+                  "입력 필드 포커스 시 키보드 자동 표시"
+                ]
+              },
+              {
+                "screenId": "SCR-004",
+                "screenName": "자동부활 신청",
+                "wireframeUrl": "https://figma.com/aia-senior-mode/auto-revival",
+                "description": "보험 자동부활 신청. 2단계 프로세스 (조건 확인 → 신청)",
+                "layout": {
+                  "type": "Step Form",
+                  "steps": [
+                    {
+                      "stepNumber": 1,
+                      "stepName": "자동부활 조건 확인",
+                      "elements": [
+                        {"type": "Info Card", "title": "자동부활이란?", "description": "보험료 미납으로 실효된 계약을 자동으로 부활시키는 제도입니다."},
+                        {"type": "Checklist", "items": ["미납 보험료 + 이자 납부", "건강 상태 양호", "계약 실효 후 2년 이내"]}
+                      ]
+                    },
+                    {
+                      "stepNumber": 2,
+                      "stepName": "신청 정보 입력",
+                      "fields": [
+                        {"label": "보험 상품", "type": "Dropdown", "options": ["건강보험 Plus", "암보험 Special"]},
+                        {"label": "납부 금액", "type": "Text (자동 계산)", "value": "계산 중..."},
+                        {"label": "신청하기", "type": "Primary Button"}
+                      ]
+                    }
+                  ]
+                },
+                "interactions": [
+                  {
+                    "trigger": "보험 상품 선택",
+                    "action": "납부 금액 자동 계산 API 호출"
+                  },
+                  {
+                    "trigger": "신청하기 버튼 탭",
+                    "action": "신청 API 호출 → 완료 화면"
+                  }
+                ],
+                "accessibility": [
+                  "Info Card는 읽기 쉬운 설명 제공",
+                  "Checklist 각 항목에 체크 아이콘 표시",
+                  "계산 중 로딩 스피너 표시"
+                ]
+              },
+              {
+                "screenId": "SCR-005",
+                "screenName": "자동송금 신청",
+                "wireframeUrl": "https://figma.com/aia-senior-mode/auto-transfer",
+                "description": "보험료 자동이체 설정. 계좌 정보 입력 및 이체일 선택",
+                "layout": {
+                  "type": "Single Form",
+                  "sections": [
+                    {
+                      "name": "계좌 정보",
+                      "fields": [
+                        {"label": "은행 선택", "type": "Dropdown", "options": ["국민은행", "신한은행", "우리은행", "하나은행"]},
+                        {"label": "계좌번호", "type": "Text Input", "placeholder": "계좌번호 입력", "inputType": "Number"}
+                      ]
+                    },
+                    {
+                      "name": "이체 설정",
+                      "fields": [
+                        {"label": "이체일", "type": "Date Picker", "options": ["매월 1일", "매월 10일", "매월 20일", "매월 말일"]},
+                        {"label": "이체 금액", "type": "Text (자동)", "value": "월 보험료 금액"}
+                      ]
+                    },
+                    {
+                      "name": "액션",
+                      "elements": [
+                        {"label": "신청하기", "type": "Primary Button"}
+                      ]
+                    }
+                  ]
+                },
+                "interactions": [
+                  {
+                    "trigger": "은행 선택",
+                    "action": "선택된 은행으로 계좌번호 입력 필드 활성화"
+                  },
+                  {
+                    "trigger": "신청하기 버튼 탭",
+                    "action": "입력 검증 → 자동송금 설정 API 호출 → 완료 화면",
+                    "validation": "은행, 계좌번호, 이체일 필수 입력"
+                  }
+                ],
+                "accessibility": [
+                  "계좌번호 입력 시 숫자 키패드 자동 표시",
+                  "이체일 Picker는 큰 터치 영역 제공",
+                  "필수 필드 미입력 시 빨간색 테두리 표시"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "5. 공통 컴포넌트 가이드",
+            "components": [
+              {
+                "name": "Primary Button",
+                "specs": {
+                  "width": "Full width (최소 280dp)",
+                  "height": "56dp",
+                  "backgroundColor": "#2196F3",
+                  "textColor": "#FFFFFF",
+                  "fontSize": "20sp",
+                  "fontWeight": "Bold",
+                  "borderRadius": "12dp",
+                  "elevation": "2dp"
+                },
+                "states": {
+                  "default": "backgroundColor: #2196F3",
+                  "pressed": "backgroundColor: #1976D2, elevation: 0dp",
+                  "disabled": "backgroundColor: #E0E0E0, textColor: #9E9E9E"
+                }
+              },
+              {
+                "name": "Secondary Button",
+                "specs": {
+                  "width": "Full width",
+                  "height": "56dp",
+                  "backgroundColor": "Transparent",
+                  "borderColor": "#2196F3",
+                  "borderWidth": "2dp",
+                  "textColor": "#2196F3",
+                  "fontSize": "20sp",
+                  "borderRadius": "12dp"
+                }
+              },
+              {
+                "name": "Text Input Field",
+                "specs": {
+                  "width": "Full width",
+                  "height": "64dp",
+                  "fontSize": "20sp",
+                  "borderColor": "#BDBDBD",
+                  "borderWidth": "2dp",
+                  "borderRadius": "8dp",
+                  "padding": "16dp"
+                },
+                "states": {
+                  "default": "borderColor: #BDBDBD",
+                  "focus": "borderColor: #2196F3, borderWidth: 3dp",
+                  "error": "borderColor: #F44336"
+                }
+              },
+              {
+                "name": "Card",
+                "specs": {
+                  "width": "328dp",
+                  "height": "Auto (최소 120dp)",
+                  "backgroundColor": "#FFFFFF",
+                  "borderRadius": "16dp",
+                  "elevation": "4dp",
+                  "padding": "24dp"
+                }
+              }
+            ]
+          },
+          {
+            "title": "6. 색상 시스템",
+            "colors": {
+              "primary": {
+                "main": "#2196F3",
+                "dark": "#1976D2",
+                "light": "#BBDEFB",
+                "contrast": "#FFFFFF"
+              },
+              "secondary": {
+                "main": "#00BCD4",
+                "dark": "#0097A7",
+                "light": "#B2EBF2"
+              },
+              "neutral": {
+                "gray900": "#212121",
+                "gray700": "#616161",
+                "gray400": "#BDBDBD",
+                "gray300": "#E0E0E0",
+                "gray100": "#F5F5F5",
+                "white": "#FFFFFF"
+              },
+              "semantic": {
+                "success": "#4CAF50",
+                "warning": "#FF9800",
+                "error": "#F44336",
+                "info": "#2196F3"
+              }
+            },
+            "accessibility": {
+              "primaryOnWhite": "4.5:1 (AA 통과)",
+              "gray700OnWhite": "7:1 (AAA 통과)",
+              "errorOnWhite": "4.6:1 (AA 통과)"
+            }
+          },
+          {
+            "title": "7. 타이포그래피",
+            "typography": {
+              "heading1": {"fontSize": "32sp", "fontWeight": "Bold", "lineHeight": "40sp", "usage": "페이지 제목"},
+              "heading2": {"fontSize": "24sp", "fontWeight": "Bold", "lineHeight": "32sp", "usage": "섹션 제목"},
+              "body": {"fontSize": "18sp", "fontWeight": "Regular", "lineHeight": "28sp", "usage": "본문 텍스트"},
+              "caption": {"fontSize": "16sp", "fontWeight": "Regular", "lineHeight": "24sp", "usage": "설명 텍스트"},
+              "button": {"fontSize": "20sp", "fontWeight": "Bold", "lineHeight": "24sp", "usage": "버튼 라벨"}
+            },
+            "fontFamily": "Noto Sans KR",
+            "minimumSize": "18sp (고령자 가독성)"
+          },
+          {
+            "title": "8. 스페이싱 시스템",
+            "spacing": {
+              "xs": "4dp",
+              "sm": "8dp",
+              "md": "16dp",
+              "lg": "24dp",
+              "xl": "32dp",
+              "xxl": "48dp"
+            },
+            "usage": {
+              "componentPadding": "24dp (lg)",
+              "sectionMargin": "32dp (xl)",
+              "elementGap": "16dp (md)",
+              "screenPadding": "24dp (lg)"
+            }
+          },
+          {
+            "title": "9. 개발 인수인계 체크리스트",
+            "checklist": [
+              {
+                "category": "디자인 에셋",
+                "items": [
+                  "Figma 파일 최종 버전 공유 완료",
+                  "이미지 에셋 Export (1x, 2x, 3x)",
+                  "아이콘 SVG 파일 제공",
+                  "폰트 파일 제공 (Noto Sans KR)"
+                ]
+              },
+              {
+                "category": "문서",
+                "items": [
+                  "화면설계서 최종 버전 전달",
+                  "디자인 시스템 가이드 전달",
+                  "컴포넌트 스펙 문서 전달",
+                  "접근성 체크리스트 전달"
+                ]
+              },
+              {
+                "category": "협업",
+                "items": [
+                  "개발팀 기술 검토 완료",
+                  "구현 가능성 확인 완료",
+                  "API 연동 포인트 정의 완료",
+                  "예외 상황 처리 방안 정의 완료"
+                ]
+              }
+            ]
+          },
+          {
+            "title": "10. 변경 이력",
+            "versionHistory": [
+              {
+                "version": "1.0",
+                "date": "2025-03-01",
+                "changes": "초기 버전 작성 (메인 화면, 보험료 납입)"
+              },
+              {
+                "version": "1.5",
+                "date": "2025-04-01",
+                "changes": "보험계약대출 상환, 자동부활 신청 화면 추가"
+              },
+              {
+                "version": "2.0",
+                "date": "2025-04-20",
+                "changes": "색상 시스템 단순화 (개발팀 피드백 반영)"
+              },
+              {
+                "version": "2.2",
+                "date": "2025-05-06",
+                "changes": "자동부활 신청 UI 단순화 (사용자 테스트 피드백)"
+              },
+              {
+                "version": "2.3",
+                "date": "2025-05-15",
+                "changes": "접근성 색상 대비 수정 (WCAG 2.1 AA 완전 준수)"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "doc-pm-03",
+      "type": "stakeholderMatrix",
+      "title": "AIA+ SENIOR MODE 이해관계자 매트릭스",
+      "version": "1.0",
+      "createdAt": "2025-02-05T00:00:00.000Z",
+      "updatedAt": "2025-02-05T00:00:00.000Z",
+      "tags": ["AIA+", "PM", "Stakeholder Management"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "analysisDate": "2025-02-05",
+        "stakeholders": [
+          {
+            "name": "AIA생명보험 디지털본부장",
+            "role": "프로젝트 스폰서",
+            "power": "높음",
+            "interest": "높음",
+            "influence": "결정권자",
+            "strategy": "적극 관리 (Manage Closely)",
+            "communication": "주간 진행 보고 (이메일), 월간 대면 회의",
+            "expectations": "일정 준수, 품질 보증, 고령 고객 만족도 향상",
+            "concerns": "프로젝트 지연, 예산 초과, 사용성 미달"
+          },
+          {
+            "name": "김시니어 (ING People)",
+            "role": "프로젝트 매니저",
+            "power": "중간",
+            "interest": "높음",
+            "influence": "실행 책임자",
+            "strategy": "적극 관리 (Manage Closely)",
+            "communication": "일일 팀 스탠드업, 주간 클라이언트 보고",
+            "expectations": "팀 협업 원활, 일정 준수, 품질 달성",
+            "concerns": "리소스 부족, 요구사항 변경, 개발팀 협업"
+          },
+          {
+            "name": "디자인 팀 (시니어 1명, 주니어 1명)",
+            "role": "실행팀",
+            "power": "낮음",
+            "interest": "높음",
+            "influence": "실무 수행",
+            "strategy": "정보 제공 (Keep Informed)",
+            "communication": "일일 스탠드업, Figma 댓글, Slack",
+            "expectations": "명확한 가이드, 피드백 제공, 일정 준수",
+            "concerns": "과도한 업무량, 불명확한 요구사항"
+          },
+          {
+            "name": "AIA 내부 개발팀",
+            "role": "협업팀 (개발 구현)",
+            "power": "중간",
+            "interest": "중간",
+            "influence": "기술 실현 가능성",
+            "strategy": "만족 유지 (Keep Satisfied)",
+            "communication": "주 2회 협업 회의, Jira 티켓 연동",
+            "expectations": "구현 가능한 디자인, 명확한 스펙 문서",
+            "concerns": "기술적 제약, 개발 일정"
+          },
+          {
+            "name": "품질 보증 팀 (QA 2명)",
+            "role": "품질 검증",
+            "power": "낮음",
+            "interest": "중간",
+            "influence": "품질 승인",
+            "strategy": "모니터링 (Monitor)",
+            "communication": "주간 테스트 보고서 공유",
+            "expectations": "테스트 케이스 제공, 접근성 준수",
+            "concerns": "테스트 시간 부족, 버그 발견"
+          },
+          {
+            "name": "60세 이상 AIA+ 사용자",
+            "role": "최종 사용자",
+            "power": "낮음",
+            "interest": "높음",
+            "influence": "만족도 결정",
+            "strategy": "정보 제공 (Keep Informed)",
+            "communication": "사용자 테스트 세션 (2회)",
+            "expectations": "쉬운 사용법, 큰 글씨, 명확한 기능",
+            "concerns": "복잡한 UI, 작은 버튼, 느린 반응"
+          },
+          {
+            "name": "AIA 마케팅팀",
+            "role": "홍보 및 사용자 확산",
+            "power": "낮음",
+            "interest": "낮음",
+            "influence": "제한적",
+            "strategy": "모니터링 (Monitor)",
+            "communication": "월간 진행 상황 공유",
+            "expectations": "론칭 일정 공유",
+            "concerns": "론칭 지연"
+          }
+        ],
+        "powerInterestMatrix": {
+          "highPowerHighInterest": ["AIA생명보험 디지털본부장", "김시니어"],
+          "highPowerLowInterest": [],
+          "lowPowerHighInterest": ["디자인 팀", "60세 이상 사용자"],
+          "lowPowerLowInterest": ["AIA 마케팅팀"]
+        },
+        "communicationPlan": {
+          "weekly": ["디지털본부장 이메일 보고", "개발팀 협업 회의 (화/목)"],
+          "biweekly": ["QA팀 테스트 보고서 공유"],
+          "monthly": ["스폰서 대면 회의", "마케팅팀 진행 공유"],
+          "asNeeded": ["사용자 테스트 세션", "긴급 이슈 대응"]
+        }
+      }
+    },
+    {
+      "id": "doc-pm-04",
+      "type": "riskRegister",
+      "title": "AIA+ SENIOR MODE 리스크 등록부",
+      "version": "1.2",
+      "createdAt": "2025-02-10T00:00:00.000Z",
+      "updatedAt": "2025-04-15T00:00:00.000Z",
+      "tags": ["AIA+", "PM", "Risk Management"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "lastUpdated": "2025-04-15",
+        "risks": [
+          {
+            "id": "R-001",
+            "category": "일정",
+            "title": "요구사항 변경으로 인한 일정 지연",
+            "description": "클라이언트 요구사항이 프로젝트 중반에 변경되어 재작업 발생 가능",
+            "probability": "중간 (50%)",
+            "impact": "높음",
+            "riskScore": "중간",
+            "triggerCondition": "클라이언트가 새로운 기능 추가 요청",
+            "owner": "김시니어 (PM)",
+            "status": "발생",
+            "mitigation": {
+              "strategy": "변경 관리 프로세스 도입",
+              "actions": [
+                "요구사항 변경 시 영향도 분석 수행",
+                "변경 승인 절차 수립 (스폰서 승인 필수)",
+                "일정 조정 협의 (2주 버퍼 확보)"
+              ],
+              "contingency": "우선순위 낮은 기능 축소 또는 Phase 2로 이관"
+            },
+            "responseLog": [
+              {
+                "date": "2025-04-15",
+                "action": "자동부활 신청 기능 UI 변경 요청 발생 → 영향도 분석 후 1주 일정 연장 승인"
+              }
+            ]
+          },
+          {
+            "id": "R-002",
+            "category": "품질",
+            "title": "접근성 기준(WCAG 2.1 AA) 미달",
+            "description": "고령자 접근성 요구사항을 충족하지 못해 재작업 필요",
+            "probability": "낮음 (20%)",
+            "impact": "높음",
+            "riskScore": "중간",
+            "triggerCondition": "QA 테스트에서 접근성 이슈 발견",
+            "owner": "디자인팀 리드",
+            "status": "모니터링",
+            "mitigation": {
+              "strategy": "초기 단계부터 접근성 체크리스트 적용",
+              "actions": [
+                "WCAG 2.1 AA 체크리스트 기반 디자인 검토",
+                "색상 대비 검사 도구 사용 (4.5:1 이상)",
+                "주 1회 자체 접근성 검토",
+                "외부 접근성 전문가 자문 (월 1회)"
+              ],
+              "contingency": "QA 피드백 후 즉시 수정, 추가 테스트 세션 확보"
+            },
+            "responseLog": []
+          },
+          {
+            "id": "R-003",
+            "category": "리소스",
+            "title": "디자이너 이탈 또는 장기 휴가",
+            "description": "주니어 디자이너 퇴사 또는 장기 병가로 인력 부족 발생",
+            "probability": "낮음 (15%)",
+            "impact": "높음",
+            "riskScore": "중간",
+            "triggerCondition": "팀원 퇴사 의사 표시 또는 2주 이상 휴가",
+            "owner": "김시니어 (PM)",
+            "status": "모니터링",
+            "mitigation": {
+              "strategy": "백업 인력 확보 및 지식 공유 체계화",
+              "actions": [
+                "Figma 파일 및 디자인 시스템 문서화 철저히",
+                "주간 디자인 리뷰로 지식 공유",
+                "외부 프리랜서 디자이너 명단 사전 확보",
+                "주요 작업 크로스 트레이닝"
+              ],
+              "contingency": "프리랜서 디자이너 긴급 투입 (1주 내)"
+            },
+            "responseLog": []
+          },
+          {
+            "id": "R-004",
+            "category": "기술",
+            "title": "개발팀의 디자인 시스템 구현 지연",
+            "description": "AIA 개발팀의 기술적 제약 또는 리소스 부족으로 디자인 구현 지연",
+            "probability": "중간 (40%)",
+            "impact": "중간",
+            "riskScore": "중간",
+            "triggerCondition": "개발팀이 구현 불가 또는 일정 지연 통보",
+            "owner": "김시니어 (PM)",
+            "status": "모니터링",
+            "mitigation": {
+              "strategy": "초기 기술 검토 및 정기 협업 회의",
+              "actions": [
+                "디자인 시스템 초기 버전 개발팀 사전 검토",
+                "주 2회 개발-디자인 협업 회의",
+                "구현 가능성 사전 확인 (컴포넌트별)",
+                "기술 제약 발견 시 대안 디자인 준비"
+              ],
+              "contingency": "구현 불가 시 디자인 단순화 또는 Phase 2 이관"
+            },
+            "responseLog": []
+          },
+          {
+            "id": "R-005",
+            "category": "사용자",
+            "title": "사용자 테스트 참가자 확보 실패",
+            "description": "60세 이상 테스트 사용자 10명 이상 모집 실패",
+            "probability": "낮음 (25%)",
+            "impact": "중간",
+            "riskScore": "낮음",
+            "triggerCondition": "테스트 2주 전까지 참가자 5명 미만",
+            "owner": "김시니어 (PM)",
+            "status": "모니터링",
+            "mitigation": {
+              "strategy": "다양한 채널을 통한 사전 모집",
+              "actions": [
+                "AIA 내부 고객 DB 활용 (마케팅팀 협조)",
+                "외부 리서치 에이전시 협력",
+                "인센티브 제공 (상품권 5만 원)",
+                "테스트 일정 유연화 (주중/주말 옵션)"
+              ],
+              "contingency": "원격 사용자 테스트 도입 (Zoom + 화면 공유)"
+            },
+            "responseLog": []
+          }
+        ],
+        "riskSummary": {
+          "totalRisks": 5,
+          "highRisk": 0,
+          "mediumRisk": 4,
+          "lowRisk": 1,
+          "activeRisks": 1,
+          "monitoringRisks": 4,
+          "closedRisks": 0
+        }
+      }
+    },
+    {
+      "id": "doc-pm-05",
+      "type": "changeLog",
+      "title": "AIA+ SENIOR MODE 변경 이력",
+      "version": "1.5",
+      "createdAt": "2025-02-01T00:00:00.000Z",
+      "updatedAt": "2025-05-20T00:00:00.000Z",
+      "tags": ["AIA+", "PM", "Change Management"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "changes": [
+          {
+            "changeId": "CHG-001",
+            "date": "2025-03-15",
+            "requestedBy": "AIA 디지털본부장",
+            "category": "요구사항 변경",
+            "priority": "높음",
+            "title": "메인 화면 위젯 추가 요청",
+            "description": "고령 사용자가 자주 사용하는 기능을 메인 화면 위젯으로 추가 (보험료 납입 바로가기, 보험금 청구 바로가기)",
+            "impact": {
+              "scope": "메인 화면 UI 재설계 필요",
+              "schedule": "+1주 (4월 5일 → 4월 12일)",
+              "budget": "변동 없음",
+              "quality": "사용성 향상 예상"
+            },
+            "decision": "승인",
+            "approvedBy": "AIA 디지털본부장",
+            "approvalDate": "2025-03-16",
+            "implementationStatus": "완료",
+            "completedDate": "2025-04-12"
+          },
+          {
+            "changeId": "CHG-002",
+            "date": "2025-04-10",
+            "requestedBy": "AIA 개발팀",
+            "category": "기술 제약",
+            "priority": "중간",
+            "title": "색상 시스템 단순화 요청",
+            "description": "현재 디자인 시스템의 그라데이션 색상이 iOS/Android 네이티브 구현에 복잡도 증가. 단색 기반으로 단순화 요청",
+            "impact": {
+              "scope": "디자인 시스템 색상 팔레트 재정의",
+              "schedule": "+3일 (4월 20일 → 4월 23일)",
+              "budget": "변동 없음",
+              "quality": "시각적 일관성 유지, 구현 안정성 향상"
+            },
+            "decision": "승인",
+            "approvedBy": "김시니어 (PM)",
+            "approvalDate": "2025-04-11",
+            "implementationStatus": "완료",
+            "completedDate": "2025-04-23"
+          },
+          {
+            "changeId": "CHG-003",
+            "date": "2025-04-15",
+            "requestedBy": "김시니어 (PM)",
+            "category": "요구사항 변경",
+            "priority": "중간",
+            "title": "자동부활 신청 UI 변경",
+            "description": "사용자 테스트 피드백 반영: 자동부활 신청 절차가 복잡하다는 의견 → 단계 축소 (3단계 → 2단계)",
+            "impact": {
+              "scope": "자동부활 신청 화면 재설계",
+              "schedule": "+5일 (5월 1일 → 5월 6일)",
+              "budget": "변동 없음",
+              "quality": "사용자 만족도 향상"
+            },
+            "decision": "승인",
+            "approvedBy": "AIA 디지털본부장",
+            "approvalDate": "2025-04-16",
+            "implementationStatus": "완료",
+            "completedDate": "2025-05-06"
+          },
+          {
+            "changeId": "CHG-004",
+            "date": "2025-05-10",
+            "requestedBy": "디자인팀",
+            "category": "품질 개선",
+            "priority": "낮음",
+            "title": "다크모드 지원 요청",
+            "description": "고령 사용자 중 일부가 야간 사용 시 밝은 화면으로 인한 눈부심 호소 → 다크모드 옵션 추가 제안",
+            "impact": {
+              "scope": "전체 화면 다크모드 디자인 추가",
+              "schedule": "+2주 (현재 일정 초과)",
+              "budget": "변동 없음",
+              "quality": "사용자 편의성 향상"
+            },
+            "decision": "Phase 2로 이관",
+            "approvedBy": "AIA 디지털본부장",
+            "approvalDate": "2025-05-11",
+            "implementationStatus": "Phase 2 백로그 등록",
+            "completedDate": null,
+            "reason": "현재 프로젝트 일정 내 구현 불가, 추가 개발 리소스 필요"
+          },
+          {
+            "changeId": "CHG-005",
+            "date": "2025-05-20",
+            "requestedBy": "QA팀",
+            "category": "버그 수정",
+            "priority": "높음",
+            "title": "접근성 이슈 수정 (색상 대비)",
+            "description": "QA 테스트 중 일부 버튼의 색상 대비가 WCAG 2.1 AA 기준 미달 발견 (3.8:1, 기준 4.5:1)",
+            "impact": {
+              "scope": "버튼 색상 조정",
+              "schedule": "+1일 (5월 25일 → 5월 26일)",
+              "budget": "변동 없음",
+              "quality": "접근성 준수"
+            },
+            "decision": "즉시 수정",
+            "approvedBy": "김시니어 (PM)",
+            "approvalDate": "2025-05-20",
+            "implementationStatus": "완료",
+            "completedDate": "2025-05-26"
+          }
+        ],
+        "changeSummary": {
+          "totalChanges": 5,
+          "approved": 4,
+          "rejected": 0,
+          "deferred": 1,
+          "totalScheduleImpact": "+10일",
+          "totalBudgetImpact": "0원"
+        }
+      }
+    },
+    {
+      "id": "doc-pm-06",
+      "type": "lessonsLearned",
+      "title": "AIA+ SENIOR MODE 프로젝트 교훈",
+      "version": "1.0",
+      "createdAt": "2025-06-30T00:00:00.000Z",
+      "updatedAt": "2025-06-30T00:00:00.000Z",
+      "tags": ["AIA+", "PM", "Retrospective"],
+      "content": {
+        "projectName": "AIA+ SENIOR MODE",
+        "projectPeriod": "2025.02.01 ~ 2025.06.30",
+        "documentDate": "2025-06-30",
+        "participants": [
+          "김시니어 (PM)",
+          "디자인팀 (시니어 1명, 주니어 1명)",
+          "AIA 디지털본부장",
+          "AIA 개발팀 리드"
+        ],
+        "sections": [
+          {
+            "title": "1. 프로젝트 개요 및 성과",
+            "content": "고령자 전용 모드(SENIOR MODE) UX/UI 디자인 시스템 구축 프로젝트. 보험료 납입, 보험계약대출 상환, 자동부활 신청, 자동송금 신청 등 4개 핵심 기능 GUI 완성. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100%, 사용자 테스트 만족도 92% 달성."
+          },
+          {
+            "title": "2. 잘된 점 (What Went Well)",
+            "items": [
+              {
+                "category": "일정 관리",
+                "description": "명확한 마일스톤과 주간 진행 점검으로 일정 준수율 100% 달성",
+                "evidence": "6개 주요 이정표 모두 계획된 날짜에 완료. 변경 요청 발생 시 즉시 일정 재조정으로 전체 일정 영향 최소화",
+                "recommendation": "향후 프로젝트에도 주간 점검 체계 유지, 2주 버퍼 확보 전략 적용"
+              },
+              {
+                "category": "사용자 중심 설계",
+                "description": "고령 사용자 테스트를 2회 실시하여 실사용자 피드백 기반 UI 개선",
+                "evidence": "1차 테스트(4월) 피드백으로 자동부활 신청 단계 축소 → 2차 테스트(6월) 만족도 92% 달성",
+                "recommendation": "프로젝트 초기(3월)에도 사용자 테스트 추가하여 방향성 조기 검증 필요"
+              },
+              {
+                "category": "접근성 준수",
+                "description": "WCAG 2.1 AA 기준 100% 준수, 색상 대비/키보드 네비게이션/스크린리더 지원 완벽 구현",
+                "evidence": "외부 접근성 전문가 검수 통과, QA 접근성 테스트 이슈 0건",
+                "recommendation": "접근성 체크리스트 기반 디자인 검토를 표준 프로세스로 정착"
+              },
+              {
+                "category": "개발팀 협업",
+                "description": "주 2회 정기 협업 회의로 기술 제약 사전 파악 및 대응",
+                "evidence": "색상 시스템 단순화 요청을 조기 발견하여 큰 재작업 없이 해결",
+                "recommendation": "디자인 시스템 초기 버전부터 개발팀 기술 검토 필수화"
+              }
+            ]
+          },
+          {
+            "title": "3. 개선이 필요한 점 (What Could Be Improved)",
+            "items": [
+              {
+                "category": "요구사항 관리",
+                "description": "프로젝트 중반(3~4월) 요구사항 변경이 잦아 일정 압박 발생",
+                "issue": "클라이언트의 추가 기능 요청(메인 위젯, 자동부활 UI 변경)으로 총 10일 일정 연장",
+                "rootCause": "초기 요구사항 분석이 불충분, 클라이언트 기대치 명확화 부족",
+                "recommendation": "프로젝트 초기 1개월을 요구사항 분석 및 프로토타입 검증에 집중. 요구사항 동결 시점 명확화 (예: 3월 말)"
+              },
+              {
+                "category": "리소스 관리",
+                "description": "주니어 디자이너의 업무 부담이 과중하여 번아웃 위험 발생",
+                "issue": "4~5월 디자인 시스템 구축 및 4개 기능 GUI 동시 진행으로 주니어의 주당 근무시간 50시간 초과",
+                "rootCause": "작업 분배 불균형, 주니어 역량 과대평가",
+                "recommendation": "프로젝트 초기 팀원 역량 평가 후 현실적인 작업 분배. 외부 프리랜서 투입 옵션 사전 확보"
+              },
+              {
+                "category": "문서화",
+                "description": "디자인 시스템 가이드 문서화가 프로젝트 후반(6월)에 집중되어 개발팀 전달 지연",
+                "issue": "개발팀이 5월까지 Figma 파일만 참고하여 일부 컴포넌트 구현 오류 발생",
+                "rootCause": "문서화 우선순위 낮게 설정, 디자인 작업에만 집중",
+                "recommendation": "디자인 시스템 구축과 동시에 문서화 진행 (주 1회 문서 업데이트). Storybook 등 자동화 도구 도입 검토"
+              },
+              {
+                "category": "리스크 관리",
+                "description": "리스크 등록부를 작성했으나 실제 모니터링 및 대응이 미흡",
+                "issue": "디자이너 이탈 리스크는 사전 파악했으나 백업 인력 확보 없이 운에 의존",
+                "rootCause": "리스크 대응 계획 수립 후 실행 점검 부재",
+                "recommendation": "주간 회의에서 리스크 현황 점검 필수 안건으로 포함. 대응 계획의 실행 여부 추적"
+              }
+            ]
+          },
+          {
+            "title": "4. 배운 점 (Lessons Learned)",
+            "items": [
+              {
+                "lesson": "고령자 UX는 '단순함'이 핵심",
+                "insight": "60세 이상 사용자는 3단계 이상의 복잡한 절차를 어려워함. 2단계 이내로 단순화하고 각 단계에서 명확한 안내 필수",
+                "application": "향후 고령자 대상 프로젝트는 '최소 단계 원칙' 적용. 프로토타입 단계에서 절차 복잡도 검증"
+              },
+              {
+                "lesson": "접근성은 나중이 아닌 처음부터",
+                "insight": "초기부터 WCAG 체크리스트 기반으로 디자인하니 후반 수정 작업 최소화",
+                "application": "모든 프로젝트에서 디자인 초안부터 색상 대비 검사 도구 사용 필수화"
+              },
+              {
+                "lesson": "개발팀과의 조기 협업이 재작업 방지",
+                "insight": "디자인 시스템 초기 버전을 개발팀이 검토하여 기술적 제약 조기 파악 → 색상 시스템 단순화로 큰 재작업 방지",
+                "application": "디자인 시스템 프로젝트는 초안 완성 즉시 개발팀 기술 검토 세션 필수"
+              },
+              {
+                "lesson": "사용자 테스트는 2회 이상 필수",
+                "insight": "1차 테스트로 방향성 검증, 2차 테스트로 개선사항 확인하여 만족도 92% 달성",
+                "application": "프로젝트 일정에 사용자 테스트 최소 2회 포함 (초기 + 후기)"
+              },
+              {
+                "lesson": "변경 관리 프로세스가 일정 지연 최소화",
+                "insight": "요구사항 변경 발생 시 영향도 분석 후 일정 재조정하여 전체 일정 준수",
+                "application": "향후 프로젝트는 변경 관리 프로세스 필수 도입. 변경 승인 절차 및 일정 버퍼 확보"
+              }
+            ]
+          },
+          {
+            "title": "5. 향후 프로젝트 적용 사항",
+            "recommendations": [
+              {
+                "area": "프로젝트 기획",
+                "action": "요구사항 분석 기간을 전체 일정의 30% 이상 확보 (5개월 프로젝트 → 1.5개월 분석)",
+                "priority": "높음"
+              },
+              {
+                "area": "프로젝트 기획",
+                "action": "요구사항 동결 시점 명확화 및 변경 관리 프로세스 도입",
+                "priority": "높음"
+              },
+              {
+                "area": "일정 관리",
+                "action": "전체 일정의 10-15% 버퍼 확보 (예상치 못한 변경 대응)",
+                "priority": "높음"
+              },
+              {
+                "area": "품질 관리",
+                "action": "사용자 테스트 최소 2회 (프로토타입 단계 + 최종 단계)",
+                "priority": "높음"
+              },
+              {
+                "area": "품질 관리",
+                "action": "접근성 체크리스트 기반 디자인 검토 표준화",
+                "priority": "높음"
+              },
+              {
+                "area": "협업",
+                "action": "개발팀과 주 2회 정기 협업 회의 유지, 디자인 시스템 초기 기술 검토 필수",
+                "priority": "중간"
+              },
+              {
+                "area": "리소스 관리",
+                "action": "프로젝트 초기 팀원 역량 평가 후 현실적인 작업 분배. 외부 인력 투입 옵션 사전 확보",
+                "priority": "중간"
+              },
+              {
+                "area": "문서화",
+                "action": "디자인 시스템 구축과 동시에 문서화 진행 (주 1회 업데이트)",
+                "priority": "중간"
+              },
+              {
+                "area": "리스크 관리",
+                "action": "주간 회의에서 리스크 현황 점검 필수 안건 포함",
+                "priority": "중간"
+              }
+            ]
+          },
+          {
+            "title": "6. 프로젝트 성과 지표",
+            "metrics": {
+              "schedule": {
+                "planned": "2025.02.01 ~ 2025.06.30 (5개월)",
+                "actual": "2025.02.01 ~ 2025.06.30 (5개월)",
+                "variance": "0일",
+                "onTimeDelivery": "100%"
+              },
+              "budget": {
+                "planned": "150,000,000원",
+                "actual": "150,000,000원",
+                "variance": "0원"
+              },
+              "quality": {
+                "designCompletionRate": "100%",
+                "accessibilityCompliance": "100% (WCAG 2.1 AA)",
+                "userSatisfaction": "92%",
+                "clientApproval": "승인 완료"
+              },
+              "deliverables": {
+                "projectCharter": "완료",
+                "requirementsDoc": "완료",
+                "wireframesMockups": "완료",
+                "designSystemGuide": "완료",
+                "userTestReport": "완료",
+                "finalPrototype": "완료 (Figma)"
+              }
+            }
+          },
+          {
+            "title": "7. 감사 인사 및 기여자",
+            "acknowledgments": "본 프로젝트는 AIA생명보험 디지털본부의 전폭적인 지원과 명확한 비전 제시 덕분에 성공적으로 완료되었습니다. AIA 개발팀의 적극적인 협업과 기술 지원, 디자인팀의 헌신적인 노력, QA팀의 꼼꼼한 품질 검증, 그리고 무엇보다 테스트에 참여해주신 60세 이상 사용자분들께 깊은 감사를 드립니다."
+          }
+        ]
+      }
+    }
+  ]
+}

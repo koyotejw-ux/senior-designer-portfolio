@@ -314,6 +314,18 @@ class _DocumentsPageState extends ConsumerState<DocumentsPage>
               case DocumentType.portfolio:
                 context.go('/portfolio');
                 break;
+              case DocumentType.requirements:
+              case DocumentType.userFlow:
+              case DocumentType.informationArchitecture:
+              case DocumentType.wireframe:
+              case DocumentType.projectCharter:
+              case DocumentType.screenDesign:
+              case DocumentType.stakeholderMatrix:
+              case DocumentType.riskRegister:
+              case DocumentType.changeLog:
+              case DocumentType.lessonsLearned:
+                // For other document types, could show a viewer or do nothing
+                break;
             }
           },
         );

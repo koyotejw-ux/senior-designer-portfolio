@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/theme_provider.dart';
+import 'holographic_card.dart';
 
 /// 프로젝트 스토리텔링 섹션 - 대기업용 프로세스 시각화
 class ProjectStorySection extends ConsumerWidget {
@@ -22,19 +23,7 @@ class ProjectStorySection extends ConsumerWidget {
         horizontal: isMobile ? 20 : (isTablet ? 40 : 80),
       ),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: isDark
-              ? [
-                  AppColors.deepSpace,
-                  AppColors.charcoal.withValues(alpha: 0.8),
-                ]
-              : [
-                  AppColors.lightBg,
-                  AppColors.lightCard.withValues(alpha: 0.5),
-                ],
-        ),
+        color: Colors.transparent,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +34,7 @@ class ProjectStorySection extends ConsumerWidget {
             style: TextStyle(
               fontSize: isMobile ? 36 : (isTablet ? 48 : 64),
               fontWeight: FontWeight.w800,
-              color: isDark ? AppColors.gray100 : AppColors.lightGray900,
+              color: Colors.white,
               height: 1.1,
               letterSpacing: -1.5,
             ),
@@ -61,7 +50,7 @@ class ProjectStorySection extends ConsumerWidget {
             style: TextStyle(
               fontSize: isMobile ? 16 : 18,
               height: 1.6,
-              color: isDark ? AppColors.gray400 : AppColors.lightGray600,
+              color: AppColors.gray400,
             ),
           )
               .animate()
@@ -85,7 +74,7 @@ class ProjectStorySection extends ConsumerWidget {
               '페인 포인트 우선순위화',
             ],
             icon: Icons.search,
-            color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
+            color: AppColors.accentCyan,
             delay: 400.ms,
           ),
 
@@ -105,7 +94,7 @@ class ProjectStorySection extends ConsumerWidget {
               'AI 기반 자동화 도입 검토',
             ],
             icon: Icons.science,
-            color: isDark ? AppColors.highlightGreen : const Color(0xFF4CAF50),
+            color: AppColors.highlightGreen,
             delay: 600.ms,
           ),
 
@@ -125,7 +114,7 @@ class ProjectStorySection extends ConsumerWidget {
               'CI/CD 파이프라인 구축',
             ],
             icon: Icons.palette,
-            color: isDark ? const Color(0xFFFF9800) : const Color(0xFFF57C00),
+            color: const Color(0xFFFF9800),
             delay: 800.ms,
           ),
 
@@ -145,7 +134,7 @@ class ProjectStorySection extends ConsumerWidget {
               '사용자 피드백 기반 지속적 개선',
             ],
             icon: Icons.rocket_launch,
-            color: isDark ? const Color(0xFFE91E63) : const Color(0xFFC2185B),
+            color: const Color(0xFFE91E63),
             delay: 1000.ms,
             isLast: true,
           ),
@@ -153,42 +142,12 @@ class ProjectStorySection extends ConsumerWidget {
           SizedBox(height: isMobile ? 40 : 60),
 
           // Key Takeaways
-          Container(
-            padding: EdgeInsets.all(isMobile ? 24 : 32),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? AppColors.blue900.withValues(alpha: 0.3)
-                  : AppColors.lightGray100,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: isDark
-                    ? AppColors.accentCyan.withValues(alpha: 0.3)
-                    : AppColors.primaryBlue.withValues(alpha: 0.2),
-                width: 1,
-              ),
-            ),
+          HolographicCard(
+            title: 'Key Insights',
+            accentColor: AppColors.highlightGreen,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.lightbulb,
-                      color: isDark ? AppColors.highlightGreen : const Color(0xFFFFC107),
-                      size: isMobile ? 24 : 28,
-                    ),
-                    const SizedBox(width: 12),
-                    Text(
-                      'Key Insights',
-                      style: TextStyle(
-                        fontSize: isMobile ? 20 : 24,
-                        fontWeight: FontWeight.w700,
-                        color: isDark ? AppColors.gray100 : AppColors.lightGray900,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
                 _buildInsightItem(
                   isDark,
                   '데이터 기반 의사결정',
@@ -256,58 +215,18 @@ class ProjectStorySection extends ConsumerWidget {
 
         // Content
         Expanded(
-          child: Container(
-            padding: EdgeInsets.all(isMobile ? 20 : 24),
-            decoration: BoxDecoration(
-              color: isDark
-                  ? AppColors.charcoal.withValues(alpha: 0.6)
-                  : Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: isDark
-                    ? AppColors.blue900.withValues(alpha: 0.3)
-                    : AppColors.lightGray300,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
+          child: HolographicCard(
+            title: 'STEP 0$step',
+            accentColor: color,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.2),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        'Step $step',
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          color: color,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
                 Text(
                   title,
                   style: TextStyle(
                     fontSize: isMobile ? 18 : 22,
                     fontWeight: FontWeight.w700,
-                    color: isDark ? AppColors.gray100 : AppColors.lightGray900,
+                    color: Colors.white,
                     height: 1.3,
                   ),
                 ),
@@ -316,7 +235,7 @@ class ProjectStorySection extends ConsumerWidget {
                   description,
                   style: TextStyle(
                     fontSize: 14,
-                    color: isDark ? AppColors.gray400 : AppColors.lightGray600,
+                    color: AppColors.gray400,
                     height: 1.5,
                   ),
                 ),
@@ -341,9 +260,7 @@ class ProjectStorySection extends ConsumerWidget {
                               detail,
                               style: TextStyle(
                                 fontSize: 13,
-                                color: isDark
-                                    ? AppColors.gray300
-                                    : AppColors.lightGray700,
+                                color: Colors.white,
                                 height: 1.5,
                               ),
                             ),
@@ -376,15 +293,10 @@ class ProjectStorySection extends ConsumerWidget {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: isDark
-                ? [
-                    AppColors.accentCyan.withValues(alpha: 0.5),
-                    AppColors.accentCyan.withValues(alpha: 0.1),
-                  ]
-                : [
-                    AppColors.primaryBlue.withValues(alpha: 0.3),
-                    AppColors.primaryBlue.withValues(alpha: 0.05),
-                  ],
+            colors: [
+              AppColors.accentCyan.withValues(alpha: 0.5),
+              AppColors.accentCyan.withValues(alpha: 0.1),
+            ],
           ),
         ),
       ),
@@ -400,7 +312,7 @@ class ProjectStorySection extends ConsumerWidget {
           width: 8,
           height: 8,
           decoration: BoxDecoration(
-            color: isDark ? AppColors.highlightGreen : const Color(0xFFFFC107),
+            color: AppColors.highlightGreen,
             shape: BoxShape.circle,
           ),
         ),
@@ -414,7 +326,7 @@ class ProjectStorySection extends ConsumerWidget {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: isDark ? AppColors.gray100 : AppColors.lightGray900,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 4),
@@ -422,7 +334,7 @@ class ProjectStorySection extends ConsumerWidget {
                 description,
                 style: TextStyle(
                   fontSize: 13,
-                  color: isDark ? AppColors.gray400 : AppColors.lightGray600,
+                  color: AppColors.gray400,
                   height: 1.5,
                 ),
               ),

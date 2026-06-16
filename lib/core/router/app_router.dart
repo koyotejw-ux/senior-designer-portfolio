@@ -31,7 +31,10 @@ class AppRouter {
       GoRoute(
         path: '/portfolio',
         name: 'portfolio',
-        builder: (context, state) => const PortfolioPage(),
+        builder: (context, state) {
+          final tab = state.uri.queryParameters['tab'];
+          return PortfolioPage(initialTab: tab);
+        },
         routes: [
           GoRoute(
             path: ':projectId',
