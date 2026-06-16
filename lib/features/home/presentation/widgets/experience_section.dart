@@ -74,8 +74,9 @@ class ExperienceSection extends ConsumerWidget {
                       title: career.company.toUpperCase(),
                       accentColor: accentColor,
                       child: _buildExperienceContent(
-                        company: '${career.company} / ${career.department}',
-                        position: '${career.position} / ${career.role}',
+                        department: career.department,
+                        position: career.position,
+                        role: career.role,
                         period: career.period,
                         content: [
                           if (career.projects.isNotEmpty)
@@ -109,19 +110,20 @@ class ExperienceSection extends ConsumerWidget {
       ),
     );
   }
-
+ 
   Widget _buildExperienceContent({
-    required String company,
+    required String department,
     required String position,
+    required String role,
     required String period,
     required List<Widget> content,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Company & Department
+        // Department / Team
         Text(
-          company,
+          department,
           style: AppTypography.h4.copyWith(
             color: Colors.white,
             fontWeight: FontWeight.w800,
@@ -130,29 +132,53 @@ class ExperienceSection extends ConsumerWidget {
             height: 1.3,
           ),
         ),
-        const SizedBox(height: 6),
-        // Position & Role
+        const SizedBox(height: 8),
+        
+        // Role & Description
         Text(
-          position,
+          role,
           style: TextStyle(
             color: AppColors.accentCyan,
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.w700,
-            letterSpacing: 0.5,
-            height: 1.3,
+            letterSpacing: 0.3,
+            height: 1.4,
           ),
         ),
-        const SizedBox(height: 4),
-        // Period
-        Text(
-          period,
-          style: const TextStyle(
-            color: Color(0xFF8B95A1),
-            fontFamily: 'Courier',
-            fontWeight: FontWeight.w600,
-            fontSize: 13,
-            height: 1.2,
-          ),
+        const SizedBox(height: 6),
+
+        // Position & Period Metadata Row
+        Wrap(
+          spacing: 12,
+          runSpacing: 6,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          children: [
+            Text(
+              position,
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.7),
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Container(
+              width: 4,
+              height: 4,
+              decoration: const BoxDecoration(
+                color: Color(0xFF475569),
+                shape: BoxShape.circle,
+              ),
+            ),
+            Text(
+              period,
+              style: const TextStyle(
+                color: Color(0xFF94A3B8),
+                fontFamily: 'Courier',
+                fontWeight: FontWeight.w600,
+                fontSize: 13,
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 28),
         Column(children: content),
