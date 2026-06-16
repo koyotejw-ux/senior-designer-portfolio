@@ -84,39 +84,29 @@ class _TechHudBorderPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas.drawRect(Rect.fromLTWH(0, 0, w, h), bgPaint);
 
-    // 2. Top & Bottom Horizontal Borders (Thinner: 0.5)
+    // 2. High-Tech Digital Document Bracket Borders (Straight lines with dashed endpoints: - ────────── -)
     final borderPaint = Paint()
       ..color = color.withValues(alpha: 0.25)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.5;
-    
-    // Top border line
-    canvas.drawLine(Offset(0, padding), Offset(w, padding), borderPaint);
-    // Bottom border line
-    canvas.drawLine(Offset(0, h - padding), Offset(w, h - padding), borderPaint);
 
-    // 3. Accent Corner Line Ticks (Thinner: 0.6)
-    final linePaint = Paint()
-      ..color = color.withValues(alpha: 0.5)
+    final dashPaint = Paint()
+      ..color = color.withValues(alpha: 0.55)
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 0.6;
+      ..strokeWidth = 0.8;
 
-    const tickLength = 12.0;
-    // Top-left tick
-    canvas.drawLine(Offset(padding, padding), Offset(padding + tickLength, padding), linePaint);
-    canvas.drawLine(Offset(padding, padding), Offset(padding, padding + tickLength), linePaint);
+    const dashLength = 12.0;
+    const gap = 6.0;
 
-    // Top-right tick
-    canvas.drawLine(Offset(w - padding, padding), Offset(w - padding - tickLength, padding), linePaint);
-    canvas.drawLine(Offset(w - padding, padding), Offset(w - padding, padding + tickLength), linePaint);
+    // Top border and dashes
+    canvas.drawLine(Offset(0, padding), Offset(dashLength, padding), dashPaint);
+    canvas.drawLine(Offset(dashLength + gap, padding), Offset(w - dashLength - gap, padding), borderPaint);
+    canvas.drawLine(Offset(w - dashLength, padding), Offset(w, padding), dashPaint);
 
-    // Bottom-right tick
-    canvas.drawLine(Offset(w - padding, h - padding), Offset(w - padding - tickLength, h - padding), linePaint);
-    canvas.drawLine(Offset(w - padding, h - padding), Offset(w - padding, h - padding - tickLength), linePaint);
-
-    // Bottom-left tick
-    canvas.drawLine(Offset(padding, h - padding), Offset(padding + tickLength, h - padding), linePaint);
-    canvas.drawLine(Offset(padding, h - padding), Offset(padding, h - padding - tickLength), linePaint);
+    // Bottom border and dashes
+    canvas.drawLine(Offset(0, h - padding), Offset(dashLength, h - padding), dashPaint);
+    canvas.drawLine(Offset(dashLength + gap, h - padding), Offset(w - dashLength - gap, h - padding), borderPaint);
+    canvas.drawLine(Offset(w - dashLength, h - padding), Offset(w, h - padding), dashPaint);
   }
 
   @override
