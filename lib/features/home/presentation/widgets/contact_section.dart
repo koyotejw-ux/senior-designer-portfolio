@@ -81,93 +81,50 @@ class ContactSection extends ConsumerWidget {
                 ],
               ).animate().fadeIn(duration: 600.ms).slideY(begin: 0.2, end: 0),
 
-              SizedBox(height: isMobile ? 16 : 24),
+              SizedBox(height: isMobile ? 32 : 48),
 
-              // Subtitle
-              Text(
-                    '대기업 프로젝트 경험과 AI/데이터 전문성을 갖춘 시니어 디자이너와 함께하세요',
-                    style: AppTypography.bodyLarge.copyWith(
-                      color: AppColors.gray100.withValues(alpha: 0.8),
-                      height: 1.7,
-                    ),
-                    textAlign: TextAlign.center,
-                  )
-                  .animate()
-                  .fadeIn(duration: 600.ms, delay: 200.ms)
-                  .slideY(begin: 0.2, end: 0),
-
-              SizedBox(height: isMobile ? 48 : 64),
-
-              // Contact Cards Grid
-              isMobile
-                  ? Column(
+              // Unified Horizontal Contact Card
+              HolographicCard(
+                accentColor: AppColors.accentCyan,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Center(
+                    child: Wrap(
+                      spacing: isMobile ? 12 : 24,
+                      runSpacing: 12,
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       children: [
-                        _buildContactCard(
+                        _buildInlineContactItem(
                           Icons.email_outlined,
                           'Email',
                           AppConstants.email,
                           AppColors.accentCyan,
-                          isDark,
-                          0,
+                          isMobile,
                         ),
-                        const SizedBox(height: 20),
-                        _buildContactCard(
+                        _buildDivider(isMobile),
+                        _buildInlineContactItem(
                           Icons.phone_outlined,
                           'Phone',
                           AppConstants.phone,
                           AppColors.highlightGreen,
-                          isDark,
-                          1,
+                          isMobile,
                         ),
-                        const SizedBox(height: 20),
-                        _buildContactCard(
+                        _buildDivider(isMobile),
+                        _buildInlineContactItem(
                           Icons.location_on_outlined,
                           'Location',
-                          '고양시 덕양구 향기5로 66',
+                          '고양시 덕양구',
                           AppColors.primaryBlue,
-                          isDark,
-                          2,
-                        ),
-                      ],
-                    )
-                  : Row(
-                      children: [
-                        Expanded(
-                          child: _buildContactCard(
-                            Icons.email_outlined,
-                            'Email',
-                            AppConstants.email,
-                            AppColors.accentCyan,
-                            isDark,
-                            0,
-                          ),
-                        ),
-                        const SizedBox(width: 24),
-                        Expanded(
-                          child: _buildContactCard(
-                            Icons.phone_outlined,
-                            'Phone',
-                            AppConstants.phone,
-                            AppColors.highlightGreen,
-                            isDark,
-                            1,
-                          ),
-                        ),
-                        const SizedBox(width: 24),
-                        Expanded(
-                          child: _buildContactCard(
-                            Icons.location_on_outlined,
-                            'Location',
-                            '고양시 덕양구 향기5로 66',
-                            AppColors.primaryBlue,
-                            isDark,
-                            2,
-                          ),
+                          isMobile,
                         ),
                       ],
                     ),
+                  ),
+                ),
+              ).animate().fadeIn(duration: 600.ms, delay: 200.ms).slideY(begin: 0.1, end: 0),
 
-              SizedBox(height: isMobile ? 48 : 64),
+              SizedBox(height: isMobile ? 32 : 48),
 
               // CTA Button
               GestureDetector(
@@ -256,46 +213,37 @@ class ContactSection extends ConsumerWidget {
     );
   }
 
-  Widget _buildContactCard(
+  Widget _buildInlineContactItem(
     IconData icon,
-    String title,
+    String label,
     String value,
-    Color accentColor,
-    bool isDark,
-    int index,
+    Color color,
+    bool isMobile,
   ) {
-    return HolographicCard(
-      title: title,
-      accentColor: accentColor,
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: accentColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.zero,
-              border: Border.all(
-                color: accentColor.withValues(alpha: 0.3),
-                width: 1,
-              ),
-            ),
-            child: Icon(icon, color: accentColor, size: 32),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: color, size: isMobile ? 16 : 18),
+        const SizedBox(width: 8),
+        Text(
+          value,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: isMobile ? 12 : 14,
+            fontFamily: 'Pretendard',
           ),
-          const SizedBox(height: 16),
-          Text(
-            value,
-            style: AppTypography.bodyMedium.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ),
-    )
-        .animate()
-        .fadeIn(duration: 600.ms, delay: (400 + index * 100).ms)
-        .slideY(begin: 0.1, end: 0);
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDivider(bool isMobile) {
+    return Container(
+      width: 1,
+      height: isMobile ? 12 : 16,
+      color: Colors.white24,
+    );
   }
 }
 
