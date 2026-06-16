@@ -58,13 +58,8 @@ class ExperienceSection extends ConsumerWidget {
               final index = entry.key;
               final career = entry.value;
 
-              // Cycle through accent colors
-              final accentColor = [
-                AppColors.primaryBlue,
-                AppColors.highlightGreen,
-                AppColors.accentCyan,
-                const Color(0xFF9D00FF),
-              ][index % 4];
+              // Unified accent color for all experience cards
+              const accentColor = AppColors.accentCyan;
 
               return Column(
                 children: [
@@ -195,7 +190,7 @@ class ExperienceSection extends ConsumerWidget {
           Text(
             title,
             style: TextStyle(
-              color: AppColors.highlightGreen.withValues(alpha: 0.9),
+              color: AppColors.accentCyan.withValues(alpha: 0.9),
               fontWeight: FontWeight.w800,
               fontSize: 13,
               letterSpacing: 1.5,
@@ -213,7 +208,7 @@ class ExperienceSection extends ConsumerWidget {
                   Text(
                     '· ',
                     style: TextStyle(
-                      color: AppColors.highlightGreen,
+                      color: AppColors.accentCyan,
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       height: 1.5,
