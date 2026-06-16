@@ -89,36 +89,36 @@ class ContactSection extends ConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Center(
-                    child: Wrap(
-                      spacing: isMobile ? 12 : 24,
-                      runSpacing: 12,
-                      alignment: WrapAlignment.center,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: [
-                        _buildInlineContactItem(
-                          Icons.email_outlined,
-                          'Email',
-                          AppConstants.email,
-                          AppColors.accentCyan,
-                          isMobile,
-                        ),
-                        _buildDivider(isMobile),
-                        _buildInlineContactItem(
-                          Icons.phone_outlined,
-                          'Phone',
-                          AppConstants.phone,
-                          AppColors.highlightGreen,
-                          isMobile,
-                        ),
-                        _buildDivider(isMobile),
-                        _buildInlineContactItem(
-                          Icons.location_on_outlined,
-                          'Location',
-                          '고양시 덕양구',
-                          AppColors.primaryBlue,
-                          isMobile,
-                        ),
-                      ],
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          _buildInlineContactItem(
+                            Icons.email_outlined,
+                            'Email',
+                            AppConstants.email,
+                            AppColors.accentCyan,
+                            isMobile,
+                          ),
+                          _buildDivider(isMobile),
+                          _buildInlineContactItem(
+                            Icons.phone_outlined,
+                            'Phone',
+                            AppConstants.phone,
+                            AppColors.highlightGreen,
+                            isMobile,
+                          ),
+                          _buildDivider(isMobile),
+                          _buildInlineContactItem(
+                            Icons.location_on_outlined,
+                            'Location',
+                            '고양시 덕양구',
+                            AppColors.primaryBlue,
+                            isMobile,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -172,14 +172,6 @@ class ContactSection extends ConsumerWidget {
               // Footer
               Container(
                 padding: const EdgeInsets.only(top: 40),
-                decoration: BoxDecoration(
-                  border: Border(
-                    top: BorderSide(
-                      color: AppColors.primaryBlue.withValues(alpha: 0.2),
-                      width: 1,
-                    ),
-                  ),
-                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -241,10 +233,13 @@ class ContactSection extends ConsumerWidget {
   }
 
   Widget _buildDivider(bool isMobile) {
-    return Container(
-      width: 1,
-      height: isMobile ? 12 : 16,
-      color: Colors.white24,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 12.0 : 20.0),
+      child: Container(
+        width: 1,
+        height: isMobile ? 12 : 16,
+        color: Colors.white24,
+      ),
     );
   }
 }
