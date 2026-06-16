@@ -18,7 +18,7 @@ class AppHeader extends ConsumerWidget {
       builder: (context) => Container(
         decoration: BoxDecoration(
           color: isDark ? AppColors.deepSpace : Colors.white,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+          borderRadius: BorderRadius.zero, // Rectilinear sharp corners
           border: Border.all(
             color: isDark
                 ? AppColors.primaryBlue.withValues(alpha: 0.3)
@@ -37,7 +37,7 @@ class AppHeader extends ConsumerWidget {
                 color: isDark
                     ? AppColors.gray100.withValues(alpha: 0.3)
                     : AppColors.lightGray500,
-                borderRadius: BorderRadius.circular(2),
+                borderRadius: BorderRadius.zero, // Rectilinear pull handle
               ),
             ),
             _buildBottomSheetItem(context, 'Resume', isDark),
