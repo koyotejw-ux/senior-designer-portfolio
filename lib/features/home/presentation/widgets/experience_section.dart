@@ -181,7 +181,10 @@ class ExperienceSection extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: 28),
-        Column(children: content),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: content,
+        ),
       ],
     );
   }

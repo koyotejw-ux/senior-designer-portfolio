@@ -25,12 +25,13 @@ class HolographicCard extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.all(32),
         decoration: BoxDecoration(
-          color: const Color(0xFF04060A).withValues(alpha: 0.75), // Deep space semi-transparent
+          color: const Color(0xFF04060A).withValues(alpha: 0.12), // Highly transparent glass overlay
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (title != null) ...[
               ShaderMask(
                 shaderCallback: (bounds) => const LinearGradient(
                   colors: [
@@ -76,9 +77,9 @@ class _TechHudBorderPainter extends CustomPainter {
     final h = size.height;
     const padding = 1.0;
 
-    // 1. Simple Flat Background Plane
+    // 1. Simple Flat Background Plane (Faint: 0.08)
     final bgPaint = Paint()
-      ..color = const Color(0xFF050811).withValues(alpha: 0.8)
+      ..color = const Color(0xFF050811).withValues(alpha: 0.08)
       ..style = PaintingStyle.fill;
     canvas.drawRect(Rect.fromLTWH(0, 0, w, h), bgPaint);
 
