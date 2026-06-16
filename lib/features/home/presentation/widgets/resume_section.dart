@@ -197,7 +197,7 @@ class ResumeSection extends ConsumerWidget {
                 color: AppColors.accentCyan.withValues(alpha: 0.85),
                 fontWeight: FontWeight.w700,
                 fontSize: 13,
-                letterSpacing: 1.5,
+                letterSpacing: 0.3,
                 fontFamily: 'Courier',
               ),
             ),
@@ -206,10 +206,10 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               value,
               style: const TextStyle(
-                color: Color(0xFFCBD5E1),
-                fontSize: 14,
+                color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
+                fontSize: 13,
                 fontWeight: FontWeight.w600,
-                letterSpacing: 0.5,
+                letterSpacing: 0.3,
               ),
             ),
           ),
@@ -230,10 +230,10 @@ class ResumeSection extends ConsumerWidget {
               date,
               style: TextStyle(
                 color: AppColors.accentCyan,
-                fontSize: 14,
+                fontSize: 13,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Courier',
-                letterSpacing: 0.5,
+                letterSpacing: 0.3,
               ),
             ),
           ),
@@ -241,8 +241,8 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               text,
               style: const TextStyle(
-                color: Color(0xFFCBD5E1),
-                fontSize: 14,
+                color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
+                fontSize: 13,
                 height: 1.6,
                 fontWeight: FontWeight.w400,
               ),
@@ -259,8 +259,8 @@ class ResumeSection extends ConsumerWidget {
       child: Text(
         text,
         style: const TextStyle(
-          color: Color(0xFFCBD5E1),
-          fontSize: 14,
+          color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
+          fontSize: 13,
           height: 1.6,
           fontWeight: FontWeight.w400,
         ),

@@ -34,10 +34,10 @@ class HolographicCard extends StatelessWidget {
             if (title != null) ...[
               Text(
                 title!,
-                style: TextStyle(
-                  color: accentColor,
+                style: const TextStyle(
+                  color: Colors.white,
                   fontFamily: 'Courier',
-                  fontSize: 16,
+                  fontSize: 18,
                   fontWeight: FontWeight.w900,
                   letterSpacing: 0.5,
                 ),

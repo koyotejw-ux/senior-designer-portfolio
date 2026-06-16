@@ -121,33 +121,33 @@ class ExperienceSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Department / Team
+        // Level 2: Department / Team (Cyan, 14px)
         Text(
           department,
-          style: AppTypography.h4.copyWith(
-            color: Colors.white,
+          style: const TextStyle(
+            color: AppColors.accentCyan,
             fontWeight: FontWeight.w800,
-            fontSize: 18,
+            fontSize: 14,
             letterSpacing: 0.5,
             height: 1.3,
           ),
         ),
         const SizedBox(height: 8),
         
-        // Role & Description
+        // Role & Description (Soft white, 13px)
         Text(
           role,
           style: const TextStyle(
-            color: Color(0xFFCBD5E1),
-            fontSize: 14,
-            fontWeight: FontWeight.w700,
+            color: Color(0xFFE2E8F0),
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
             letterSpacing: 0.3,
             height: 1.4,
           ),
         ),
         const SizedBox(height: 6),
 
-        // Position & Period Metadata Row
+        // Position & Period Metadata Row (Muted slate, 12px)
         Wrap(
           spacing: 12,
           runSpacing: 6,
@@ -155,15 +155,15 @@ class ExperienceSection extends ConsumerWidget {
           children: [
             Text(
               position,
-              style: TextStyle(
-                color: Colors.white.withValues(alpha: 0.6),
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
+              style: const TextStyle(
+                color: Color(0xFF64748B),
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
               ),
             ),
             Container(
-              width: 4,
-              height: 4,
+              width: 3,
+              height: 3,
               decoration: const BoxDecoration(
                 color: Color(0xFF475569),
                 shape: BoxShape.circle,
@@ -172,10 +172,10 @@ class ExperienceSection extends ConsumerWidget {
             Text(
               period,
               style: const TextStyle(
-                color: Color(0xFF8B95A1),
+                color: Color(0xFF64748B),
                 fontFamily: 'Courier',
                 fontWeight: FontWeight.w600,
-                fontSize: 12,
+                fontSize: 11,
               ),
             ),
           ],
@@ -192,10 +192,11 @@ class ExperienceSection extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Level 3: Subheadings (Green, 13px)
           Text(
             title,
             style: TextStyle(
-              color: AppColors.accentCyan.withValues(alpha: 0.9),
+              color: AppColors.highlightGreen.withValues(alpha: 0.95),
               fontWeight: FontWeight.w800,
               fontSize: 13,
               letterSpacing: 0.3,
@@ -210,9 +211,9 @@ class ExperienceSection extends ConsumerWidget {
               child: Text(
                 item,
                 style: const TextStyle(
-                  color: Color(0xFFCBD5E1),
+                  color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
                   height: 1.5,
-                  fontSize: 14,
+                  fontSize: 13,
                   fontWeight: FontWeight.w400,
                 ),
               ),
