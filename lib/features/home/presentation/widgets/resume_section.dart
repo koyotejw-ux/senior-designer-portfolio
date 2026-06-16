@@ -206,8 +206,8 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               value,
               style: const TextStyle(
-                color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
-                fontSize: 13,
+                color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 12px)
+                fontSize: 12,
                 fontWeight: FontWeight.w600,
                 letterSpacing: 0.3,
               ),
@@ -241,9 +241,9 @@ class ResumeSection extends ConsumerWidget {
             child: Text(
               text,
               style: const TextStyle(
-                color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
-                fontSize: 13,
-                height: 1.6,
+                color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 12px)
+                fontSize: 12,
+                height: 1.3,
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -259,9 +259,9 @@ class ResumeSection extends ConsumerWidget {
       child: Text(
         text,
         style: const TextStyle(
-          color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
-          fontSize: 13,
-          height: 1.6,
+          color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 12px)
+          fontSize: 12,
+          height: 1.3,
           fontWeight: FontWeight.w400,
         ),
       ),
@@ -287,19 +287,29 @@ class ResumeSection extends ConsumerWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                career.company,
-                style: AppTypography.h4.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 17,
-                  height: 1.3,
+              ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [
+                    AppColors.accentCyan,
+                    Color(0xFFFF007F), // Neon Pink
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ).createShader(bounds),
+                child: Text(
+                  career.company,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 16,
+                    height: 1.3,
+                  ),
                 ),
               ),
               const SizedBox(height: 6),
               Text(
                 '${career.department} · ${career.position}',
-                style: TextStyle(
+                style: const TextStyle(
                   color: AppColors.accentCyan,
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
@@ -310,10 +320,10 @@ class ResumeSection extends ConsumerWidget {
               Text(
                 career.period,
                 style: const TextStyle(
-                  color: Color(0xFF8B95A1),
+                  color: Color(0xFF64748B),
                   fontFamily: 'Courier',
                   fontWeight: FontWeight.w600,
-                  fontSize: 12,
+                  fontSize: 11,
                   height: 1.2,
                 ),
               ),
@@ -327,9 +337,9 @@ class ResumeSection extends ConsumerWidget {
           Text(
             career.role,
             style: const TextStyle(
-              color: Color(0xFFCBD5E1),
-              fontSize: 14,
-              height: 1.5,
+              color: Color(0xFF94A3B8), // Level 4 Body
+              fontSize: 12,
+              height: 1.3,
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -344,9 +354,9 @@ class ResumeSection extends ConsumerWidget {
                   child: Text(
                     project,
                     style: const TextStyle(
-                      color: Color(0xFFCBD5E1),
-                      fontSize: 14,
-                      height: 1.5,
+                      color: Color(0xFF94A3B8), // Level 4 Body
+                      fontSize: 12,
+                      height: 1.3,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -363,9 +373,9 @@ class ResumeSection extends ConsumerWidget {
                   child: Text(
                     achievement,
                     style: const TextStyle(
-                      color: Color(0xFFCBD5E1),
-                      fontSize: 14,
-                      height: 1.5,
+                      color: Color(0xFF94A3B8), // Level 4 Body
+                      fontSize: 12,
+                      height: 1.3,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -380,24 +390,27 @@ class ResumeSection extends ConsumerWidget {
             Wrap(
               spacing: 8,
               runSpacing: 8,
+              alignment: WrapAlignment.start,
+              crossAxisAlignment: WrapCrossAlignment.start,
               children: career.tools.map((tool) {
                 return Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
+                    horizontal: 10,
+                    vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0A0E17),
+                    color: const Color(0xFF050810),
                     borderRadius: BorderRadius.zero,
                     border: Border.all(
-                      color: AppColors.accentCyan.withValues(alpha: 0.3),
+                      color: AppColors.accentCyan.withValues(alpha: 0.2),
+                      width: 0.5,
                     ),
                   ),
                   child: Text(
                     tool,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: AppColors.accentCyan,
-                      fontSize: 12,
+                      fontSize: 11,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -411,11 +424,11 @@ class ResumeSection extends ConsumerWidget {
           if (career.environment != null && career.environment!.isNotEmpty) ...[
             Row(
               children: [
-                Text(
+                const Text(
                   '개발환경',
                   style: TextStyle(
-                    color: const Color(0xFF8B95A1),
-                    fontSize: 13,
+                    color: Color(0xFF64748B),
+                    fontSize: 12,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -424,8 +437,8 @@ class ResumeSection extends ConsumerWidget {
                   child: Text(
                     career.environment!,
                     style: const TextStyle(
-                      color: Color(0xFFe0e4e8),
-                      fontSize: 13,
+                      color: Color(0xFF94A3B8),
+                      fontSize: 12,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

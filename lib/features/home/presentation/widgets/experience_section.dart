@@ -192,13 +192,13 @@ class ExperienceSection extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Level 3: Subheadings (Green, 13px)
+          // Level 3: Subheadings (Green, 14px)
           Text(
             title,
             style: TextStyle(
               color: AppColors.highlightGreen.withValues(alpha: 0.95),
               fontWeight: FontWeight.w800,
-              fontSize: 13,
+              fontSize: 14,
               letterSpacing: 0.3,
               fontFamily: 'Courier',
               height: 1.2,
@@ -211,9 +211,9 @@ class ExperienceSection extends ConsumerWidget {
               child: Text(
                 item,
                 style: const TextStyle(
-                  color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 13px)
-                  height: 1.5,
-                  fontSize: 13,
+                  color: Color(0xFF94A3B8), // Level 4: Body (Slate-400, 12px)
+                  height: 1.3,
+                  fontSize: 12,
                   fontWeight: FontWeight.w400,
                 ),
               ),

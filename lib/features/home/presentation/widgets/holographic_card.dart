@@ -31,15 +31,24 @@ class HolographicCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (title != null) ...[
-              Text(
-                title!,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Courier',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 0.5,
+              ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [
+                    AppColors.accentCyan,
+                    Color(0xFFFF007F), // Neon Pink matching the hero name
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ).createShader(bounds),
+                child: Text(
+                  title!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Courier',
+                    fontSize: 18,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 0.5,
+                  ),
                 ),
               ),
               const SizedBox(height: 24),
