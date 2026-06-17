@@ -41,13 +41,23 @@ class _WebOptimizedImageState extends State<WebOptimizedImage> {
   }
 
   void _registerImageView() {
+    // Determine the actual image URL, supporting relative assets with base-href prefixing
+    String finalUrl = widget.imageUrl;
+    if (finalUrl.startsWith('assets/')) {
+      // For GitHub Pages or standard subfolder deploys, we should resolve relative assets properly
+      final baseHref = html.document.getElementsByTagName('base').firstOrNull?.getAttribute('href') ?? '/';
+      finalUrl = baseHref + finalUrl;
+      // Clean duplicate slashes
+      finalUrl = finalUrl.replaceAll('//', '/');
+    }
+
     // Register a platform view factory for this image
     // ignore: undefined_prefixed_name
     ui_web.platformViewRegistry.registerViewFactory(
       viewId,
       (int viewId) {
         final img = html.ImageElement()
-          ..src = widget.imageUrl
+          ..src = finalUrl
           ..style.width = '100%'
           ..style.height = '100%'
           ..style.display = 'block'
