@@ -78,6 +78,10 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           'AIA 생명 앱의 고령자 전용 모드 메인 UX 기획 및 디자인 시스템 구축. 보험료 납입, 보험계약대출 상환, 자동부활 신청 등 핵심 GUI 정의.',
       'tags': ['Mobile UX', 'Design System', 'Accessibility', 'Figma'],
       'gradient': [AppColors.accentCyan, AppColors.blue400],
+      'imageUrl': 'assets/images/project_detail_aia.jpg',
+      'mainScreenImages': [
+        'assets/images/project_detail_aia.jpg',
+      ],
       'details': {
         'role': 'Senior Product Designer',
         'duration': '2025',

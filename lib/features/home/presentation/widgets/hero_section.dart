@@ -104,11 +104,13 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                           end: Alignment.bottomRight,
                         ).createShader(bounds),
                         child: Text(
-                          'JAEWOONG JUNG',
+                          'JAEWOONG\nJUNG',
+                          textAlign: TextAlign.center,
                           style: GoogleFonts.outfit(
                             fontSize: 34,
                             fontWeight: FontWeight.w900,
                             letterSpacing: -1.0,
+                            height: 1.1,
                             color: Colors.white,
                           ),
                         ),

@@ -289,38 +289,13 @@ class _PortfolioGallerySectionState
                                         color: AppColors.charcoal.withValues(
                                           alpha: 0.3,
                                         ),
-                                        child: WebOptimizedImage(
-                                          imageUrl: project.imageUrl!,
+                                        child: Image.asset(
+                                          project.imageUrl!,
                                           width: double.infinity,
                                           height: 200,
                                           fit: BoxFit.cover,
                                           alignment: Alignment.topCenter,
-                                          loadingWidget: Container(
-                                            height: 200,
-                                            width: double.infinity,
-                                            color: AppColors.charcoal,
-                                            child: Center(
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  const CircularProgressIndicator(),
-                                                  const SizedBox(height: 8),
-                                                  Text(
-                                                    'Loading...',
-                                                    style: AppTypography
-                                                        .bodySmall
-                                                        .copyWith(
-                                                          color:
-                                                              AppColors.gray100,
-                                                          fontSize: 10,
-                                                        ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          errorWidget: Container(
+                                          errorBuilder: (context, error, stackTrace) => Container(
                                             height: 200,
                                             width: double.infinity,
                                             color: AppColors.charcoal,
