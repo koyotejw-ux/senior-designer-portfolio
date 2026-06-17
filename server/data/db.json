@@ -1,6 +1,36 @@
 {
   "projects": [
     {
+      "id": "p7",
+      "title": "FARM SYSTEM",
+      "subtitle": "스마트 농가 모니터링 시스템 UX/UI",
+      "company": "Smart Farm Solution",
+      "year": "2023.10-2024.03",
+      "category": "IoT Device",
+      "description": "농가 온습도 모니터링, 급수 및 조명 제어, 작물 상태 진단 등 스마트 팜 IoT 관리 화면 기획 및 UI 설계.",
+      "tags": [
+        "IoT Device",
+        "Dashboard",
+        "Design System",
+        "Figma"
+      ],
+      "imageUrl": "http://localhost:8080/images/farm_1.jpg",
+      "gradientColors": [
+        "#4CAF50",
+        "#8BC34A"
+      ],
+      "role": "Lead Product Designer",
+      "duration": "6개월 (2023.10-2024.03)",
+      "teamSize": "6명 (디자이너 1명, 개발자 4명, PM 1명)",
+      "mainScreenImages": [
+        "http://localhost:8080/images/farm_1.jpg",
+        "http://localhost:8080/images/farm_2.jpg",
+        "http://localhost:8080/images/farm_3.jpg"
+      ],
+      "isCorporate": false,
+      "order": 0
+    },
+    {
       "id": "p1",
       "title": "AIA+ SENIOR MODE",
       "subtitle": "고령자 전용 모드 UX/UI 디자인 시스템",
@@ -19,91 +49,158 @@
         "#2196F3",
         "#00BCD4"
       ],
-      "order": 0
-    },
-    {
-      "id": "p2",
-      "title": "SMART HOME PLATFORM",
-      "subtitle": "차세대 스마트홈 통합 플랫폼",
-      "company": "Hyundai HT",
-      "year": "2022.01-2023.12",
-      "category": "IoT Device",
-      "description": "스마트홈 IoT 기기 통합 제어 플랫폼 구축. 월패드, 모바일 앱, 웹 대시보드 전반의 UX/UI 설계. 실시간 연동 및 시나리오 제어 기능 구현. 사용자 만족도 95% 달성.",
-      "tags": [
-        "IoT",
-        "Smart Home",
-        "Real-time",
-        "Dashboard"
-      ],
-      "imageUrl": "https://picsum.photos/seed/smart-home/800/600",
-      "gradientColors": [
-        "#1976D2",
-        "#42A5F5"
-      ],
       "order": 1
     },
     {
-      "id": "p3",
-      "title": "E-COMMERCE REDESIGN",
-      "subtitle": "모바일 커머스 플랫폼 리뉴얼",
-      "company": "Commerce Co.",
-      "year": "2023.03-2023.09",
-      "category": "Mobile App",
-      "description": "전자상거래 모바일 앱 전면 리뉴얼. 사용자 여정 맵 재설계 및 구매 전환율 향상 UX 최적화. 리뉴얼 후 구매 전환율 35% 증가, 평균 체류 시간 40% 증가.",
+      "id": "p2",
+      "title": "현대에이치티 월패드",
+      "subtitle": "HT 범용 안드로이드 월패드 디자인 시스템",
+      "company": "Hyundai HT",
+      "year": "2018.05-2023.12",
+      "category": "IoT Device",
+      "description": "동종 업계 1위 유지 기반 HT 안드로이드 월패드 라인업 UX 설계 프로세스 체계화. 현대/포스코/금호/한양/한화/대림 등 고객사 맞춤형 월패드(7~24인치) UX/UI 기획 및 통합 디자인 시스템 적용. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100%.",
       "tags": [
-        "E-commerce",
-        "Mobile",
-        "Conversion",
-        "UX Research"
+        "Figma",
+        "Android",
+        "Design System",
+        "IoT UI/UX"
       ],
-      "imageUrl": "https://picsum.photos/seed/ecommerce/800/600",
+      "imageUrl": "http://localhost:8080/images/ht_01.jpg",
       "gradientColors": [
-        "#4CAF50",
-        "#8BC34A"
+        "#1976D2",
+        "#00BCD4"
       ],
+      "role": "Product Lead",
+      "duration": "5년 7개월 (2018.05-2023.12)",
+      "teamSize": "15명 (디자이너 3명, 개발자 10명, PM 2명)",
+      "mainScreenImages": [
+        "http://localhost:8080/images/ht_01.jpg",
+        "http://localhost:8080/images/ht_02_1.jpg",
+        "http://localhost:8080/images/ht_02_2.jpg",
+        "http://localhost:8080/images/ht_03_1.jpg",
+        "http://localhost:8080/images/ht_03_2.jpg"
+      ],
+      "isCorporate": false,
       "order": 2
     },
     {
-      "id": "p4",
-      "title": "FINTECH DASHBOARD",
-      "subtitle": "금융 데이터 분석 대시보드",
-      "company": "FinTech Solutions",
-      "year": "2023.06-2024.02",
-      "category": "Web Design",
-      "description": "금융 데이터 시각화 및 분석 대시보드 구축. 실시간 차트, 알림 시스템, 커스터마이징 가능한 위젯 시스템 설계. 복잡한 금융 데이터를 직관적으로 표현.",
+      "id": "p3",
+      "title": "HT HOME 2.0",
+      "subtitle": "주거전용 스마트홈 통합 앱",
+      "company": "Hyundai HT",
+      "year": "2021.07-2023.04",
+      "category": "Mobile App",
+      "description": "HT HOME 및 HT Imazu 앱 앱스토어 정식 론칭. 월패드와 통합 연동 최적화 및 사용자 접점 확대. 스마트홈 IoT 기기 통합 제어 UX 설계.",
       "tags": [
-        "Dashboard",
-        "Data Viz",
-        "Finance",
-        "React"
+        "Mobile App",
+        "iOS",
+        "Android",
+        "Smart Home"
       ],
-      "imageUrl": "https://picsum.photos/seed/fintech/800/600",
+      "imageUrl": "http://localhost:8080/images/hthome_01_1.jpg",
       "gradientColors": [
-        "#673AB7",
-        "#9C27B0"
+        "#42A5F5",
+        "#00BCD4"
       ],
+      "role": "Senior Product Designer",
+      "duration": "2년 (2021-2023)",
+      "teamSize": "15명 (디자이너 3명, 개발자 10명, PM 2명)",
+      "mainScreenImages": [
+        "http://localhost:8080/images/hthome_01_1.jpg",
+        "http://localhost:8080/images/hthome_01_2.jpg",
+        "http://localhost:8080/images/hthome_01_3.jpg"
+      ],
+      "isCorporate": false,
       "order": 3
     },
     {
-      "id": "p5",
-      "title": "HEALTH TRACKING APP",
-      "subtitle": "AI 기반 건강관리 앱",
-      "company": "HealthTech Inc",
-      "year": "2024.01-2024.06",
-      "category": "Mobile App",
-      "description": "AI 기반 개인 맞춤형 건강관리 모바일 앱. 운동, 식단, 수면 패턴 분석 및 추천 시스템. 머신러닝 모델 연동 UX 설계. 사용자 리텐션 80% 달성.",
+      "id": "p4",
+      "title": "SOULARK",
+      "subtitle": "모바일 게임 UX/UI 디자인",
+      "company": "BluestoneSoft",
+      "year": "2016-2017",
+      "category": "Game UI",
+      "description": "SOULARK 모바일 게임의 전반적인 UX/UI 개발. Unity3D 기반 GUI 인터랙션 및 애니메이션 설계.",
       "tags": [
-        "AI/ML",
-        "Healthcare",
-        "Personalization",
-        "Analytics"
+        "Game UI",
+        "Unity3D",
+        "Mobile",
+        "Photoshop"
       ],
-      "imageUrl": "https://picsum.photos/seed/health/800/600",
+      "imageUrl": "http://localhost:8080/images/soulark_1.jpg",
       "gradientColors": [
-        "#FF5722",
-        "#FF9800"
+        "#4CAF50",
+        "#00BCD4"
       ],
+      "role": "UI/UX Designer",
+      "duration": "1년 (2016-2017)",
+      "teamSize": "20명 (디자이너 4명, 개발자 12명, 기획자 4명)",
+      "mainScreenImages": [
+        "http://localhost:8080/images/soulark_1.jpg",
+        "http://localhost:8080/images/soulark_2.jpg",
+        "http://localhost:8080/images/soulark_3.jpg"
+      ],
+      "isCorporate": false,
       "order": 4
+    },
+    {
+      "id": "p5",
+      "title": "CLOSERS",
+      "subtitle": "클로저스 웹사이트 UX/UI 디자인",
+      "company": "NEXON Korea",
+      "year": "2014",
+      "category": "Web Design",
+      "description": "클로저스 CBT 반응형 웹사이트 UX/UI 개발. 사내 최초로 PC/태블릿/모바일 대상 반응형 웹 구현 적용.",
+      "tags": [
+        "Web Design",
+        "Responsive",
+        "Game Promotion",
+        "HTML/CSS"
+      ],
+      "imageUrl": "http://localhost:8080/images/closers_1.jpg",
+      "gradientColors": [
+        "#2196F3",
+        "#1E88E5"
+      ],
+      "role": "Web Designer",
+      "duration": "6개월 (2014)",
+      "teamSize": "10명 (디자이너 2명, 개발자 6명, 기획자 2명)",
+      "mainScreenImages": [
+        "http://localhost:8080/images/closers_1.jpg",
+        "http://localhost:8080/images/closers_2.jpg",
+        "http://localhost:8080/images/closers_3.jpg"
+      ],
+      "isCorporate": false,
+      "order": 5
+    },
+    {
+      "id": "p6",
+      "title": "NEXON PROMOTION",
+      "subtitle": "넥슨 게임 프로모션 디자인 및 웹 퍼블리싱",
+      "company": "NEXON Korea",
+      "year": "2010.10-2014.12",
+      "category": "Web Design",
+      "description": "넥슨 라이브 게임들의 대규모 업데이트 및 신작 론칭 프로모션 웹사이트 UX/UI 디자인 및 퍼블리싱 총괄. 사내 표준 마크업 가이드 준수 및 크로스 브라우징 완벽 구현.",
+      "tags": [
+        "Web Design",
+        "Promotion",
+        "HTML/CSS",
+        "Photoshop"
+      ],
+      "imageUrl": "http://localhost:8080/images/promotion_1.jpg",
+      "gradientColors": [
+        "#FF9800",
+        "#FF5722"
+      ],
+      "role": "Senior Web Designer",
+      "duration": "4년 (2010-2014)",
+      "teamSize": "8명 (디자이너 2명, 개발자 4명, PM 2명)",
+      "mainScreenImages": [
+        "http://localhost:8080/images/promotion_1.jpg",
+        "http://localhost:8080/images/promotion_2.jpg"
+      ],
+      "isCorporate": false,
+      "order": 6
     }
   ],
   "profile": {
@@ -124,7 +221,7 @@
       "company": "(주)코드브릿지엑스",
       "role": "팀원",
       "period": "2025.10 - 2026.01",
-      "description": "제조 MES 및 ERP 시스템 UX/UI 기획 및 Claude/Gemini/Midjourney 활용 프로세스 혁신",
+      "description": "제조 MES 및 ERP 시스템 UX/UI 설계 및 디자인·개발 협업 프로세스 혁신",
       "tags": [
         "Enterprise System",
         "AI Workflow"
@@ -234,9 +331,9 @@
       "id": "edu2",
       "school": "청강문화산업대학교",
       "degree": "전문학사",
-      "major": "애니메이션과 3D전공",
+      "major": "애니메이션과 (3D)",
       "period": "1999.03 - 2004.02",
-      "description": "청강문화산업대학교 애니메이션과 3D전공(주간) 졸업 (3.34/4.2)",
+      "description": "청강문화산업대학교 애니메이션과 (3D) 졸업 (3.34/4.2)",
       "order": 2
     }
   ],

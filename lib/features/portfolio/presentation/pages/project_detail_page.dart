@@ -9,6 +9,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/widgets/scroll_reveal_widget.dart';
 import '../../../home/data/models/project_model.dart';
 import '../../../home/data/providers/content_provider.dart';
+import '../../../home/presentation/widgets/web_optimized_image.dart';
 
 class ProjectDetailPage extends ConsumerStatefulWidget {
   final String projectId;
@@ -159,6 +160,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
       };
     }
 
+    print('PROJECT DETAIL PAGE - ID: ${widget.projectId}, TITLE: ${projectData?["title"]}, IMAGES: ${projectData?["mainScreenImages"]}');
+
     if (projectData == null) {
       return Scaffold(
         body: Center(
@@ -226,13 +229,12 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 // Hero Section
                 _buildHeroSection(projectData, isMobile, isTablet, isDark),
 
-                // Project Image
-                if (projectData['imageUrl'] != null)
-                  _buildProjectImage(
-                    projectData['imageUrl'],
-                    isMobile,
-                    isTablet,
-                  ),
+                // Project Image(s)
+                _buildProjectImages(
+                  projectData,
+                  isMobile,
+                  isTablet,
+                ),
 
                 // Project Info
                 _buildProjectInfo(projectData, isMobile, isTablet, isDark),
@@ -250,12 +252,24 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                   ),
 
                 // Main Screens Gallery (New)
-                _buildGallery(
-                  List<String>.from(projectData['mainScreenImages'] ?? []),
-                  isMobile,
-                  isTablet,
-                  isDark,
-                ),
+                if (!(projectData['company']?.toString().toLowerCase().contains('hyundai ht') == true &&
+                    (projectData['title']?.toString().toLowerCase().contains('wallpad') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('월패드') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('home') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('홈') == true)) &&
+                    !(projectData['title']?.toString().toLowerCase().contains('soulark') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('소울아크') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('promotion') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('프로모션') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('farm') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('농가') == true ||
+                     projectData['title']?.toString().toLowerCase().contains('농업') == true))
+                  _buildGallery(
+                    List<String>.from(projectData['mainScreenImages'] ?? []),
+                    isMobile,
+                    isTablet,
+                    isDark,
+                  ),
 
                 // Design System Analysis (New)
                 _buildDesignSystem(projectData, isMobile, isTablet, isDark),
@@ -369,7 +383,9 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                     ],
                   ),
                   clipBehavior: Clip.antiAlias,
-                  child: Image.network(images[index], fit: BoxFit.cover),
+                  child: images[index].startsWith('http')
+                      ? Image.network(images[index], fit: BoxFit.cover)
+                      : Image.asset(images[index], fit: BoxFit.cover),
                 );
               },
             ),
@@ -514,67 +530,179 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     );
   }
 
-  Widget _buildProjectImage(String imageUrl, bool isMobile, bool isTablet) {
+  Widget _buildProjectImages(Map<String, dynamic> projectData, bool isMobile, bool isTablet) {
+    final title = projectData['title']?.toString().toLowerCase() ?? '';
+    final company = projectData['company']?.toString().toLowerCase() ?? '';
+    final isWallpad = company.contains('hyundai ht') && (title.contains('wallpad') || title.contains('월패드'));
+    final isHtHome = company.contains('hyundai ht') && (title.contains('home') || title.contains('홈'));
+    final isSoulark = title.contains('soulark') || title.contains('소울아크');
+    final isClosers = title.contains('closers') || title.contains('클로저스');
+    final isPromotion = title.contains('promotion') || title.contains('프로모션');
+    final isFarm = title.contains('farm') || title.contains('농가') || title.contains('농업');
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm) {
+      return const SizedBox.shrink();
+    }
+
+    final isNetwork = projectData['imageUrl'] != null && projectData['imageUrl']!.toString().startsWith('http');
+    
+    final List<Map<String, dynamic>> imagesToRender;
+    if (isWallpad) {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/ht_01.jpg' : 'assets/images/ht_01.jpg',
+          'ratio': 13020 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/ht_02_1.jpg' : 'assets/images/ht_02_1.jpg',
+          'ratio': 9540 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/ht_02_2.jpg' : 'assets/images/ht_02_2.jpg',
+          'ratio': 9541 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/ht_03_1.jpg' : 'assets/images/ht_03_1.jpg',
+          'ratio': 9789 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/ht_03_2.jpg' : 'assets/images/ht_03_2.jpg',
+          'ratio': 9790 / 1920,
+        },
+      ];
+    } else if (isHtHome) {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1.jpg' : 'assets/images/hthome_01_1.jpg',
+          'ratio': 9899 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2.jpg' : 'assets/images/hthome_01_2.jpg',
+          'ratio': 9899 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_3.jpg' : 'assets/images/hthome_01_3.jpg',
+          'ratio': 9900 / 1920,
+        },
+      ];
+    } else if (isSoulark) {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/soulark_1.jpg' : 'assets/images/soulark_1.jpg',
+          'ratio': 7706 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/soulark_2.jpg' : 'assets/images/soulark_2.jpg',
+          'ratio': 7706 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/soulark_3.jpg' : 'assets/images/soulark_3.jpg',
+          'ratio': 7706 / 1920,
+        },
+      ];
+    } else if (isClosers) {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/closers_1.jpg' : 'assets/images/closers_1.jpg',
+          'ratio': 6652 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/closers_2.jpg' : 'assets/images/closers_2.jpg',
+          'ratio': 6652 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/closers_3.jpg' : 'assets/images/closers_3.jpg',
+          'ratio': 6654 / 1920,
+        },
+      ];
+    } else if (isPromotion) {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/promotion_1.jpg' : 'assets/images/promotion_1.jpg',
+          'ratio': 5993 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/promotion_2.jpg' : 'assets/images/promotion_2.jpg',
+          'ratio': 5994 / 1920,
+        },
+      ];
+    } else {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/farm_1.jpg' : 'assets/images/farm_1.jpg',
+          'ratio': 6043 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/farm_2.jpg' : 'assets/images/farm_2.jpg',
+          'ratio': 6043 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/farm_3.jpg' : 'assets/images/farm_3.jpg',
+          'ratio': 6043 / 1920,
+        },
+      ];
+    }
+
     return ScrollRevealWidget(
       delay: const Duration(milliseconds: 500),
       child: Container(
         width: double.infinity,
         padding: EdgeInsets.zero,
         child: Center(
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: double.infinity),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
-                  blurRadius: 20,
-                  offset: const Offset(0, 10),
-                ),
-              ],
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: imageUrl.toLowerCase().endsWith('.svg')
-                  ? SvgPicture.network(
-                      imageUrl,
-                      fit: BoxFit.contain,
-                      placeholderBuilder: (context) => Container(
-                        height: 400,
-                        color: AppColors.charcoal,
-                        child: const Center(child: CircularProgressIndicator()),
-                      ),
-                    )
-                  : Container(
-                      color: AppColors.charcoal,
-                      child: Image.network(
-                        imageUrl,
-                        fit: BoxFit.fitWidth,
-                        filterQuality: FilterQuality.high,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return Container(
-                            height: 400,
-                            width: double.infinity,
-                            color: AppColors.charcoal,
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                value:
-                                    loadingProgress.expectedTotalBytes != null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: imagesToRender.map((imgData) {
+                final String imgUrl = imgData['url'] as String;
+                final double ratio = imgData['ratio'] as double;
+                final double calculatedHeight = screenWidth * ratio;
+
+                if (imgUrl.startsWith('http')) {
+                  return WebOptimizedImage(
+                    imageUrl: imgUrl,
+                    width: screenWidth,
+                    height: calculatedHeight,
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.topCenter,
+                    loadingWidget: SizedBox(
+                      height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                      child: const Center(child: CircularProgressIndicator()),
                     ),
+                  );
+                } else {
+                  return Image.asset(
+                    imgUrl,
+                    width: screenWidth,
+                    height: calculatedHeight,
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.topCenter,
+                    errorBuilder: (context, error, stackTrace) {
+                      return SizedBox(
+                        height: 300,
+                        child: Center(
+                          child: Text(
+                            'Asset not found: $imgUrl',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+              }).toList(),
             ),
           ),
         ),
       ),
     );
+  }
+
+  // Helper placeholder for backward compatibility
+  Widget _buildProjectImage(String imageUrl, bool isMobile, bool isTablet) {
+    return const SizedBox.shrink();
   }
 
   Widget _buildBackButton(bool isMobile, bool isDark) {

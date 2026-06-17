@@ -12,6 +12,9 @@ class AppConstants {
   static const String email = 'coyotejw@naver.com';
   static const String phone = '010-4375-3599';
 
+  // Admin Firebase Auth UID restriction
+  static const String adminUid = 'Pj2Muxk8p0R8E1S5mN8qgM0k7x23'; // Replace with actual Firebase Auth UID if different
+
   // Experience
   static const int yearsOfExperience = 19;
   static const String role = 'Senior Product Designer';

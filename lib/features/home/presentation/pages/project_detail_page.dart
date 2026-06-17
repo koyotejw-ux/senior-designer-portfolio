@@ -183,68 +183,436 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                   orElse: () => throw Exception('Project not found'),
                 );
 
-                Widget imageWidget;
-                if (project.imageUrl != null && project.imageUrl!.isNotEmpty) {
-                  if (project.imageUrl!.startsWith('http')) {
-                    // Use WebOptimizedImage for network images to bypass WebGL limits
-                    imageWidget = WebOptimizedImage(
-                      imageUrl: project.imageUrl!,
-                      fit: BoxFit.fitWidth,
-                      alignment: Alignment.topCenter,
-                      loadingWidget: const SizedBox(
-                        height: 300,
-                        child: Center(child: CircularProgressIndicator()),
-                      ),
-                      errorWidget: const SizedBox(
-                        height: 300,
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.broken_image,
-                                color: Colors.white,
-                                size: 48,
-                              ),
-                              SizedBox(height: 16),
-                              Text(
-                                'Failed to load image',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    imageWidget = Image.asset(
-                      project.imageUrl!,
-                      fit: BoxFit.fitWidth,
-                      alignment: Alignment.topCenter,
-                      errorBuilder: (context, error, stackTrace) {
-                        return SizedBox(
-                          height: 300,
-                          child: Center(
-                            child: Text(
-                              'Asset not found: ${project.imageUrl}',
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        );
+                  final title = project.title.toLowerCase();
+                  final company = project.company.toLowerCase();
+                  final isWallpad = company.contains('hyundai ht') && (title.contains('wallpad') || title.contains('월패드'));
+                  final isHtHome = company.contains('hyundai ht') && (title.contains('home') || title.contains('홈'));
+                  final isSoulark = title.contains('soulark') || title.contains('소울아크');
+                  final isClosers = title.contains('closers') || title.contains('클로저스');
+                  final isPromotion = title.contains('promotion') || title.contains('프로모션');
+                  final isFarm = title.contains('farm') || title.contains('농가') || title.contains('농업');
+                  final screenWidth = MediaQuery.of(context).size.width;
+
+                  Widget imageWidget;
+                  if (isWallpad) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> wallpadImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_01.jpg' : 'assets/images/ht_01.jpg',
+                        'ratio': 13020 / 1920,
                       },
-                    );
-                  }
-                } else {
-                  imageWidget = const SizedBox(
-                    height: 300,
-                    child: Center(
-                      child: Text(
-                        'No image provided',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  );
-                }
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_02_1.jpg' : 'assets/images/ht_02_1.jpg',
+                        'ratio': 9540 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_02_2.jpg' : 'assets/images/ht_02_2.jpg',
+                        'ratio': 9541 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_03_1.jpg' : 'assets/images/ht_03_1.jpg',
+                        'ratio': 9789 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_03_2.jpg' : 'assets/images/ht_03_2.jpg',
+                        'ratio': 9790 / 1920,
+                      },
+                    ];
+
+                   imageWidget = Column(
+                     mainAxisSize: MainAxisSize.min,
+                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                     children: wallpadImages.map((imgData) {
+                       final String imgUrl = imgData['url'] as String;
+                       final double ratio = imgData['ratio'] as double;
+                       final double calculatedHeight = screenWidth * ratio;
+
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
+                     }).toList(),
+                   );
+                 } else if (isHtHome) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> htHomeImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1.jpg' : 'assets/images/hthome_01_1.jpg',
+                        'ratio': 9899 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2.jpg' : 'assets/images/hthome_01_2.jpg',
+                        'ratio': 9899 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_3.jpg' : 'assets/images/hthome_01_3.jpg',
+                        'ratio': 9900 / 1920,
+                      },
+                    ];
+
+                   imageWidget = Column(
+                     mainAxisSize: MainAxisSize.min,
+                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                     children: htHomeImages.map((imgData) {
+                       final String imgUrl = imgData['url'] as String;
+                       final double ratio = imgData['ratio'] as double;
+                       final double calculatedHeight = screenWidth * ratio;
+
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
+                     }).toList(),
+                   );
+                 } else if (isSoulark) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> soularkImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/soulark_1.jpg' : 'assets/images/soulark_1.jpg',
+                        'ratio': 7706 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/soulark_2.jpg' : 'assets/images/soulark_2.jpg',
+                        'ratio': 7706 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/soulark_3.jpg' : 'assets/images/soulark_3.jpg',
+                        'ratio': 7706 / 1920,
+                      },
+                    ];
+
+                   imageWidget = Column(
+                     mainAxisSize: MainAxisSize.min,
+                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                     children: soularkImages.map((imgData) {
+                       final String imgUrl = imgData['url'] as String;
+                       final double ratio = imgData['ratio'] as double;
+                       final double calculatedHeight = screenWidth * ratio;
+
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
+                     }).toList(),
+                   );
+                 } else if (isClosers) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> closersImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/closers_1.jpg' : 'assets/images/closers_1.jpg',
+                        'ratio': 6652 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/closers_2.jpg' : 'assets/images/closers_2.jpg',
+                        'ratio': 6652 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/closers_3.jpg' : 'assets/images/closers_3.jpg',
+                        'ratio': 6654 / 1920,
+                      },
+                    ];
+
+                   imageWidget = Column(
+                     mainAxisSize: MainAxisSize.min,
+                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                     children: closersImages.map((imgData) {
+                       final String imgUrl = imgData['url'] as String;
+                       final double ratio = imgData['ratio'] as double;
+                       final double calculatedHeight = screenWidth * ratio;
+
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
+                     }).toList(),
+                   );
+                 } else if (isPromotion) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> promotionImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/promotion_1.jpg' : 'assets/images/promotion_1.jpg',
+                        'ratio': 5993 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/promotion_2.jpg' : 'assets/images/promotion_2.jpg',
+                        'ratio': 5994 / 1920,
+                      },
+                    ];
+
+                   imageWidget = Column(
+                     mainAxisSize: MainAxisSize.min,
+                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                     children: promotionImages.map((imgData) {
+                       final String imgUrl = imgData['url'] as String;
+                       final double ratio = imgData['ratio'] as double;
+                       final double calculatedHeight = screenWidth * ratio;
+
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
+                     }).toList(),
+                   );
+                 } else if (isFarm) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> farmImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/farm_1.jpg' : 'assets/images/farm_1.jpg',
+                        'ratio': 6043 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/farm_2.jpg' : 'assets/images/farm_2.jpg',
+                        'ratio': 6043 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/farm_3.jpg' : 'assets/images/farm_3.jpg',
+                        'ratio': 6043 / 1920,
+                      },
+                    ];
+
+                   imageWidget = Column(
+                     mainAxisSize: MainAxisSize.min,
+                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                     children: farmImages.map((imgData) {
+                       final String imgUrl = imgData['url'] as String;
+                       final double ratio = imgData['ratio'] as double;
+                       final double calculatedHeight = screenWidth * ratio;
+
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
+                     }).toList(),
+                   );
+                 } else if (project.imageUrl != null && project.imageUrl!.isNotEmpty) {
+                   if (project.imageUrl!.startsWith('http')) {
+                     // Use WebOptimizedImage for network images to bypass WebGL limits
+                     imageWidget = WebOptimizedImage(
+                       imageUrl: project.imageUrl!,
+                       fit: BoxFit.fitWidth,
+                       alignment: Alignment.topCenter,
+                       loadingWidget: const SizedBox(
+                         height: 300,
+                         child: Center(child: CircularProgressIndicator()),
+                       ),
+                       errorWidget: const SizedBox(
+                         height: 300,
+                         child: Center(
+                           child: Column(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: [
+                               Icon(
+                                 Icons.broken_image,
+                                 color: Colors.white,
+                                 size: 48,
+                               ),
+                               SizedBox(height: 16),
+                               Text(
+                                 'Failed to load image',
+                                 style: TextStyle(color: Colors.white),
+                               ),
+                             ],
+                           ),
+                         ),
+                       ),
+                     );
+                   } else {
+                     imageWidget = Image.asset(
+                       project.imageUrl!,
+                       fit: BoxFit.fitWidth,
+                       alignment: Alignment.topCenter,
+                       errorBuilder: (context, error, stackTrace) {
+                         return SizedBox(
+                           height: 300,
+                           child: Center(
+                             child: Text(
+                               'Asset not found: ${project.imageUrl}',
+                               style: const TextStyle(color: Colors.white),
+                             ),
+                           ),
+                         );
+                       },
+                     );
+                   }
+                 } else {
+                   imageWidget = const SizedBox(
+                     height: 300,
+                     child: Center(
+                       child: Text(
+                         'No image provided',
+                         style: TextStyle(color: Colors.white),
+                       ),
+                     ),
+                   );
+                 }
 
                 return SingleChildScrollView(
                   controller: _scrollController,

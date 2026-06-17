@@ -713,6 +713,38 @@ class _ResumePageState extends ConsumerState<ResumePage>
   Widget _buildExperienceTimeline(bool isDark, bool isMobile, bool isTablet) {
     final experiences = [
       {
+        'company': 'Independent Projects (Personal)',
+        'position': '1인 풀스택 개발',
+        'period': '2026.01 - 현재',
+        'projects': [
+          'ChatGPT Codex, Gemini Antigravity, Anthropic Claude 등 최신 LLM 에이전트와의 페어 프로그래밍을 통한 초고속 1인 풀스택 개발 프로세스 구축',
+          'Flutter 및 Unity3D를 연동하여 기획부터 UI/UX 디자인, 클라이언트/서버 개발, 앱스토어 심사 통과까지 개발 라이프사이클 전 과정 주도',
+          'AI 에이전트를 연동한 글로벌 다국어 SEO/ASO(앱스토어 최적화), 마케팅 크리에이티브 및 글로벌 광고 카피라이팅/프로모션 자동화 파이프라인 수립',
+        ],
+        'achievements': [
+          '전통적 개발 프로세스 대비 리드타임 70% 단축 및 글로벌 22개국 다국어 로컬라이징 앱 6종 단독 출시 완료',
+          '구글 애드몹(AdMob) 및 인앱 결제(IAP) 연동을 통한 비즈니스 모델(BM) 구축 및 글로벌 수익화 달성',
+        ],
+        'color': const Color(0xFFE91E63),
+      },
+      {
+        'company': '(주)코드브릿지엑스',
+        'position': '개발팀 / 연구원(팀원)',
+        'period': '2025.09 - 2026.01',
+        'projects': [
+          '실시간 댓글 피드와 커뮤니케이션 기능을 내장한 온라인 기획서 플랫폼을 구축하여 기획-개발 간 소통 공정 일원화',
+          'Figma 기반 High-Fidelity 반응형 프로토타입 설계를 도입하여 개발자 코드 커스터마이징 생산성 극대화',
+          '디자인 토큰과 디자인 시스템 에셋을 모니터링하고 일관되게 제어하는 디자인 시스템 관리자 화면(Admin UI) 기획 및 개발',
+          '프로세스 데이터 신뢰성 확보를 위한 단위/통합 테스트 기획 버전 검증 툴을 설계 및 개발하여 예외 리스크 사전 예방',
+          '브랜드 아이덴티티 수립을 위한 CI/BI 리뉴얼 작업 및 서식류(명함 등) 비주얼 가이드라인 디자인',
+        ],
+        'achievements': [
+          '디자인-개발 공정 정합성 보장을 위한 Git 기반 형상 관리 및 버전 제어 프로세스 도입',
+          'MES/ERP 시스템 디자인 개발 완성률 100% 및 마일스톤 일정 준수율 100% 달성',
+        ],
+        'color': const Color(0xFF9C27B0),
+      },
+      {
         'company': '아이엔지피플',
         'position': 'UX팀 / 매니저',
         'period': '2025.01 - 2025.06',
@@ -1225,7 +1257,7 @@ class _ResumePageState extends ConsumerState<ResumePage>
         'icon': Icons.school,
       },
       {
-        'title': '청강문화산업대학교 애니메이션과 3D전공',
+        'title': '청강문화산업대학교 애니메이션과 (3D)',
         'subtitle': '학점: 3.34/4.2',
         'period': '1999.03 - 2004.02',
         'icon': Icons.school,

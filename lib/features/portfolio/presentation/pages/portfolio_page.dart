@@ -34,6 +34,40 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
 
   final List<Map<String, dynamic>> _projects = [
     {
+      'id': 'p7',
+      'title': 'FARM SYSTEM',
+      'subtitle': '스마트 농가 모니터링 시스템 UX/UI',
+      'company': 'Smart Farm Solution',
+      'year': '2023-2024',
+      'category': 'IoT Device',
+      'description': '농가 온습도 모니터링, 급수 및 조명 제어, 작물 상태 진단 등 스마트 팜 IoT 관리 화면 기획 및 UI 설계.',
+      'tags': ['IoT Device', 'Dashboard', 'Design System', 'Figma'],
+      'gradient': [AppColors.highlightGreen, AppColors.accentCyan],
+      'imageUrl': 'assets/images/farm_1.jpg',
+      'mainScreenImages': [
+        'assets/images/farm_1.jpg',
+        'assets/images/farm_2.jpg',
+        'assets/images/farm_3.jpg'
+      ],
+      'details': {
+        'role': 'Lead Product Designer',
+        'duration': '6개월 (2023-2024)',
+        'teamSize': '6명 (디자이너 1명, 개발자 4명, PM 1명)',
+        'achievements': [
+          '농가 실시간 모니터링 대시보드 UI 설계',
+          '원격 기기 제어(급수, 조명) 사용자 시나리오 정의',
+          '데이터 수집 및 통계 시각화 구현',
+          '현장 필드 테스트 피드백 반영 사용성 개선',
+        ],
+        'technologies': [
+          'Figma',
+          'IoT Device',
+          'Design System',
+          'Dashboard',
+        ],
+      },
+    },
+    {
       'id': 'aia-senior-mode',
       'title': 'AIA+ SENIOR MODE',
       'subtitle': '고령자 전용 모드 UX/UI 디자인 시스템',
@@ -64,24 +98,33 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     },
     {
       'id': 'wallpad',
-      'title': 'WALLPAD',
-      'subtitle': '현대건설 전용 13.3인치 안드로이드 월패드',
+      'title': '현대에이치티 월패드',
+      'subtitle': 'HT 범용 안드로이드 월패드 디자인 시스템',
       'company': 'Hyundai HT',
-      'year': '2021-2023',
+      'year': '2018-2023',
       'category': 'IoT Device',
       'description':
-          'HT 범용 월패드 디자인 시스템 구축. 현대/포스코/금호/한양/한화 등 고객사 맞춤형 월패드(7~24인치) UX/UI 기획 및 통합 디자인 시스템 적용.',
-      'tags': ['IoT UI/UX', 'Android', 'Design System', 'Figma'],
+          '동종 업계 1위 유지 기반 HT 안드로이드 월패드 라인업 UX 설계 프로세스 체계화. 현대/포스코/금호/한양/한화/대림 등 고객사 맞춤형 월패드(7~24인치) UX/UI 기획 및 통합 디자인 시스템 적용.',
+      'tags': ['Figma', 'Android', 'Design System', 'IoT UI/UX'],
       'gradient': [AppColors.primaryBlue, AppColors.accentCyan],
+      'imageUrl': 'assets/images/ht_01.jpg',
+      'mainScreenImages': [
+        'assets/images/ht_01.jpg',
+        'assets/images/ht_02_1.jpg',
+        'assets/images/ht_02_2.jpg',
+        'assets/images/ht_03_1.jpg',
+        'assets/images/ht_03_2.jpg'
+      ],
       'details': {
-        'role': 'Lead Product Designer',
-        'duration': '2년 (2021-2023)',
-        'teamSize': '12명 (디자이너 3명, 개발자 7명, PM 2명)',
+        'role': 'Product Lead',
+        'duration': '5년 7개월 (2018-2023)',
+        'teamSize': '15명 (디자이너 3명, 개발자 10명, PM 2명)',
         'achievements': [
-          '5개 건설사 대응 가능한 범용 디자인 시스템 구축',
-          '7인치~24인치 디바이스 대응 반응형 UI 설계',
+          '동종 업계 1위 유지 기반 UX 설계 프로세스 체계화',
+          '5개 건설사 대응 범용 디자인 시스템 구축',
+          '7~24인치 디바이스 대응 반응형 UI 설계',
           '월패드-앱 연동 UX 최적화',
-          '디자인 시스템 문서화 및 가이드라인 제작',
+          'HT 범용 월패드 전용 디자인 시스템 구축 및 전 제품군 적용',
         ],
         'technologies': ['Figma', 'Android', 'IoT', 'Design System', 'Zeplin'],
       },
@@ -97,6 +140,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           'HT HOME 및 HT Imazu 앱 앱스토어 론칭. 월패드와 통합 연동 최적화 및 사용자 접점 확대.',
       'tags': ['Mobile App', 'iOS', 'Android', 'Smart Home'],
       'gradient': [AppColors.blue400, AppColors.accentCyan],
+      'imageUrl': 'assets/images/hthome_01_1.jpg',
+      'mainScreenImages': [
+        'assets/images/hthome_01_1.jpg',
+        'assets/images/hthome_01_2.jpg',
+        'assets/images/hthome_01_3.jpg'
+      ],
       'details': {
         'role': 'Senior Product Designer',
         'duration': '2년 (2021-2023)',
@@ -117,7 +166,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       },
     },
     {
-      'id': 'soulark',
+      'id': 'p4',
       'title': 'SOULARK',
       'subtitle': '모바일 게임 UX/UI 디자인',
       'company': 'BluestoneSoft',
@@ -127,6 +176,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           'SOULARK 모바일 게임의 전반적인 UX/UI 개발. Unity3D 기반 GUI 인터랙션 및 애니메이션 설계.',
       'tags': ['Game UI', 'Unity3D', 'Mobile', 'Photoshop'],
       'gradient': [AppColors.highlightGreen, AppColors.accentCyan],
+      'imageUrl': 'assets/images/soulark_1.jpg',
+      'mainScreenImages': [
+        'assets/images/soulark_1.jpg',
+        'assets/images/soulark_2.jpg',
+        'assets/images/soulark_3.jpg'
+      ],
       'details': {
         'role': 'UI/UX Designer',
         'duration': '1년 (2016-2017)',
@@ -141,7 +196,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       },
     },
     {
-      'id': 'closers',
+      'id': 'p5',
       'title': 'CLOSERS',
       'subtitle': '클로저스 웹사이트 UX/UI 디자인',
       'company': 'NEXON Korea',
@@ -151,6 +206,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           '클로저스 CBT 반응형 웹사이트 UX/UI 개발. 사내 최초로 PC/태블릿/모바일 대상 반응형 웹 구현 적용.',
       'tags': ['Web Design', 'Responsive', 'Game Promotion', 'HTML/CSS'],
       'gradient': [AppColors.primaryBlue, AppColors.blue400],
+      'imageUrl': 'assets/images/closers_1.jpg',
+      'mainScreenImages': [
+        'assets/images/closers_1.jpg',
+        'assets/images/closers_2.jpg',
+        'assets/images/closers_3.jpg'
+      ],
       'details': {
         'role': 'Web Designer',
         'duration': '6개월 (2014)',
@@ -167,6 +228,41 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
           'JavaScript',
           'Responsive Design',
           'Photoshop',
+        ],
+      },
+    },
+    {
+      'id': 'p6',
+      'title': 'NEXON PROMOTION',
+      'subtitle': '넥슨 게임 프로모션 디자인 및 웹 퍼블리싱',
+      'company': 'NEXON Korea',
+      'year': '2010.10-2014.12',
+      'category': 'Web Design',
+      'description':
+          '넥슨 라이브 게임들의 대규모 업데이트 및 신작 론칭 프로모션 웹사이트 UX/UI 디자인 및 퍼블리싱 총괄. 사내 표준 마크업 가이드 준수 및 크로스 브라우징 완벽 구현.',
+      'tags': ['Web Design', 'Promotion', 'HTML/CSS', 'Photoshop'],
+      'gradient': [AppColors.accentCyan, AppColors.highlightGreen],
+      'imageUrl': 'assets/images/promotion_1.jpg',
+      'mainScreenImages': [
+        'assets/images/promotion_1.jpg',
+        'assets/images/promotion_2.jpg'
+      ],
+      'details': {
+        'role': 'Senior Web Designer',
+        'duration': '4년 (2010-2014)',
+        'teamSize': '8명 (디자이너 2명, 개발자 4명, PM 2명)',
+        'achievements': [
+          '넥슨 라이브 게임 업데이트 프로모션 총괄',
+          '사내 웹 표준 가이드라인 수립 및 크로스 브라우징 보장',
+          '프로모션 페이지 방문율 및 이벤트 참여율 향상',
+          'SEO 및 로딩 최적화를 통한 성능 개선',
+        ],
+        'technologies': [
+          'HTML5',
+          'CSS3',
+          'JavaScript',
+          'Photoshop',
+          'Illustrator',
         ],
       },
     },

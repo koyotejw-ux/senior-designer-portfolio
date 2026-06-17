@@ -10,6 +10,8 @@ import '../../features/resume/presentation/pages/resume_page.dart';
 import '../../features/admin/presentation/pages/admin_page.dart';
 import '../../features/career/presentation/pages/career_description_page.dart';
 import '../../features/cover_letter/presentation/pages/cover_letter_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../constants/app_constants.dart';
 
 class AppRouter {
   AppRouter._();
@@ -79,6 +81,14 @@ class AppRouter {
         path: '/admin/dashboard',
         name: 'admin-dashboard',
         builder: (context, state) => const AdminPage(),
+        redirect: (context, state) {
+          final user = FirebaseAuth.instance.currentUser;
+          final isAdmin = user != null && user.uid == AppConstants.adminUid;
+          if (!isAdmin) {
+            return '/';
+          }
+          return null;
+        },
       ),
     ],
     errorBuilder: (context, state) =>

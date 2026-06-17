@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_provider.dart';
@@ -184,18 +185,32 @@ class ContactSection extends ConsumerWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(width: 8),
-                    // Hidden Admin Access
-                    MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: GestureDetector(
-                        onTap: () => GoRouter.of(context).go('/admin'),
-                        child: Icon(
-                          Icons.admin_panel_settings,
-                          size: 16,
-                          color: AppColors.gray100.withValues(alpha: 0.1),
-                        ),
-                      ),
+                    StreamBuilder<User?>(
+                      stream: FirebaseAuth.instance.authStateChanges(),
+                      builder: (context, snapshot) {
+                        final user = snapshot.data;
+                        final isAdmin = user != null && user.uid == AppConstants.adminUid;
+                        if (!isAdmin) {
+                          return const SizedBox.shrink();
+                        }
+                        return Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(width: 8),
+                            MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: GestureDetector(
+                                onTap: () => GoRouter.of(context).go('/admin'),
+                                child: Icon(
+                                  Icons.admin_panel_settings,
+                                  size: 16,
+                                  color: AppColors.gray100.withValues(alpha: 0.1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),

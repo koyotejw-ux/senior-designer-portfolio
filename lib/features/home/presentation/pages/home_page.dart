@@ -15,6 +15,8 @@ import '../widgets/contact_section.dart';
 import '../widgets/resume_section.dart';
 import '../widgets/section_indicator.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/constants/app_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   final String? initialSection;
@@ -320,26 +322,36 @@ class _HomePageState extends ConsumerState<HomePage>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                AnimatedScale(
-                  scale: _showFab ? 1.0 : 0.0,
-                  duration: const Duration(milliseconds: 300),
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 16),
-                    child: FloatingActionButton(
-                      heroTag: 'admin_fab',
-                      onPressed: () => GoRouter.of(context).go('/admin'),
-                      backgroundColor: Colors.black,
-                      shape: Border.all(
-                        color: AppColors.primaryBlue,
-                        width: 1.5,
+                StreamBuilder<User?>(
+                  stream: FirebaseAuth.instance.authStateChanges(),
+                  builder: (context, snapshot) {
+                    final user = snapshot.data;
+                    final isAdmin = user != null && user.uid == AppConstants.adminUid;
+                    if (!isAdmin) {
+                      return const SizedBox.shrink();
+                    }
+                    return AnimatedScale(
+                      scale: _showFab ? 1.0 : 0.0,
+                      duration: const Duration(milliseconds: 300),
+                      child: Container(
+                        margin: const EdgeInsets.only(bottom: 16),
+                        child: FloatingActionButton(
+                          heroTag: 'admin_fab',
+                          onPressed: () => GoRouter.of(context).go('/admin'),
+                          backgroundColor: Colors.black,
+                          shape: Border.all(
+                            color: AppColors.primaryBlue,
+                            width: 1.5,
+                          ),
+                          child: const Icon(
+                            Icons.admin_panel_settings,
+                            color: AppColors.primaryBlue,
+                            size: 24,
+                          ),
+                        ),
                       ),
-                      child: const Icon(
-                        Icons.admin_panel_settings,
-                        color: AppColors.primaryBlue,
-                        size: 24,
-                      ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 AnimatedScale(
                   scale: _showFab ? 1.0 : 0.0,
