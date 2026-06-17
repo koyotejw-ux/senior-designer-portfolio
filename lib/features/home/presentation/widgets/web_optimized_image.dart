@@ -45,10 +45,15 @@ class _WebOptimizedImageState extends State<WebOptimizedImage> {
     String finalUrl = widget.imageUrl;
     if (finalUrl.startsWith('assets/')) {
       // For GitHub Pages or standard subfolder deploys, we should resolve relative assets properly
-      final baseHref = html.document.getElementsByTagName('base').firstOrNull?.getAttribute('href') ?? '/';
+      final baseElement = html.document.getElementsByTagName('base').firstOrNull;
+      final baseHref = baseElement != null && baseElement is html.HtmlElement ? baseElement.getAttribute('href') ?? '/' : '/';
       finalUrl = baseHref + finalUrl;
       // Clean duplicate slashes
-      finalUrl = finalUrl.replaceAll('//', '/');
+      if (finalUrl.startsWith('/')) {
+        finalUrl = finalUrl.substring(1);
+      }
+      finalUrl = 'senior-designer-portfolio/' + finalUrl;
+      finalUrl = '/' + finalUrl;
     }
 
     // Register a platform view factory for this image
