@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart' as flutter;
 import '../models/project_model.dart';
 import '../models/profile_model.dart';
 import '../models/experience_model.dart';
@@ -17,16 +18,230 @@ class ContentRepository {
 
   Future<Map<String, dynamic>> _fetchData() async {
     try {
-      final response = await http.get(Uri.parse('$_baseUrl/api/data'));
+      final response = await http.get(Uri.parse('$_baseUrl/api/data')).timeout(const Duration(seconds: 2));
       if (response.statusCode == 200) {
         return jsonDecode(response.body) as Map<String, dynamic>;
       }
-      throw Exception('Failed to load data: ${response.statusCode}');
+      throw Exception('Server returned ${response.statusCode}');
     } catch (e) {
-      print('Error fetching data: $e');
-      rethrow;
+      print('Error fetching data from server, falling back to local asset: $e');
+      try {
+        // Fallback to local asset bundle data
+        final localDataStr = await flutter.ServicesBinding.instance.defaultBinaryMessenger.window.useLogoImage? "" : await flutter_services_fallback();
+        return {};
+      } catch (assetErr) {
+        // Return structured static default fallback data to prevent app crashes on web
+        return _getDefaultFallbackData();
+      }
     }
   }
+
+  static Future<String> flutter_services_fallback() async {
+    try {
+      return await flutter.rootBundle.loadString('assets/data/db.json');
+    } catch (_) {
+      try {
+        return await flutter.rootBundle.loadString('server/data/db.json');
+      } catch (_) {
+        return '{}';
+      }
+    }
+  }
+
+  Map<String, dynamic> _getDefaultFallbackData() {
+    return {
+      "projects": [
+        {
+          "id": "p7",
+          "title": "FARM SYSTEM",
+          "subtitle": "스마트 농가 모니터링 시스템 UX/UI",
+          "company": "Smart Farm Solution",
+          "year": "2023.10-2024.03",
+          "category": "IoT Device",
+          "description": "농가 온습도 모니터링, 급수 및 조명 제어, 작물 상태 진단 등 스마트 팜 IoT 관리 화면 기획 및 UI 설계.",
+          "tags": ["IoT Device", "Dashboard", "Design System", "Figma"],
+          "imageUrl": "assets/images/farm_1.jpg",
+          "gradientColors": ["#4CAF50", "#8BC34A"],
+          "role": "Lead Product Designer",
+          "duration": "6개월 (2023.10-2024.03)",
+          "teamSize": "6명 (디자이너 1명, 개발자 4명, PM 1명)",
+          "mainScreenImages": [
+            "assets/images/farm_1.jpg",
+            "assets/images/farm_2.jpg",
+            "assets/images/farm_3.jpg"
+          ],
+          "isCorporate": false,
+          "order": 0
+        },
+        {
+          "id": "p1",
+          "title": "AIA+ SENIOR MODE",
+          "subtitle": "고령자 전용 모드 UX/UI 디자인 시스템",
+          "company": "ING People",
+          "year": "2025.02-2025.06",
+          "category": "Mobile App",
+          "description": "AIA 생명 앱 Phase2 고령자 전용 모드 메인 UX 기획 및 디자인 시스템 구축. 보험료 납입, 보험계약대출 상환, 자동부활 신청, 자동송금 신청 등 핵심 GUI 정의. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100% 달성.",
+          "tags": ["Figma", "Mobile UX", "Design System", "Accessibility"],
+          "imageUrl": "assets/images/aia_1.jpg",
+          "gradientColors": ["#2196F3", "#00BCD4"],
+          "order": 1
+        },
+        {
+          "id": "p2",
+          "title": "현대에이치티 월패드",
+          "subtitle": "HT 범용 안드로이드 월패드 디자인 시스템",
+          "company": "Hyundai HT",
+          "year": "2018.05-2023.12",
+          "category": "IoT Device",
+          "description": "동종 업계 1위 유지 기반 HT 안드로이드 월패드 라인업 UX 설계 프로세스 체계화. 현대/포스코/금호/한양/한화/대림 등 고객사 맞춤형 월패드(7~24인치) UX/UI 기획 및 통합 디자인 시스템 적용. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100%.",
+          "tags": ["Figma", "Android", "Design System", "IoT UI/UX"],
+          "imageUrl": "assets/images/ht_01.jpg",
+          "gradientColors": ["#1976D2", "#00BCD4"],
+          "role": "Product Lead",
+          "duration": "5년 7개월 (2018.05-2023.12)",
+          "teamSize": "15명 (디자이너 3명, 개발자 10명, PM 2명)",
+          "mainScreenImages": [
+            "assets/images/ht_01.jpg",
+            "assets/images/ht_02_1.jpg",
+            "assets/images/ht_02_2.jpg",
+            "assets/images/ht_03_1.jpg",
+            "assets/images/ht_03_2.jpg"
+          ],
+          "isCorporate": false,
+          "order": 2
+        },
+        {
+          "id": "p3",
+          "title": "HT HOME 2.0",
+          "subtitle": "주거전용 스마트홈 통합 앱",
+          "company": "Hyundai HT",
+          "year": "2021.07-2023.04",
+          "category": "Mobile App",
+          "description": "HT HOME 및 HT Imazu 앱 앱스토어 정식 론칭. 월패드와 통합 연동 최적화 및 사용자 접점 확대. 스마트홈 IoT 기기 통합 제어 UX 설계.",
+          "tags": ["Mobile App", "iOS", "Android", "Smart Home"],
+          "imageUrl": "assets/images/hthome_01_1.jpg",
+          "gradientColors": ["#42A5F5", "#00BCD4"],
+          "role": "Senior Product Designer",
+          "duration": "2년 (2021-2023)",
+          "teamSize": "15명 (디자이너 3명, 개발자 10명, PM 2명)",
+          "mainScreenImages": [
+            "assets/images/hthome_01_1.jpg",
+            "assets/images/hthome_01_2.jpg",
+            "assets/images/hthome_01_3.jpg"
+          ],
+          "isCorporate": false,
+          "order": 3
+        },
+        {
+          "id": "p4",
+          "title": "SOULARK",
+          "subtitle": "모바일 게임 UX/UI 디자인",
+          "company": "BluestoneSoft",
+          "year": "2016-2017",
+          "category": "Game UI",
+          "description": "SOULARK 모바일 게임의 전반적인 UX/UI 개발. Unity3D 기반 GUI 인터랙션 및 애니메이션 설계.",
+          "tags": ["Game UI", "Unity3D", "Mobile", "Photoshop"],
+          "imageUrl": "assets/images/soulark_1.jpg",
+          "gradientColors": ["#4CAF50", "#00BCD4"],
+          "role": "UI/UX Designer",
+          "duration": "1년 (2016-2017)",
+          "teamSize": "20명 (디자이너 4명, 개발자 12명, 기획자 4명)",
+          "mainScreenImages": [
+            "assets/images/soulark_1.jpg",
+            "assets/images/soulark_2.jpg",
+            "assets/images/soulark_3.jpg"
+          ],
+          "isCorporate": false,
+          "order": 4
+        },
+        {
+          "id": "p5",
+          "title": "CLOSERS",
+          "subtitle": "클로저스 웹사이트 UX/UI 디자인",
+          "company": "NEXON Korea",
+          "year": "2014",
+          "category": "Web Design",
+          "description": "클로저스 CBT 반응형 웹사이트 UX/UI 개발. 사내 최초로 PC/태블릿/모바일 대상 반응형 웹 구현 적용.",
+          "tags": ["Web Design", "Responsive", "Game Promotion", "HTML/CSS"],
+          "imageUrl": "assets/images/closers_1.jpg",
+          "gradientColors": ["#2196F3", "#1E88E5"],
+          "role": "Web Designer",
+          "duration": "6개월 (2014)",
+          "teamSize": "10명 (디자이너 2명, 개발자 6명, 기획자 2명)",
+          "mainScreenImages": [
+            "assets/images/closers_1.jpg",
+            "assets/images/closers_2.jpg",
+            "assets/images/closers_3.jpg"
+          ],
+          "isCorporate": false,
+          "order": 5
+        },
+        {
+          "id": "p6",
+          "title": "NEXON PROMOTION",
+          "subtitle": "넥슨 게임 프로모션 디자인 및 웹 퍼블리싱",
+          "company": "NEXON Korea",
+          "year": "2010.10-2014.12",
+          "category": "Web Design",
+          "description": "넥슨 라이브 게임들의 대규모 업데이트 및 신작 론칭 프로모션 웹사이트 UX/UI 디자인 및 퍼블리싱 총괄. 사내 표준 마크업 가이드 준수 및 크로스 브라우징 완벽 구현.",
+          "tags": ["Web Design", "Promotion", "HTML/CSS", "Photoshop"],
+          "imageUrl": "assets/images/promotion_1.jpg",
+          "gradientColors": ["#FF9800", "#FF5722"],
+          "role": "Senior Web Designer",
+          "duration": "4년 (2010-2014)",
+          "teamSize": "8명 (디자이너 2명, 개발자 4명, PM 2명)",
+          "mainScreenImages": [
+            "assets/images/promotion_1.jpg",
+            "assets/images/promotion_2.jpg"
+          ],
+          "isCorporate": false,
+          "order": 6
+        }
+      ],
+      "profile": {
+        "id": "profile",
+        "name": "정재웅 (Jaewoong Jung)",
+        "birth": "1979.08.14",
+        "address": "고양시 덕양구 향기5로 66",
+        "military": "육군 병장 전역 (1999.11 - 2002.01)",
+        "phone": "010-4375-3599",
+        "email": "coyotejw@naver.com",
+        "introduction": "에이전시부터 게임 엔터테인먼트, 제조 디바이스까지 다양한 사업군에서 17년 이상의 UX/UI 수행 경험을 보유한 시니어 프로덕트 디자이너입니다. UX/UI 기획과 디자인 모두 수행 가능하며, Hi-Fi Prototyping 2D/3D 작업이 가능합니다.",
+        "philosophy": "사용자 중심의 디자인 철학을 바탕으로, 복잡한 시스템을 직관적이고 효율적인 인터페이스로 구현합니다. 디자인 시스템 구축과 일관된 사용자 경험 제공을 통해 비즈니스 가치를 창출합니다.",
+        "aspirations": "디자인 그룹 관리 경험(UX/UI 디렉팅/인력관리/외주관리/일정관리/신규업무 생성)을 바탕으로, 효율적인 디자인 프로세스를 체계화하고 조직의 디자인 역량을 강화하는 리더가 되고자 합니다."
+      },
+      "experience": [
+        {
+          "id": "e0",
+          "company": "(주)코드브릿지엑스",
+          "role": "팀원",
+          "period": "2025.10 - 2026.01",
+          "description": "제조 MES 및 ERP 시스템 UX/UI 설계 및 디자인·개발 협업 프로세스 혁신",
+          "tags": ["Enterprise System", "AI Workflow"],
+          "order": 0
+        },
+        {
+          "id": "e1",
+          "company": "ING People",
+          "role": "팀원",
+          "period": "2025.01 - 2025.06",
+          "description": "AIA 생명 앱 고령자 모드 및 토지개발 분석 솔루션 UX/UI 리딩",
+          "tags": ["Fintech", "UX Strategy"],
+          "order": 1
+        },
+        {
+          "id": "e2",
+          "company": "Hyundai HT",
+          "role": "팀장 (수석연구원)",
+          "period": "2018.05 - 2024.03",
+          "description": "스마트홈 월패드 및 모바일 앱 서비스 통합 UX/UI 디자인 총괄",
+          "tags": ["Smart Home", "IoT", "Lead"],
+          "order": 2
+        }
+      ]
+    };
+  }
+
 
   Future<void> _saveData(Map<String, dynamic> data) async {
     try {
