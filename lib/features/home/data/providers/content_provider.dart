@@ -24,15 +24,8 @@ class ContentRepository {
       }
       throw Exception('Server returned ${response.statusCode}');
     } catch (e) {
-      print('Error fetching data from server, falling back to local asset: $e');
-      try {
-        // Fallback to local asset bundle data
-        final localDataStr = await flutter.ServicesBinding.instance.defaultBinaryMessenger.window.useLogoImage? "" : await flutter_services_fallback();
-        return {};
-      } catch (assetErr) {
-        // Return structured static default fallback data to prevent app crashes on web
-        return _getDefaultFallbackData();
-      }
+      print('Error fetching data from server, falling back to local fallback data: $e');
+      return _getDefaultFallbackData();
     }
   }
 
