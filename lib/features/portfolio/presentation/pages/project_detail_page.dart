@@ -635,8 +635,16 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     } else if (isAia) {
       imagesToRender = [
         {
-          'url': isNetwork ? 'http://localhost:8080/images/aia.jpg' : 'assets/images/aia.jpg',
-          'ratio': 16589 / 1920,
+          'url': isNetwork ? 'http://localhost:8080/images/aia_1.jpg' : 'assets/images/aia_1.jpg',
+          'ratio': 5500 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/aia_2.jpg' : 'assets/images/aia_2.jpg',
+          'ratio': 5500 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/aia_3.jpg' : 'assets/images/aia_3.jpg',
+          'ratio': 5589 / 1920,
         },
       ];
     } else {
