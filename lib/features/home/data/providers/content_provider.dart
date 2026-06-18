@@ -75,7 +75,10 @@ class ContentRepository {
           "category": "Mobile App",
           "description": "AIA 생명 앱 Phase2 고령자 전용 모드 메인 UX 기획 및 디자인 시스템 구축. 보험료 납입, 보험계약대출 상환, 자동부활 신청, 자동송금 신청 등 핵심 GUI 정의. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100% 달성.",
           "tags": ["Figma", "Mobile UX", "Design System", "Accessibility"],
-          "imageUrl": "assets/images/project_detail_aia.jpg",
+          "imageUrl": "assets/images/aia_thumbnail.jpg",
+          "mainScreenImages": [
+            "assets/images/aia.jpg"
+          ],
           "gradientColors": ["#2196F3", "#00BCD4"],
           "order": 1
         },

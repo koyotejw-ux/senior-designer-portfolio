@@ -44,7 +44,10 @@
         "Design System",
         "Accessibility"
       ],
-      "imageUrl": "http://localhost:8080/images/1766237810979_aia_1.jpg",
+      "imageUrl": "http://localhost:8080/images/aia_thumbnail.jpg",
+      "mainScreenImages": [
+        "http://localhost:8080/images/aia.jpg"
+      ],
       "gradientColors": [
         "#2196F3",
         "#00BCD4"

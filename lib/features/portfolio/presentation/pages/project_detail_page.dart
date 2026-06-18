@@ -206,6 +206,9 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
       );
     }
 
+    final isAia = projectData['title']?.toString().toLowerCase().contains('aia') == true ||
+        projectData['company']?.toString().toLowerCase().contains('aia') == true;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -237,13 +240,13 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 ),
 
                 // Project Info
-                _buildProjectInfo(projectData, isMobile, isTablet, isDark),
+                if (!isAia) _buildProjectInfo(projectData, isMobile, isTablet, isDark),
 
                 // Overview
-                _buildOverview(projectData, isMobile, isTablet, isDark),
+                if (!isAia) _buildOverview(projectData, isMobile, isTablet, isDark),
 
                 // Challenges & Solutions (Only if available)
-                if ((projectData['challenges'] as List).isNotEmpty)
+                if (!isAia && (projectData['challenges'] as List).isNotEmpty)
                   _buildChallengesSolutions(
                     projectData,
                     isMobile,
@@ -252,7 +255,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                   ),
 
                 // Main Screens Gallery (New)
-                if (!(projectData['company']?.toString().toLowerCase().contains('hyundai ht') == true &&
+                if (!isAia &&
+                    !(projectData['company']?.toString().toLowerCase().contains('hyundai ht') == true &&
                     (projectData['title']?.toString().toLowerCase().contains('wallpad') == true ||
                      projectData['title']?.toString().toLowerCase().contains('월패드') == true ||
                      projectData['title']?.toString().toLowerCase().contains('home') == true ||
@@ -272,18 +276,18 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                   ),
 
                 // Design System Analysis (New)
-                _buildDesignSystem(projectData, isMobile, isTablet, isDark),
+                if (!isAia) _buildDesignSystem(projectData, isMobile, isTablet, isDark),
 
                 // Process (Only if available)
-                if ((projectData['process'] as List).isNotEmpty)
+                if (!isAia && (projectData['process'] as List).isNotEmpty)
                   _buildProcess(projectData, isMobile, isTablet, isDark),
 
                 // Achievements (Only if available)
-                if ((projectData['achievements'] as List).isNotEmpty)
+                if (!isAia && (projectData['achievements'] as List).isNotEmpty)
                   _buildAchievements(projectData, isMobile, isTablet, isDark),
 
                 // Technologies
-                if ((projectData['technologies'] as List).isNotEmpty)
+                if (!isAia && (projectData['technologies'] as List).isNotEmpty)
                   _buildTechnologies(projectData, isMobile, isTablet, isDark),
 
                 // Navigation
@@ -539,9 +543,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     final isClosers = title.contains('closers') || title.contains('클로저스');
     final isPromotion = title.contains('promotion') || title.contains('프로모션');
     final isFarm = title.contains('farm') || title.contains('농가') || title.contains('농업');
+    final isAia = title.contains('aia') || company.contains('aia');
     final screenWidth = MediaQuery.of(context).size.width;
 
-    if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm) {
+    if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm && !isAia) {
       return const SizedBox.shrink();
     }
 
@@ -625,6 +630,13 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
         {
           'url': isNetwork ? 'http://localhost:8080/images/promotion_2.jpg' : 'assets/images/promotion_2.jpg',
           'ratio': 5994 / 1920,
+        },
+      ];
+    } else if (isAia) {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/aia.jpg' : 'assets/images/aia.jpg',
+          'ratio': 16589 / 1920,
         },
       ];
     } else {
