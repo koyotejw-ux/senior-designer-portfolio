@@ -34,6 +34,37 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
 
   final List<Map<String, dynamic>> _projects = [
     {
+      'id': 'p8',
+      'title': 'SAMSUNG MES SYSTEM',
+      'subtitle': '제조 생산 관리 시스템(MES) 및 ERP UX/UI',
+      'company': '(주)코드브릿지엑스',
+      'year': '2025.10-2026.01',
+      'category': 'Web Design',
+      'description': '삼성 제조 생산 관리 시스템(MES) 및 ERP 시스템의 UX/UI 전면 재설계. 복잡한 데이터 대시보드 시각화 및 직관적인 설비 상태 제어 플로우 구축.',
+      'tags': ['Figma', 'Web UX/UI', 'Enterprise', 'Dashboard'],
+      'gradient': [AppColors.primaryBlue, AppColors.accentCyan],
+      'imageUrl': 'assets/images/sam_mes_thumbnail.jpg',
+      'mainScreenImages': [
+        'assets/images/sam_mes.jpg',
+      ],
+      'details': {
+        'role': 'Lead Product Designer',
+        'duration': '4개월 (2025.10-2026.01)',
+        'teamSize': '10명 (디자이너 2명, 개발자 6명, PM 2명)',
+        'achievements': [
+          '삼성 제조 MES 대시보드 화면 설계 및 가시성 개선',
+          'ERP 시스템 데이터 그리드 및 상세 제어 레이아웃 표준화',
+          'Figma 변수 기반 다크/라이트 테마 가이드 적용',
+        ],
+        'technologies': [
+          'Figma',
+          'Web UX/UI',
+          'Enterprise',
+          'Dashboard',
+        ],
+      },
+    },
+    {
       'id': 'p7',
       'title': 'FARM SYSTEM',
       'subtitle': '스마트 농가 모니터링 시스템 UX/UI',

@@ -1,6 +1,34 @@
 {
   "projects": [
     {
+      "id": "p8",
+      "title": "SAMSUNG MES SYSTEM",
+      "subtitle": "제조 생산 관리 시스템(MES) 및 ERP UX/UI",
+      "company": "(주)코드브릿지엑스",
+      "year": "2025.10-2026.01",
+      "category": "Web Design",
+      "description": "삼성 제조 생산 관리 시스템(MES) 및 ERP 시스템의 UX/UI 전면 재설계. 복잡한 데이터 대시보드 시각화 및 직관적인 설비 상태 제어 플로우 구축.",
+      "tags": [
+        "Figma",
+        "Web UX/UI",
+        "Enterprise",
+        "Dashboard"
+      ],
+      "imageUrl": "assets/images/sam_mes_thumbnail.jpg",
+      "gradientColors": [
+        "#0056B3",
+        "#00A8FF"
+      ],
+      "role": "Lead Product Designer",
+      "duration": "4개월 (2025.10-2026.01)",
+      "teamSize": "10명 (디자이너 2명, 개발자 6명, PM 2명)",
+      "mainScreenImages": [
+        "assets/images/sam_mes.jpg"
+      ],
+      "isCorporate": false,
+      "order": 0
+    },
+    {
       "id": "p7",
       "title": "FARM SYSTEM",
       "subtitle": "스마트 농가 모니터링 시스템 UX/UI",
@@ -28,7 +56,7 @@
         "http://localhost:8080/images/farm_3.jpg"
       ],
       "isCorporate": false,
-      "order": 0
+      "order": 1
     },
     {
       "id": "p1",
@@ -52,7 +80,7 @@
         "#2196F3",
         "#00BCD4"
       ],
-      "order": 1
+      "order": 2
     },
     {
       "id": "p2",
@@ -84,7 +112,7 @@
         "http://localhost:8080/images/ht_03_2.jpg"
       ],
       "isCorporate": false,
-      "order": 2
+      "order": 3
     },
     {
       "id": "p3",
@@ -114,7 +142,7 @@
         "http://localhost:8080/images/hthome_01_3.jpg"
       ],
       "isCorporate": false,
-      "order": 3
+      "order": 4
     },
     {
       "id": "p4",
@@ -144,7 +172,7 @@
         "http://localhost:8080/images/soulark_3.jpg"
       ],
       "isCorporate": false,
-      "order": 4
+      "order": 5
     },
     {
       "id": "p5",
@@ -174,7 +202,7 @@
         "http://localhost:8080/images/closers_3.jpg"
       ],
       "isCorporate": false,
-      "order": 5
+      "order": 6
     },
     {
       "id": "p6",
@@ -203,7 +231,7 @@
         "http://localhost:8080/images/promotion_2.jpg"
       ],
       "isCorporate": false,
-      "order": 6
+      "order": 7
     }
   ],
   "profile": {
@@ -451,21 +479,33 @@
                 "step": 1,
                 "action": "홈페이지 접속",
                 "page": "/ (HomePage)",
-                "ui_elements": ["Loading screen with animated effects", "Navigation bar"],
+                "ui_elements": [
+                  "Loading screen with animated effects",
+                  "Navigation bar"
+                ],
                 "user_behavior": "로딩 애니메이션을 보며 대기 (1-2초)"
               },
               {
                 "step": 2,
                 "action": "Hero Section 확인",
                 "page": "/ (HomePage - Hero Section)",
-                "ui_elements": ["프로필 이미지", "이름/직함", "핵심 소개 문구", "CTA 버튼"],
+                "ui_elements": [
+                  "프로필 이미지",
+                  "이름/직함",
+                  "핵심 소개 문구",
+                  "CTA 버튼"
+                ],
                 "user_behavior": "첫인상 형성, 핵심 정보 스캔"
               },
               {
                 "step": 3,
                 "action": "Resume Section 스크롤",
                 "page": "/ (HomePage - Resume Section)",
-                "ui_elements": ["경력 요약", "핵심 역량", "PDF 다운로드 버튼"],
+                "ui_elements": [
+                  "경력 요약",
+                  "핵심 역량",
+                  "PDF 다운로드 버튼"
+                ],
                 "user_behavior": "경력 연수, 주요 기술 스택 확인",
                 "decision_point": "상세 이력서 필요 시 → PDF 다운로드 | 계속 탐색 → 스크롤 다운"
               },
@@ -473,21 +513,33 @@
                 "step": 4,
                 "action": "Experience Section 탐색",
                 "page": "/ (HomePage - Experience Section)",
-                "ui_elements": ["Timeline 형식 경력", "회사명/기간", "주요 성과"],
+                "ui_elements": [
+                  "Timeline 형식 경력",
+                  "회사명/기간",
+                  "주요 성과"
+                ],
                 "user_behavior": "시간 순서대로 경력 흐름 파악"
               },
               {
                 "step": 5,
                 "action": "About Section 확인",
                 "page": "/ (HomePage - About Section)",
-                "ui_elements": ["자기소개", "Education", "추가 정보"],
+                "ui_elements": [
+                  "자기소개",
+                  "Education",
+                  "추가 정보"
+                ],
                 "user_behavior": "개인 배경과 교육 이력 확인"
               },
               {
                 "step": 6,
                 "action": "Portfolio Gallery 탐색",
                 "page": "/ (HomePage - Portfolio Section)",
-                "ui_elements": ["프로젝트 카드 그리드", "Holographic effects", "태그/카테고리"],
+                "ui_elements": [
+                  "프로젝트 카드 그리드",
+                  "Holographic effects",
+                  "태그/카테고리"
+                ],
                 "user_behavior": "대표 프로젝트 썸네일 스캔",
                 "decision_point": "관심 프로젝트 발견 → 클릭하여 상세 보기 | 전체 포트폴리오 → /portfolio 이동"
               },
@@ -495,14 +547,22 @@
                 "step": 7,
                 "action": "Skills Section 확인",
                 "page": "/ (HomePage - Skills Section)",
-                "ui_elements": ["스킬 카테고리", "숙련도 표시", "기술 태그"],
+                "ui_elements": [
+                  "스킬 카테고리",
+                  "숙련도 표시",
+                  "기술 태그"
+                ],
                 "user_behavior": "기술 스택과 도구 숙련도 평가"
               },
               {
                 "step": 8,
                 "action": "Contact Section 도달",
                 "page": "/ (HomePage - Contact Section)",
-                "ui_elements": ["연락처 정보", "소셜 링크", "Contact form (선택)"],
+                "ui_elements": [
+                  "연락처 정보",
+                  "소셜 링크",
+                  "Contact form (선택)"
+                ],
                 "user_behavior": "필요 시 연락 방법 확인"
               }
             ],
@@ -511,7 +571,11 @@
               "이력서 다운로드 → UF-03 (문서 다운로드)",
               "Navigation 메뉴 클릭 → 다른 페이지 이동"
             ],
-            "success_metrics": ["페이지 체류 시간 > 2분", "스크롤 깊이 > 80%", "프로젝트 클릭률 > 30%"]
+            "success_metrics": [
+              "페이지 체류 시간 > 2분",
+              "스크롤 깊이 > 80%",
+              "프로젝트 클릭률 > 30%"
+            ]
           },
           {
             "flow_id": "UF-02",
@@ -524,21 +588,34 @@
                 "step": 1,
                 "action": "프로젝트 카드 클릭",
                 "page": "/ or /portfolio",
-                "ui_elements": ["프로젝트 썸네일 카드"],
+                "ui_elements": [
+                  "프로젝트 썸네일 카드"
+                ],
                 "user_behavior": "관심 있는 프로젝트 선택"
               },
               {
                 "step": 2,
                 "action": "프로젝트 상세 페이지 진입",
                 "page": "/portfolio/:projectId",
-                "ui_elements": ["Hero 이미지", "프로젝트 제목/부제", "회사/기간", "태그"],
+                "ui_elements": [
+                  "Hero 이미지",
+                  "프로젝트 제목/부제",
+                  "회사/기간",
+                  "태그"
+                ],
                 "user_behavior": "프로젝트 개요 파악"
               },
               {
                 "step": 3,
                 "action": "프로젝트 내용 스크롤",
                 "page": "/portfolio/:projectId",
-                "ui_elements": ["프로젝트 배경", "역할 및 책임", "디자인 프로세스", "주요 성과", "이미지 갤러리"],
+                "ui_elements": [
+                  "프로젝트 배경",
+                  "역할 및 책임",
+                  "디자인 프로세스",
+                  "주요 성과",
+                  "이미지 갤러리"
+                ],
                 "user_behavior": "디자인 사고 과정과 실무 역량 평가",
                 "decision_point": "충분한 정보 획득 → 뒤로가기 | 더 많은 프로젝트 → Related projects 클릭"
               },
@@ -546,14 +623,20 @@
                 "step": 4,
                 "action": "이미지/스크린샷 확대",
                 "page": "/portfolio/:projectId",
-                "ui_elements": ["이미지 갤러리", "Lightbox modal (선택)"],
+                "ui_elements": [
+                  "이미지 갤러리",
+                  "Lightbox modal (선택)"
+                ],
                 "user_behavior": "디자인 디테일 확인"
               },
               {
                 "step": 5,
                 "action": "페이지 종료",
                 "page": "/portfolio/:projectId",
-                "ui_elements": ["뒤로가기 버튼", "다른 프로젝트 링크"],
+                "ui_elements": [
+                  "뒤로가기 버튼",
+                  "다른 프로젝트 링크"
+                ],
                 "user_behavior": "포트폴리오 메인 또는 홈으로 복귀"
               }
             ],
@@ -562,7 +645,11 @@
               "다른 프로젝트 클릭 → 다른 프로젝트 상세",
               "Navigation 메뉴 → 다른 섹션 이동"
             ],
-            "success_metrics": ["프로젝트 상세 페이지 체류 시간 > 1분", "이미지 클릭률 > 50%", "다른 프로젝트 탐색률 > 40%"]
+            "success_metrics": [
+              "프로젝트 상세 페이지 체류 시간 > 1분",
+              "이미지 클릭률 > 50%",
+              "다른 프로젝트 탐색률 > 40%"
+            ]
           },
           {
             "flow_id": "UF-03",
@@ -575,21 +662,31 @@
                 "step": 1,
                 "action": "Resume 페이지 또는 Documents 페이지 접속",
                 "page": "/resume or /documents",
-                "ui_elements": ["Navigation 메뉴"],
+                "ui_elements": [
+                  "Navigation 메뉴"
+                ],
                 "user_behavior": "문서 다운로드를 위한 페이지 이동"
               },
               {
                 "step": 2,
                 "action": "문서 목록 확인",
                 "page": "/documents",
-                "ui_elements": ["문서 카드 그리드", "문서 타입 필터", "검색 기능 (선택)"],
+                "ui_elements": [
+                  "문서 카드 그리드",
+                  "문서 타입 필터",
+                  "검색 기능 (선택)"
+                ],
                 "user_behavior": "필요한 문서 타입 탐색 (이력서, 경력기술서, 자기소개서 등)"
               },
               {
                 "step": 3,
                 "action": "문서 선택 및 미리보기",
                 "page": "/documents",
-                "ui_elements": ["문서 카드", "미리보기 버튼", "다운로드 버튼"],
+                "ui_elements": [
+                  "문서 카드",
+                  "미리보기 버튼",
+                  "다운로드 버튼"
+                ],
                 "user_behavior": "문서 내용 확인",
                 "decision_point": "미리보기 → 내용 확인 후 다운로드 | 직접 다운로드 → PDF 저장"
               },
@@ -597,14 +694,18 @@
                 "step": 4,
                 "action": "PDF 다운로드",
                 "page": "/documents",
-                "ui_elements": ["다운로드 버튼"],
+                "ui_elements": [
+                  "다운로드 버튼"
+                ],
                 "user_behavior": "PDF 파일 로컬에 저장"
               },
               {
                 "step": 5,
                 "action": "다운로드 완료",
                 "page": "/documents",
-                "ui_elements": ["Success 메시지 (선택)"],
+                "ui_elements": [
+                  "Success 메시지 (선택)"
+                ],
                 "user_behavior": "문서 확보 완료, 사이트 탐색 계속 또는 종료"
               }
             ],
@@ -613,7 +714,10 @@
               "다운로드 후 사이트 종료",
               "다른 문서 추가 다운로드"
             ],
-            "success_metrics": ["다운로드 완료율 > 90%", "다운로드 후 사이트 재방문률 > 20%"]
+            "success_metrics": [
+              "다운로드 완료율 > 90%",
+              "다운로드 후 사이트 재방문률 > 20%"
+            ]
           },
           {
             "flow_id": "UF-04",
@@ -626,35 +730,48 @@
                 "step": 1,
                 "action": "모바일 브라우저로 접속",
                 "page": "/ (HomePage)",
-                "ui_elements": ["모바일 최적화 레이아웃", "Hamburger 메뉴"],
+                "ui_elements": [
+                  "모바일 최적화 레이아웃",
+                  "Hamburger 메뉴"
+                ],
                 "user_behavior": "모바일 화면에 최적화된 콘텐츠 확인"
               },
               {
                 "step": 2,
                 "action": "Hamburger 메뉴 열기",
                 "page": "/ (any page)",
-                "ui_elements": ["모바일 Navigation drawer"],
+                "ui_elements": [
+                  "모바일 Navigation drawer"
+                ],
                 "user_behavior": "메뉴 펼쳐서 전체 구조 파악"
               },
               {
                 "step": 3,
                 "action": "섹션별 스와이프/스크롤",
                 "page": "/ (HomePage)",
-                "ui_elements": ["모바일 친화적 카드", "터치 인터랙션"],
+                "ui_elements": [
+                  "모바일 친화적 카드",
+                  "터치 인터랙션"
+                ],
                 "user_behavior": "수직 스크롤로 콘텐츠 탐색"
               },
               {
                 "step": 4,
                 "action": "프로젝트 카드 탭",
                 "page": "/portfolio",
-                "ui_elements": ["터치 최적화 카드", "큰 타겟 영역"],
+                "ui_elements": [
+                  "터치 최적화 카드",
+                  "큰 타겟 영역"
+                ],
                 "user_behavior": "손가락으로 탭하여 프로젝트 상세 진입"
               },
               {
                 "step": 5,
                 "action": "이미지 핀치 줌",
                 "page": "/portfolio/:projectId",
-                "ui_elements": ["터치 제스처 지원 이미지"],
+                "ui_elements": [
+                  "터치 제스처 지원 이미지"
+                ],
                 "user_behavior": "디테일 확인을 위한 확대/축소"
               }
             ],
@@ -663,7 +780,11 @@
               "연락처 정보 확인 후 종료",
               "북마크 후 종료"
             ],
-            "success_metrics": ["모바일 Bounce rate < 40%", "모바일 평균 세션 시간 > 1분 30초", "모바일 전환율 (연락/다운로드) > 15%"]
+            "success_metrics": [
+              "모바일 Bounce rate < 40%",
+              "모바일 평균 세션 시간 > 1분 30초",
+              "모바일 전환율 (연락/다운로드) > 15%"
+            ]
           },
           {
             "flow_id": "UF-05",
@@ -676,14 +797,21 @@
                 "step": 1,
                 "action": "관리자 로그인 페이지 접속",
                 "page": "/admin/login",
-                "ui_elements": ["이메일 입력 필드", "비밀번호 입력 필드", "로그인 버튼"],
+                "ui_elements": [
+                  "이메일 입력 필드",
+                  "비밀번호 입력 필드",
+                  "로그인 버튼"
+                ],
                 "user_behavior": "관리자 계정 정보 입력"
               },
               {
                 "step": 2,
                 "action": "인증 정보 제출",
                 "page": "/admin/login",
-                "ui_elements": ["로그인 버튼", "로딩 인디케이터"],
+                "ui_elements": [
+                  "로그인 버튼",
+                  "로딩 인디케이터"
+                ],
                 "user_behavior": "로그인 버튼 클릭",
                 "decision_point": "인증 성공 → 대시보드 리다이렉트 | 인증 실패 → 오류 메시지 표시"
               },
@@ -691,14 +819,19 @@
                 "step": 3,
                 "action": "관리자 대시보드 진입",
                 "page": "/admin/dashboard",
-                "ui_elements": ["탭 네비게이션 (11개 탭)", "콘텐츠 관리 영역"],
+                "ui_elements": [
+                  "탭 네비게이션 (11개 탭)",
+                  "콘텐츠 관리 영역"
+                ],
                 "user_behavior": "대시보드 전체 구조 파악"
               },
               {
                 "step": 4,
                 "action": "작업할 탭 선택",
                 "page": "/admin/dashboard",
-                "ui_elements": ["Profile, Projects, Experience, Education, Skills, Documents, Resume, Career Description, Cover Letter, Design System, Project Guide 탭"],
+                "ui_elements": [
+                  "Profile, Projects, Experience, Education, Skills, Documents, Resume, Career Description, Cover Letter, Design System, Project Guide 탭"
+                ],
                 "user_behavior": "업데이트할 콘텐츠 영역 선택"
               }
             ],
@@ -706,7 +839,10 @@
               "탭 선택 → UF-06, UF-07, UF-08 등 콘텐츠 편집 플로우",
               "로그아웃 → 공개 페이지로 복귀"
             ],
-            "success_metrics": ["로그인 성공률 > 95%", "로그인 후 콘텐츠 수정률 > 80%"]
+            "success_metrics": [
+              "로그인 성공률 > 95%",
+              "로그인 후 콘텐츠 수정률 > 80%"
+            ]
           },
           {
             "flow_id": "UF-06",
@@ -719,14 +855,20 @@
                 "step": 1,
                 "action": "Projects 탭 선택",
                 "page": "/admin/dashboard",
-                "ui_elements": ["Projects 탭"],
+                "ui_elements": [
+                  "Projects 탭"
+                ],
                 "user_behavior": "프로젝트 관리 영역 진입"
               },
               {
                 "step": 2,
                 "action": "프로젝트 목록 확인",
                 "page": "/admin/dashboard (Projects tab)",
-                "ui_elements": ["프로젝트 리스트", "추가 버튼", "편집/삭제 버튼"],
+                "ui_elements": [
+                  "프로젝트 리스트",
+                  "추가 버튼",
+                  "편집/삭제 버튼"
+                ],
                 "user_behavior": "기존 프로젝트 확인",
                 "decision_point": "새 프로젝트 → 추가 버튼 클릭 | 기존 수정 → 편집 버튼 클릭"
               },
@@ -734,21 +876,38 @@
                 "step": 3,
                 "action": "프로젝트 폼 작성",
                 "page": "/admin/dashboard (Project Editor)",
-                "ui_elements": ["제목", "부제목", "회사명", "기간", "카테고리", "설명", "태그", "이미지 업로드", "그라디언트 색상"],
+                "ui_elements": [
+                  "제목",
+                  "부제목",
+                  "회사명",
+                  "기간",
+                  "카테고리",
+                  "설명",
+                  "태그",
+                  "이미지 업로드",
+                  "그라디언트 색상"
+                ],
                 "user_behavior": "프로젝트 정보 입력/수정"
               },
               {
                 "step": 4,
                 "action": "이미지 업로드",
                 "page": "/admin/dashboard (Project Editor)",
-                "ui_elements": ["파일 선택 버튼", "이미지 미리보기", "업로드 진행 상태"],
+                "ui_elements": [
+                  "파일 선택 버튼",
+                  "이미지 미리보기",
+                  "업로드 진행 상태"
+                ],
                 "user_behavior": "대표 이미지 선택 및 업로드"
               },
               {
                 "step": 5,
                 "action": "변경사항 저장",
                 "page": "/admin/dashboard (Project Editor)",
-                "ui_elements": ["저장 버튼", "취소 버튼"],
+                "ui_elements": [
+                  "저장 버튼",
+                  "취소 버튼"
+                ],
                 "user_behavior": "저장 버튼 클릭",
                 "decision_point": "저장 성공 → Success 메시지 | 실패 → 오류 메시지"
               },
@@ -756,14 +915,18 @@
                 "step": 6,
                 "action": "변경사항 확인",
                 "page": "/admin/dashboard (Projects tab)",
-                "ui_elements": ["업데이트된 프로젝트 리스트"],
+                "ui_elements": [
+                  "업데이트된 프로젝트 리스트"
+                ],
                 "user_behavior": "추가/수정된 프로젝트 확인"
               },
               {
                 "step": 7,
                 "action": "공개 페이지에서 검증",
                 "page": "/portfolio",
-                "ui_elements": ["새 프로젝트 카드"],
+                "ui_elements": [
+                  "새 프로젝트 카드"
+                ],
                 "user_behavior": "실제 포트폴리오 페이지에서 정상 노출 확인"
               }
             ],
@@ -772,7 +935,11 @@
               "저장 후 로그아웃",
               "공개 페이지 확인 후 추가 수정"
             ],
-            "success_metrics": ["프로젝트 저장 성공률 > 98%", "이미지 업로드 성공률 > 95%", "평균 프로젝트 추가 시간 < 5분"]
+            "success_metrics": [
+              "프로젝트 저장 성공률 > 98%",
+              "이미지 업로드 성공률 > 95%",
+              "평균 프로젝트 추가 시간 < 5분"
+            ]
           },
           {
             "flow_id": "UF-07",
@@ -785,42 +952,58 @@
                 "step": 1,
                 "action": "Resume 탭 선택",
                 "page": "/admin/dashboard",
-                "ui_elements": ["Resume 탭"],
+                "ui_elements": [
+                  "Resume 탭"
+                ],
                 "user_behavior": "이력서 관리 영역 진입"
               },
               {
                 "step": 2,
                 "action": "이력서 내용 편집",
                 "page": "/admin/dashboard (Resume tab)",
-                "ui_elements": ["이력서 에디터", "섹션별 입력 필드"],
+                "ui_elements": [
+                  "이력서 에디터",
+                  "섹션별 입력 필드"
+                ],
                 "user_behavior": "필요 시 이력서 내용 수정"
               },
               {
                 "step": 3,
                 "action": "PDF 생성 버튼 클릭",
                 "page": "/admin/dashboard (Resume tab)",
-                "ui_elements": ["PDF 생성 버튼", "인쇄 다이얼로그"],
+                "ui_elements": [
+                  "PDF 생성 버튼",
+                  "인쇄 다이얼로그"
+                ],
                 "user_behavior": "PDF 생성 트리거"
               },
               {
                 "step": 4,
                 "action": "PDF 미리보기",
                 "page": "Print dialog",
-                "ui_elements": ["PDF 미리보기", "인쇄 설정"],
+                "ui_elements": [
+                  "PDF 미리보기",
+                  "인쇄 설정"
+                ],
                 "user_behavior": "생성될 PDF 레이아웃 확인"
               },
               {
                 "step": 5,
                 "action": "PDF 저장",
                 "page": "Print dialog",
-                "ui_elements": ["저장 버튼", "파일명 입력"],
+                "ui_elements": [
+                  "저장 버튼",
+                  "파일명 입력"
+                ],
                 "user_behavior": "PDF 파일 로컬에 저장"
               },
               {
                 "step": 6,
                 "action": "저장된 PDF 확인",
                 "page": "Local file system",
-                "ui_elements": ["PDF 파일"],
+                "ui_elements": [
+                  "PDF 파일"
+                ],
                 "user_behavior": "PDF 뷰어로 최종 확인"
               }
             ],
@@ -829,7 +1012,11 @@
               "PDF 다운로드 후 로그아웃",
               "필요 시 내용 수정 후 재생성"
             ],
-            "success_metrics": ["PDF 생성 성공률 > 99%", "PDF 품질 만족도 > 95%", "평균 생성 시간 < 10초"]
+            "success_metrics": [
+              "PDF 생성 성공률 > 99%",
+              "PDF 품질 만족도 > 95%",
+              "평균 생성 시간 < 10초"
+            ]
           },
           {
             "flow_id": "UF-08",
@@ -842,28 +1029,40 @@
                 "step": 1,
                 "action": "Experience 또는 Skills 탭 선택",
                 "page": "/admin/dashboard",
-                "ui_elements": ["Experience 탭", "Skills 탭"],
+                "ui_elements": [
+                  "Experience 탭",
+                  "Skills 탭"
+                ],
                 "user_behavior": "업데이트할 영역 선택"
               },
               {
                 "step": 2,
                 "action": "항목 추가/수정/삭제",
                 "page": "/admin/dashboard (Experience/Skills tab)",
-                "ui_elements": ["항목 리스트", "추가 버튼", "편집/삭제 버튼", "입력 폼"],
+                "ui_elements": [
+                  "항목 리스트",
+                  "추가 버튼",
+                  "편집/삭제 버튼",
+                  "입력 폼"
+                ],
                 "user_behavior": "경력 항목 또는 스킬 추가/수정"
               },
               {
                 "step": 3,
                 "action": "변경사항 저장",
                 "page": "/admin/dashboard",
-                "ui_elements": ["저장 버튼"],
+                "ui_elements": [
+                  "저장 버튼"
+                ],
                 "user_behavior": "변경사항 확정"
               },
               {
                 "step": 4,
                 "action": "공개 페이지에서 검증",
                 "page": "/ (HomePage - Experience/Skills Section)",
-                "ui_elements": ["업데이트된 경력/스킬"],
+                "ui_elements": [
+                  "업데이트된 경력/스킬"
+                ],
                 "user_behavior": "홈페이지에서 정상 반영 확인"
               }
             ],
@@ -872,7 +1071,10 @@
               "저장 후 로그아웃",
               "필요 시 추가 수정"
             ],
-            "success_metrics": ["저장 성공률 > 98%", "실시간 반영률 100%"]
+            "success_metrics": [
+              "저장 성공률 > 98%",
+              "실시간 반영률 100%"
+            ]
           },
           {
             "flow_id": "UF-09",
@@ -885,49 +1087,71 @@
                 "step": 1,
                 "action": "Documents 탭 선택",
                 "page": "/admin/dashboard",
-                "ui_elements": ["Documents 탭"],
+                "ui_elements": [
+                  "Documents 탭"
+                ],
                 "user_behavior": "문서 관리 영역 진입"
               },
               {
                 "step": 2,
                 "action": "새 문서 추가 버튼 클릭",
                 "page": "/admin/dashboard (Documents tab)",
-                "ui_elements": ["문서 추가 버튼", "문서 타입 선택 드롭다운"],
+                "ui_elements": [
+                  "문서 추가 버튼",
+                  "문서 타입 선택 드롭다운"
+                ],
                 "user_behavior": "문서 타입 선택 (요구사항 정의서, 사용자 플로우, IA, 와이어프레임 등)"
               },
               {
                 "step": 3,
                 "action": "문서 정보 입력",
                 "page": "/admin/dashboard (Document Editor)",
-                "ui_elements": ["문서 제목", "버전", "내용 에디터", "태그"],
+                "ui_elements": [
+                  "문서 제목",
+                  "버전",
+                  "내용 에디터",
+                  "태그"
+                ],
                 "user_behavior": "문서 내용 작성 (마크다운 또는 구조화된 JSON)"
               },
               {
                 "step": 4,
                 "action": "문서 내용 구조화",
                 "page": "/admin/dashboard (Document Editor)",
-                "ui_elements": ["섹션별 입력 필드", "리스트 관리", "첨부파일 업로드"],
+                "ui_elements": [
+                  "섹션별 입력 필드",
+                  "리스트 관리",
+                  "첨부파일 업로드"
+                ],
                 "user_behavior": "기획 문서 표준 구조에 맞춰 입력"
               },
               {
                 "step": 5,
                 "action": "문서 저장",
                 "page": "/admin/dashboard (Document Editor)",
-                "ui_elements": ["저장 버튼", "미리보기 버튼"],
+                "ui_elements": [
+                  "저장 버튼",
+                  "미리보기 버튼"
+                ],
                 "user_behavior": "문서 저장 및 미리보기 확인"
               },
               {
                 "step": 6,
                 "action": "Documents 페이지에서 확인",
                 "page": "/documents",
-                "ui_elements": ["문서 카드 그리드", "새로 추가된 문서"],
+                "ui_elements": [
+                  "문서 카드 그리드",
+                  "새로 추가된 문서"
+                ],
                 "user_behavior": "공개 페이지에서 문서 정상 노출 확인"
               },
               {
                 "step": 7,
                 "action": "PDF 생성 (선택)",
                 "page": "/admin/dashboard (Documents tab)",
-                "ui_elements": ["PDF 생성 버튼"],
+                "ui_elements": [
+                  "PDF 생성 버튼"
+                ],
                 "user_behavior": "필요 시 문서를 PDF로 변환하여 다운로드"
               }
             ],
@@ -936,7 +1160,11 @@
               "문서 저장 후 로그아웃",
               "공개 페이지 확인 후 내용 수정"
             ],
-            "success_metrics": ["문서 저장 성공률 > 98%", "문서 카테고리별 분류 정확도 100%", "평균 문서 작성 시간 < 30분"]
+            "success_metrics": [
+              "문서 저장 성공률 > 98%",
+              "문서 카테고리별 분류 정확도 100%",
+              "평균 문서 작성 시간 < 30분"
+            ]
           },
           {
             "flow_id": "UF-10",
@@ -949,35 +1177,54 @@
                 "step": 1,
                 "action": "Design System 탭 선택",
                 "page": "/admin/dashboard",
-                "ui_elements": ["Design System 탭"],
+                "ui_elements": [
+                  "Design System 탭"
+                ],
                 "user_behavior": "디자인 시스템 문서 영역 진입"
               },
               {
                 "step": 2,
                 "action": "컴포넌트 카테고리 선택",
                 "page": "/admin/dashboard (Design System tab)",
-                "ui_elements": ["Atoms", "Molecules", "Organisms", "Templates", "Pages 네비게이션"],
+                "ui_elements": [
+                  "Atoms",
+                  "Molecules",
+                  "Organisms",
+                  "Templates",
+                  "Pages 네비게이션"
+                ],
                 "user_behavior": "문서화할 컴포넌트 레벨 선택"
               },
               {
                 "step": 3,
                 "action": "컴포넌트 문서 작성",
                 "page": "/admin/dashboard (Design System tab)",
-                "ui_elements": ["컴포넌트 이름", "설명", "Props", "사용 예시", "스크린샷"],
+                "ui_elements": [
+                  "컴포넌트 이름",
+                  "설명",
+                  "Props",
+                  "사용 예시",
+                  "스크린샷"
+                ],
                 "user_behavior": "컴포넌트 사양 및 가이드라인 입력"
               },
               {
                 "step": 4,
                 "action": "Live Preview 확인",
                 "page": "/admin/dashboard (Design System tab)",
-                "ui_elements": ["실시간 미리보기 영역"],
+                "ui_elements": [
+                  "실시간 미리보기 영역"
+                ],
                 "user_behavior": "작성한 문서의 렌더링 결과 확인"
               },
               {
                 "step": 5,
                 "action": "문서 저장 및 퍼블리시",
                 "page": "/admin/dashboard (Design System tab)",
-                "ui_elements": ["저장 버튼", "퍼블리시 버튼"],
+                "ui_elements": [
+                  "저장 버튼",
+                  "퍼블리시 버튼"
+                ],
                 "user_behavior": "디자인 시스템 문서 확정"
               }
             ],
@@ -986,7 +1233,10 @@
               "공개 페이지에서 디자인 시스템 확인",
               "로그아웃"
             ],
-            "success_metrics": ["컴포넌트 문서화 완성도 > 90%", "문서 업데이트 주기 < 2주"]
+            "success_metrics": [
+              "컴포넌트 문서화 완성도 > 90%",
+              "문서 업데이트 주기 < 2주"
+            ]
           }
         ],
         "interactionPatterns": [
@@ -994,7 +1244,10 @@
             "pattern_id": "IP-01",
             "pattern_name": "Scroll-based Navigation",
             "description": "홈페이지의 주요 내비게이션 방식은 수직 스크롤입니다. 각 섹션이 순차적으로 배치되어 있으며, Navigation bar의 링크 클릭 시 해당 섹션으로 스크롤 애니메이션 이동합니다.",
-            "applies_to": ["UF-01", "UF-04"],
+            "applies_to": [
+              "UF-01",
+              "UF-04"
+            ],
             "ux_considerations": [
               "스크롤 진행도 인디케이터 표시 (선택)",
               "Sticky navigation bar로 섹션 간 빠른 이동 지원",
@@ -1006,7 +1259,11 @@
             "pattern_id": "IP-02",
             "pattern_name": "Card-based Exploration",
             "description": "프로젝트, 문서, 스킬 등의 콘텐츠는 카드 형식으로 제공됩니다. 카드 호버 시 holographic effect나 그라디언트 애니메이션이 적용되어 인터랙티브한 경험을 제공합니다.",
-            "applies_to": ["UF-01", "UF-02", "UF-03"],
+            "applies_to": [
+              "UF-01",
+              "UF-02",
+              "UF-03"
+            ],
             "ux_considerations": [
               "카드 크기는 콘텐츠에 따라 적응형",
               "호버 상태에서 추가 정보 표시 (툴팁, 프리뷰 등)",
@@ -1018,7 +1275,12 @@
             "pattern_id": "IP-03",
             "pattern_name": "Modal/Dialog for Editing",
             "description": "관리자 페이지에서 콘텐츠 편집 시 모달 또는 다이얼로그 형식을 사용하여 context를 유지하면서 편집 작업을 수행합니다.",
-            "applies_to": ["UF-06", "UF-07", "UF-08", "UF-09"],
+            "applies_to": [
+              "UF-06",
+              "UF-07",
+              "UF-08",
+              "UF-09"
+            ],
             "ux_considerations": [
               "모달 외부 클릭 시 닫힘 경고 (변경사항 있을 경우)",
               "ESC 키로 모달 닫기 지원",
@@ -1030,7 +1292,12 @@
             "pattern_id": "IP-04",
             "pattern_name": "Real-time Preview",
             "description": "관리자가 콘텐츠를 수정할 때 변경사항을 실시간으로 미리보기하여 즉각적인 피드백을 제공합니다.",
-            "applies_to": ["UF-06", "UF-07", "UF-09", "UF-10"],
+            "applies_to": [
+              "UF-06",
+              "UF-07",
+              "UF-09",
+              "UF-10"
+            ],
             "ux_considerations": [
               "debounce 적용으로 과도한 렌더링 방지",
               "미리보기와 편집 영역 분할 (split view)",
@@ -1042,7 +1309,11 @@
             "pattern_id": "IP-05",
             "pattern_name": "Progressive Disclosure",
             "description": "복잡한 정보는 단계적으로 노출하여 인지 부하를 줄입니다. 예: 프로젝트 카드에서는 요약 정보만 표시하고, 클릭 시 전체 상세 정보 제공.",
-            "applies_to": ["UF-01", "UF-02", "UF-03"],
+            "applies_to": [
+              "UF-01",
+              "UF-02",
+              "UF-03"
+            ],
             "ux_considerations": [
               "중요 정보는 항상 visible",
               "부가 정보는 accordion, tooltip, expandable 등으로 제공",
@@ -1056,32 +1327,65 @@
           "public_area": {
             "/": {
               "name": "홈페이지",
-              "sections": ["Hero", "Resume", "Experience", "About", "Portfolio", "Skills", "Contact"],
-              "navigation_to": ["/portfolio", "/documents", "/resume", "/career-description", "/cover-letter", "/contact"]
+              "sections": [
+                "Hero",
+                "Resume",
+                "Experience",
+                "About",
+                "Portfolio",
+                "Skills",
+                "Contact"
+              ],
+              "navigation_to": [
+                "/portfolio",
+                "/documents",
+                "/resume",
+                "/career-description",
+                "/cover-letter",
+                "/contact"
+              ]
             },
             "/portfolio": {
               "name": "포트폴리오 갤러리",
-              "navigation_to": ["/portfolio/:projectId", "/"]
+              "navigation_to": [
+                "/portfolio/:projectId",
+                "/"
+              ]
             },
             "/portfolio/:projectId": {
               "name": "프로젝트 상세",
-              "navigation_to": ["/portfolio", "/"]
+              "navigation_to": [
+                "/portfolio",
+                "/"
+              ]
             },
             "/documents": {
               "name": "문서 목록",
-              "navigation_to": ["/", "/resume"]
+              "navigation_to": [
+                "/",
+                "/resume"
+              ]
             },
             "/resume": {
               "name": "이력서",
-              "navigation_to": ["/", "/documents"]
+              "navigation_to": [
+                "/",
+                "/documents"
+              ]
             },
             "/career-description": {
               "name": "경력기술서",
-              "navigation_to": ["/", "/documents"]
+              "navigation_to": [
+                "/",
+                "/documents"
+              ]
             },
             "/cover-letter": {
               "name": "자기소개서",
-              "navigation_to": ["/", "/documents"]
+              "navigation_to": [
+                "/",
+                "/documents"
+              ]
             },
             "/contact": {
               "name": "연락처 (섹션)",
@@ -1091,7 +1395,10 @@
           "admin_area": {
             "/admin/login": {
               "name": "관리자 로그인",
-              "navigation_to": ["/admin/dashboard", "/"]
+              "navigation_to": [
+                "/admin/dashboard",
+                "/"
+              ]
             },
             "/admin/dashboard": {
               "name": "관리자 대시보드",
@@ -1108,7 +1415,10 @@
                 "Design System",
                 "Project Guide"
               ],
-              "navigation_to": ["/", "/admin/login (로그아웃)"]
+              "navigation_to": [
+                "/",
+                "/admin/login (로그아웃)"
+              ]
             }
           }
         },
@@ -1164,7 +1474,12 @@
           "모바일에서는 이미지 해상도 최적화"
         ]
       },
-      "tags": ["user-flow", "ux-design", "portfolio", "current-project"]
+      "tags": [
+        "user-flow",
+        "ux-design",
+        "portfolio",
+        "current-project"
+      ]
     },
     {
       "id": "doc-current-03",
@@ -1194,7 +1509,10 @@
           "structure": {
             "level_0": {
               "name": "Root",
-              "children": ["Public Area", "Admin Area"]
+              "children": [
+                "Public Area",
+                "Admin Area"
+              ]
             },
             "public_area": {
               "name": "Public Area (공개 영역)",
@@ -1209,43 +1527,72 @@
                     {
                       "id": "SEC-01",
                       "name": "Hero Section",
-                      "content": ["프로필 이미지", "이름 및 직함", "핵심 소개", "CTA 버튼"],
+                      "content": [
+                        "프로필 이미지",
+                        "이름 및 직함",
+                        "핵심 소개",
+                        "CTA 버튼"
+                      ],
                       "purpose": "첫인상 형성 및 핵심 정보 전달"
                     },
                     {
                       "id": "SEC-02",
                       "name": "Resume Section",
-                      "content": ["경력 요약", "핵심 역량", "PDF 다운로드 버튼"],
+                      "content": [
+                        "경력 요약",
+                        "핵심 역량",
+                        "PDF 다운로드 버튼"
+                      ],
                       "purpose": "경력 개요 제공 및 이력서 다운로드"
                     },
                     {
                       "id": "SEC-03",
                       "name": "Experience Section",
-                      "content": ["타임라인 형식 경력", "회사명/기간", "주요 성과"],
+                      "content": [
+                        "타임라인 형식 경력",
+                        "회사명/기간",
+                        "주요 성과"
+                      ],
                       "purpose": "시간 순서대로 경력 상세 정보 제공"
                     },
                     {
                       "id": "SEC-04",
                       "name": "About Section",
-                      "content": ["자기소개", "교육 배경", "추가 정보"],
+                      "content": [
+                        "자기소개",
+                        "교육 배경",
+                        "추가 정보"
+                      ],
                       "purpose": "개인 배경 및 스토리 전달"
                     },
                     {
                       "id": "SEC-05",
                       "name": "Portfolio Section",
-                      "content": ["프로젝트 카드 그리드", "Holographic effects", "태그/카테고리 필터"],
+                      "content": [
+                        "프로젝트 카드 그리드",
+                        "Holographic effects",
+                        "태그/카테고리 필터"
+                      ],
                       "purpose": "대표 프로젝트 갤러리 제공"
                     },
                     {
                       "id": "SEC-06",
                       "name": "Skills Section",
-                      "content": ["스킬 카테고리", "숙련도 표시", "기술 태그"],
+                      "content": [
+                        "스킬 카테고리",
+                        "숙련도 표시",
+                        "기술 태그"
+                      ],
                       "purpose": "기술 스택 및 역량 시각화"
                     },
                     {
                       "id": "SEC-07",
                       "name": "Contact Section",
-                      "content": ["연락처 정보", "소셜 링크", "문의 폼"],
+                      "content": [
+                        "연락처 정보",
+                        "소셜 링크",
+                        "문의 폼"
+                      ],
                       "purpose": "연락 방법 제공"
                     }
                   ]
@@ -1255,13 +1602,23 @@
                   "name": "Portfolio (/portfolio)",
                   "type": "Collection Page",
                   "priority": "Primary",
-                  "content": ["프로젝트 전체 목록", "필터/정렬 기능", "카테고리 네비게이션"],
+                  "content": [
+                    "프로젝트 전체 목록",
+                    "필터/정렬 기능",
+                    "카테고리 네비게이션"
+                  ],
                   "children": [
                     {
                       "id": "PA-02-01",
                       "name": "Project Detail (/portfolio/:projectId)",
                       "type": "Detail Page",
-                      "content": ["프로젝트 Hero 이미지", "상세 설명", "역할 및 프로세스", "이미지 갤러리", "성과 지표"]
+                      "content": [
+                        "프로젝트 Hero 이미지",
+                        "상세 설명",
+                        "역할 및 프로세스",
+                        "이미지 갤러리",
+                        "성과 지표"
+                      ]
                     }
                   ]
                 },
@@ -1270,7 +1627,12 @@
                   "name": "Documents (/documents)",
                   "type": "Collection Page",
                   "priority": "Secondary",
-                  "content": ["문서 목록 그리드", "문서 타입 필터", "검색 기능", "다운로드 버튼"],
+                  "content": [
+                    "문서 목록 그리드",
+                    "문서 타입 필터",
+                    "검색 기능",
+                    "다운로드 버튼"
+                  ],
                   "document_types": [
                     "이력서 (resume)",
                     "자기소개서 (coverLetter)",
@@ -1293,21 +1655,35 @@
                   "name": "Resume (/resume)",
                   "type": "Detail Page",
                   "priority": "Secondary",
-                  "content": ["이력서 전체 내용", "PDF 다운로드 버튼", "인쇄 최적화 레이아웃"]
+                  "content": [
+                    "이력서 전체 내용",
+                    "PDF 다운로드 버튼",
+                    "인쇄 최적화 레이아웃"
+                  ]
                 },
                 {
                   "id": "PA-05",
                   "name": "Career Description (/career-description)",
                   "type": "Detail Page",
                   "priority": "Secondary",
-                  "content": ["경력기술서 상세", "프로젝트별 상세 역할", "성과 지표", "PDF 다운로드"]
+                  "content": [
+                    "경력기술서 상세",
+                    "프로젝트별 상세 역할",
+                    "성과 지표",
+                    "PDF 다운로드"
+                  ]
                 },
                 {
                   "id": "PA-06",
                   "name": "Cover Letter (/cover-letter)",
                   "type": "Detail Page",
                   "priority": "Tertiary",
-                  "content": ["자기소개서 내용", "지원 동기", "핵심 역량 강조", "PDF 다운로드"]
+                  "content": [
+                    "자기소개서 내용",
+                    "지원 동기",
+                    "핵심 역량 강조",
+                    "PDF 다운로드"
+                  ]
                 }
               ]
             },
@@ -1321,7 +1697,11 @@
                   "name": "Admin Login (/admin/login)",
                   "type": "Authentication Page",
                   "priority": "Critical",
-                  "content": ["로그인 폼", "이메일/비밀번호 입력", "로그인 버튼"],
+                  "content": [
+                    "로그인 폼",
+                    "이메일/비밀번호 입력",
+                    "로그인 버튼"
+                  ],
                   "redirect": "/admin/dashboard (성공 시)"
                 },
                 {
@@ -1333,67 +1713,110 @@
                     {
                       "id": "TAB-01",
                       "name": "Profile",
-                      "content": ["프로필 정보 편집", "이미지 업로드", "연락처 관리"],
+                      "content": [
+                        "프로필 정보 편집",
+                        "이미지 업로드",
+                        "연락처 관리"
+                      ],
                       "data_model": "ProfileModel"
                     },
                     {
                       "id": "TAB-02",
                       "name": "Projects",
-                      "content": ["프로젝트 목록", "추가/편집/삭제", "이미지 업로드", "순서 조정"],
+                      "content": [
+                        "프로젝트 목록",
+                        "추가/편집/삭제",
+                        "이미지 업로드",
+                        "순서 조정"
+                      ],
                       "data_model": "ProjectModel"
                     },
                     {
                       "id": "TAB-03",
                       "name": "Experience",
-                      "content": ["경력 항목 관리", "회사/기간/역할 입력", "타임라인 순서 조정"],
+                      "content": [
+                        "경력 항목 관리",
+                        "회사/기간/역할 입력",
+                        "타임라인 순서 조정"
+                      ],
                       "data_model": "ExperienceModel"
                     },
                     {
                       "id": "TAB-04",
                       "name": "Education",
-                      "content": ["학력 정보 관리", "학교/전공/기간 입력"],
+                      "content": [
+                        "학력 정보 관리",
+                        "학교/전공/기간 입력"
+                      ],
                       "data_model": "EducationModel"
                     },
                     {
                       "id": "TAB-05",
                       "name": "Skills",
-                      "content": ["스킬 카테고리 관리", "숙련도 설정", "태그 관리"],
+                      "content": [
+                        "스킬 카테고리 관리",
+                        "숙련도 설정",
+                        "태그 관리"
+                      ],
                       "data_model": "SkillModel"
                     },
                     {
                       "id": "TAB-06",
                       "name": "Documents",
-                      "content": ["문서 목록", "문서 추가/편집/삭제", "문서 타입 선택", "PDF 생성"],
+                      "content": [
+                        "문서 목록",
+                        "문서 추가/편집/삭제",
+                        "문서 타입 선택",
+                        "PDF 생성"
+                      ],
                       "data_model": "DocumentModel"
                     },
                     {
                       "id": "TAB-07",
                       "name": "Resume",
-                      "content": ["이력서 편집", "PDF 생성", "실시간 미리보기"],
+                      "content": [
+                        "이력서 편집",
+                        "PDF 생성",
+                        "실시간 미리보기"
+                      ],
                       "data_model": "ResumeModel"
                     },
                     {
                       "id": "TAB-08",
                       "name": "Career Description",
-                      "content": ["경력기술서 편집", "프로젝트별 상세 작성"],
+                      "content": [
+                        "경력기술서 편집",
+                        "프로젝트별 상세 작성"
+                      ],
                       "data_model": "CareerDescriptionModel"
                     },
                     {
                       "id": "TAB-09",
                       "name": "Cover Letter",
-                      "content": ["자기소개서 편집", "버전 관리"],
+                      "content": [
+                        "자기소개서 편집",
+                        "버전 관리"
+                      ],
                       "data_model": "CoverLetterModel"
                     },
                     {
                       "id": "TAB-10",
                       "name": "Design System",
-                      "content": ["Atomic Design 문서화", "컴포넌트 카탈로그", "스타일 가이드"],
+                      "content": [
+                        "Atomic Design 문서화",
+                        "컴포넌트 카탈로그",
+                        "스타일 가이드"
+                      ],
                       "data_model": "DesignSystemModel"
                     },
                     {
                       "id": "TAB-11",
                       "name": "Project Guide",
-                      "content": ["프로젝트 구조 문서", "개발 가이드", "배포 매뉴얼"],
+                      "content": [
+                        "프로젝트 구조 문서",
+                        "개발 가이드",
+                        "배포 매뉴얼"
+                      ],
                       "data_model": "ProjectGuideModel"
                     }
                   ]
@@ -1442,19 +1865,44 @@
               {
                 "page": "Home",
                 "type": "Anchor Links",
-                "items": ["Hero", "Resume", "Experience", "About", "Portfolio", "Skills", "Contact"],
+                "items": [
+                  "Hero",
+                  "Resume",
+                  "Experience",
+                  "About",
+                  "Portfolio",
+                  "Skills",
+                  "Contact"
+                ],
                 "behavior": "클릭 시 해당 섹션으로 스크롤 애니메이션"
               },
               {
                 "page": "Documents",
                 "type": "Filter Navigation",
-                "items": ["All", "개인 문서", "기획/디자인 문서", "PM 문서"],
+                "items": [
+                  "All",
+                  "개인 문서",
+                  "기획/디자인 문서",
+                  "PM 문서"
+                ],
                 "behavior": "문서 타입별 필터링"
               },
               {
                 "page": "Admin Dashboard",
                 "type": "Tab Navigation",
-                "items": ["Profile", "Projects", "Experience", "Education", "Skills", "Documents", "Resume", "Career Description", "Cover Letter", "Design System", "Project Guide"],
+                "items": [
+                  "Profile",
+                  "Projects",
+                  "Experience",
+                  "Education",
+                  "Skills",
+                  "Documents",
+                  "Resume",
+                  "Career Description",
+                  "Cover Letter",
+                  "Design System",
+                  "Project Guide"
+                ],
                 "behavior": "탭 전환으로 콘텐츠 관리 영역 변경"
               }
             ]
@@ -1478,7 +1926,12 @@
           },
           "footer_navigation": {
             "description": "Footer에 위치한 보조 네비게이션",
-            "items": ["소셜 링크", "연락처 정보", "사이트맵", "Privacy Policy (선택)"]
+            "items": [
+              "소셜 링크",
+              "연락처 정보",
+              "사이트맵",
+              "Privacy Policy (선택)"
+            ]
           }
         },
         "contentOrganization": {
@@ -1487,23 +1940,48 @@
             "categories": [
               {
                 "name": "개인 문서",
-                "types": ["resume", "coverLetter", "careerDescription", "portfolio"],
+                "types": [
+                  "resume",
+                  "coverLetter",
+                  "careerDescription",
+                  "portfolio"
+                ],
                 "purpose": "개인 경력 및 역량 증명"
               },
               {
                 "name": "기획/디자인 문서",
-                "types": ["requirements", "userFlow", "informationArchitecture", "wireframe"],
+                "types": [
+                  "requirements",
+                  "userFlow",
+                  "informationArchitecture",
+                  "wireframe"
+                ],
                 "purpose": "기획 역량 및 UX 프로세스 증명"
               },
               {
                 "name": "PM 문서",
-                "types": ["projectCharter", "screenDesign", "stakeholderMatrix", "riskRegister", "changeLog", "lessonsLearned"],
+                "types": [
+                  "projectCharter",
+                  "screenDesign",
+                  "stakeholderMatrix",
+                  "riskRegister",
+                  "changeLog",
+                  "lessonsLearned"
+                ],
                 "purpose": "프로젝트 관리 역량 증명"
               }
             ],
             "tags": {
               "description": "크로스 카테고리 분류를 위한 태그 시스템",
-              "examples": ["Figma", "Mobile UX", "Design System", "Accessibility", "IoT", "Real-time", "Dashboard"]
+              "examples": [
+                "Figma",
+                "Mobile UX",
+                "Design System",
+                "Accessibility",
+                "IoT",
+                "Real-time",
+                "Dashboard"
+              ]
             }
           },
           "metadata": {
@@ -1518,33 +1996,72 @@
               "type (타입)"
             ],
             "content_specific_fields": {
-              "projects": ["company", "year", "description", "imageUrl", "gradientColors", "order"],
-              "documents": ["version", "pdfUrl", "content"],
-              "experience": ["company", "period", "role", "achievements"],
-              "skills": ["category", "proficiency", "tools"]
+              "projects": [
+                "company",
+                "year",
+                "description",
+                "imageUrl",
+                "gradientColors",
+                "order"
+              ],
+              "documents": [
+                "version",
+                "pdfUrl",
+                "content"
+              ],
+              "experience": [
+                "company",
+                "period",
+                "role",
+                "achievements"
+              ],
+              "skills": [
+                "category",
+                "proficiency",
+                "tools"
+              ]
             }
           }
         },
         "searchAndDiscovery": {
           "search_functionality": {
             "scope": "전체 콘텐츠 (프로젝트, 문서, 경력, 스킬)",
-            "search_fields": ["title", "description", "tags", "company", "content"],
+            "search_fields": [
+              "title",
+              "description",
+              "tags",
+              "company",
+              "content"
+            ],
             "location": "Documents 페이지, Portfolio 페이지",
             "type": "실시간 검색 (Debounced)",
             "results": "관련성 순 정렬"
           },
           "filtering": {
             "documents_page": {
-              "filters": ["문서 타입 (개인/기획/PM)", "태그", "날짜"],
+              "filters": [
+                "문서 타입 (개인/기획/PM)",
+                "태그",
+                "날짜"
+              ],
               "behavior": "다중 필터 지원"
             },
             "portfolio_page": {
-              "filters": ["카테고리 (Mobile App, IoT, E-commerce 등)", "태그", "연도"],
+              "filters": [
+                "카테고리 (Mobile App, IoT, E-commerce 등)",
+                "태그",
+                "연도"
+              ],
               "behavior": "실시간 필터링"
             }
           },
           "sorting": {
-            "options": ["최신순", "오래된순", "이름순", "관련성순"],
+            "options": [
+              "최신순",
+              "오래된순",
+              "이름순",
+              "관련성순"
+            ],
             "default": "최신순 (updatedAt 기준)"
           }
         },
@@ -1552,46 +2069,101 @@
           "recruiter_journey": {
             "entry_point": "/ (Home)",
             "typical_path": "Home > Portfolio > Project Detail > Documents > Resume Download",
-            "key_pages": ["/", "/portfolio/:projectId", "/documents", "/resume"],
+            "key_pages": [
+              "/",
+              "/portfolio/:projectId",
+              "/documents",
+              "/resume"
+            ],
             "exit_point": "연락처 정보 확인 또는 이력서 다운로드"
           },
           "admin_journey": {
             "entry_point": "/admin/login",
             "typical_path": "Login > Dashboard > [Tab] > Edit Content > Save > Preview",
-            "key_pages": ["/admin/login", "/admin/dashboard"],
+            "key_pages": [
+              "/admin/login",
+              "/admin/dashboard"
+            ],
             "exit_point": "로그아웃 후 공개 페이지 확인"
           }
         },
         "informationHierarchy": {
           "level_1": {
             "description": "최상위 레벨 - 주요 영역",
-            "items": ["Home", "Portfolio", "Documents", "Admin"]
+            "items": [
+              "Home",
+              "Portfolio",
+              "Documents",
+              "Admin"
+            ]
           },
           "level_2": {
             "description": "두 번째 레벨 - 섹션/페이지",
-            "items": ["Hero Section", "Resume Section", "Experience Section", "About Section", "Portfolio Section", "Skills Section", "Contact Section", "Project Detail", "Document List", "Resume Page", "Admin Dashboard"]
+            "items": [
+              "Hero Section",
+              "Resume Section",
+              "Experience Section",
+              "About Section",
+              "Portfolio Section",
+              "Skills Section",
+              "Contact Section",
+              "Project Detail",
+              "Document List",
+              "Resume Page",
+              "Admin Dashboard"
+            ]
           },
           "level_3": {
             "description": "세 번째 레벨 - 콘텐츠 블록",
-            "items": ["프로젝트 카드", "경력 항목", "스킬 카테고리", "문서 카드", "편집 폼", "탭 콘텐츠"]
+            "items": [
+              "프로젝트 카드",
+              "경력 항목",
+              "스킬 카테고리",
+              "문서 카드",
+              "편집 폼",
+              "탭 콘텐츠"
+            ]
           },
           "level_4": {
             "description": "네 번째 레벨 - 개별 요소",
-            "items": ["버튼", "입력 필드", "이미지", "텍스트", "아이콘", "링크"]
+            "items": [
+              "버튼",
+              "입력 필드",
+              "이미지",
+              "텍스트",
+              "아이콘",
+              "링크"
+            ]
           }
         },
         "contentPriority": {
           "critical": {
             "description": "모든 사용자가 반드시 접근해야 하는 콘텐츠",
-            "items": ["Hero Section", "Portfolio Gallery", "Resume Section", "Contact Section", "Admin Login"]
+            "items": [
+              "Hero Section",
+              "Portfolio Gallery",
+              "Resume Section",
+              "Contact Section",
+              "Admin Login"
+            ]
           },
           "important": {
             "description": "대부분의 사용자가 관심 있는 콘텐츠",
-            "items": ["Experience Section", "Skills Section", "Project Detail", "Documents Page"]
+            "items": [
+              "Experience Section",
+              "Skills Section",
+              "Project Detail",
+              "Documents Page"
+            ]
           },
           "optional": {
             "description": "특정 사용자만 필요로 하는 콘텐츠",
-            "items": ["About Section", "Cover Letter", "Career Description", "Design System Documentation"]
+            "items": [
+              "About Section",
+              "Cover Letter",
+              "Career Description",
+              "Design System Documentation"
+            ]
           }
         },
         "responsiveStrategy": {
@@ -1638,7 +2210,12 @@
           "scalability": "문서 및 프로젝트 수가 증가해도 현재 IA 구조 유지 가능. 필요 시 하위 카테고리 추가로 대응."
         }
       },
-      "tags": ["information-architecture", "ia", "site-structure", "current-project"]
+      "tags": [
+        "information-architecture",
+        "ia",
+        "site-structure",
+        "current-project"
+      ]
     },
     {
       "id": "doc-current-04",
@@ -1682,7 +2259,13 @@
                     {
                       "element": "Navigation Menu",
                       "position": "Right (60% width)",
-                      "items": ["Home", "Portfolio", "Documents", "Resume", "Contact"],
+                      "items": [
+                        "Home",
+                        "Portfolio",
+                        "Documents",
+                        "Resume",
+                        "Contact"
+                      ],
                       "behavior": "Horizontal menu, 현재 섹션 하이라이트"
                     },
                     {
@@ -1736,7 +2319,11 @@
                       {
                         "element": "Career Summary",
                         "grid_position": "Columns 1-8",
-                        "content": ["총 경력 연수", "주요 역할", "핵심 성과"]
+                        "content": [
+                          "총 경력 연수",
+                          "주요 역할",
+                          "핵심 성과"
+                        ]
                       },
                       {
                         "element": "PDF Download Button",
@@ -1791,7 +2378,10 @@
                       {
                         "element": "About Text",
                         "grid_position": "Columns 1-7",
-                        "content": ["자기소개 (P, 16px)", "핵심 가치관 (P, 16px)"]
+                        "content": [
+                          "자기소개 (P, 16px)",
+                          "핵심 가치관 (P, 16px)"
+                        ]
                       },
                       {
                         "element": "Education",
@@ -1818,7 +2408,13 @@
                       {
                         "element": "Filter Tabs (선택)",
                         "grid_position": "Columns 1-12",
-                        "items": ["All", "Mobile App", "Web", "IoT", "E-commerce"]
+                        "items": [
+                          "All",
+                          "Mobile App",
+                          "Web",
+                          "IoT",
+                          "E-commerce"
+                        ]
                       },
                       {
                         "element": "Project Grid",
@@ -1861,12 +2457,20 @@
                           {
                             "category": "Design Tools",
                             "grid": "Columns 1-6",
-                            "items": ["Figma (90%)", "Sketch (85%)", "Adobe XD (80%)"]
+                            "items": [
+                              "Figma (90%)",
+                              "Sketch (85%)",
+                              "Adobe XD (80%)"
+                            ]
                           },
                           {
                             "category": "Prototyping",
                             "grid": "Columns 7-12",
-                            "items": ["Principle (85%)", "ProtoPie (80%)", "Framer (75%)"]
+                            "items": [
+                              "Principle (85%)",
+                              "ProtoPie (80%)",
+                              "Framer (75%)"
+                            ]
                           }
                         ],
                         "skill_display": "Skill name + Progress bar (Horizontal)"
@@ -1897,7 +2501,14 @@
                         "element": "Social Links",
                         "grid_position": "Columns 7-12",
                         "layout": "Icon grid (4x2)",
-                        "items": ["LinkedIn", "Behance", "Dribbble", "GitHub", "Medium", "Twitter"]
+                        "items": [
+                          "LinkedIn",
+                          "Behance",
+                          "Dribbble",
+                          "GitHub",
+                          "Medium",
+                          "Twitter"
+                        ]
                       }
                     ]
                   }
@@ -1913,7 +2524,10 @@
                     {
                       "element": "Footer Links",
                       "position": "Right",
-                      "items": ["Privacy Policy", "Sitemap"]
+                      "items": [
+                        "Privacy Policy",
+                        "Sitemap"
+                      ]
                     }
                   ]
                 }
@@ -1948,12 +2562,23 @@
                       {
                         "element": "Category Tabs",
                         "position": "Left",
-                        "items": ["All", "Mobile App", "Web", "IoT", "E-commerce", "Other"]
+                        "items": [
+                          "All",
+                          "Mobile App",
+                          "Web",
+                          "IoT",
+                          "E-commerce",
+                          "Other"
+                        ]
                       },
                       {
                         "element": "Sort Dropdown",
                         "position": "Right",
-                        "options": ["Latest", "Oldest", "Name (A-Z)"]
+                        "options": [
+                          "Latest",
+                          "Oldest",
+                          "Name (A-Z)"
+                        ]
                       }
                     ]
                   },
@@ -2133,23 +2758,36 @@
                     "sections": [
                       {
                         "section": "Personal Info",
-                        "content": ["Name", "Contact", "Location"]
+                        "content": [
+                          "Name",
+                          "Contact",
+                          "Location"
+                        ]
                       },
                       {
                         "section": "Summary",
-                        "content": ["경력 요약 (3-4 문장)"]
+                        "content": [
+                          "경력 요약 (3-4 문장)"
+                        ]
                       },
                       {
                         "section": "Experience",
-                        "content": ["회사별 경력 (최신순)", "각 항목: 회사명, 기간, 역할, 성과"]
+                        "content": [
+                          "회사별 경력 (최신순)",
+                          "각 항목: 회사명, 기간, 역할, 성과"
+                        ]
                       },
                       {
                         "section": "Education",
-                        "content": ["학력 정보"]
+                        "content": [
+                          "학력 정보"
+                        ]
                       },
                       {
                         "section": "Skills",
-                        "content": ["기술 스택 나열"]
+                        "content": [
+                          "기술 스택 나열"
+                        ]
                       }
                     ],
                     "style": "인쇄 최적화 레이아웃 (깔끔한 타이포그래피)"
@@ -2306,8 +2944,18 @@
                       {
                         "element": "Project List",
                         "layout": "Table or Card list",
-                        "columns": ["Thumbnail", "Title", "Company", "Year", "Actions (Edit/Delete)"],
-                        "row_actions": ["Edit button", "Delete button", "Drag handle (for reordering)"]
+                        "columns": [
+                          "Thumbnail",
+                          "Title",
+                          "Company",
+                          "Year",
+                          "Actions (Edit/Delete)"
+                        ],
+                        "row_actions": [
+                          "Edit button",
+                          "Delete button",
+                          "Drag handle (for reordering)"
+                        ]
                       },
                       {
                         "element": "Edit Modal (on click)",
@@ -2441,7 +3089,12 @@
           "실제 구현 시 Flutter의 Responsive Framework 및 LayoutBuilder를 활용하여 반응형 레이아웃을 구현합니다."
         ]
       },
-      "tags": ["wireframe", "ui-design", "layout", "current-project"]
+      "tags": [
+        "wireframe",
+        "ui-design",
+        "layout",
+        "current-project"
+      ]
     },
     {
       "id": "doc-plan-01",
@@ -2450,7 +3103,12 @@
       "version": "1.5",
       "createdAt": "2025-02-01T00:00:00.000Z",
       "updatedAt": "2025-02-28T00:00:00.000Z",
-      "tags": ["AIA+", "기획", "Requirements", "Specification"],
+      "tags": [
+        "AIA+",
+        "기획",
+        "Requirements",
+        "Specification"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "documentVersion": "1.5",
@@ -2464,7 +3122,12 @@
               "purpose": "AIA+ 앱 고령자 전용 모드(SENIOR MODE)의 기능 및 비기능 요구사항을 상세히 정의하여 개발 및 디자인 방향성 제시",
               "scope": "60세 이상 고령 사용자를 위한 전용 모드 전체 기능",
               "targetUsers": "60세 이상 AIA+ 앱 사용자 (약 15만명 추정)",
-              "deliverables": ["기능 요구사항 명세", "비기능 요구사항 명세", "사용자 스토리", "인수 기준"]
+              "deliverables": [
+                "기능 요구사항 명세",
+                "비기능 요구사항 명세",
+                "사용자 스토리",
+                "인수 기준"
+              ]
             }
           },
           {
@@ -2753,7 +3416,12 @@
       "version": "1.2",
       "createdAt": "2025-02-15T00:00:00.000Z",
       "updatedAt": "2025-03-10T00:00:00.000Z",
-      "tags": ["AIA+", "기획", "User Flow", "Journey"],
+      "tags": [
+        "AIA+",
+        "기획",
+        "User Flow",
+        "Journey"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "documentVersion": "1.2",
@@ -3019,7 +3687,12 @@
       "version": "1.0",
       "createdAt": "2025-02-20T00:00:00.000Z",
       "updatedAt": "2025-02-20T00:00:00.000Z",
-      "tags": ["AIA+", "기획", "IA", "Sitemap"],
+      "tags": [
+        "AIA+",
+        "기획",
+        "IA",
+        "Sitemap"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "documentVersion": "1.0",
@@ -3046,9 +3719,18 @@
                 "description": "보험료 납부 기능",
                 "navigation": "위젯 터치",
                 "level3": [
-                  {"name": "납입 정보 확인", "type": "정보 화면"},
-                  {"name": "결제 수단 선택", "type": "입력 화면"},
-                  {"name": "납입 완료", "type": "결과 화면"}
+                  {
+                    "name": "납입 정보 확인",
+                    "type": "정보 화면"
+                  },
+                  {
+                    "name": "결제 수단 선택",
+                    "type": "입력 화면"
+                  },
+                  {
+                    "name": "납입 완료",
+                    "type": "결과 화면"
+                  }
                 ]
               },
               {
@@ -3056,9 +3738,18 @@
                 "description": "보험금 청구 신청",
                 "navigation": "위젯 터치",
                 "level3": [
-                  {"name": "청구 대상 선택", "type": "선택 화면"},
-                  {"name": "서류 업로드", "type": "입력 화면"},
-                  {"name": "청구 완료", "type": "결과 화면"}
+                  {
+                    "name": "청구 대상 선택",
+                    "type": "선택 화면"
+                  },
+                  {
+                    "name": "서류 업로드",
+                    "type": "입력 화면"
+                  },
+                  {
+                    "name": "청구 완료",
+                    "type": "결과 화면"
+                  }
                 ]
               },
               {
@@ -3066,9 +3757,18 @@
                 "description": "보험 계약 정보 확인 및 관리",
                 "navigation": "위젯 터치",
                 "level3": [
-                  {"name": "보험계약대출 상환", "type": "기능 화면"},
-                  {"name": "자동부활 신청", "type": "기능 화면"},
-                  {"name": "자동송금 신청", "type": "기능 화면"}
+                  {
+                    "name": "보험계약대출 상환",
+                    "type": "기능 화면"
+                  },
+                  {
+                    "name": "자동부활 신청",
+                    "type": "기능 화면"
+                  },
+                  {
+                    "name": "자동송금 신청",
+                    "type": "기능 화면"
+                  }
                 ]
               },
               {
@@ -3076,9 +3776,18 @@
                 "description": "상담 및 문의",
                 "navigation": "위젯 터치",
                 "level3": [
-                  {"name": "전화 상담", "type": "액션 (전화 앱 호출)"},
-                  {"name": "1:1 문의", "type": "입력 화면"},
-                  {"name": "자주 묻는 질문", "type": "정보 화면"}
+                  {
+                    "name": "전화 상담",
+                    "type": "액션 (전화 앱 호출)"
+                  },
+                  {
+                    "name": "1:1 문의",
+                    "type": "입력 화면"
+                  },
+                  {
+                    "name": "자주 묻는 질문",
+                    "type": "정보 화면"
+                  }
                 ]
               }
             ]
@@ -3123,7 +3832,12 @@
       "version": "1.0",
       "createdAt": "2025-03-01T00:00:00.000Z",
       "updatedAt": "2025-03-01T00:00:00.000Z",
-      "tags": ["AIA+", "기획", "Wireframe", "Low-Fi"],
+      "tags": [
+        "AIA+",
+        "기획",
+        "Wireframe",
+        "Low-Fi"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "documentVersion": "1.0",
@@ -3217,9 +3931,18 @@
                   {
                     "name": "납입 정보",
                     "fields": [
-                      {"label": "보험 상품 (18sp)", "value": "건강보험 Plus (18sp)"},
-                      {"label": "납입 금액 (18sp)", "value": "150,000원 (28sp Bold Primary)"},
-                      {"label": "납입 기한 (18sp)", "value": "2025.06.30 (18sp)"}
+                      {
+                        "label": "보험 상품 (18sp)",
+                        "value": "건강보험 Plus (18sp)"
+                      },
+                      {
+                        "label": "납입 금액 (18sp)",
+                        "value": "150,000원 (28sp Bold Primary)"
+                      },
+                      {
+                        "label": "납입 기한 (18sp)",
+                        "value": "2025.06.30 (18sp)"
+                      }
                     ]
                   },
                   {
@@ -3288,15 +4011,32 @@
                   {
                     "name": "대출 정보",
                     "fields": [
-                      {"label": "현재 대출 잔액 (18sp)", "value": "5,000,000원 (28sp Bold)"},
-                      {"label": "월 이자 (18sp)", "value": "15,000원 (18sp)"}
+                      {
+                        "label": "현재 대출 잔액 (18sp)",
+                        "value": "5,000,000원 (28sp Bold)"
+                      },
+                      {
+                        "label": "월 이자 (18sp)",
+                        "value": "15,000원 (18sp)"
+                      }
                     ]
                   },
                   {
                     "name": "상환 금액 입력",
                     "components": [
-                      {"type": "Number Input Field", "placeholder": "금액을 입력하세요 (20sp)", "height": "64dp"},
-                      {"type": "Chip Group", "chips": ["[50만원]", "[100만원]", "[전액 상환]"]}
+                      {
+                        "type": "Number Input Field",
+                        "placeholder": "금액을 입력하세요 (20sp)",
+                        "height": "64dp"
+                      },
+                      {
+                        "type": "Chip Group",
+                        "chips": [
+                          "[50만원]",
+                          "[100만원]",
+                          "[전액 상환]"
+                        ]
+                      }
                     ]
                   },
                   {
@@ -3336,8 +4076,14 @@
                   {
                     "name": "상세 정보",
                     "fields": [
-                      {"label": "납입 금액", "value": "150,000원"},
-                      {"label": "납입 일시", "value": "2025.06.20 14:23"}
+                      {
+                        "label": "납입 금액",
+                        "value": "150,000원"
+                      },
+                      {
+                        "label": "납입 일시",
+                        "value": "2025.06.20 14:23"
+                      }
                     ]
                   },
                   {
@@ -3385,7 +4131,12 @@
       "version": "1.0",
       "createdAt": "2024-12-01T00:00:00.000Z",
       "updatedAt": "2024-12-28T00:00:00.000Z",
-      "tags": ["Portfolio", "기획", "Requirements", "Flutter"],
+      "tags": [
+        "Portfolio",
+        "기획",
+        "Requirements",
+        "Flutter"
+      ],
       "content": {
         "projectName": "Senior Designer Portfolio Platform",
         "projectDescription": "시니어 프로덕트 디자이너의 경력, 프로젝트, 문서를 체계적으로 관리하고 전시하는 웹/앱 통합 포트폴리오 플랫폼",
@@ -3911,31 +4662,97 @@
             "dataModels": [
               {
                 "modelName": "ProfileModel",
-                "fields": ["id", "name", "birth", "address", "military", "phone", "email", "introduction", "philosophy", "aspirations"]
+                "fields": [
+                  "id",
+                  "name",
+                  "birth",
+                  "address",
+                  "military",
+                  "phone",
+                  "email",
+                  "introduction",
+                  "philosophy",
+                  "aspirations"
+                ]
               },
               {
                 "modelName": "ProjectModel",
-                "fields": ["id", "title", "subtitle", "company", "year", "category", "description", "tags", "imageUrl", "gradientColors", "order"]
+                "fields": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "company",
+                  "year",
+                  "category",
+                  "description",
+                  "tags",
+                  "imageUrl",
+                  "gradientColors",
+                  "order"
+                ]
               },
               {
                 "modelName": "ExperienceModel",
-                "fields": ["id", "company", "role", "period", "description", "responsibilities", "achievements", "tools", "environment", "reasonForLeaving", "order", "tags"]
+                "fields": [
+                  "id",
+                  "company",
+                  "role",
+                  "period",
+                  "description",
+                  "responsibilities",
+                  "achievements",
+                  "tools",
+                  "environment",
+                  "reasonForLeaving",
+                  "order",
+                  "tags"
+                ]
               },
               {
                 "modelName": "EducationModel",
-                "fields": ["id", "period", "school", "major", "gpa", "order"]
+                "fields": [
+                  "id",
+                  "period",
+                  "school",
+                  "major",
+                  "gpa",
+                  "order"
+                ]
               },
               {
                 "modelName": "SkillModel",
-                "fields": ["id", "title", "skills (list)", "order", "iconName"]
+                "fields": [
+                  "id",
+                  "title",
+                  "skills (list)",
+                  "order",
+                  "iconName"
+                ]
               },
               {
                 "modelName": "ResumeModel",
-                "fields": ["PersonalInfo", "Education[]", "Career[]", "coreCompetencies[]", "Certification[]", "CoverLetterModel"]
+                "fields": [
+                  "PersonalInfo",
+                  "Education[]",
+                  "Career[]",
+                  "coreCompetencies[]",
+                  "Certification[]",
+                  "CoverLetterModel"
+                ]
               },
               {
                 "modelName": "DocumentModel",
-                "fields": ["id", "type (enum)", "title", "version", "createdAt", "updatedAt", "pdfUrl", "content (JSON)", "tags[]"]
+                "fields": [
+                  "id",
+                  "type (enum)",
+                  "title",
+                  "version",
+                  "createdAt",
+                  "updatedAt",
+                  "pdfUrl",
+                  "content (JSON)",
+                  "tags[]"
+                ]
               }
             ]
           },
@@ -3986,7 +4803,11 @@
       "version": "1.0",
       "createdAt": "2025-02-01T00:00:00.000Z",
       "updatedAt": "2025-02-01T00:00:00.000Z",
-      "tags": ["AIA+", "PM", "Project Charter"],
+      "tags": [
+        "AIA+",
+        "PM",
+        "Project Charter"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "projectCode": "AIA-SM-2025",
@@ -4046,7 +4867,13 @@
       "version": "2.3",
       "createdAt": "2025-03-01T00:00:00.000Z",
       "updatedAt": "2025-05-15T00:00:00.000Z",
-      "tags": ["AIA+", "PM", "Screen Design", "Wireframe", "UI/UX"],
+      "tags": [
+        "AIA+",
+        "PM",
+        "Screen Design",
+        "Wireframe",
+        "UI/UX"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "documentVersion": "2.3",
@@ -4071,22 +4898,36 @@
               {
                 "name": "단순성 (Simplicity)",
                 "description": "복잡한 정보를 최소화하고 핵심 기능만 노출. 3단계 이상 깊이 금지",
-                "examples": ["메인 화면 위젯 4개 이하", "한 화면에 주요 액션 1-2개만"]
+                "examples": [
+                  "메인 화면 위젯 4개 이하",
+                  "한 화면에 주요 액션 1-2개만"
+                ]
               },
               {
                 "name": "가독성 (Readability)",
                 "description": "큰 글씨(최소 18sp), 높은 명도 대비(4.5:1 이상), 명확한 레이블",
-                "examples": ["본문 18sp", "제목 24sp", "버튼 라벨 20sp"]
+                "examples": [
+                  "본문 18sp",
+                  "제목 24sp",
+                  "버튼 라벨 20sp"
+                ]
               },
               {
                 "name": "접근성 (Accessibility)",
                 "description": "WCAG 2.1 AA 기준 100% 준수, 스크린리더 지원, 키보드 네비게이션",
-                "examples": ["대체 텍스트 필수", "터치 영역 48dp 이상", "포커스 인디케이터"]
+                "examples": [
+                  "대체 텍스트 필수",
+                  "터치 영역 48dp 이상",
+                  "포커스 인디케이터"
+                ]
               },
               {
                 "name": "일관성 (Consistency)",
                 "description": "디자인 시스템 컴포넌트 재사용, 동일한 패턴 유지",
-                "examples": ["Primary 버튼 스타일 통일", "입력 필드 디자인 일관성"]
+                "examples": [
+                  "Primary 버튼 스타일 통일",
+                  "입력 필드 디자인 일관성"
+                ]
               }
             ]
           },
@@ -4104,7 +4945,11 @@
                       "screen": "보험료 납입",
                       "description": "보험료 납부 기능",
                       "children": [
-                        {"level": 3, "screen": "납입 완료", "description": "납부 결과 확인"}
+                        {
+                          "level": 3,
+                          "screen": "납입 완료",
+                          "description": "납부 결과 확인"
+                        }
                       ]
                     },
                     {
@@ -4112,7 +4957,11 @@
                       "screen": "보험계약대출 상환",
                       "description": "대출 상환 기능",
                       "children": [
-                        {"level": 3, "screen": "상환 완료", "description": "상환 결과 확인"}
+                        {
+                          "level": 3,
+                          "screen": "상환 완료",
+                          "description": "상환 결과 확인"
+                        }
                       ]
                     },
                     {
@@ -4120,7 +4969,11 @@
                       "screen": "자동부활 신청",
                       "description": "보험 자동부활 신청",
                       "children": [
-                        {"level": 3, "screen": "신청 완료", "description": "신청 결과 확인"}
+                        {
+                          "level": 3,
+                          "screen": "신청 완료",
+                          "description": "신청 결과 확인"
+                        }
                       ]
                     },
                     {
@@ -4128,7 +4981,11 @@
                       "screen": "자동송금 신청",
                       "description": "자동이체 설정",
                       "children": [
-                        {"level": 3, "screen": "설정 완료", "description": "설정 결과 확인"}
+                        {
+                          "level": 3,
+                          "screen": "설정 완료",
+                          "description": "설정 결과 확인"
+                        }
                       ]
                     }
                   ]
@@ -4152,7 +5009,10 @@
                     {
                       "name": "헤더",
                       "height": "80dp",
-                      "elements": ["환영 메시지 (안녕하세요, OOO님)", "설정 아이콘"]
+                      "elements": [
+                        "환영 메시지 (안녕하세요, OOO님)",
+                        "설정 아이콘"
+                      ]
                     },
                     {
                       "name": "위젯 영역",
@@ -4167,7 +5027,9 @@
                     {
                       "name": "최근 활동",
                       "height": "Auto",
-                      "elements": ["최근 거래 내역 (최대 3개)"]
+                      "elements": [
+                        "최근 거래 내역 (최대 3개)"
+                      ]
                     }
                   ]
                 },
@@ -4181,9 +5043,21 @@
                     "borderRadius": "16dp",
                     "elevation": "4dp",
                     "content": [
-                      {"element": "아이콘", "size": "48dp", "color": "Primary"},
-                      {"element": "제목", "fontSize": "24sp", "fontWeight": "Bold"},
-                      {"element": "설명", "fontSize": "16sp", "color": "Gray700"}
+                      {
+                        "element": "아이콘",
+                        "size": "48dp",
+                        "color": "Primary"
+                      },
+                      {
+                        "element": "제목",
+                        "fontSize": "24sp",
+                        "fontWeight": "Bold"
+                      },
+                      {
+                        "element": "설명",
+                        "fontSize": "16sp",
+                        "color": "Gray700"
+                      }
                     ]
                   }
                 ],
@@ -4212,17 +5086,44 @@
                       "stepNumber": 1,
                       "stepName": "납입 정보 확인",
                       "fields": [
-                        {"label": "보험 상품", "type": "Text (읽기 전용)", "value": "건강보험 Plus"},
-                        {"label": "납입 금액", "type": "Text (읽기 전용)", "value": "150,000원", "fontSize": "28sp", "color": "Primary"},
-                        {"label": "납입 기한", "type": "Text (읽기 전용)", "value": "2025.06.30"}
+                        {
+                          "label": "보험 상품",
+                          "type": "Text (읽기 전용)",
+                          "value": "건강보험 Plus"
+                        },
+                        {
+                          "label": "납입 금액",
+                          "type": "Text (읽기 전용)",
+                          "value": "150,000원",
+                          "fontSize": "28sp",
+                          "color": "Primary"
+                        },
+                        {
+                          "label": "납입 기한",
+                          "type": "Text (읽기 전용)",
+                          "value": "2025.06.30"
+                        }
                       ]
                     },
                     {
                       "stepNumber": 2,
                       "stepName": "결제 수단 선택",
                       "fields": [
-                        {"label": "결제 수단", "type": "Radio Group", "options": ["등록 카드 (****1234)", "계좌이체", "간편결제"]},
-                        {"label": "즉시 납부", "type": "Primary Button", "height": "56dp", "fontSize": "20sp"}
+                        {
+                          "label": "결제 수단",
+                          "type": "Radio Group",
+                          "options": [
+                            "등록 카드 (****1234)",
+                            "계좌이체",
+                            "간편결제"
+                          ]
+                        },
+                        {
+                          "label": "즉시 납부",
+                          "type": "Primary Button",
+                          "height": "56dp",
+                          "fontSize": "20sp"
+                        }
                       ]
                     }
                   ]
@@ -4278,21 +5179,46 @@
                     {
                       "name": "대출 정보",
                       "elements": [
-                        {"label": "현재 대출 잔액", "value": "5,000,000원", "fontSize": "28sp"},
-                        {"label": "월 이자", "value": "15,000원", "fontSize": "18sp"}
+                        {
+                          "label": "현재 대출 잔액",
+                          "value": "5,000,000원",
+                          "fontSize": "28sp"
+                        },
+                        {
+                          "label": "월 이자",
+                          "value": "15,000원",
+                          "fontSize": "18sp"
+                        }
                       ]
                     },
                     {
                       "name": "상환 금액 입력",
                       "elements": [
-                        {"label": "상환 금액", "type": "Number Input", "placeholder": "금액을 입력하세요", "fontSize": "24sp"},
-                        {"label": "빠른 선택", "type": "Chip Group", "options": ["50만원", "100만원", "전액 상환"]}
+                        {
+                          "label": "상환 금액",
+                          "type": "Number Input",
+                          "placeholder": "금액을 입력하세요",
+                          "fontSize": "24sp"
+                        },
+                        {
+                          "label": "빠른 선택",
+                          "type": "Chip Group",
+                          "options": [
+                            "50만원",
+                            "100만원",
+                            "전액 상환"
+                          ]
+                        }
                       ]
                     },
                     {
                       "name": "액션",
                       "elements": [
-                        {"label": "상환하기", "type": "Primary Button", "height": "56dp"}
+                        {
+                          "label": "상환하기",
+                          "type": "Primary Button",
+                          "height": "56dp"
+                        }
                       ]
                     }
                   ]
@@ -4349,17 +5275,42 @@
                       "stepNumber": 1,
                       "stepName": "자동부활 조건 확인",
                       "elements": [
-                        {"type": "Info Card", "title": "자동부활이란?", "description": "보험료 미납으로 실효된 계약을 자동으로 부활시키는 제도입니다."},
-                        {"type": "Checklist", "items": ["미납 보험료 + 이자 납부", "건강 상태 양호", "계약 실효 후 2년 이내"]}
+                        {
+                          "type": "Info Card",
+                          "title": "자동부활이란?",
+                          "description": "보험료 미납으로 실효된 계약을 자동으로 부활시키는 제도입니다."
+                        },
+                        {
+                          "type": "Checklist",
+                          "items": [
+                            "미납 보험료 + 이자 납부",
+                            "건강 상태 양호",
+                            "계약 실효 후 2년 이내"
+                          ]
+                        }
                       ]
                     },
                     {
                       "stepNumber": 2,
                       "stepName": "신청 정보 입력",
                       "fields": [
-                        {"label": "보험 상품", "type": "Dropdown", "options": ["건강보험 Plus", "암보험 Special"]},
-                        {"label": "납부 금액", "type": "Text (자동 계산)", "value": "계산 중..."},
-                        {"label": "신청하기", "type": "Primary Button"}
+                        {
+                          "label": "보험 상품",
+                          "type": "Dropdown",
+                          "options": [
+                            "건강보험 Plus",
+                            "암보험 Special"
+                          ]
+                        },
+                        {
+                          "label": "납부 금액",
+                          "type": "Text (자동 계산)",
+                          "value": "계산 중..."
+                        },
+                        {
+                          "label": "신청하기",
+                          "type": "Primary Button"
+                        }
                       ]
                     }
                   ]
@@ -4391,21 +5342,51 @@
                     {
                       "name": "계좌 정보",
                       "fields": [
-                        {"label": "은행 선택", "type": "Dropdown", "options": ["국민은행", "신한은행", "우리은행", "하나은행"]},
-                        {"label": "계좌번호", "type": "Text Input", "placeholder": "계좌번호 입력", "inputType": "Number"}
+                        {
+                          "label": "은행 선택",
+                          "type": "Dropdown",
+                          "options": [
+                            "국민은행",
+                            "신한은행",
+                            "우리은행",
+                            "하나은행"
+                          ]
+                        },
+                        {
+                          "label": "계좌번호",
+                          "type": "Text Input",
+                          "placeholder": "계좌번호 입력",
+                          "inputType": "Number"
+                        }
                       ]
                     },
                     {
                       "name": "이체 설정",
                       "fields": [
-                        {"label": "이체일", "type": "Date Picker", "options": ["매월 1일", "매월 10일", "매월 20일", "매월 말일"]},
-                        {"label": "이체 금액", "type": "Text (자동)", "value": "월 보험료 금액"}
+                        {
+                          "label": "이체일",
+                          "type": "Date Picker",
+                          "options": [
+                            "매월 1일",
+                            "매월 10일",
+                            "매월 20일",
+                            "매월 말일"
+                          ]
+                        },
+                        {
+                          "label": "이체 금액",
+                          "type": "Text (자동)",
+                          "value": "월 보험료 금액"
+                        }
                       ]
                     },
                     {
                       "name": "액션",
                       "elements": [
-                        {"label": "신청하기", "type": "Primary Button"}
+                        {
+                          "label": "신청하기",
+                          "type": "Primary Button"
+                        }
                       ]
                     }
                   ]
@@ -4531,11 +5512,36 @@
           {
             "title": "7. 타이포그래피",
             "typography": {
-              "heading1": {"fontSize": "32sp", "fontWeight": "Bold", "lineHeight": "40sp", "usage": "페이지 제목"},
-              "heading2": {"fontSize": "24sp", "fontWeight": "Bold", "lineHeight": "32sp", "usage": "섹션 제목"},
-              "body": {"fontSize": "18sp", "fontWeight": "Regular", "lineHeight": "28sp", "usage": "본문 텍스트"},
-              "caption": {"fontSize": "16sp", "fontWeight": "Regular", "lineHeight": "24sp", "usage": "설명 텍스트"},
-              "button": {"fontSize": "20sp", "fontWeight": "Bold", "lineHeight": "24sp", "usage": "버튼 라벨"}
+              "heading1": {
+                "fontSize": "32sp",
+                "fontWeight": "Bold",
+                "lineHeight": "40sp",
+                "usage": "페이지 제목"
+              },
+              "heading2": {
+                "fontSize": "24sp",
+                "fontWeight": "Bold",
+                "lineHeight": "32sp",
+                "usage": "섹션 제목"
+              },
+              "body": {
+                "fontSize": "18sp",
+                "fontWeight": "Regular",
+                "lineHeight": "28sp",
+                "usage": "본문 텍스트"
+              },
+              "caption": {
+                "fontSize": "16sp",
+                "fontWeight": "Regular",
+                "lineHeight": "24sp",
+                "usage": "설명 텍스트"
+              },
+              "button": {
+                "fontSize": "20sp",
+                "fontWeight": "Bold",
+                "lineHeight": "24sp",
+                "usage": "버튼 라벨"
+              }
             },
             "fontFamily": "Noto Sans KR",
             "minimumSize": "18sp (고령자 가독성)"
@@ -4629,7 +5635,11 @@
       "version": "1.0",
       "createdAt": "2025-02-05T00:00:00.000Z",
       "updatedAt": "2025-02-05T00:00:00.000Z",
-      "tags": ["AIA+", "PM", "Stakeholder Management"],
+      "tags": [
+        "AIA+",
+        "PM",
+        "Stakeholder Management"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "analysisDate": "2025-02-05",
@@ -4713,16 +5723,35 @@
           }
         ],
         "powerInterestMatrix": {
-          "highPowerHighInterest": ["AIA생명보험 디지털본부장", "김시니어"],
+          "highPowerHighInterest": [
+            "AIA생명보험 디지털본부장",
+            "김시니어"
+          ],
           "highPowerLowInterest": [],
-          "lowPowerHighInterest": ["디자인 팀", "60세 이상 사용자"],
-          "lowPowerLowInterest": ["AIA 마케팅팀"]
+          "lowPowerHighInterest": [
+            "디자인 팀",
+            "60세 이상 사용자"
+          ],
+          "lowPowerLowInterest": [
+            "AIA 마케팅팀"
+          ]
         },
         "communicationPlan": {
-          "weekly": ["디지털본부장 이메일 보고", "개발팀 협업 회의 (화/목)"],
-          "biweekly": ["QA팀 테스트 보고서 공유"],
-          "monthly": ["스폰서 대면 회의", "마케팅팀 진행 공유"],
-          "asNeeded": ["사용자 테스트 세션", "긴급 이슈 대응"]
+          "weekly": [
+            "디지털본부장 이메일 보고",
+            "개발팀 협업 회의 (화/목)"
+          ],
+          "biweekly": [
+            "QA팀 테스트 보고서 공유"
+          ],
+          "monthly": [
+            "스폰서 대면 회의",
+            "마케팅팀 진행 공유"
+          ],
+          "asNeeded": [
+            "사용자 테스트 세션",
+            "긴급 이슈 대응"
+          ]
         }
       }
     },
@@ -4733,7 +5762,11 @@
       "version": "1.2",
       "createdAt": "2025-02-10T00:00:00.000Z",
       "updatedAt": "2025-04-15T00:00:00.000Z",
-      "tags": ["AIA+", "PM", "Risk Management"],
+      "tags": [
+        "AIA+",
+        "PM",
+        "Risk Management"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "lastUpdated": "2025-04-15",
@@ -4876,7 +5909,11 @@
       "version": "1.5",
       "createdAt": "2025-02-01T00:00:00.000Z",
       "updatedAt": "2025-05-20T00:00:00.000Z",
-      "tags": ["AIA+", "PM", "Change Management"],
+      "tags": [
+        "AIA+",
+        "PM",
+        "Change Management"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "changes": [
@@ -4999,7 +6036,11 @@
       "version": "1.0",
       "createdAt": "2025-06-30T00:00:00.000Z",
       "updatedAt": "2025-06-30T00:00:00.000Z",
-      "tags": ["AIA+", "PM", "Retrospective"],
+      "tags": [
+        "AIA+",
+        "PM",
+        "Retrospective"
+      ],
       "content": {
         "projectName": "AIA+ SENIOR MODE",
         "projectPeriod": "2025.02.01 ~ 2025.06.30",

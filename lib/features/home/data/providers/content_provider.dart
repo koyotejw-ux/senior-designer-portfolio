@@ -45,6 +45,26 @@ class ContentRepository {
     return {
       "projects": [
         {
+          "id": "p8",
+          "title": "SAMSUNG MES SYSTEM",
+          "subtitle": "제조 생산 관리 시스템(MES) 및 ERP UX/UI",
+          "company": "(주)코드브릿지엑스",
+          "year": "2025.10-2026.01",
+          "category": "Web Design",
+          "description": "삼성 제조 생산 관리 시스템(MES) 및 ERP 시스템의 UX/UI 전면 재설계. 복잡한 데이터 대시보드 시각화 및 직관적인 설비 상태 제어 플로우 구축.",
+          "tags": ["Figma", "Web UX/UI", "Enterprise", "Dashboard"],
+          "imageUrl": "assets/images/sam_mes_thumbnail.jpg",
+          "gradientColors": ["#0056B3", "#00A8FF"],
+          "role": "Lead Product Designer",
+          "duration": "4개월 (2025.10-2026.01)",
+          "teamSize": "10명 (디자이너 2명, 개발자 6명, PM 2명)",
+          "mainScreenImages": [
+            "assets/images/sam_mes.jpg"
+          ],
+          "isCorporate": false,
+          "order": 0
+        },
+        {
           "id": "p7",
           "title": "FARM SYSTEM",
           "subtitle": "스마트 농가 모니터링 시스템 UX/UI",
@@ -64,7 +84,7 @@ class ContentRepository {
             "assets/images/farm_3.jpg"
           ],
           "isCorporate": false,
-          "order": 0
+          "order": 1
         },
         {
           "id": "p1",
@@ -80,7 +100,7 @@ class ContentRepository {
             "assets/images/aia.jpg"
           ],
           "gradientColors": ["#2196F3", "#00BCD4"],
-          "order": 1
+          "order": 2
         },
         {
           "id": "p2",
@@ -104,7 +124,7 @@ class ContentRepository {
             "assets/images/ht_03_2.jpg"
           ],
           "isCorporate": false,
-          "order": 2
+          "order": 3
         },
         {
           "id": "p3",
@@ -126,7 +146,7 @@ class ContentRepository {
             "assets/images/hthome_01_3.jpg"
           ],
           "isCorporate": false,
-          "order": 3
+          "order": 4
         },
         {
           "id": "p4",
@@ -148,7 +168,7 @@ class ContentRepository {
             "assets/images/soulark_3.jpg"
           ],
           "isCorporate": false,
-          "order": 4
+          "order": 5
         },
         {
           "id": "p5",
@@ -170,7 +190,7 @@ class ContentRepository {
             "assets/images/closers_3.jpg"
           ],
           "isCorporate": false,
-          "order": 5
+          "order": 6
         },
         {
           "id": "p6",
@@ -191,7 +211,7 @@ class ContentRepository {
             "assets/images/promotion_2.jpg"
           ],
           "isCorporate": false,
-          "order": 6
+          "order": 7
         }
       ],
       "profile": {

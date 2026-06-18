@@ -192,6 +192,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                   final isPromotion = title.contains('promotion') || title.contains('프로모션');
                   final isFarm = title.contains('farm') || title.contains('농가') || title.contains('농업');
                   final isAia = title.contains('aia') || company.contains('aia');
+                  final isSamMes = title.contains('mes') || company.contains('코드브릿지') || company.contains('bridge');
                   final screenWidth = MediaQuery.of(context).size.width;
 
                   Widget imageWidget;
@@ -586,6 +587,85 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: aiaImages.map((imgData) {
+                        final String imgUrl = imgData['url'] as String;
+                        final double ratio = imgData['ratio'] as double;
+                        final double calculatedHeight = screenWidth * ratio;
+
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      }).toList(),
+                    );
+                  } else if (isSamMes) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> samMesImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_1.jpg' : 'assets/images/sam_mes_1.jpg',
+                        'ratio': 2866 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_2.jpg' : 'assets/images/sam_mes_2.jpg',
+                        'ratio': 2866 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_3.jpg' : 'assets/images/sam_mes_3.jpg',
+                        'ratio': 2866 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_4.jpg' : 'assets/images/sam_mes_4.jpg',
+                        'ratio': 2866 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_5.jpg' : 'assets/images/sam_mes_5.jpg',
+                        'ratio': 2866 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_6.jpg' : 'assets/images/sam_mes_6.jpg',
+                        'ratio': 2866 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_7.jpg' : 'assets/images/sam_mes_7.jpg',
+                        'ratio': 2866 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_8.jpg' : 'assets/images/sam_mes_8.jpg',
+                        'ratio': 2871 / 1920,
+                      },
+                    ];
+
+                    imageWidget = Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: samMesImages.map((imgData) {
                         final String imgUrl = imgData['url'] as String;
                         final double ratio = imgData['ratio'] as double;
                         final double calculatedHeight = screenWidth * ratio;

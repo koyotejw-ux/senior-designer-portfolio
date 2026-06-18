@@ -208,6 +208,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
 
     final isAia = projectData['title']?.toString().toLowerCase().contains('aia') == true ||
         projectData['company']?.toString().toLowerCase().contains('aia') == true;
+    final isSamMes = projectData['title']?.toString().toLowerCase().contains('mes') == true ||
+        projectData['company']?.toString().toLowerCase().contains('코드브릿지') == true ||
+        projectData['company']?.toString().toLowerCase().contains('bridge') == true;
+    final hideDetails = isAia || isSamMes;
 
     return Scaffold(
       body: Stack(
@@ -240,13 +244,13 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 ),
 
                 // Project Info
-                if (!isAia) _buildProjectInfo(projectData, isMobile, isTablet, isDark),
+                if (!hideDetails) _buildProjectInfo(projectData, isMobile, isTablet, isDark),
 
                 // Overview
-                if (!isAia) _buildOverview(projectData, isMobile, isTablet, isDark),
+                if (!hideDetails) _buildOverview(projectData, isMobile, isTablet, isDark),
 
                 // Challenges & Solutions (Only if available)
-                if (!isAia && (projectData['challenges'] as List).isNotEmpty)
+                if (!hideDetails && (projectData['challenges'] as List).isNotEmpty)
                   _buildChallengesSolutions(
                     projectData,
                     isMobile,
@@ -255,7 +259,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                   ),
 
                 // Main Screens Gallery (New)
-                if (!isAia &&
+                if (!hideDetails &&
                     !(projectData['company']?.toString().toLowerCase().contains('hyundai ht') == true &&
                     (projectData['title']?.toString().toLowerCase().contains('wallpad') == true ||
                      projectData['title']?.toString().toLowerCase().contains('월패드') == true ||
@@ -276,18 +280,18 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                   ),
 
                 // Design System Analysis (New)
-                if (!isAia) _buildDesignSystem(projectData, isMobile, isTablet, isDark),
+                if (!hideDetails) _buildDesignSystem(projectData, isMobile, isTablet, isDark),
 
                 // Process (Only if available)
-                if (!isAia && (projectData['process'] as List).isNotEmpty)
+                if (!hideDetails && (projectData['process'] as List).isNotEmpty)
                   _buildProcess(projectData, isMobile, isTablet, isDark),
 
                 // Achievements (Only if available)
-                if (!isAia && (projectData['achievements'] as List).isNotEmpty)
+                if (!hideDetails && (projectData['achievements'] as List).isNotEmpty)
                   _buildAchievements(projectData, isMobile, isTablet, isDark),
 
                 // Technologies
-                if (!isAia && (projectData['technologies'] as List).isNotEmpty)
+                if (!hideDetails && (projectData['technologies'] as List).isNotEmpty)
                   _buildTechnologies(projectData, isMobile, isTablet, isDark),
 
                 // Navigation
@@ -544,9 +548,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     final isPromotion = title.contains('promotion') || title.contains('프로모션');
     final isFarm = title.contains('farm') || title.contains('농가') || title.contains('농업');
     final isAia = title.contains('aia') || company.contains('aia');
+    final isSamMes = title.contains('mes') || company.contains('코드브릿지') || company.contains('bridge');
     final screenWidth = MediaQuery.of(context).size.width;
 
-    if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm && !isAia) {
+    if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm && !isAia && !isSamMes) {
       return const SizedBox.shrink();
     }
 
@@ -657,6 +662,41 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_6.jpg' : 'assets/images/aia_6.jpg',
           'ratio': 2589 / 1920,
+        },
+      ];
+    } else if (isSamMes) {
+      imagesToRender = [
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_1.jpg' : 'assets/images/sam_mes_1.jpg',
+          'ratio': 2866 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_2.jpg' : 'assets/images/sam_mes_2.jpg',
+          'ratio': 2866 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_3.jpg' : 'assets/images/sam_mes_3.jpg',
+          'ratio': 2866 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_4.jpg' : 'assets/images/sam_mes_4.jpg',
+          'ratio': 2866 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_5.jpg' : 'assets/images/sam_mes_5.jpg',
+          'ratio': 2866 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_6.jpg' : 'assets/images/sam_mes_6.jpg',
+          'ratio': 2866 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_7.jpg' : 'assets/images/sam_mes_7.jpg',
+          'ratio': 2866 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_8.jpg' : 'assets/images/sam_mes_8.jpg',
+          'ratio': 2871 / 1920,
         },
       ];
     } else {
