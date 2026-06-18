@@ -636,15 +636,27 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
       imagesToRender = [
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_1.jpg' : 'assets/images/aia_1.jpg',
-          'ratio': 5500 / 1920,
+          'ratio': 2800 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_2.jpg' : 'assets/images/aia_2.jpg',
-          'ratio': 5500 / 1920,
+          'ratio': 2800 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_3.jpg' : 'assets/images/aia_3.jpg',
-          'ratio': 5589 / 1920,
+          'ratio': 2800 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/aia_4.jpg' : 'assets/images/aia_4.jpg',
+          'ratio': 2800 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/aia_5.jpg' : 'assets/images/aia_5.jpg',
+          'ratio': 2800 / 1920,
+        },
+        {
+          'url': isNetwork ? 'http://localhost:8080/images/aia_6.jpg' : 'assets/images/aia_6.jpg',
+          'ratio': 2589 / 1920,
         },
       ];
     } else {
@@ -679,18 +691,33 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 final String imgUrl = imgData['url'] as String;
                 final double ratio = imgData['ratio'] as double;
                 final double calculatedHeight = screenWidth * ratio;
+                print('--- DETAIL PAGE IMAGE: $imgUrl, RATIO: $ratio, HEIGHT: $calculatedHeight, SCREEN WIDTH: $screenWidth ---');
 
                 if (imgUrl.startsWith('http')) {
-                  return WebOptimizedImage(
-                    imageUrl: imgUrl,
+                  return Image.network(
+                    imgUrl,
                     width: screenWidth,
                     height: calculatedHeight,
                     fit: BoxFit.fitWidth,
                     alignment: Alignment.topCenter,
-                    loadingWidget: SizedBox(
-                      height: calculatedHeight > 500 ? 500 : calculatedHeight,
-                      child: const Center(child: CircularProgressIndicator()),
-                    ),
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return SizedBox(
+                        height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                        child: const Center(child: CircularProgressIndicator()),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return SizedBox(
+                        height: 300,
+                        child: Center(
+                          child: Text(
+                            'Failed to load network image: $imgUrl',
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      );
+                    },
                   );
                 } else {
                   return Image.asset(
