@@ -289,24 +289,43 @@ class _PortfolioGallerySectionState
                                         color: AppColors.charcoal.withValues(
                                           alpha: 0.3,
                                         ),
-                                        child: Image.asset(
-                                          project.imageUrl!,
-                                          width: double.infinity,
-                                          height: 200,
-                                          fit: BoxFit.cover,
-                                          alignment: Alignment.topCenter,
-                                          errorBuilder: (context, error, stackTrace) => Container(
-                                            height: 200,
-                                            width: double.infinity,
-                                            color: AppColors.charcoal,
-                                            child: const Center(
-                                              child: Icon(
-                                                Icons.broken_image,
-                                                color: Colors.red,
+                                        child: project.imageUrl!.startsWith('http')
+                                            ? Image.network(
+                                                project.imageUrl!,
+                                                width: double.infinity,
+                                                height: 200,
+                                                fit: BoxFit.cover,
+                                                alignment: Alignment.topCenter,
+                                                errorBuilder: (context, error, stackTrace) => Container(
+                                                  height: 200,
+                                                  width: double.infinity,
+                                                  color: AppColors.charcoal,
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.broken_image,
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            : Image.asset(
+                                                project.imageUrl!,
+                                                width: double.infinity,
+                                                height: 200,
+                                                fit: BoxFit.cover,
+                                                alignment: Alignment.topCenter,
+                                                errorBuilder: (context, error, stackTrace) => Container(
+                                                  height: 200,
+                                                  width: double.infinity,
+                                                  color: AppColors.charcoal,
+                                                  child: const Center(
+                                                    child: Icon(
+                                                      Icons.broken_image,
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                        ),
                                       ),
                                       // Transparent overlay to ensure click detection
                                       Positioned.fill(
