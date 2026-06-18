@@ -559,43 +559,77 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     
     final List<Map<String, dynamic>> imagesToRender;
     if (isWallpad) {
-      imagesToRender = [
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/ht_01.jpg' : 'assets/images/ht_01.jpg',
-          'ratio': 13020 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/ht_02_1.jpg' : 'assets/images/ht_02_1.jpg',
-          'ratio': 9540 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/ht_02_2.jpg' : 'assets/images/ht_02_2.jpg',
-          'ratio': 9541 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/ht_03_1.jpg' : 'assets/images/ht_03_1.jpg',
-          'ratio': 9789 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/ht_03_2.jpg' : 'assets/images/ht_03_2.jpg',
-          'ratio': 9790 / 1920,
-        },
-      ];
+      imagesToRender = [];
+      for (int i = 1; i <= 6; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/ht_01_slice_$i.jpg' : 'assets/images/ht_01_slice_$i.jpg',
+          'ratio': 2170 / 1920,
+        });
+      }
+      for (int i = 1; i <= 4; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/ht_02_1_slice_$i.jpg' : 'assets/images/ht_02_1_slice_$i.jpg',
+          'ratio': 2385 / 1920,
+        });
+      }
+      for (int i = 1; i <= 3; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/ht_02_2_slice_$i.jpg' : 'assets/images/ht_02_2_slice_$i.jpg',
+          'ratio': 2386 / 1920,
+        });
+      }
+      imagesToRender.add({
+        'url': isNetwork ? 'http://localhost:8080/images/ht_02_2_slice_4.jpg' : 'assets/images/ht_02_2_slice_4.jpg',
+        'ratio': 2383 / 1920,
+      });
+      for (int i = 1; i <= 3; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/ht_03_1_slice_$i.jpg' : 'assets/images/ht_03_1_slice_$i.jpg',
+          'ratio': 2448 / 1920,
+        });
+      }
+      imagesToRender.add({
+        'url': isNetwork ? 'http://localhost:8080/images/ht_03_1_slice_4.jpg' : 'assets/images/ht_03_1_slice_4.jpg',
+        'ratio': 2445 / 1920,
+      });
+      for (int i = 1; i <= 3; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/ht_03_2_slice_$i.jpg' : 'assets/images/ht_03_2_slice_$i.jpg',
+          'ratio': 2448 / 1920,
+        });
+      }
+      imagesToRender.add({
+        'url': isNetwork ? 'http://localhost:8080/images/ht_03_2_slice_4.jpg' : 'assets/images/ht_03_2_slice_4.jpg',
+        'ratio': 2446 / 1920,
+      });
     } else if (isHtHome) {
-      imagesToRender = [
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1.jpg' : 'assets/images/hthome_01_1.jpg',
-          'ratio': 9899 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2.jpg' : 'assets/images/hthome_01_2.jpg',
-          'ratio': 9899 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_3.jpg' : 'assets/images/hthome_01_3.jpg',
-          'ratio': 9900 / 1920,
-        },
-      ];
+      imagesToRender = [];
+      for (int i = 1; i <= 3; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1_slice_$i.jpg' : 'assets/images/hthome_01_1_slice_$i.jpg',
+          'ratio': 2475 / 1920,
+        });
+      }
+      imagesToRender.add({
+        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1_slice_4.jpg' : 'assets/images/hthome_01_1_slice_4.jpg',
+        'ratio': 2474 / 1920,
+      });
+      for (int i = 1; i <= 3; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2_slice_$i.jpg' : 'assets/images/hthome_01_2_slice_$i.jpg',
+          'ratio': 2475 / 1920,
+        });
+      }
+      imagesToRender.add({
+        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2_slice_4.jpg' : 'assets/images/hthome_01_2_slice_4.jpg',
+        'ratio': 2474 / 1920,
+      });
+      for (int i = 1; i <= 4; i++) {
+        imagesToRender.add({
+          'url': isNetwork ? 'http://localhost:8080/images/hthome_01_3_slice_$i.jpg' : 'assets/images/hthome_01_3_slice_$i.jpg',
+          'ratio': 2475 / 1920,
+        });
+      }
     } else if (isSoulark) {
       imagesToRender = [
         {

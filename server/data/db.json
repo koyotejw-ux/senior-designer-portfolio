@@ -96,7 +96,7 @@
         "Design System",
         "IoT UI/UX"
       ],
-      "imageUrl": "assets/images/ht_01.jpg",
+      "imageUrl": "assets/images/ht_thumbnail.jpg",
       "gradientColors": [
         "#1976D2",
         "#00BCD4"
@@ -105,11 +105,28 @@
       "duration": "5년 7개월 (2018.05-2023.12)",
       "teamSize": "15명 (디자이너 3명, 개발자 10명, PM 2명)",
       "mainScreenImages": [
-        "assets/images/ht_01.jpg",
-        "assets/images/ht_02_1.jpg",
-        "assets/images/ht_02_2.jpg",
-        "assets/images/ht_03_1.jpg",
-        "assets/images/ht_03_2.jpg"
+        "assets/images/ht_01_slice_1.jpg",
+        "assets/images/ht_01_slice_2.jpg",
+        "assets/images/ht_01_slice_3.jpg",
+        "assets/images/ht_01_slice_4.jpg",
+        "assets/images/ht_01_slice_5.jpg",
+        "assets/images/ht_01_slice_6.jpg",
+        "assets/images/ht_02_1_slice_1.jpg",
+        "assets/images/ht_02_1_slice_2.jpg",
+        "assets/images/ht_02_1_slice_3.jpg",
+        "assets/images/ht_02_1_slice_4.jpg",
+        "assets/images/ht_02_2_slice_1.jpg",
+        "assets/images/ht_02_2_slice_2.jpg",
+        "assets/images/ht_02_2_slice_3.jpg",
+        "assets/images/ht_02_2_slice_4.jpg",
+        "assets/images/ht_03_1_slice_1.jpg",
+        "assets/images/ht_03_1_slice_2.jpg",
+        "assets/images/ht_03_1_slice_3.jpg",
+        "assets/images/ht_03_1_slice_4.jpg",
+        "assets/images/ht_03_2_slice_1.jpg",
+        "assets/images/ht_03_2_slice_2.jpg",
+        "assets/images/ht_03_2_slice_3.jpg",
+        "assets/images/ht_03_2_slice_4.jpg"
       ],
       "isCorporate": false,
       "order": 3
@@ -128,7 +145,7 @@
         "Android",
         "Smart Home"
       ],
-      "imageUrl": "assets/images/hthome_01_1.jpg",
+      "imageUrl": "assets/images/hthome_thumbnail.jpg",
       "gradientColors": [
         "#42A5F5",
         "#00BCD4"
@@ -137,9 +154,18 @@
       "duration": "2년 (2021-2023)",
       "teamSize": "15명 (디자이너 3명, 개발자 10명, PM 2명)",
       "mainScreenImages": [
-        "assets/images/hthome_01_1.jpg",
-        "assets/images/hthome_01_2.jpg",
-        "assets/images/hthome_01_3.jpg"
+        "assets/images/hthome_01_1_slice_1.jpg",
+        "assets/images/hthome_01_1_slice_2.jpg",
+        "assets/images/hthome_01_1_slice_3.jpg",
+        "assets/images/hthome_01_1_slice_4.jpg",
+        "assets/images/hthome_01_2_slice_1.jpg",
+        "assets/images/hthome_01_2_slice_2.jpg",
+        "assets/images/hthome_01_2_slice_3.jpg",
+        "assets/images/hthome_01_2_slice_4.jpg",
+        "assets/images/hthome_01_3_slice_1.jpg",
+        "assets/images/hthome_01_3_slice_2.jpg",
+        "assets/images/hthome_01_3_slice_3.jpg",
+        "assets/images/hthome_01_3_slice_4.jpg"
       ],
       "isCorporate": false,
       "order": 4
