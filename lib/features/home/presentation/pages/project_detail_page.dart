@@ -191,6 +191,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                   final isClosers = title.contains('closers') || title.contains('클로저스');
                   final isPromotion = title.contains('promotion') || title.contains('프로모션');
                   final isFarm = title.contains('farm') || title.contains('농가') || title.contains('농업');
+                  final isAia = title.contains('aia') || company.contains('aia');
                   final screenWidth = MediaQuery.of(context).size.width;
 
                   Widget imageWidget;
@@ -552,8 +553,79 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                        }
                      }).toList(),
                    );
-                 } else if (project.imageUrl != null && project.imageUrl!.isNotEmpty) {
-                   if (project.imageUrl!.startsWith('http')) {
+                 } else if (isAia) {
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> aiaImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/aia_1.jpg' : 'assets/images/aia_1.jpg',
+                        'ratio': 2800 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/aia_2.jpg' : 'assets/images/aia_2.jpg',
+                        'ratio': 2800 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/aia_3.jpg' : 'assets/images/aia_3.jpg',
+                        'ratio': 2800 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/aia_4.jpg' : 'assets/images/aia_4.jpg',
+                        'ratio': 2800 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/aia_5.jpg' : 'assets/images/aia_5.jpg',
+                        'ratio': 2800 / 1920,
+                      },
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/aia_6.jpg' : 'assets/images/aia_6.jpg',
+                        'ratio': 2589 / 1920,
+                      },
+                    ];
+
+                    imageWidget = Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: aiaImages.map((imgData) {
+                        final String imgUrl = imgData['url'] as String;
+                        final double ratio = imgData['ratio'] as double;
+                        final double calculatedHeight = screenWidth * ratio;
+
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      }).toList(),
+                    );
+                  } else if (project.imageUrl != null && project.imageUrl!.isNotEmpty) {
+                    if (project.imageUrl!.startsWith('http')) {
                      // Use WebOptimizedImage for network images to bypass WebGL limits
                      imageWidget = WebOptimizedImage(
                        imageUrl: project.imageUrl!,
