@@ -49,6 +49,24 @@ class _HeroSectionState extends ConsumerState<HeroSection>
     super.dispose();
   }
 
+  String _getFormattedTicker(String item, bool needsWrap) {
+    if (!needsWrap) return item;
+    switch (item) {
+      case "PRODUCT STRATEGY & UX/UI DESIGN":
+        return "PRODUCT STRATEGY\n& UX/UI DESIGN";
+      case "ENTERPRISE MES & ERP SYSTEM DESIGN":
+        return "ENTERPRISE MES\n& ERP SYSTEM DESIGN";
+      case "AI WORKFLOW INTEGRATION & FIGMA STANDARD":
+        return "AI WORKFLOW INTEGRATION\n& FIGMA STANDARD";
+      case "CROSS-PLATFORM INTERACTION ARCHITECTURE":
+        return "CROSS-PLATFORM\nINTERACTION ARCHITECTURE";
+      case "B2B & B2C PRODUCT ARCHITECTURE":
+        return "B2B & B2C\nPRODUCT ARCHITECTURE";
+      default:
+        return item;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -154,7 +172,7 @@ class _HeroSectionState extends ConsumerState<HeroSection>
 
                       // Animated Ticker
                       SizedBox(
-                        height: 35,
+                        height: 50,
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 600),
                           transitionBuilder: (child, animation) {
@@ -172,18 +190,16 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                               ),
                             );
                           },
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              _tickerItems[_currentTickerIndex],
-                              key: ValueKey<int>(_currentTickerIndex),
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.outfit(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xFF8B95A1),
-                                letterSpacing: 1.5,
-                              ),
+                          child: Text(
+                            _getFormattedTicker(_tickerItems[_currentTickerIndex], true),
+                            key: ValueKey<int>(_currentTickerIndex),
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.outfit(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF8B95A1),
+                              letterSpacing: 1.5,
+                              height: 1.4,
                             ),
                           ),
                         ),
@@ -308,7 +324,7 @@ class _HeroSectionState extends ConsumerState<HeroSection>
 
                     // Animated Skill/Role Ticker
                     SizedBox(
-                      height: 40,
+                      height: isTablet ? 55 : 40,
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 600),
                         transitionBuilder: (child, animation) {
@@ -326,18 +342,16 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                             ),
                           );
                         },
-                        child: FittedBox(
-                          fit: BoxFit.scaleDown,
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            _tickerItems[_currentTickerIndex],
-                            key: ValueKey<int>(_currentTickerIndex),
-                            style: GoogleFonts.outfit(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF9EA4B0),
-                              letterSpacing: 2.0,
-                            ),
+                        child: Text(
+                          _getFormattedTicker(_tickerItems[_currentTickerIndex], isTablet),
+                          key: ValueKey<int>(_currentTickerIndex),
+                          textAlign: TextAlign.left,
+                          style: GoogleFonts.outfit(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: const Color(0xFF9EA4B0),
+                            letterSpacing: 2.0,
+                            height: 1.4,
                           ),
                         ),
                       ),
