@@ -47,13 +47,15 @@ class _WebOptimizedImageState extends State<WebOptimizedImage> {
       // For GitHub Pages or standard subfolder deploys, we should resolve relative assets properly
       final baseElement = html.document.getElementsByTagName('base').firstOrNull;
       final baseHref = baseElement != null && baseElement is html.HtmlElement ? baseElement.getAttribute('href') ?? '/' : '/';
-      finalUrl = baseHref + finalUrl;
-      // Clean duplicate slashes
-      if (finalUrl.startsWith('/')) {
-        finalUrl = finalUrl.substring(1);
+      // Make sure baseHref starts with '/' and ends with '/'
+      String cleanBase = baseHref;
+      if (!cleanBase.startsWith('/')) {
+        cleanBase = '/' + cleanBase;
       }
-      finalUrl = 'senior-designer-portfolio/' + finalUrl;
-      finalUrl = '/' + finalUrl;
+      if (!cleanBase.endsWith('/')) {
+        cleanBase = cleanBase + '/';
+      }
+      finalUrl = cleanBase + finalUrl;
     }
 
     // Register a platform view factory for this image

@@ -771,52 +771,17 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 final double calculatedHeight = screenWidth * ratio;
                 print('--- DETAIL PAGE IMAGE: $imgUrl, RATIO: $ratio, HEIGHT: $calculatedHeight, SCREEN WIDTH: $screenWidth ---');
 
-                if (imgUrl.startsWith('http')) {
-                  return Image.network(
-                    imgUrl,
-                    width: screenWidth,
-                    height: calculatedHeight,
-                    fit: BoxFit.fitWidth,
-                    alignment: Alignment.topCenter,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return SizedBox(
-                        height: calculatedHeight > 500 ? 500 : calculatedHeight,
-                        child: const Center(child: CircularProgressIndicator()),
-                      );
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return SizedBox(
-                        height: 300,
-                        child: Center(
-                          child: Text(
-                            'Failed to load network image: $imgUrl',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return Image.asset(
-                    imgUrl,
-                    width: screenWidth,
-                    height: calculatedHeight,
-                    fit: BoxFit.fitWidth,
-                    alignment: Alignment.topCenter,
-                    errorBuilder: (context, error, stackTrace) {
-                      return SizedBox(
-                        height: 300,
-                        child: Center(
-                          child: Text(
-                            'Asset not found: $imgUrl',
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }
+                return WebOptimizedImage(
+                  imageUrl: imgUrl,
+                  width: screenWidth,
+                  height: calculatedHeight,
+                  fit: BoxFit.fitWidth,
+                  alignment: Alignment.topCenter,
+                  loadingWidget: SizedBox(
+                    height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                    child: const Center(child: CircularProgressIndicator()),
+                  ),
+                );
               }).toList(),
             ),
           ),
