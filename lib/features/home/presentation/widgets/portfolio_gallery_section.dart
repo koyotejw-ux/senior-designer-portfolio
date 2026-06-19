@@ -339,16 +339,16 @@ class _PortfolioGallerySectionState
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: accentColor.withValues(alpha: 0.1),
+                          color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.1),
                           border: Border.all(
-                            color: accentColor.withValues(alpha: 0.3),
+                            color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.3),
                           ),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
                           project.category,
                           style: AppTypography.labelSmall.copyWith(
-                            color: accentColor,
+                            color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
                             fontWeight: FontWeight.w700,
                             fontSize: 11,
                             letterSpacing: 1.2,
@@ -380,7 +380,7 @@ class _PortfolioGallerySectionState
                         project.subtitle,
                         style: TextStyle(
                           fontFamily: 'Pretendard',
-                          color: accentColor,
+                          color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
                           fontWeight: FontWeight.w800,
                           fontSize: 14,
                         ),
@@ -451,7 +451,7 @@ class _PortfolioGallerySectionState
                             ),
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: accentColor.withValues(alpha: 0.2),
+                                color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.2),
                                 width: 0.5,
                               ),
                               borderRadius: BorderRadius.zero,
@@ -460,7 +460,7 @@ class _PortfolioGallerySectionState
                               tag.toUpperCase(),
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
-                                color: accentColor.withValues(alpha: 0.8),
+                                color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.8),
                                 fontWeight: FontWeight.w600,
                                 fontSize: 10,
                                 letterSpacing: 1.0,
