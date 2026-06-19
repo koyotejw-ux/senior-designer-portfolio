@@ -198,87 +198,121 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                   Widget imageWidget;
                   if (isWallpad) {
                     final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
-                    final List<Map<String, dynamic>> wallpadImages = [
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/ht_01.jpg' : 'assets/images/ht_01.jpg',
-                        'ratio': 13020 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/ht_02_1.jpg' : 'assets/images/ht_02_1.jpg',
-                        'ratio': 9540 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/ht_02_2.jpg' : 'assets/images/ht_02_2.jpg',
-                        'ratio': 9541 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/ht_03_1.jpg' : 'assets/images/ht_03_1.jpg',
-                        'ratio': 9789 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/ht_03_2.jpg' : 'assets/images/ht_03_2.jpg',
-                        'ratio': 9790 / 1920,
-                      },
-                    ];
+                    final List<Map<String, dynamic>> wallpadImages = [];
+                    for (int i = 1; i <= 6; i++) {
+                      wallpadImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_01_slice_$i.jpg' : 'assets/images/ht_01_slice_$i.jpg',
+                        'ratio': 2170 / 1920,
+                      });
+                    }
+                    for (int i = 1; i <= 4; i++) {
+                      wallpadImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_02_1_slice_$i.jpg' : 'assets/images/ht_02_1_slice_$i.jpg',
+                        'ratio': 2385 / 1920,
+                      });
+                    }
+                    for (int i = 1; i <= 3; i++) {
+                      wallpadImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_02_2_slice_$i.jpg' : 'assets/images/ht_02_2_slice_$i.jpg',
+                        'ratio': 2386 / 1920,
+                      });
+                    }
+                    wallpadImages.add({
+                      'url': isNetwork ? 'http://localhost:8080/images/ht_02_2_slice_4.jpg' : 'assets/images/ht_02_2_slice_4.jpg',
+                      'ratio': 2383 / 1920,
+                    });
+                    for (int i = 1; i <= 3; i++) {
+                      wallpadImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_03_1_slice_$i.jpg' : 'assets/images/ht_03_1_slice_$i.jpg',
+                        'ratio': 2448 / 1920,
+                      });
+                    }
+                    wallpadImages.add({
+                      'url': isNetwork ? 'http://localhost:8080/images/ht_03_1_slice_4.jpg' : 'assets/images/ht_03_1_slice_4.jpg',
+                      'ratio': 2445 / 1920,
+                    });
+                    for (int i = 1; i <= 3; i++) {
+                      wallpadImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/ht_03_2_slice_$i.jpg' : 'assets/images/ht_03_2_slice_$i.jpg',
+                        'ratio': 2448 / 1920,
+                      });
+                    }
+                    wallpadImages.add({
+                      'url': isNetwork ? 'http://localhost:8080/images/ht_03_2_slice_4.jpg' : 'assets/images/ht_03_2_slice_4.jpg',
+                      'ratio': 2446 / 1920,
+                    });
 
-                   imageWidget = Column(
-                     mainAxisSize: MainAxisSize.min,
-                     crossAxisAlignment: CrossAxisAlignment.stretch,
-                     children: wallpadImages.map((imgData) {
-                       final String imgUrl = imgData['url'] as String;
-                       final double ratio = imgData['ratio'] as double;
-                       final double calculatedHeight = screenWidth * ratio;
+                    imageWidget = Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: wallpadImages.map((imgData) {
+                        final String imgUrl = imgData['url'] as String;
+                        final double ratio = imgData['ratio'] as double;
+                        final double calculatedHeight = screenWidth * ratio;
 
-                       if (imgUrl.startsWith('http')) {
-                         return WebOptimizedImage(
-                           imageUrl: imgUrl,
-                           width: screenWidth,
-                           height: calculatedHeight,
-                           fit: BoxFit.fitWidth,
-                           alignment: Alignment.topCenter,
-                           loadingWidget: SizedBox(
-                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
-                             child: const Center(child: CircularProgressIndicator()),
-                           ),
-                         );
-                       } else {
-                         return Image.asset(
-                           imgUrl,
-                           width: screenWidth,
-                           height: calculatedHeight,
-                           fit: BoxFit.fitWidth,
-                           alignment: Alignment.topCenter,
-                           errorBuilder: (context, error, stackTrace) {
-                             return SizedBox(
-                               height: 300,
-                               child: Center(
-                                 child: Text(
-                                   'Asset not found: $imgUrl',
-                                   style: const TextStyle(color: Colors.white),
-                                 ),
-                               ),
-                             );
-                           },
-                         );
-                       }
-                     }).toList(),
-                   );
-                 } else if (isHtHome) {
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      }).toList(),
+                    );
+                  } else if (isHtHome) {
                     final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
-                    final List<Map<String, dynamic>> htHomeImages = [
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1.jpg' : 'assets/images/hthome_01_1.jpg',
-                        'ratio': 9899 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2.jpg' : 'assets/images/hthome_01_2.jpg',
-                        'ratio': 9899 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_3.jpg' : 'assets/images/hthome_01_3.jpg',
-                        'ratio': 9900 / 1920,
-                      },
-                    ];
+                    final List<Map<String, dynamic>> htHomeImages = [];
+                    for (int i = 1; i <= 3; i++) {
+                      htHomeImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1_slice_$i.jpg' : 'assets/images/hthome_01_1_slice_$i.jpg',
+                        'ratio': 2475 / 1920,
+                      });
+                    }
+                    htHomeImages.add({
+                      'url': isNetwork ? 'http://localhost:8080/images/hthome_01_1_slice_4.jpg' : 'assets/images/hthome_01_1_slice_4.jpg',
+                      'ratio': 2474 / 1920,
+                    });
+                    for (int i = 1; i <= 3; i++) {
+                      htHomeImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2_slice_$i.jpg' : 'assets/images/hthome_01_2_slice_$i.jpg',
+                        'ratio': 2475 / 1920,
+                      });
+                    }
+                    htHomeImages.add({
+                      'url': isNetwork ? 'http://localhost:8080/images/hthome_01_2_slice_4.jpg' : 'assets/images/hthome_01_2_slice_4.jpg',
+                      'ratio': 2474 / 1920,
+                    });
+                    for (int i = 1; i <= 4; i++) {
+                      htHomeImages.add({
+                        'url': isNetwork ? 'http://localhost:8080/images/hthome_01_3_slice_$i.jpg' : 'assets/images/hthome_01_3_slice_$i.jpg',
+                        'ratio': 2475 / 1920,
+                      });
+                    }
 
                    imageWidget = Column(
                      mainAxisSize: MainAxisSize.min,
