@@ -103,15 +103,18 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ).createShader(bounds),
-                        child: Text(
-                          'JAEWOONG\nJUNG',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.outfit(
-                            fontSize: 34,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: -1.0,
-                            height: 1.1,
-                            color: Colors.white,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            'JAEWOONG\nJUNG',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.outfit(
+                              fontSize: 34,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: -1.0,
+                              height: 1.1,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       )
@@ -169,15 +172,18 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                               ),
                             );
                           },
-                          child: Text(
-                            _tickerItems[_currentTickerIndex],
-                            key: ValueKey<int>(_currentTickerIndex),
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.outfit(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: const Color(0xFF8B95A1),
-                              letterSpacing: 1.5,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              _tickerItems[_currentTickerIndex],
+                              key: ValueKey<int>(_currentTickerIndex),
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.outfit(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: const Color(0xFF8B95A1),
+                                letterSpacing: 1.5,
+                              ),
                             ),
                           ),
                         ),
@@ -279,14 +285,18 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ).createShader(bounds),
-                      child: Text(
-                        'JAEWOONG\nJUNG',
-                        style: GoogleFonts.outfit(
-                          fontSize: isTablet ? 64 : 84,
-                          fontWeight: FontWeight.w900,
-                          height: 0.95,
-                          letterSpacing: -2.0,
-                          color: Colors.white,
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'JAEWOONG\nJUNG',
+                          style: GoogleFonts.outfit(
+                            fontSize: isTablet ? 64 : 84,
+                            fontWeight: FontWeight.w900,
+                            height: 0.95,
+                            letterSpacing: -2.0,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     )
@@ -316,14 +326,18 @@ class _HeroSectionState extends ConsumerState<HeroSection>
                             ),
                           );
                         },
-                        child: Text(
-                          _tickerItems[_currentTickerIndex],
-                          key: ValueKey<int>(_currentTickerIndex),
-                          style: GoogleFonts.outfit(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w400,
-                            color: const Color(0xFF9EA4B0),
-                            letterSpacing: 2.0,
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            _tickerItems[_currentTickerIndex],
+                            key: ValueKey<int>(_currentTickerIndex),
+                            style: GoogleFonts.outfit(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xFF9EA4B0),
+                              letterSpacing: 2.0,
+                            ),
                           ),
                         ),
                       ),
