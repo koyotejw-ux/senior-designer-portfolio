@@ -266,75 +266,67 @@ class _PortfolioGallerySectionState
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child:
-                                project.imageUrl!.toLowerCase().endsWith('.svg')
-                                ? SvgPicture.network(
-                                    project.imageUrl!,
-                                    height: 200,
-                                    width: double.infinity,
-                                    fit: BoxFit.contain,
-                                    placeholderBuilder: (context) => Container(
-                                      height: 200,
-                                      color: AppColors.charcoal,
-                                      child: const Center(
-                                        child: CircularProgressIndicator(),
+                            child: AspectRatio(
+                              aspectRatio: 16 / 9,
+                              child: project.imageUrl!.toLowerCase().endsWith('.svg')
+                                  ? SvgPicture.network(
+                                      project.imageUrl!,
+                                      width: double.infinity,
+                                      fit: BoxFit.contain,
+                                      placeholderBuilder: (context) => Container(
+                                        color: AppColors.charcoal,
+                                        child: const Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
                                       ),
+                                    )
+                                  : Stack(
+                                      children: [
+                                        Container(
+                                          color: AppColors.charcoal.withValues(
+                                            alpha: 0.3,
+                                          ),
+                                          child: project.imageUrl!.startsWith('http')
+                                              ? Image.network(
+                                                  project.imageUrl!,
+                                                  width: double.infinity,
+                                                  fit: BoxFit.cover,
+                                                  alignment: Alignment.topCenter,
+                                                  errorBuilder: (context, error, stackTrace) => Container(
+                                                    color: AppColors.charcoal,
+                                                    child: const Center(
+                                                      child: Icon(
+                                                        Icons.broken_image,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                )
+                                              : Image.asset(
+                                                  project.imageUrl!,
+                                                  width: double.infinity,
+                                                  fit: BoxFit.cover,
+                                                  alignment: Alignment.topCenter,
+                                                  errorBuilder: (context, error, stackTrace) => Container(
+                                                    color: AppColors.charcoal,
+                                                    child: const Center(
+                                                      child: Icon(
+                                                        Icons.broken_image,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                        ),
+                                        // Transparent overlay to ensure click detection
+                                        Positioned.fill(
+                                          child: Container(
+                                            color: Colors.transparent,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  )
-                                : Stack(
-                                    children: [
-                                      Container(
-                                        height: 200,
-                                        width: double.infinity,
-                                        color: AppColors.charcoal.withValues(
-                                          alpha: 0.3,
-                                        ),
-                                        child: project.imageUrl!.startsWith('http')
-                                            ? Image.network(
-                                                project.imageUrl!,
-                                                width: double.infinity,
-                                                height: 200,
-                                                fit: BoxFit.cover,
-                                                alignment: Alignment.topCenter,
-                                                errorBuilder: (context, error, stackTrace) => Container(
-                                                  height: 200,
-                                                  width: double.infinity,
-                                                  color: AppColors.charcoal,
-                                                  child: const Center(
-                                                    child: Icon(
-                                                      Icons.broken_image,
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
-                                                ),
-                                              )
-                                            : Image.asset(
-                                                project.imageUrl!,
-                                                width: double.infinity,
-                                                height: 200,
-                                                fit: BoxFit.cover,
-                                                alignment: Alignment.topCenter,
-                                                errorBuilder: (context, error, stackTrace) => Container(
-                                                  height: 200,
-                                                  width: double.infinity,
-                                                  color: AppColors.charcoal,
-                                                  child: const Center(
-                                                    child: Icon(
-                                                      Icons.broken_image,
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                      ),
-                                      // Transparent overlay to ensure click detection
-                                      Positioned.fill(
-                                        child: Container(
-                                          color: Colors.transparent,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 16),
