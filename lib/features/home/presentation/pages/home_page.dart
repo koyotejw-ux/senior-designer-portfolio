@@ -78,20 +78,20 @@ class _HomePageState extends ConsumerState<HomePage>
         key = _heroKey;
         index = 0;
         break;
-      case 'Resume':
-        key = _resumeKey;
-        index = 1;
-        break;
-      case 'Experience':
-        key = _experienceKey;
-        index = 2;
-        break;
       case 'About':
         key = _aboutKey;
-        index = 3;
+        index = 1;
         break;
       case 'Portfolio':
         key = _portfolioKey;
+        index = 2;
+        break;
+      case 'Experience':
+        key = _experienceKey;
+        index = 3;
+        break;
+      case 'Resume':
+        key = _resumeKey;
         index = 4;
         break;
       case 'Contact':
@@ -143,10 +143,10 @@ class _HomePageState extends ConsumerState<HomePage>
 
     final keys = [
       _heroKey,
-      _resumeKey,
-      _experienceKey,
       _aboutKey,
       _portfolioKey,
+      _experienceKey,
+      _resumeKey,
       _contactKey,
     ];
 
@@ -177,10 +177,10 @@ class _HomePageState extends ConsumerState<HomePage>
   void _updateSectionIndex() {
     final keys = [
       _heroKey,
-      _resumeKey,
-      _experienceKey,
       _aboutKey,
       _portfolioKey,
+      _experienceKey,
+      _resumeKey,
       _contactKey,
     ];
     final viewportHeight = MediaQuery.of(context).size.height;
@@ -248,30 +248,30 @@ class _HomePageState extends ConsumerState<HomePage>
               children: [
                 HeroSection(key: _heroKey),
                 ScrollRevealWidget(
-                  key: _resumeKey,
-                  isRevealed: _revealedSections.contains(_resumeKey),
-                  child: const ResumeSection(),
-                ),
-                const SizedBox(height: 40),
-                ScrollRevealWidget(
-                  key: _experienceKey,
-                  isRevealed: _revealedSections.contains(_experienceKey),
-                  delay: const Duration(milliseconds: 100),
-                  child: const ExperienceSection(),
-                ),
-                const SizedBox(height: 40),
-                ScrollRevealWidget(
                   key: _aboutKey,
                   isRevealed: _revealedSections.contains(_aboutKey),
-                  delay: const Duration(milliseconds: 200),
                   child: const AboutSection(),
                 ),
                 const SizedBox(height: 40),
                 ScrollRevealWidget(
                   key: _portfolioKey,
                   isRevealed: _revealedSections.contains(_portfolioKey),
-                  delay: const Duration(milliseconds: 300),
+                  delay: const Duration(milliseconds: 100),
                   child: const PortfolioGallerySection(),
+                ),
+                const SizedBox(height: 40),
+                ScrollRevealWidget(
+                  key: _experienceKey,
+                  isRevealed: _revealedSections.contains(_experienceKey),
+                  delay: const Duration(milliseconds: 200),
+                  child: const ExperienceSection(),
+                ),
+                const SizedBox(height: 40),
+                ScrollRevealWidget(
+                  key: _resumeKey,
+                  isRevealed: _revealedSections.contains(_resumeKey),
+                  delay: const Duration(milliseconds: 300),
+                  child: const ResumeSection(),
                 ),
                 const SizedBox(height: 40),
                 ScrollRevealWidget(
@@ -305,10 +305,10 @@ class _HomePageState extends ConsumerState<HomePage>
                   onSelect: (index) {
                     final sections = [
                       'Home',
-                      'Resume',
-                      'Experience',
                       'About',
                       'Portfolio',
+                      'Experience',
+                      'Resume',
                       'Contact',
                     ];
                     _scrollToSection(sections[index]);
