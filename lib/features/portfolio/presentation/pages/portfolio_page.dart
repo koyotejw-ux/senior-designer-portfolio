@@ -32,15 +32,15 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     'Game UI',
   ];
 
-  final List<Map<String, dynamic>> _projects = [
+    final List<Map<String, dynamic>> _projects = [
     {
       'id': 'p8',
       'title': 'SAM MES SYSTEM',
       'subtitle': '제조 생산 관리 시스템(MES) 및 ERP UX/UI',
       'company': '(주)코드브릿지엑스',
-      'year': '2025.09 - 2026.01',
+      'year': '2025.09-2026.01',
       'category': 'Web Design',
-      'description': '삼성 제조 MES 대시보드 화면 설계 및 가시성 개선. ERP 시스템 데이터 그리드 및 상세 제어 레이아웃 표준화.',
+      'description': 'SAM 제조 생산 관리 시스템(MES) 및 ERP 시스템의 UX/UI 전면 재설계. 복잡한 데이터 대시보드 시각화 및 직관적인 설비 상태 제어 플로우 구축.',
       'tags': ['Figma', 'Web UX/UI', 'Enterprise', 'Dashboard'],
       'gradient': [AppColors.primaryBlue, AppColors.accentCyan],
       'imageUrl': 'assets/images/sam_mes_thumbnail.jpg',
@@ -49,7 +49,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       ],
       'details': {
         'role': 'Lead Product Designer',
-        'duration': '4개월 (2025.10-2026.01)',
+        'duration': '5개월 (2025.09-2026.01)',
         'teamSize': '10명 (디자이너 2명, 개발자 6명, PM 2명)',
         'achievements': [
           '삼성 제조 MES 대시보드 화면 설계 및 가시성 개선',
@@ -69,7 +69,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       'title': 'FARM SYSTEM',
       'subtitle': '스마트 농가 모니터링 시스템 UX/UI',
       'company': 'Smart Farm Solution',
-      'year': '2023.10 - 2024.03',
+      'year': '2023.10-2024.03',
       'category': 'IoT Device',
       'description': '농가 온습도 모니터링, 급수 및 조명 제어, 작물 상태 진단 등 스마트 팜 IoT 관리 화면 기획 및 UI 설계.',
       'tags': ['IoT Device', 'Dashboard', 'Design System', 'Figma'],
@@ -82,7 +82,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       ],
       'details': {
         'role': 'Lead Product Designer',
-        'duration': '6개월 (2023-2024)',
+        'duration': '6개물 (2023.10-2024.03)',
         'teamSize': '6명 (디자이너 1명, 개발자 4명, PM 1명)',
         'achievements': [
           '농가 실시간 모니터링 대시보드 UI 설계',
@@ -101,12 +101,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     {
       'id': 'p1',
       'title': 'AIA+ SENIOR MODE',
-      'subtitle': '고령자 전용 모드 UX/UI',
+      'subtitle': '고령자 전용 모드 UX/UI 디자인 시스템',
       'company': '아이엔지피플',
-      'year': '2025.01 - 2025.06',
+      'year': '2025.01-2025.06',
       'category': 'Mobile App',
-      'description': '시니어 사용자의 디지털 접근성을 획기적으로 개선하기 위해 터치 영역 및 폰트 크기 표준을 정립한 금융 앱 고령자 모드 설계.',
-      'tags': ['Mobile UX', 'Design System', 'Accessibility', 'Figma'],
+      'description': 'AIA 생명 앱 Phase2 고령자 전용 모드 메인 UX 기획 및 디자인 시스템 구축. 보험료 납입, 보험계약대출 상환, 자동부활 신청, 자동송금 신청 등 핵심 GUI 정의. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100% 달성.',
+      'tags': ['Figma', 'Mobile UX', 'Design System', 'Accessibility'],
       'gradient': [AppColors.accentCyan, AppColors.blue400],
       'imageUrl': 'assets/images/aia_thumbnail.jpg',
       'mainScreenImages': [
@@ -114,7 +114,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       ],
       'details': {
         'role': 'Senior Product Designer',
-        'duration': '2025',
+        'duration': '6개월 (2025.01-2025.06)',
         'teamSize': '8명 (디자이너 2명, 개발자 4명, PM 2명)',
         'achievements': [
           '고령자 전용 접근성 가이드라인 수립',
@@ -132,12 +132,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     },
     {
       'id': 'p2',
-      'title': 'WALLPAD',
-      'subtitle': '범용 안드로이드 월패드 UX/UI',
+      'title': '현대에이치티 월패드',
+      'subtitle': 'HT 범용 안드로이드 월패드 디자인 시스템',
       'company': '현대에이치티(주)',
-      'year': '2018.05 - 2023.12',
+      'year': '2018.05-2024.03',
       'category': 'IoT Device',
-      'description': '현대, 포스코 등 대형 건설사 대응 범용 스마트홈 월패드(7~24인치) 통합 UX/UI 가이드라인 및 디자인 시스템 구축.',
+      'description': '동종 업계 1위 유지 기반 HT 안드로이드 월패드 라인업 UX 설계 프로세스 체계화. 현대/포스코/금호/한양/한화/대림 등 고객사 맞춤형 월패드(7~24인치) UX/UI 기획 및 통합 디자인 시스템 적용. 디자인 개발 완성률 100%, 프로젝트 일정 준수율 100%.',
       'tags': ['Figma', 'Android', 'Design System', 'IoT UI/UX'],
       'gradient': [AppColors.primaryBlue, AppColors.accentCyan],
       'imageUrl': 'assets/images/ht_thumbnail.jpg',
@@ -167,7 +167,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       ],
       'details': {
         'role': 'Product Lead',
-        'duration': '5년 7개월 (2018-2023)',
+        'duration': '5년 10개월 (2018.05-2024.03)',
         'teamSize': '15명 (디자이너 3명, 개발자 10명, PM 2명)',
         'achievements': [
           '동종 업계 1위 유지 기반 UX 설계 프로세스 체계화',
@@ -181,12 +181,12 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     },
     {
       'id': 'p3',
-      'title': 'HT HOME',
-      'subtitle': '주거전용 스마트홈 통합 앱 UX/UI',
+      'title': 'HT HOME 2.0',
+      'subtitle': '주거전용 스마트홈 통합 앱',
       'company': '현대에이치티(주)',
-      'year': '2021.07 - 2023.04',
+      'year': '2021.07-2023.04',
       'category': 'Mobile App',
-      'description': '스마트폰으로 집안의 IoT 기기를 모니터링하고 원격 제어할 수 있는 주거전용 스마트홈 통합 모바일 앱 UX/UI 디자인.',
+      'description': 'HT HOME 및 HT Imazu 앱 앱스토어 정식 론칭. 월패드와 통합 연동 최적화 및 사용자 접점 확대. 스마트홈 IoT 기기 통합 제어 UX 설계.',
       'tags': ['Mobile App', 'iOS', 'Android', 'Smart Home'],
       'gradient': [AppColors.blue400, AppColors.accentCyan],
       'imageUrl': 'assets/images/hthome_thumbnail.jpg',
@@ -226,11 +226,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     {
       'id': 'p4',
       'title': 'SOULARK',
-      'subtitle': '모바일 RPG 게임 UX/UI',
+      'subtitle': '모바일 게임 UX/UI 디자인',
       'company': '(주)블루스톤소프트',
-      'year': '2016.05 - 2017.06',
+      'year': '2016.05-2017.06',
       'category': 'Game UI',
-      'description': 'Unity3D 기반 RPG 모바일 게임의 HUD, 인게임 전투 인터페이스, 로비 및 캐릭터 성장 시스템 등 전체 GUI/UX 설계.',
+      'description': 'SOULARK 모바일 게임의 전반적인 UX/UI 개발. Unity3D 기반 GUI 인터랙션 및 애니메이션 설계.',
       'tags': ['Game UI', 'Unity3D', 'Mobile', 'Photoshop'],
       'gradient': [AppColors.highlightGreen, AppColors.accentCyan],
       'imageUrl': 'assets/images/soulark_1.jpg',
@@ -241,7 +241,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       ],
       'details': {
         'role': 'UI/UX Designer',
-        'duration': '1년 (2016-2017)',
+        'duration': '1년 1개월 (2016.05-2017.06)',
         'teamSize': '20명 (디자이너 4명, 개발자 12명, 기획자 4명)',
         'achievements': [
           'Unity3D 기반 GUI 시스템 구축',
@@ -255,11 +255,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     {
       'id': 'p5',
       'title': 'CLOSERS',
-      'subtitle': 'CBT 반응형 웹사이트 UX/UI',
+      'subtitle': '클로저스 웹사이트 UX/UI 디자인',
       'company': '(주)넥슨코리아',
-      'year': '2014.06 - 2014.12',
+      'year': '2014.06-2014.12',
       'category': 'Web Design',
-      'description': 'CBT 유저 모객을 위한 반응형 프로모션 사이트 설계. 사내 최초로 모바일, 태블릿, PC 대응 반응형 레이아웃 도입.',
+      'description': '클로저스 CBT 반응형 웹사이트 UX/UI 개발. 사내 최초로 PC/태블릿/모바일 대상 반응형 웹 구현 적용.',
       'tags': ['Web Design', 'Responsive', 'Game Promotion', 'HTML/CSS'],
       'gradient': [AppColors.primaryBlue, AppColors.blue400],
       'imageUrl': 'assets/images/closers_1.jpg',
@@ -290,11 +290,11 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
     {
       'id': 'p6',
       'title': 'NEXON PROMOTION',
-      'subtitle': '게임 프로모션 웹사이트 UX/UI',
+      'subtitle': '넥슨 게임 프로모션 디자인 및 웹 퍼블리싱',
       'company': '(주)넥슨코리아',
-      'year': '2010.10 - 2015.12',
+      'year': '2010.10-2015.12',
       'category': 'Web Design',
-      'description': '넥슨 라이브 게임들의 대규모 업데이트 및 신작 론칭을 위한 반응형 프로모션 웹사이트 UX/UI 기획 및 디자인.',
+      'description': '넥슨 라이브 게임들의 대규모 업데이트 및 신작 론칭 프로모션 웹사이트 UX/UI 디자인 및 퍼블리싱 총괄. 사내 표준 마크업 가이드 준수 및 크로스 브라우징 완벽 구현.',
       'tags': ['Web Design', 'Promotion', 'HTML/CSS', 'Photoshop'],
       'gradient': [AppColors.accentCyan, AppColors.highlightGreen],
       'imageUrl': 'assets/images/promotion_1.jpg',
@@ -304,7 +304,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       ],
       'details': {
         'role': 'Senior Web Designer',
-        'duration': '4년 (2010-2014)',
+        'duration': '5년 2개월 (2010-2015)',
         'teamSize': '8명 (디자이너 2명, 개발자 4명, PM 2명)',
         'achievements': [
           '넥슨 라이브 게임 업데이트 프로모션 총괄',
