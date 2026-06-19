@@ -61,7 +61,7 @@ class AboutSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 1,
             child: HolographicCard(
-              title: 'Product Strategy',
+              title: '인사말 (Introduction)',
               accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.greeting,
@@ -82,7 +82,7 @@ class AboutSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 2,
             child: HolographicCard(
-              title: '17 Years of Impact',
+              title: '성장배경 (Background)',
               accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.background,
@@ -103,7 +103,7 @@ class AboutSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 3,
             child: HolographicCard(
-              title: 'Tech Leadership',
+              title: '핵심역량 (Core Competencies)',
               accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.personality,
@@ -124,7 +124,7 @@ class AboutSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 4,
             child: HolographicCard(
-              title: 'AI Workflow Research',
+              title: '생활신조 및 책임감 (Values & Responsibility)',
               accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.hobbies,
@@ -145,7 +145,7 @@ class AboutSection extends ConsumerWidget {
           ScrollRevealWidget(
             index: 5,
             child: HolographicCard(
-              title: 'Future Vision',
+              title: '입사 후 포부 (Future Vision)',
               accentColor: AppColors.accentCyan,
               child: Text(
                 coverLetter.aspiration,

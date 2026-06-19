@@ -98,9 +98,33 @@ class ResumeSection extends ConsumerWidget {
               accentColor: AppColors.primaryBlue,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: resume.careers
-                    .map((career) => _buildCareerDetailItem(career, isMobile))
-                    .toList(),
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 24),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.work_history_outlined,
+                          color: AppColors.accentCyan,
+                          size: 18,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          '총 경력: 17년 1개월',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'Pretendard',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ...resume.careers
+                      .map((career) => _buildCareerDetailItem(career, isMobile))
+                      .toList(),
+                ],
               ),
             ),
           ),
