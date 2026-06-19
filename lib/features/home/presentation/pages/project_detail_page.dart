@@ -250,7 +250,38 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                         final double ratio = imgData['ratio'] as double;
                         final double calculatedHeight = screenWidth * ratio;
 
-                        return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
                       }).toList(),
                     );
                   } else if (isHtHome) {
@@ -291,7 +322,38 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                        final double ratio = imgData['ratio'] as double;
                        final double calculatedHeight = screenWidth * ratio;
 
-                       return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
                      }).toList(),
                    );
                  } else if (isSoulark) {
@@ -319,7 +381,38 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                        final double ratio = imgData['ratio'] as double;
                        final double calculatedHeight = screenWidth * ratio;
 
-                       return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
                      }).toList(),
                    );
                  } else if (isClosers) {
@@ -347,7 +440,38 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                        final double ratio = imgData['ratio'] as double;
                        final double calculatedHeight = screenWidth * ratio;
 
-                       return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
                      }).toList(),
                    );
                  } else if (isPromotion) {
@@ -371,7 +495,38 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                        final double ratio = imgData['ratio'] as double;
                        final double calculatedHeight = screenWidth * ratio;
 
-                       return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
                      }).toList(),
                    );
                  } else if (isFarm) {
@@ -399,7 +554,38 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                        final double ratio = imgData['ratio'] as double;
                        final double calculatedHeight = screenWidth * ratio;
 
-                       return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                       if (imgUrl.startsWith('http')) {
+                         return WebOptimizedImage(
+                           imageUrl: imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           loadingWidget: SizedBox(
+                             height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                             child: const Center(child: CircularProgressIndicator()),
+                           ),
+                         );
+                       } else {
+                         return Image.asset(
+                           imgUrl,
+                           width: screenWidth,
+                           height: calculatedHeight,
+                           fit: BoxFit.fitWidth,
+                           alignment: Alignment.topCenter,
+                           errorBuilder: (context, error, stackTrace) {
+                             return SizedBox(
+                               height: 300,
+                               child: Center(
+                                 child: Text(
+                                   'Asset not found: $imgUrl',
+                                   style: const TextStyle(color: Colors.white),
+                                 ),
+                               ),
+                             );
+                           },
+                         );
+                       }
                      }).toList(),
                    );
                  } else if (isAia) {
@@ -439,7 +625,38 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                         final double ratio = imgData['ratio'] as double;
                         final double calculatedHeight = screenWidth * ratio;
 
-                        return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
                       }).toList(),
                     );
                   } else if (isSamMes) {
@@ -487,11 +704,90 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                         final double ratio = imgData['ratio'] as double;
                         final double calculatedHeight = screenWidth * ratio;
 
-                        return _buildWebOptimizedImage(imgUrl, screenWidth, calculatedHeight);
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
                       }).toList(),
                     );
                   } else if (project.imageUrl != null && project.imageUrl!.isNotEmpty) {
-                    imageWidget = _buildWebOptimizedImage(project.imageUrl!, screenWidth, null);
+                    if (project.imageUrl!.startsWith('http')) {
+                     // Use WebOptimizedImage for network images to bypass WebGL limits
+                     imageWidget = WebOptimizedImage(
+                       imageUrl: project.imageUrl!,
+                       fit: BoxFit.fitWidth,
+                       alignment: Alignment.topCenter,
+                       loadingWidget: const SizedBox(
+                         height: 300,
+                         child: Center(child: CircularProgressIndicator()),
+                       ),
+                       errorWidget: const SizedBox(
+                         height: 300,
+                         child: Center(
+                           child: Column(
+                             mainAxisAlignment: MainAxisAlignment.center,
+                             children: [
+                               Icon(
+                                 Icons.broken_image,
+                                 color: Colors.white,
+                                 size: 48,
+                               ),
+                               SizedBox(height: 16),
+                               Text(
+                                 'Failed to load image',
+                                 style: TextStyle(color: Colors.white),
+                               ),
+                             ],
+                           ),
+                         ),
+                       ),
+                     );
+                   } else {
+                     imageWidget = Image.asset(
+                       project.imageUrl!,
+                       fit: BoxFit.fitWidth,
+                       alignment: Alignment.topCenter,
+                       errorBuilder: (context, error, stackTrace) {
+                         return SizedBox(
+                           height: 300,
+                           child: Center(
+                             child: Text(
+                               'Asset not found: ${project.imageUrl}',
+                               style: const TextStyle(color: Colors.white),
+                             ),
+                           ),
+                         );
+                       },
+                     );
+                   }
                  } else {
                    imageWidget = const SizedBox(
                      height: 300,
@@ -636,25 +932,6 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildWebOptimizedImage(String imageUrl, double screenWidth, double? height) {
-    return WebOptimizedImage(
-      imageUrl: imageUrl,
-      width: screenWidth,
-      height: height,
-      fit: BoxFit.fitWidth,
-      alignment: Alignment.topCenter,
-      loadingWidget: height != null
-          ? SizedBox(
-              height: height > 500 ? 500 : height,
-              child: const Center(child: CircularProgressIndicator()),
-            )
-          : const SizedBox(
-              height: 300,
-              child: Center(child: CircularProgressIndicator()),
-            ),
     );
   }
 }
