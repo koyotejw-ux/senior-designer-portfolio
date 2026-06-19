@@ -46,12 +46,12 @@ class ContentRepository {
       "projects": [
         {
           "id": "p8",
-          "title": "SAMSUNG MES SYSTEM",
+          "title": "SAM MES SYSTEM",
           "subtitle": "제조 생산 관리 시스템(MES) 및 ERP UX/UI",
           "company": "(주)코드브릿지엑스",
           "year": "2025.10-2026.01",
           "category": "Web Design",
-          "description": "삼성 제조 생산 관리 시스템(MES) 및 ERP 시스템의 UX/UI 전면 재설계. 복잡한 데이터 대시보드 시각화 및 직관적인 설비 상태 제어 플로우 구축.",
+          "description": "SAM 제조 생산 관리 시스템(MES) 및 ERP 시스템의 UX/UI 전면 재설계. 복잡한 데이터 대시보드 시각화 및 직관적인 설비 상태 제어 플로우 구축.",
           "tags": ["Figma", "Web UX/UI", "Enterprise", "Dashboard"],
           "imageUrl": "assets/images/sam_mes_thumbnail.jpg",
           "gradientColors": ["#0056B3", "#00A8FF"],
