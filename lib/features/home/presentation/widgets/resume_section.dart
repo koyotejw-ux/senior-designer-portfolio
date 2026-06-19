@@ -272,183 +272,52 @@ class ResumeSection extends ConsumerWidget {
   }
 
   Widget _buildCareerDetailItem(Career career, bool isMobile) {
-    return Container(
-      width: double.infinity,
-      margin: const EdgeInsets.only(bottom: 32),
-      padding: const EdgeInsets.all(28),
-      decoration: BoxDecoration(
-        color: const Color(0xFF04060A).withValues(alpha: 0.6),
-        borderRadius: BorderRadius.zero,
-        border: Border.all(
-          color: AppColors.primaryBlue.withValues(alpha: 0.3),
-          width: 0.5,
-        ),
-      ),
-      child: Column(
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 헤더: 회사명 및 기간
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                career.company,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900, // Pretendard Black
-                  fontFamily: 'Pretendard',
-                  fontSize: 16,
-                  height: 1.3,
-                ),
+          SizedBox(
+            width: isMobile ? 120 : 180,
+            child: Text(
+              career.period,
+              style: TextStyle(
+                color: AppColors.accentCyan,
+                fontSize: 13,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Pretendard',
+                letterSpacing: 0.3,
               ),
-              const SizedBox(height: 6),
-              Text(
-                '${career.department} · ${career.position}',
-                style: const TextStyle(
-                  color: AppColors.accentCyan,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  fontFamily: 'Pretendard',
-                  height: 1.3,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                career.period,
-                style: const TextStyle(
-                  color: Color(0xFF64748B),
-                  fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 11,
-                  height: 1.2,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 24),
-
-          // 역할
-          _buildSectionTitle('담당 업무'),
-          const SizedBox(height: 8),
-          Text(
-            career.role,
-            style: const TextStyle(
-              color: Color(0xFF94A3B8), // Level 4 Body
-              fontSize: 12,
-              height: 1.3,
-              fontWeight: FontWeight.w400,
-              fontFamily: 'Pretendard',
             ),
           ),
-          const SizedBox(height: 32),
-
-          // 주요 프로젝트
-          if (career.projects.isNotEmpty) ...[
-            _buildSectionTitle('주요 프로젝트'),
-            const SizedBox(height: 8),
-            ...career.projects.map((project) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    project,
-                    style: const TextStyle(
-                      color: Color(0xFF94A3B8), // Level 4 Body
-                      fontSize: 12,
-                      height: 1.3,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Pretendard',
-                    ),
-                  ),
-                )),
-            const SizedBox(height: 32),
-          ],
-
-          // 주요 성과
-          if (career.achievements.isNotEmpty) ...[
-            _buildSectionTitle('주요 성과'),
-            const SizedBox(height: 8),
-            ...career.achievements.map((achievement) => Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    achievement,
-                    style: const TextStyle(
-                      color: Color(0xFF94A3B8), // Level 4 Body
-                      fontSize: 12,
-                      height: 1.3,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: 'Pretendard',
-                    ),
-                  ),
-                )),
-            const SizedBox(height: 32),
-          ],
-
-          // 사용 도구
-          if (career.tools.isNotEmpty) ...[
-            _buildSectionTitle('사용 도구'),
-            const SizedBox(height: 8),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              alignment: WrapAlignment.start,
-              crossAxisAlignment: WrapCrossAlignment.start,
-              children: career.tools.map((tool) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 4,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF050810),
-                    borderRadius: BorderRadius.zero,
-                    border: Border.all(
-                      color: AppColors.accentCyan.withValues(alpha: 0.2),
-                      width: 0.5,
-                    ),
-                  ),
-                  child: Text(
-                    tool,
-                    style: const TextStyle(
-                      color: AppColors.accentCyan,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      fontFamily: 'Pretendard',
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 28),
-          ],
-
-          // 개발 환경
-          if (career.environment != null && career.environment!.isNotEmpty) ...[
-            Row(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  '개발환경',
-                  style: TextStyle(
-                    color: Color(0xFF64748B),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
+                Text(
+                  career.company,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w900,
                     fontFamily: 'Pretendard',
+                    fontSize: 14,
+                    height: 1.3,
                   ),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    career.environment!,
-                    style: const TextStyle(
-                      color: Color(0xFF94A3B8),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      fontFamily: 'Pretendard',
-                    ),
+                const SizedBox(height: 4),
+                Text(
+                  '${career.department} · ${career.position}',
+                  style: const TextStyle(
+                    color: Color(0xFF94A3B8),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Pretendard',
+                    height: 1.3,
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-          ],
+          ),
         ],
       ),
     );

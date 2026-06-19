@@ -90,9 +90,10 @@ class ExperienceSection extends ConsumerWidget {
                               career.achievements,
                             ),
                           if (career.tools.isNotEmpty)
-                            _buildSubSection('개발도구 (TOOLS)', [
-                              career.tools.join(', '),
-                            ]),
+                            _buildToolsSubSection(
+                              '개발도구 (TOOLS)',
+                              career.tools,
+                            ),
                           if (career.environment != null && career.environment!.isNotEmpty)
                             _buildSubSection('개발환경 (ENVIRONMENT)', [
                               career.environment!,
@@ -189,6 +190,58 @@ class ExperienceSection extends ConsumerWidget {
           children: content,
         ),
       ],
+    );
+  }
+
+  Widget _buildToolsSubSection(String title, List<String> tools) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 32),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: AppColors.highlightGreen.withValues(alpha: 0.95),
+              fontWeight: FontWeight.w900,
+              fontSize: 14,
+              letterSpacing: 0.3,
+              fontFamily: 'Pretendard',
+              height: 1.2,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: tools.map((tool) {
+              return Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF050810),
+                  borderRadius: BorderRadius.zero,
+                  border: Border.all(
+                    color: AppColors.accentCyan.withValues(alpha: 0.2),
+                    width: 0.5,
+                  ),
+                ),
+                child: Text(
+                  tool,
+                  style: const TextStyle(
+                    color: AppColors.accentCyan,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Pretendard',
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 
