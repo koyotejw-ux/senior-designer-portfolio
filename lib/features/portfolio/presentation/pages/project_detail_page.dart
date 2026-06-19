@@ -260,7 +260,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
 
                 // Main Screens Gallery (New)
                 if (!hideDetails &&
-                    !(projectData['company']?.toString().toLowerCase().contains('hyundai ht') == true &&
+                    !((projectData['company']?.toString().toLowerCase().contains('hyundai ht') == true ||
+                       projectData['company']?.toString().contains('현대에이치티') == true) &&
                     (projectData['title']?.toString().toLowerCase().contains('wallpad') == true ||
                      projectData['title']?.toString().toLowerCase().contains('월패드') == true ||
                      projectData['title']?.toString().toLowerCase().contains('home') == true ||
@@ -541,8 +542,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
   Widget _buildProjectImages(Map<String, dynamic> projectData, bool isMobile, bool isTablet) {
     final title = projectData['title']?.toString().toLowerCase() ?? '';
     final company = projectData['company']?.toString().toLowerCase() ?? '';
-    final isWallpad = company.contains('hyundai ht') && (title.contains('wallpad') || title.contains('월패드'));
-    final isHtHome = company.contains('hyundai ht') && (title.contains('home') || title.contains('홈'));
+    final isWallpad = (company.contains('hyundai ht') || company.contains('현대에이치티')) && (title.contains('wallpad') || title.contains('월패드'));
+    final isHtHome = (company.contains('hyundai ht') || company.contains('현대에이치티')) && (title.contains('home') || title.contains('홈'));
     final isSoulark = title.contains('soulark') || title.contains('소울아크');
     final isClosers = title.contains('closers') || title.contains('클로저스');
     final isPromotion = title.contains('promotion') || title.contains('프로모션');
