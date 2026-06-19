@@ -29,12 +29,12 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     'aia-senior-mode': {
       'title': 'AIA+ SENIOR MODE',
       'subtitle': '고령자 전용 모드 UX/UI 디자인 시스템',
-      'company': 'ING People',
-      'year': '2025',
+      'company': '아이엔지피플',
+      'year': '2025.01-2025.06',
       'category': 'Mobile App',
-      'gradient': [AppColors.accentCyan, AppColors.blue400],
+      'gradient': const [Color(0xFFD31145), Color(0xFFFF4B4B)],
       'role': 'Senior Product Designer',
-      'duration': '2025 (진행 중)',
+      'duration': '6개월 (2025.01-2025.06)',
       'teamSize': '8명 (디자이너 2명, 개발자 4명, PM 2명)',
       'overview':
           'AIA 생명 앱의 고령자 전용 모드를 설계하여 시니어 사용자의 디지털 접근성을 획기적으로 개선한 프로젝트입니다. 보험료 납입, 보험계약대출 상환, 자동부활 신청 등 핵심 보험 업무를 고령자가 쉽게 처리할 수 있도록 UX/UI를 전면 재설계했습니다.',
@@ -135,6 +135,9 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     if (projectModel.id.isEmpty) {
       projectData = _projectData[widget.projectId];
     } else {
+      final lookupKey = widget.projectId == 'p1' ? 'aia-senior-mode' : widget.projectId;
+      final hardcodedData = _projectData[lookupKey] ?? {};
+
       // Convert ProjectModel to Map for consistent rendering logic
       projectData = {
         'title': projectModel.title,
@@ -145,15 +148,15 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
         'gradient': projectModel.gradientColors.isNotEmpty
             ? projectModel.gradientColors
             : [AppColors.primaryBlue, AppColors.accentCyan],
-        'role': projectModel.role ?? 'Designer',
-        'duration': projectModel.duration ?? projectModel.year,
-        'teamSize': projectModel.teamSize ?? '-',
+        'role': projectModel.role ?? hardcodedData['role'] ?? 'Designer',
+        'duration': projectModel.duration ?? hardcodedData['duration'] ?? projectModel.year,
+        'teamSize': projectModel.teamSize ?? hardcodedData['teamSize'] ?? '-',
         'overview': projectModel.description,
-        'challenges': <String>[],
-        'solutions': <String>[],
-        'achievements': <String>[],
+        'challenges': hardcodedData['challenges'] ?? <String>[],
+        'solutions': hardcodedData['solutions'] ?? <String>[],
+        'achievements': hardcodedData['achievements'] ?? <String>[],
         'technologies': projectModel.tags,
-        'process': <Map<String, String>>[],
+        'process': hardcodedData['process'] ?? <Map<String, String>>[],
         'imageUrl': projectModel.imageUrl,
         'mainScreenImages': projectModel.mainScreenImages,
         'designSystem': projectModel.designSystem,
