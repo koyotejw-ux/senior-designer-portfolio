@@ -40,10 +40,10 @@ class AppHeader extends ConsumerWidget {
                 borderRadius: BorderRadius.zero, // Rectilinear pull handle
               ),
             ),
+            _buildBottomSheetItem(context, 'Resume', isDark),
+            _buildBottomSheetItem(context, 'Experience', isDark),
             _buildBottomSheetItem(context, 'About', isDark),
             _buildBottomSheetItem(context, 'Portfolio', isDark),
-            _buildBottomSheetItem(context, 'Experience', isDark),
-            _buildBottomSheetItem(context, 'Resume', isDark),
             _buildBottomSheetItem(context, 'Contact', isDark),
             const SizedBox(height: 20),
           ],
@@ -145,13 +145,13 @@ class AppHeader extends ConsumerWidget {
             else
               Row(
                 children: [
-                  _buildNavLink(context, 'About', '/about', isDark),
-                  const SizedBox(width: 32),
-                  _buildNavLink(context, 'Portfolio', '/portfolio', isDark),
+                  _buildNavLink(context, 'Resume', '/resume', isDark),
                   const SizedBox(width: 32),
                   _buildNavLink(context, 'Experience', '/experience', isDark),
                   const SizedBox(width: 32),
-                  _buildNavLink(context, 'Resume', '/resume', isDark),
+                  _buildNavLink(context, 'About', '/about', isDark),
+                  const SizedBox(width: 32),
+                  _buildNavLink(context, 'Portfolio', '/portfolio', isDark),
                   const SizedBox(width: 32),
                   _buildNavLink(context, 'Contact', '/contact', isDark),
                 ],
