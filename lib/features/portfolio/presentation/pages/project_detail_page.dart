@@ -1386,30 +1386,22 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
         spacing: 12,
         runSpacing: 12,
         children: (project['technologies'] as List<String>).map((tech) {
+          final tagColor = _getTagColor(tech, isDark);
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: (project['gradient'] as List<Color>)
-                    .map((c) => c.withValues(alpha: 0.2))
-                    .toList(),
-              ),
+              color: tagColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: (project['gradient'] as List<Color>)[0].withValues(
-                  alpha: 0.3,
-                ),
+                color: tagColor.withValues(alpha: 0.3),
+                width: 0.8,
               ),
             ),
             child: Text(
               tech,
               style: AppTypography.bodyMedium.copyWith(
-                color: isDark
-                    ? (project['gradient'] as List<Color>)[0]
-                    : (project['gradient'] as List<Color>)[0].withValues(
-                        alpha: 0.9,
-                      ),
-                fontWeight: FontWeight.w700,
+                color: tagColor,
+                fontWeight: FontWeight.bold,
               ),
             ),
           );
@@ -1525,6 +1517,29 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
         ),
       ),
     );
+  }
+
+  Color _getTagColor(String tag, bool isDark) {
+    final lower = tag.toLowerCase().trim();
+    if (lower.contains('figma') || lower.contains('photoshop') || lower.contains('unity3d') || lower.contains('design system') || lower.contains('zeplin') || lower.contains('illustrator')) {
+      return isDark ? const Color(0xFFE040FB) : const Color(0xFF9C27B0); // Purple/Pink
+    }
+    if (lower.contains('web') || lower.contains('responsive') || lower.contains('html') || lower.contains('css') || lower.contains('javascript') || lower.contains('publishing') || lower.contains('퍼블리싱')) {
+      return isDark ? const Color(0xFF00E5FF) : const Color(0xFF00B8D4); // Cyan/Teal
+    }
+    if (lower.contains('mobile') || lower.contains('ios') || lower.contains('android') || lower.contains('app')) {
+      return isDark ? const Color(0xFF29B6F6) : const Color(0xFF0288D1); // Light Blue
+    }
+    if (lower.contains('iot') || lower.contains('device') || lower.contains('smart') || lower.contains('home') || lower.contains('월패드') || lower.contains('wallpad') || lower.contains('farm') || lower.contains('농가')) {
+      return isDark ? const Color(0xFFFFB74D) : const Color(0xFFF57C00); // Orange
+    }
+    if (lower.contains('enterprise') || lower.contains('dashboard') || lower.contains('mes') || lower.contains('erp') || lower.contains('대시보드')) {
+      return isDark ? const Color(0xFF81C784) : const Color(0xFF388E3C); // Green
+    }
+    if (lower.contains('accessibility') || lower.contains('testing') || lower.contains('strategy') || lower.contains('fintech') || lower.contains('lead') || lower.contains('senior') || lower.contains('접근성')) {
+      return isDark ? const Color(0xFFFF8A80) : const Color(0xFFD32F2F); // Red/Coral
+    }
+    return isDark ? AppColors.accentCyan : AppColors.primaryBlue;
   }
 }
 

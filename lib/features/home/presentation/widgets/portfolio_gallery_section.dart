@@ -339,16 +339,16 @@ class _PortfolioGallerySectionState
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.1),
+                          color: accentColor.withValues(alpha: 0.1),
                           border: Border.all(
-                            color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.3),
+                            color: accentColor.withValues(alpha: 0.3),
                           ),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
                           project.category,
                           style: AppTypography.labelSmall.copyWith(
-                            color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
+                            color: accentColor,
                             fontWeight: FontWeight.w700,
                             fontSize: 11,
                             letterSpacing: 1.2,
@@ -380,7 +380,7 @@ class _PortfolioGallerySectionState
                         project.subtitle,
                         style: TextStyle(
                           fontFamily: 'Pretendard',
-                          color: isDark ? AppColors.accentCyan : AppColors.primaryBlue,
+                          color: accentColor,
                           fontWeight: FontWeight.w800,
                           fontSize: 14,
                         ),
@@ -444,24 +444,26 @@ class _PortfolioGallerySectionState
                         spacing: 8,
                         runSpacing: 8,
                         children: project.tags.map((tag) {
+                          final tagColor = _getTagColor(tag, isDark);
                           return Container(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 10,
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
+                              color: tagColor.withValues(alpha: 0.1),
                               border: Border.all(
-                                color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.2),
-                                width: 0.5,
+                                color: tagColor.withValues(alpha: 0.3),
+                                width: 0.8,
                               ),
-                              borderRadius: BorderRadius.zero,
+                              borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
                               tag.toUpperCase(),
                               style: TextStyle(
                                 fontFamily: 'Pretendard',
-                                color: (isDark ? AppColors.accentCyan : AppColors.primaryBlue).withValues(alpha: 0.8),
-                                fontWeight: FontWeight.w600,
+                                color: tagColor,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 10,
                                 letterSpacing: 1.0,
                               ),
@@ -479,5 +481,28 @@ class _PortfolioGallerySectionState
         .animate()
         .fadeIn(duration: 800.ms, delay: (200 + index * 100).ms)
         .slideY(begin: 0.2, end: 0);
+  }
+
+  Color _getTagColor(String tag, bool isDark) {
+    final lower = tag.toLowerCase().trim();
+    if (lower.contains('figma') || lower.contains('photoshop') || lower.contains('unity3d') || lower.contains('design system') || lower.contains('zeplin') || lower.contains('illustrator')) {
+      return isDark ? const Color(0xFFE040FB) : const Color(0xFF9C27B0); // Purple/Pink
+    }
+    if (lower.contains('web') || lower.contains('responsive') || lower.contains('html') || lower.contains('css') || lower.contains('javascript') || lower.contains('publishing') || lower.contains('퍼블리싱')) {
+      return isDark ? const Color(0xFF00E5FF) : const Color(0xFF00B8D4); // Cyan/Teal
+    }
+    if (lower.contains('mobile') || lower.contains('ios') || lower.contains('android') || lower.contains('app')) {
+      return isDark ? const Color(0xFF29B6F6) : const Color(0xFF0288D1); // Light Blue
+    }
+    if (lower.contains('iot') || lower.contains('device') || lower.contains('smart') || lower.contains('home') || lower.contains('월패드') || lower.contains('wallpad') || lower.contains('farm') || lower.contains('농가')) {
+      return isDark ? const Color(0xFFFFB74D) : const Color(0xFFF57C00); // Orange
+    }
+    if (lower.contains('enterprise') || lower.contains('dashboard') || lower.contains('mes') || lower.contains('erp') || lower.contains('대시보드')) {
+      return isDark ? const Color(0xFF81C784) : const Color(0xFF388E3C); // Green
+    }
+    if (lower.contains('accessibility') || lower.contains('testing') || lower.contains('strategy') || lower.contains('fintech') || lower.contains('lead') || lower.contains('senior') || lower.contains('접근성')) {
+      return isDark ? const Color(0xFFFF8A80) : const Color(0xFFD32F2F); // Red/Coral
+    }
+    return isDark ? AppColors.accentCyan : AppColors.primaryBlue;
   }
 }
