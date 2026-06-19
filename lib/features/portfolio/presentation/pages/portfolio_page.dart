@@ -1029,25 +1029,34 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Category Badge
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: project['gradient'] as List<Color>,
-                      ),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      project['category'] as String,
-                      style: AppTypography.labelSmall.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 11,
-                      ),
-                    ),
+                  Builder(
+                    builder: (context) {
+                      final tagsList = (project['tags'] as List? ?? []);
+                      final platformTag = tagsList.firstWhere(
+                        (t) => t.toString().contains('플랫폼:'),
+                        orElse: () => project['category'] as String,
+                      );
+                      return Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: project['gradient'] as List<Color>,
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Text(
+                          platformTag,
+                          style: AppTypography.labelSmall.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 11,
+                          ),
+                        ),
+                      );
+                    }
                   ),
 
                   SizedBox(height: isMobile ? 16 : 20),
@@ -1113,7 +1122,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
-                    children: (project['tags'] as List<String>).map((tag) {
+                    children: (project['tags'] as List<String>).where((t) => !t.contains('플랫폼:')).map((tag) {
                       return Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 10,

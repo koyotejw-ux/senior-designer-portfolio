@@ -333,27 +333,35 @@ class _PortfolioGallerySectionState
                       ],
 
                       // Category badge
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: accentColor.withValues(alpha: 0.1),
-                          border: Border.all(
-                            color: accentColor.withValues(alpha: 0.3),
-                          ),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          project.category,
-                          style: AppTypography.labelSmall.copyWith(
-                            color: accentColor,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 11,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
+                      Builder(
+                        builder: (context) {
+                          final platformTag = project.tags.firstWhere(
+                            (t) => t.contains('플랫폼:'),
+                            orElse: () => project.category,
+                          );
+                          return Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              color: accentColor.withValues(alpha: 0.1),
+                              border: Border.all(
+                                color: accentColor.withValues(alpha: 0.3),
+                              ),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Text(
+                              platformTag,
+                              style: AppTypography.labelSmall.copyWith(
+                                color: accentColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 11,
+                                letterSpacing: 1.2,
+                              ),
+                            ),
+                          );
+                        }
                       ),
 
                       const SizedBox(height: 12),
@@ -443,7 +451,7 @@ class _PortfolioGallerySectionState
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
-                        children: project.tags.map((tag) {
+                        children: project.tags.where((t) => !t.contains('플랫폼:')).map((tag) {
                           final tagColor = _getTagColor(tag, isDark);
                           return Container(
                             padding: const EdgeInsets.symmetric(
