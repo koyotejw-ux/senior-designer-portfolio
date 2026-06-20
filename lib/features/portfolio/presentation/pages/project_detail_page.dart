@@ -236,16 +236,18 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 // Hero Section
                 _buildHeroSection(projectData, isMobile, isTablet, isDark),
 
-                // Design System Section (For SAM MES+ERP)
-                if (isSamMes)
+                // Project Image(s) with Design System split for SAM MES+ERP
+                if (isSamMes) ...[
+                  _buildProjectImagesSplit(projectData, isMobile, isTablet, firstPart: true),
                   _SamMesDesignSystemViewer(isMobile: isMobile, isDark: isDark),
-
-                // Project Image(s)
-                _buildProjectImages(
-                  projectData,
-                  isMobile,
-                  isTablet,
-                ),
+                  _buildProjectImagesSplit(projectData, isMobile, isTablet, firstPart: false),
+                ] else ...[
+                  _buildProjectImages(
+                    projectData,
+                    isMobile,
+                    isTablet,
+                  ),
+                ],
 
                 // Project Info
                 if (!hideDetails) _buildProjectInfo(projectData, isMobile, isTablet, isDark),
@@ -816,6 +818,102 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                         ),
                       );
                     },
+                  );
+                }
+              }).toList(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProjectImagesSplit(
+    Map<String, dynamic> projectData,
+    bool isMobile,
+    bool isTablet, {
+    required bool firstPart,
+  }) {
+    final isNetwork = projectData['imageUrl'] != null && projectData['imageUrl']!.toString().startsWith('http');
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    final List<Map<String, dynamic>> allImages = [
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_1.jpg' : 'assets/images/sam_mes_1.jpg',
+        'ratio': 2866 / 1920,
+      },
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_2.jpg' : 'assets/images/sam_mes_2.jpg',
+        'ratio': 2866 / 1920,
+      },
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_3.jpg' : 'assets/images/sam_mes_3.jpg',
+        'ratio': 2866 / 1920,
+      },
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_4.jpg' : 'assets/images/sam_mes_4.jpg',
+        'ratio': 2866 / 1920,
+      },
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_5.jpg' : 'assets/images/sam_mes_5.jpg',
+        'ratio': 2866 / 1920,
+      },
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_6.jpg' : 'assets/images/sam_mes_6.jpg',
+        'ratio': 2866 / 1920,
+      },
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_7.jpg' : 'assets/images/sam_mes_7.jpg',
+        'ratio': 2866 / 1920,
+      },
+      {
+        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_8.jpg' : 'assets/images/sam_mes_8.jpg',
+        'ratio': 2871 / 1920,
+      },
+    ];
+
+    final List<Map<String, dynamic>> imagesToRender = firstPart
+        ? allImages.sublist(0, 6)
+        : allImages.sublist(6);
+
+    return ScrollRevealWidget(
+      delay: const Duration(milliseconds: 300),
+      child: Container(
+        width: double.infinity,
+        padding: EdgeInsets.zero,
+        child: Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: imagesToRender.map((imgData) {
+                final String imgUrl = imgData['url'] as String;
+                final double ratio = imgData['ratio'] as double;
+                final double calculatedHeight = screenWidth * ratio;
+
+                if (imgUrl.startsWith('http')) {
+                  return Image.network(
+                    imgUrl,
+                    width: screenWidth,
+                    height: calculatedHeight,
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.topCenter,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return SizedBox(
+                        height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                        child: const Center(child: CircularProgressIndicator()),
+                      );
+                    },
+                  );
+                } else {
+                  return Image.asset(
+                    imgUrl,
+                    width: screenWidth,
+                    height: calculatedHeight,
+                    fit: BoxFit.fitWidth,
+                    alignment: Alignment.topCenter,
                   );
                 }
               }).toList(),
