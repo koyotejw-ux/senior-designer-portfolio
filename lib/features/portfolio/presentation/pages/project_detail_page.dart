@@ -209,11 +209,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
       );
     }
 
-    final isAia = projectData['title']?.toString().toLowerCase().contains('aia') == true ||
-        projectData['company']?.toString().toLowerCase().contains('aia') == true;
-    final isSamMes = projectData['title']?.toString().toLowerCase().contains('mes') == true ||
-        projectData['company']?.toString().toLowerCase().contains('코드브릿지') == true ||
-        projectData['company']?.toString().toLowerCase().contains('bridge') == true;
+    final isAia = widget.projectId == 'p1';
+    final isSamMes = widget.projectId == 'p8';
     final hideDetails = isAia || isSamMes;
 
     return Scaffold(
@@ -555,8 +552,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     final isClosers = title.contains('closers') || title.contains('클로저스');
     final isPromotion = title.contains('promotion') || title.contains('프로모션');
     final isFarm = title.contains('farm') || title.contains('농가') || title.contains('농업');
-    final isAia = title.contains('aia') || company.contains('aia');
-    final isSamMes = title.contains('mes') || company.contains('코드브릿지') || company.contains('bridge');
+    final isAia = widget.projectId == 'p1';
+    final isSamMes = widget.projectId == 'p8';
     final screenWidth = MediaQuery.of(context).size.width;
 
     if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm && !isAia && !isSamMes) {
