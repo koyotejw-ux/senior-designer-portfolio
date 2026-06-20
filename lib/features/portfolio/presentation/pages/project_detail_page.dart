@@ -239,6 +239,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 // Hero Section
                 _buildHeroSection(projectData, isMobile, isTablet, isDark),
 
+                // Design System Section (For SAM MES+ERP)
+                if (isSamMes)
+                  _SamMesDesignSystemViewer(isMobile: isMobile, isDark: isDark),
+
                 // Project Image(s)
                 _buildProjectImages(
                   projectData,
@@ -1542,6 +1546,821 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     return isDark ? AppColors.accentCyan : AppColors.primaryBlue;
   }
 }
+
+
+
+// =========================================================================
+// SAM MES+ERP Integrated Design System Viewer (Enterprise Grade)
+// =========================================================================
+
+class _SamMesDesignSystemViewer extends StatefulWidget {
+  final bool isMobile;
+  final bool isDark;
+
+  const _SamMesDesignSystemViewer({
+    required this.isMobile,
+    required this.isDark,
+  });
+
+  @override
+  State<_SamMesDesignSystemViewer> createState() => _SamMesDesignSystemViewerState();
+}
+
+class _SamMesDesignSystemViewerState extends State<_SamMesDesignSystemViewer> {
+  String _activeTab = 'foundation';
+  String _searchQuery = '';
+  final Map<String, bool> _expandedCode = {};
+
+  final List<Map<String, dynamic>> _tabs = [
+    {'id': 'foundation', 'label': 'Foundation (기초)', 'icon': Icons.layers_outlined},
+    {'id': 'atoms', 'label': 'Atoms (원자)', 'icon': Icons.auto_awesome_mosaic_outlined},
+    {'id': 'molecules', 'label': 'Molecules (분자)', 'icon': Icons.grid_view_outlined},
+    {'id': 'organisms', 'label': 'Organisms (유기체)', 'icon': Icons.dashboard_customize_outlined},
+    {'id': 'templates', 'label': 'Templates (템플릿)', 'icon': Icons.splitscreen_outlined},
+    {'id': 'cards', 'label': 'Cards (카드)', 'icon': Icons.credit_card_outlined},
+  ];
+
+  void _copyToClipboard(String code, String name) {
+    flutter.Clipboard.setData(flutter.ClipboardData(text: code));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('$name TSX 코드가 클립보드에 복사되었습니다.'),
+        backgroundColor: AppColors.highlightGreen,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = widget.isDark;
+    final accentColor = AppColors.accentCyan;
+
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        vertical: widget.isMobile ? 40 : 60,
+        horizontal: widget.isMobile ? 16 : 40,
+      ),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Section Title & Badge
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: accentColor.withValues(alpha: 0.1),
+                      border: Border.all(color: accentColor.withValues(alpha: 0.3)),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: Text(
+                      'DESIGN SYSTEM',
+                      style: AppTypography.labelSmall.copyWith(
+                        color: accentColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '통합 디자인 시스템 (Atomic Architecture)',
+                style: (widget.isMobile ? AppTypography.h3 : AppTypography.h2).copyWith(
+                  color: isDark ? Colors.white : AppColors.lightGray900,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'SAM MES+ERP 솔루션의 고품질 일관성을 보장하는 엔터프라이즈 디자인 명세서입니다. Radix UI와 Tailwind CSS 기반의 React 컴포넌트를 아토믹 설계 규칙에 따라 제공합니다.',
+                style: AppTypography.bodyMedium.copyWith(
+                  color: isDark ? AppColors.gray100.withValues(alpha: 0.7) : AppColors.lightText2,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 32),
+
+              // Search Bar
+              Container(
+                decoration: BoxDecoration(
+                  color: isDark ? AppColors.charcoal.withOpacity(0.5) : AppColors.lightGray100,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: isDark ? AppColors.blue900.withOpacity(0.3) : AppColors.lightGray300,
+                  ),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Icon(Icons.search, color: isDark ? Colors.grey : AppColors.lightText2),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: TextField(
+                        onChanged: (val) {
+                          setState(() {
+                            _searchQuery = val.toLowerCase();
+                          });
+                        },
+                        style: TextStyle(color: isDark ? Colors.white : AppColors.lightGray900),
+                        decoration: InputDecoration(
+                          hintText: '컴포넌트 이름 또는 설명 검색...',
+                          hintStyle: TextStyle(
+                            color: isDark ? Colors.grey : AppColors.lightText2.withOpacity(0.5),
+                          ),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Tabs
+              widget.isMobile
+                  ? SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: _tabs.map((tab) => _buildTabItem(tab)).toList(),
+                      ),
+                    )
+                  : Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: _tabs.map((tab) => _buildTabItem(tab)).toList(),
+                    ),
+              const SizedBox(height: 32),
+
+              // Component Grid/List based on active tab
+              _buildActiveTabContent(isDark),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTabItem(Map<String, dynamic> tab) {
+    final isSelected = _activeTab == tab['id'];
+    final accentColor = AppColors.accentCyan;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            _activeTab = tab['id'];
+          });
+        },
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          margin: const EdgeInsets.only(right: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            gradient: isSelected
+                ? LinearGradient(colors: [AppColors.primaryBlue, AppColors.accentCyan])
+                : null,
+            color: isSelected ? null : (widget.isDark ? AppColors.charcoal.withOpacity(0.5) : AppColors.lightGray200),
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: isSelected ? Colors.transparent : (widget.isDark ? AppColors.blue900.withOpacity(0.3) : AppColors.lightGray300),
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(tab['icon'] as IconData, size: 16, color: isSelected ? Colors.white : (widget.isDark ? Colors.white70 : AppColors.lightGray900)),
+              const SizedBox(width: 8),
+              Text(
+                tab['label'] as String,
+                style: AppTypography.bodyMedium.copyWith(
+                  color: isSelected ? Colors.white : (widget.isDark ? AppColors.gray100 : AppColors.lightGray900),
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w600,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActiveTabContent(bool isDark) {
+    final items = _getComponentsForActiveTab();
+    final filtered = items.where((item) {
+      final name = item['title'].toString().toLowerCase();
+      final desc = item['description'].toString().toLowerCase();
+      return name.contains(_searchQuery) || desc.contains(_searchQuery);
+    }).toList();
+
+    if (filtered.isEmpty) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 40),
+          child: Text(
+            '검색 결과가 없습니다.',
+            style: TextStyle(color: isDark ? Colors.grey : AppColors.lightText2),
+          ),
+        ),
+      );
+    }
+
+    return Column(
+      children: filtered.map((item) => _buildComponentCard(item, isDark)).toList(),
+    );
+  }
+
+  Widget _buildComponentCard(Map<String, dynamic> item, bool isDark) {
+    final title = item['title'] as String;
+    final description = item['description'] as String;
+    final path = item['path'] as String;
+    final code = item['code'] as String;
+    final isExpanded = _expandedCode[title] ?? false;
+
+    return Container(
+      margin: const EdgeInsets.only(bottom: 24),
+      decoration: BoxDecoration(
+        color: isDark ? AppColors.charcoal.withOpacity(0.4) : Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isDark ? AppColors.blue900.withOpacity(0.3) : AppColors.lightGray300,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(isDark ? 0.2 : 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Card Header
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            title,
+                            style: AppTypography.bodyLarge.copyWith(
+                              color: isDark ? Colors.white : AppColors.lightGray900,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                            decoration: BoxDecoration(
+                              color: isDark ? Colors.black38 : AppColors.lightGray100,
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(
+                                color: isDark ? Colors.white12 : AppColors.lightGray300,
+                              ),
+                            ),
+                            child: Text(
+                              path,
+                              style: const TextStyle(
+                                fontFamily: 'monospace',
+                                fontSize: 10,
+                                color: AppColors.primaryBlue,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        description,
+                        style: AppTypography.bodySmall.copyWith(
+                          color: isDark ? AppColors.gray100.withOpacity(0.7) : AppColors.lightText2,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Action Buttons
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        isExpanded ? Icons.expand_less : Icons.expand_more,
+                        color: isDark ? Colors.white70 : AppColors.lightGray900,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _expandedCode[title] = !isExpanded;
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.copy_outlined,
+                        color: isDark ? Colors.white70 : AppColors.lightGray900,
+                        size: 20,
+                      ),
+                      onPressed: () => _copyToClipboard(code, title),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          // Preview Area
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: isDark ? Colors.black26 : AppColors.lightGray100,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: isDark ? Colors.white10 : AppColors.lightGray300.withOpacity(0.5),
+              ),
+            ),
+            child: item['preview'] as Widget,
+          ),
+          const SizedBox(height: 20),
+
+          // Code Snippet Area
+          if (isExpanded)
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: const BoxDecoration(
+                color: Color(0xFF0F172A), // Tailwind Slate 900
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ),
+              ),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(
+                  code,
+                  style: const TextStyle(
+                    fontFamily: 'monospace',
+                    fontSize: 12,
+                    color: Color(0xFFE2E8F0),
+                    height: 1.4,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+
+  List<Map<String, dynamic>> _getComponentsForActiveTab() {
+    switch (_activeTab) {
+      case 'foundation':
+        return [
+          {
+            'title': 'Color Palette',
+            'description': '엔터프라이즈 통합 생산성 강화를 위해 수립된 SAM 브랜드 전용 컬러 시스템',
+            'path': '/components/foundation/color.tsx',
+            'code': '''import { ColorPalette } from "./foundation/color";
+
+<ColorPalette />''',
+            'preview': Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildColorRow('Brand Primary', [
+                  _buildColorBlock('Blue 500', '#0056B3', const Color(0xFF0056B3)),
+                  _buildColorBlock('Cyan 400', '#00A8FF', const Color(0xFF00A8FF)),
+                  _buildColorBlock('Deep Blue', '#0F172A', const Color(0xFF0F172A)),
+                ]),
+                const SizedBox(height: 16),
+                _buildColorRow('System Status', [
+                  _buildColorBlock('Success', '#10B981', const Color(0xFF10B981)),
+                  _buildColorBlock('Warning', '#F59E0B', const Color(0xFFF59E0B)),
+                  _buildColorBlock('Danger', '#EF4444', const Color(0xFFEF4444)),
+                ]),
+              ],
+            ),
+          },
+          {
+            'title': 'Typography',
+            'description': '화면 가독성 및 계층화를 극대화하는 Pretendard 기반의 타이포 표 가이드라인',
+            'path': '/components/foundation/typography.tsx',
+            'code': '''import { Typography } from "./foundation/typography";
+
+<Typography />''',
+            'preview': Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Display Header (36px Bold)', style: TextStyle(fontFamily: 'Pretendard', fontSize: 36, fontWeight: FontWeight.bold, color: widget.isDark ? Colors.white : Colors.black)),
+                const SizedBox(height: 8),
+                Text('Section Title (24px Bold)', style: TextStyle(fontFamily: 'Pretendard', fontSize: 24, fontWeight: FontWeight.bold, color: widget.isDark ? Colors.white : Colors.black)),
+                const SizedBox(height: 8),
+                Text('Body Regular (14px Height 1.6)', style: TextStyle(fontFamily: 'Pretendard', fontSize: 14, fontWeight: FontWeight.normal, color: widget.isDark ? Colors.grey : Colors.black87)),
+              ],
+            ),
+          },
+          {
+            'title': 'Spacing',
+            'description': '레이아웃 일관성을 유지하는 4px 배수 그리드 스페이싱 토큰',
+            'path': '/components/foundation/spacing.tsx',
+            'code': '''import { Spacing } from "./foundation/spacing";
+
+<Spacing />''',
+            'preview': Row(
+              children: [
+                _buildSpacingBlock('4px', 10),
+                _buildSpacingBlock('8px', 20),
+                _buildSpacingBlock('12px', 30),
+                _buildSpacingBlock('16px', 40),
+                _buildSpacingBlock('20px', 50),
+              ],
+            ),
+          }
+        ];
+      case 'atoms':
+        return [
+          {
+            'title': 'Button',
+            'description': '제조 및 관제 시스템 환경에서 오동작 방지와 최상의 터치/클릭 반응을 위해 최적화된 버튼',
+            'path': '/components/ui/button.tsx',
+            'code': '''import { Button } from "./ui/button";
+
+<Button>기본</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="destructive">Destructive</Button>
+<Button size="sm">Small</Button>
+<Button size="lg">Large</Button>''',
+            'preview': Wrap(
+              spacing: 12,
+              runSpacing: 12,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryBlue),
+                  child: const Text('기본', style: TextStyle(color: Colors.white)),
+                ),
+                OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(side: const BorderSide(color: AppColors.accentCyan)),
+                  child: const Text('Outline', style: TextStyle(color: AppColors.accentCyan)),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text('Ghost', style: TextStyle(color: Colors.grey)),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  child: const Text('Destructive', style: TextStyle(color: Colors.white)),
+                ),
+              ],
+            ),
+          },
+          {
+            'title': 'Badge',
+            'description': '품질 상태 및 작업 단계 상태값을 전달하는 시각 뱃지',
+            'path': '/components/ui/badge.tsx',
+            'code': '''import { Badge } from "./ui/badge";
+
+<Badge>기본</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="destructive">Destructive</Badge>''',
+            'preview': Row(
+              children: [
+                _buildBadgeWidget('기본', Colors.blue, Colors.white),
+                const SizedBox(width: 8),
+                _buildBadgeWidget('Outline', Colors.transparent, Colors.blue, hasBorder: true),
+                const SizedBox(width: 8),
+                _buildBadgeWidget('Secondary', Colors.grey, Colors.white),
+                const SizedBox(width: 8),
+                _buildBadgeWidget('Destructive', Colors.red, Colors.white),
+              ],
+            ),
+          },
+          {
+            'title': 'Input',
+            'description': '엔터프라이즈 대량 데이터 입력을 지원하는 표준 텍스트 인풋 필드',
+            'path': '/components/ui/input.tsx',
+            'code': '''import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+
+<Label htmlFor="name">이름</Label>
+<Input id="name" placeholder="이름을 입력하세요" />''',
+            'preview': Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('이름', style: TextStyle(fontWeight: FontWeight.bold, color: widget.isDark ? Colors.white : Colors.black)),
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    color: widget.isDark ? Colors.black38 : Colors.white,
+                    border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: const TextField(
+                    decoration: InputDecoration(
+                      hintText: '이름을 입력하세요',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          }
+        ];
+      case 'molecules':
+        return [
+          {
+            'title': 'Select',
+            'description': '품목 분류 및 공정 단계를 신속하게 교체할 수 있는 드롭다운 셀렉터',
+            'path': '/components/ui/select.tsx',
+            'code': '''import { Select, SelectContent, SelectItem, SelectTrigger } from "./ui/select";''',
+            'preview': Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+              decoration: BoxDecoration(
+                color: widget.isDark ? Colors.black38 : Colors.white,
+                border: Border.all(color: Colors.grey.withOpacity(0.5)),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.between,
+                children: [
+                  Text('활성 상태 선택', style: TextStyle(color: widget.isDark ? Colors.white : Colors.black87)),
+                  const Icon(Icons.arrow_drop_down),
+                ],
+              ),
+            ),
+          },
+          {
+            'title': 'Card',
+            'description': '공정 데이터 요약을 그룹화하여 가시성을 확보하는 컨테이너 카드',
+            'path': '/components/ui/card.tsx',
+            'code': '''import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "./ui/card";''',
+            'preview': Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: widget.isDark ? Colors.black45 : Colors.white,
+                border: Border.all(color: AppColors.accentCyan.withOpacity(0.3)),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('기본 공정 정보 카드', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
+                  const Text('해당 공정의 전반적인 요약 정보를 전달합니다.', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                  const Divider(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.between,
+                    children: const [
+                      Text('상태: 정상 가동'),
+                      Text('가동율: 98%', style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold)),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          }
+        ];
+      case 'organisms':
+        return [
+          {
+            'title': 'Page Header',
+            'description': '엔터프라이즈 모듈 구조상 각 페이지의 상단에 위치하여 대시보드 맥락 정보를 공유하는 헤더',
+            'path': '/components/organisms/PageHeader.tsx',
+            'code': '''import { PageHeader } from "./organisms/PageHeader";
+
+<PageHeader
+  title="설비 모니터링"
+  subtitle="실시간 공정 관리 및 에러 이벤트 트래킹"
+  action={<Button>새 설비 등록</Button>}
+/>''',
+            'preview': Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: widget.isDark ? Colors.black38 : Colors.white,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.between,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('설비 모니터링 대시보드', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      Text('실시간 스마트 설비 제어 및 에러 트래킹', style: TextStyle(fontSize: 12, color: Colors.grey.withOpacity(0.8))),
+                    ],
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(backgroundColor: AppColors.primaryBlue),
+                    child: const Text('새 설비 등록', style: TextStyle(color: Colors.white)),
+                  )
+                ],
+              ),
+            ),
+          },
+          {
+            'title': 'Stat Cards',
+            'description': '핵심 수치 정보(KPI)를 격자 형태로 신속히 요약 전달하는 대시보드 핵심 오가니즘',
+            'path': '/components/organisms/StatCards.tsx',
+            'code': '''import { StatCards } from "./organisms/StatCards";''',
+            'preview': GridView.count(
+              crossAxisCount: widget.isMobile ? 2 : 4,
+              shrinkWrap: true,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 1.5,
+              children: [
+                _buildStatBox('전체 작업 오더', '1,248건', Colors.blue),
+                _buildStatBox('정상 설비', '98.5%', Colors.green),
+                _buildStatBox('임계 경보', '3건', Colors.orange),
+                _buildStatBox('정지 오더', '0건', Colors.red),
+              ],
+            ),
+          }
+        ];
+      case 'templates':
+        return [
+          {
+            'title': 'Unified List Template',
+            'description': '목록-필터-검색-그리드 패턴이 포함된 정형 리스트 템플릿',
+            'path': '/components/templates/UnifiedListTemplate.tsx',
+            'code': '''import { UnifiedListTemplate } from "./templates/UnifiedListTemplate";''',
+            'preview': Container(
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue.withOpacity(0.3), style: BorderStyle.solid),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                children: const [
+                  Icon(Icons.layers, size: 32, color: Colors.blue),
+                  SizedBox(height: 8),
+                  Text('Unified List Template', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('3컬럼 그리드, 탭 필터링 및 대용량 목록 렌더링 최적화 템플릿', style: TextStyle(fontSize: 11, color: Colors.grey), textAlign: TextAlign.center),
+                ],
+              ),
+            ),
+          }
+        ];
+      case 'cards':
+        return [
+          {
+            'title': 'Quote Card',
+            'description': 'MES ERP 연동 수주 및 발주 계약 상태 관리를 시각화한 견적 정보 카드',
+            'path': '/components/cards/QuoteCard.tsx',
+            'code': '''import { QuoteCard } from "./cards/QuoteCard";''',
+            'preview': Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: widget.isDark ? Colors.black38 : Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.grey.withOpacity(0.3)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.between,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(color: Colors.blue.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                        child: const Text('Q-2026-A03', style: TextStyle(color: Colors.blue, fontSize: 10, fontFamily: 'monospace')),
+                      ),
+                      _buildBadgeWidget('승인완료', Colors.green, Colors.white),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  const Text('삼성전자 평택 캠퍼스 스마트 라인 구축 건', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+                  const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(color: Colors.grey.withOpacity(0.05), borderRadius: BorderRadius.circular(4)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.between,
+                      children: const [
+                        Text('최종 계약가', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                        Text('₩158,000,000', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          }
+        ];
+      default:
+        return [];
+    }
+  }
+
+  Widget _buildColorRow(String groupName, List<Widget> children) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(groupName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: AppColors.accentCyan)),
+        const SizedBox(height: 8),
+        Row(children: children),
+      ],
+    );
+  }
+
+  Widget _buildColorBlock(String label, String hex, Color color) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.only(right: 8),
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        height: 60,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(label, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+            Text(hex, style: const TextStyle(color: Colors.white70, fontSize: 8)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSpacingBlock(String label, double size) {
+    return Container(
+      margin: const EdgeInsets.only(right: 12),
+      child: Column(
+        children: [
+          Container(
+            width: size,
+            height: size,
+            color: AppColors.accentCyan,
+          ),
+          const SizedBox(height: 4),
+          Text(label, style: const TextStyle(fontSize: 8)),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBadgeWidget(String label, Color bgColor, Color textColor, {bool hasBorder = false}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      decoration: BoxDecoration(
+        color: bgColor.withValues(alpha: 0.15),
+        border: hasBorder ? Border.all(color: textColor.withValues(alpha: 0.5)) : null,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(color: textColor, fontWeight: FontWeight.bold, fontSize: 10),
+      ),
+    );
+  }
+
+  Widget _buildStatBox(String label, String value, Color color) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: widget.isDark ? Colors.black45 : Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withOpacity(0.3)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(label, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+          const SizedBox(height: 4),
+          Text(value, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: color)),
+        ],
+      ),
+    );
+  }
+}
+
 
 class BackgroundPainter extends CustomPainter {
   final Animation<double> animation;
