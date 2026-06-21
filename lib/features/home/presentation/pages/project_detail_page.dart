@@ -777,6 +777,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                         ),
                         // Design System Specification Section
                         _buildDesignSystemSection(isDark: isDark),
+                        // Admin Management UI Section
+                        _buildAdminManagementSection(isDark: isDark),
                         // Part 2: Images 7-8 (UI Screens)
                         SizedBox(
                           width: double.infinity,
@@ -1779,6 +1781,631 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         const SizedBox(height: 4),
         Text(label, style: const TextStyle(color: Color(0xFF0F172A), fontSize: 7)),
       ],
+    );
+  }
+
+  Widget _buildAdminManagementSection({required bool isDark}) {
+    final primaryBlue = const Color(0xFF1E5EFF);
+    final slateDark = isDark ? const Color(0xFFF9FAFB) : const Color(0xFF1F2937);
+    final slateLight = isDark ? const Color(0xFF0F172A) : const Color(0xFFF9FAFB);
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+    final bgDark = isDark ? const Color(0xFF0B0F19) : const Color(0xFFF1F5F9);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+
+    return Container(
+      width: double.infinity,
+      color: bgDark,
+      padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 24),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Section Header
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: primaryBlue.withValues(alpha: 0.1),
+                  border: Border.all(color: primaryBlue.withValues(alpha: 0.3)),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  'ADMIN MANAGEMENT SYSTEM',
+                  style: TextStyle(
+                    color: primaryBlue,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '시스템 관리자 - 디자인시스템 관리',
+                style: TextStyle(
+                  fontFamily: AppTypography.pretendard,
+                  color: slateDark,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 28,
+                  letterSpacing: -1.0,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '실제 운영 중인 SAM MES+ERP 시스템의 관리자 권한 전용 디자인시스템 관리자 화면입니다. 기초 토큰부터 컴포넌트, 디바이스별 반응형 중단점(Breakpoints)까지 실시간으로 커스텀하고 제어할 수 있는 어드민 콘솔 레이아웃을 확인하실 수 있습니다.',
+                style: TextStyle(
+                  color: textSub,
+                  fontSize: 14,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 40),
+
+              // Mockup Window Container
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF0B0F19) : Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: borderColor),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withValues(alpha: 0.1),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    // App Header
+                    _buildAdminHeader(isDark),
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final isWide = constraints.maxWidth > 800;
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            if (isWide) _buildAdminSidebar(isDark),
+                            Expanded(
+                              child: _buildAdminWorkspace(isDark, isWide: isWide),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAdminHeader(bool isDark) {
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+    final logoColor = const Color(0xFF1E5EFF);
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+    final bgHeader = isDark ? const Color(0xFF111827) : Colors.white;
+
+    return Container(
+      height: 60,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: BoxDecoration(
+        color: bgHeader,
+        border: Border(bottom: BorderSide(color: borderColor)),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Left: Logo
+          Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: logoColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Center(
+                  child: Text(
+                    'S',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'SAM',
+                    style: TextStyle(
+                      color: textMain,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                  ),
+                  Text(
+                    'Smart Automation Management',
+                    style: TextStyle(
+                      color: textSub,
+                      fontSize: 8,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          // Center: Search Bar (Desktop only, or simplified)
+          Container(
+            width: 200,
+            height: 32,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(
+              color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF3F4F6),
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: borderColor),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.search, size: 14, color: textSub),
+                const SizedBox(width: 6),
+                Text(
+                  '통합 검색...',
+                  style: TextStyle(color: textSub, fontSize: 10),
+                ),
+              ],
+            ),
+          ),
+          // Right: Controls
+          Row(
+            children: [
+              Icon(Icons.wb_sunny_outlined, size: 16, color: textSub),
+              const SizedBox(width: 14),
+              Stack(
+                children: [
+                  Icon(Icons.notifications_none_outlined, size: 18, color: textSub),
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: Container(
+                      width: 6,
+                      height: 6,
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 14),
+              // Profile Chip
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF1E293B) : const Color(0xFFF3F4F6),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 10,
+                      backgroundColor: Colors.blue,
+                      child: Icon(Icons.person, size: 12, color: Colors.white),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      '최시스템',
+                      style: TextStyle(color: textMain, fontSize: 10, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              // Role Badge
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: logoColor.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: logoColor.withValues(alpha: 0.2)),
+                ),
+                child: Text(
+                  '시스템관리자',
+                  style: TextStyle(color: logoColor, fontSize: 9, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAdminSidebar(bool isDark) {
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+    final primaryBlue = const Color(0xFF1E5EFF);
+    final bgSidebar = isDark ? const Color(0xFF111827) : const Color(0xFFF9FAFB);
+
+    return Container(
+      width: 220,
+      height: 480,
+      decoration: BoxDecoration(
+        color: bgSidebar,
+        border: Border(right: BorderSide(color: borderColor)),
+      ),
+      child: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        children: [
+          _buildSidebarItem(Icons.dashboard_outlined, '시스템 대시보드', false, isDark),
+          _buildSidebarItem(Icons.people_outline, '사용자 관리', false, isDark),
+          _buildSidebarItem(Icons.tune_outlined, '메뉴 커스터마이징', false, isDark),
+          _buildSidebarItem(Icons.info_outline, '기준정보 관리', false, isDark, hasChevron: true),
+          _buildSidebarItem(Icons.color_lens_outlined, '디자인시스템관리', true, isDark, hasChevron: true),
+          // Submenus
+          _buildSidebarSubItem('디자인시스템_최종', false, isDark),
+          _buildSidebarSubItem('통합 디자인 시스템', false, isDark),
+          _buildSidebarSubItem('디자인시스템 뷰어', false, isDark),
+          _buildSidebarSubItem('컴포넌트 추출 도구', false, isDark),
+          _buildSidebarSubItem('중앙 저장소', false, isDark),
+          _buildSidebarSubItem('스타일 테스트', false, isDark),
+          _buildSidebarSubItem('템플릿 비교', false, isDark),
+          _buildSidebarSubItem('디자인시스템 관리', true, isDark),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSidebarItem(IconData icon, String label, bool isActive, bool isDark, {bool hasChevron = false}) {
+    final activeBg = const Color(0xFF1E5EFF);
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: isActive ? activeBg : Colors.transparent,
+        borderRadius: BorderRadius.circular(6),
+      ),
+      child: Row(
+        children: [
+          Icon(icon, size: 16, color: isActive ? Colors.white : textSub),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isActive ? Colors.white : textMain,
+                fontSize: 11,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ),
+          if (hasChevron)
+            Icon(
+              label == '디자인시스템관리' ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+              size: 14,
+              color: isActive ? Colors.white : textSub,
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSidebarSubItem(String label, bool isActive, bool isDark) {
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+    final primaryBlue = const Color(0xFF1E5EFF);
+
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 1),
+      padding: const EdgeInsets.only(left: 32, right: 12, top: 6, bottom: 6),
+      decoration: BoxDecoration(
+        color: isActive ? primaryBlue.withValues(alpha: 0.1) : Colors.transparent,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Row(
+        children: [
+          // Small dot for submenus
+          Container(
+            width: 4,
+            height: 4,
+            decoration: BoxDecoration(
+              color: isActive ? primaryBlue : textSub.withValues(alpha: 0.4),
+              shape: BoxShape.circle,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isActive ? primaryBlue : textMain.withValues(alpha: 0.8),
+                fontSize: 10,
+                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAdminWorkspace(bool isDark, {required bool isWide}) {
+    final primaryBlue = const Color(0xFF1E5EFF);
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+    final bgWorkspace = isDark ? const Color(0xFF0F172A) : const Color(0xFFF9FAFB);
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+
+    return Container(
+      height: 480,
+      color: bgWorkspace,
+      padding: const EdgeInsets.all(16),
+      child: ListView(
+        children: [
+          // Top Nav Path
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '디자인시스템 관리',
+                    style: TextStyle(color: textMain, fontWeight: FontWeight.bold, fontSize: 14),
+                  ),
+                  Text(
+                    'Foundation, Components, Tokens, Responsive 관리',
+                    style: TextStyle(color: textSub, fontSize: 9),
+                  ),
+                ],
+              ),
+              // Recovery Button
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: isDark ? const Color(0xFF1E293B) : Colors.white,
+                  border: Border.all(color: borderColor),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.restore_outlined, size: 10, color: textMain),
+                    const SizedBox(width: 4),
+                    Text(
+                      '견적관리 컴포넌트 복구',
+                      style: TextStyle(color: textMain, fontSize: 8, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // Search box
+          Container(
+            height: 32,
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: cardBg,
+              border: Border.all(color: borderColor),
+              borderRadius: BorderRadius.circular(6),
+            ),
+            child: Row(
+              children: [
+                Icon(Icons.search, size: 12, color: textSub),
+                const SizedBox(width: 8),
+                Text(
+                  'Foundation, Components, Tokens, Responsive 통합 검색...',
+                  style: TextStyle(color: textSub, fontSize: 9),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 12),
+          // Tabs
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _buildAdminTabItem('Foundation', Icons.layers_outlined, false, isDark),
+                      _buildAdminTabItem('Components', Icons.widgets_outlined, false, isDark),
+                      _buildAdminTabItem('Modules', Icons.view_module_outlined, false, isDark),
+                      _buildAdminTabItem('Tokens', Icons.code_outlined, false, isDark),
+                      _buildAdminTabItem('Responsive', Icons.devices_outlined, true, isDark),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // Breakpoints Section Header
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '브레이크포인트 (Breakpoints)',
+                style: TextStyle(color: textMain, fontWeight: FontWeight.bold, fontSize: 11),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                decoration: BoxDecoration(
+                  color: primaryBlue,
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.add, size: 10, color: Colors.white),
+                    const SizedBox(width: 4),
+                    const Text(
+                      '브레이크포인트 추가',
+                      style: TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // Breakpoints list (Mobile, Tablet, Desktop)
+          isWide
+              ? Row(
+                  children: [
+                    Expanded(child: _buildBreakpointCard('Mobile', '최소 너비: 0px\n최대 너비: 767px', '모바일 디바이스', Icons.phone_android_outlined, isDark)),
+                    const SizedBox(width: 8),
+                    Expanded(child: _buildBreakpointCard('Tablet', '최소 너비: 768px\n최대 너비: 1023px', '태블릿 디바이스', Icons.tablet_mac_outlined, isDark)),
+                    const SizedBox(width: 8),
+                    Expanded(child: _buildBreakpointCard('Desktop', '최소 너비: 1024px', '데스크톱 디바이스', Icons.desktop_windows_outlined, isDark)),
+                  ],
+                )
+              : Column(
+                  children: [
+                    _buildBreakpointCard('Mobile', '최소 너비: 0px\n최대 너비: 767px', '모바일 디바이스', Icons.phone_android_outlined, isDark),
+                    const SizedBox(height: 8),
+                    _buildBreakpointCard('Tablet', '최소 너비: 768px\n최대 너비: 1023px', '태블릿 디바이스', Icons.tablet_mac_outlined, isDark),
+                    const SizedBox(height: 8),
+                    _buildBreakpointCard('Desktop', '최소 너비: 1024px', '데스크톱 디바이스', Icons.desktop_windows_outlined, isDark),
+                  ],
+                ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildAdminTabItem(String label, IconData icon, bool isActive, bool isDark) {
+    final primaryBlue = const Color(0xFF1E5EFF);
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+
+    return Container(
+      margin: const EdgeInsets.only(right: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: isActive ? (isDark ? const Color(0xFF1E293B) : Colors.white) : Colors.transparent,
+        borderRadius: BorderRadius.circular(6),
+        border: isActive ? Border.all(color: primaryBlue, width: 1.2) : Border.all(color: Colors.transparent),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 12, color: isActive ? primaryBlue : textSub),
+          const SizedBox(width: 4),
+          Text(
+            label,
+            style: TextStyle(
+              color: isActive ? primaryBlue : textMain,
+              fontSize: 9,
+              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBreakpointCard(String device, String widthDesc, String deviceDesc, IconData icon, bool isDark) {
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+    final cardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: cardBg,
+        border: Border.all(color: borderColor),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Icon + Device Name
+          Row(
+            children: [
+              Icon(icon, size: 14, color: const Color(0xFF1E5EFF)),
+              const SizedBox(width: 6),
+              Text(
+                device,
+                style: TextStyle(color: textMain, fontWeight: FontWeight.bold, fontSize: 10),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // Dimensions description
+          Text(
+            widthDesc,
+            style: TextStyle(color: textSub, fontSize: 8, height: 1.3),
+          ),
+          const SizedBox(height: 2),
+          Text(
+            deviceDesc,
+            style: TextStyle(color: textSub.withValues(alpha: 0.7), fontSize: 8),
+          ),
+          const SizedBox(height: 12),
+          // Edit/Delete Buttons
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              _buildBreakpointCardAction(Icons.edit_outlined, '수정', isDark),
+              const SizedBox(width: 4),
+              _buildBreakpointCardAction(Icons.delete_outline, '삭제', isDark),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBreakpointCardAction(IconData icon, String label, bool isDark) {
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+      decoration: BoxDecoration(
+        color: isDark ? const Color(0xFF1E293B) : Colors.white,
+        border: Border.all(color: borderColor),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 8, color: textMain),
+          const SizedBox(width: 3),
+          Text(
+            label,
+            style: TextStyle(color: textMain, fontSize: 8),
+          ),
+        ],
+      ),
     );
   }
 }
