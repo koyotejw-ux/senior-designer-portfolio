@@ -660,84 +660,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                       }).toList(),
                     );
                   } else if (isSamMes) {
-                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
-                    final List<Map<String, dynamic>> samMesImages = [
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_1.jpg' : 'assets/images/sam_mes_1.jpg',
-                        'ratio': 2866 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_2.jpg' : 'assets/images/sam_mes_2.jpg',
-                        'ratio': 2866 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_3.jpg' : 'assets/images/sam_mes_3.jpg',
-                        'ratio': 2866 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_4.jpg' : 'assets/images/sam_mes_4.jpg',
-                        'ratio': 2866 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_5.jpg' : 'assets/images/sam_mes_5.jpg',
-                        'ratio': 2866 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_6.jpg' : 'assets/images/sam_mes_6.jpg',
-                        'ratio': 2866 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_7.jpg' : 'assets/images/sam_mes_7.jpg',
-                        'ratio': 2866 / 1920,
-                      },
-                      {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_8.jpg' : 'assets/images/sam_mes_8.jpg',
-                        'ratio': 2871 / 1920,
-                      },
-                    ];
-
-                    imageWidget = Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: samMesImages.map((imgData) {
-                        final String imgUrl = imgData['url'] as String;
-                        final double ratio = imgData['ratio'] as double;
-                        final double calculatedHeight = screenWidth * ratio;
-
-                        if (imgUrl.startsWith('http')) {
-                          return WebOptimizedImage(
-                            imageUrl: imgUrl,
-                            width: screenWidth,
-                            height: calculatedHeight,
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.topCenter,
-                            loadingWidget: SizedBox(
-                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
-                              child: const Center(child: CircularProgressIndicator()),
-                            ),
-                          );
-                        } else {
-                          return Image.asset(
-                            imgUrl,
-                            width: screenWidth,
-                            height: calculatedHeight,
-                            fit: BoxFit.fitWidth,
-                            alignment: Alignment.topCenter,
-                            errorBuilder: (context, error, stackTrace) {
-                              return SizedBox(
-                                height: 300,
-                                child: Center(
-                                  child: Text(
-                                    'Asset not found: $imgUrl',
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        }
-                      }).toList(),
-                    );
+                    // SAM MES uses split layout: images 1-6, design system, images 7-8
+                    imageWidget = const SizedBox.shrink();
                   } else if (project.imageUrl != null && project.imageUrl!.isNotEmpty) {
                     if (project.imageUrl!.startsWith('http')) {
                      // Use WebOptimizedImage for network images to bypass WebGL limits
@@ -800,13 +724,74 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                    );
                  }
 
+                if (isSamMes) {
+                  final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                  final samMesPart1 = <Map<String, dynamic>>[
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_1.jpg' : 'assets/images/sam_mes_1.jpg', 'ratio': 2866 / 1920},
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_2.jpg' : 'assets/images/sam_mes_2.jpg', 'ratio': 2866 / 1920},
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_3.jpg' : 'assets/images/sam_mes_3.jpg', 'ratio': 2866 / 1920},
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_4.jpg' : 'assets/images/sam_mes_4.jpg', 'ratio': 2866 / 1920},
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_5.jpg' : 'assets/images/sam_mes_5.jpg', 'ratio': 2866 / 1920},
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_6.jpg' : 'assets/images/sam_mes_6.jpg', 'ratio': 2866 / 1920},
+                  ];
+                  final samMesPart2 = <Map<String, dynamic>>[
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_7.jpg' : 'assets/images/sam_mes_7.jpg', 'ratio': 2866 / 1920},
+                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_8.jpg' : 'assets/images/sam_mes_8.jpg', 'ratio': 2871 / 1920},
+                  ];
+
+                  Widget buildSamMesImageColumn(List<Map<String, dynamic>> images) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: images.map((imgData) {
+                        final String imgUrl = imgData['url'] as String;
+                        final double ratio = imgData['ratio'] as double;
+                        final double h = screenWidth * ratio;
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl, width: screenWidth, height: h,
+                            fit: BoxFit.fitWidth, alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(height: h > 500 ? 500 : h, child: const Center(child: CircularProgressIndicator())),
+                          );
+                        } else {
+                          return Image.asset(imgUrl, width: screenWidth, height: h, fit: BoxFit.fitWidth, alignment: Alignment.topCenter,
+                            errorBuilder: (c, e, s) => SizedBox(height: 300, child: Center(child: Text('Asset not found: $imgUrl', style: const TextStyle(color: Colors.white)))),
+                          );
+                        }
+                      }).toList(),
+                    );
+                  }
+
+                  return SingleChildScrollView(
+                    controller: _scrollController,
+                    physics: const ClampingScrollPhysics(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // Part 1: Images 1-6
+                        SizedBox(
+                          key: _imageKey,
+                          width: double.infinity,
+                          child: buildSamMesImageColumn(samMesPart1),
+                        ),
+                        // Design System Specification Section
+                        _buildDesignSystemSection(isDark: isDark),
+                        // Part 2: Images 7-8 (UI Screens)
+                        SizedBox(
+                          width: double.infinity,
+                          child: buildSamMesImageColumn(samMesPart2),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+
                 return SingleChildScrollView(
                   controller: _scrollController,
-                  physics: const ClampingScrollPhysics(), // Prevent overscroll
+                  physics: const ClampingScrollPhysics(),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min, // Prevent extra scrolling
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      // The Main Image - Full Width (Fit Width)
                       SizedBox(
                         key: _imageKey,
                         width: double.infinity,
@@ -931,6 +916,202 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildDesignSystemSection({required bool isDark}) {
+    const accentColor = AppColors.accentCyan;
+    const primaryColor = AppColors.primaryBlue;
+
+    final categories = [
+      {
+        'title': '01. Foundation (기초)',
+        'icon': Icons.layers_outlined,
+        'desc': '브랜드 가이드라인 및 공통 스타일 토큰 정의',
+        'tags': ['Color Palette', 'Typography', 'Spacing', 'Design Tokens'],
+        'color': accentColor,
+      },
+      {
+        'title': '02. Atoms (원자)',
+        'icon': Icons.auto_awesome_mosaic_outlined,
+        'desc': '더 이상 나눌 수 없는 최소 단위의 기본 UI 요소',
+        'tags': ['Button', 'Badge', 'Input', 'Checkbox', 'Switch', 'Label', 'Separator'],
+        'color': primaryColor,
+      },
+      {
+        'title': '03. Molecules (분자)',
+        'icon': Icons.grid_view_outlined,
+        'desc': '원자 컴포넌트의 단순 조합으로 구현된 기능 단위',
+        'tags': ['Select', 'Accordion', 'Card', 'Search Filter'],
+        'color': AppColors.highlightGreen,
+      },
+      {
+        'title': '04. Organisms (유기체)',
+        'icon': Icons.dashboard_customize_outlined,
+        'desc': '분자 및 원자의 결합으로 완성된 복합 관제 인터페이스',
+        'tags': ['Page Header', 'Stat Cards', 'Form Section'],
+        'color': Colors.amber,
+      },
+      {
+        'title': '05. Templates (템플릿)',
+        'icon': Icons.splitscreen_outlined,
+        'desc': '레이아웃 및 일관된 레이어 분할 표준 구조 정의',
+        'tags': ['Unified List Template', 'Unified Form Template', 'Unified Detail Template', 'Unified Dashboard'],
+        'color': Colors.purple,
+      },
+      {
+        'title': '06. Cards (카드)',
+        'icon': Icons.credit_card_outlined,
+        'desc': '대규모 데이터를 압축하여 전달하는 업무 중심 카드 세트',
+        'tags': ['Quote Card', 'Sales Order Card', 'Item Master Card', 'Client Card', 'Site Card'],
+        'color': Colors.pink,
+      },
+    ];
+
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
+    return Container(
+      width: double.infinity,
+      color: isDark ? const Color(0xFF0D1117) : const Color(0xFFF8FAFC),
+      padding: EdgeInsets.symmetric(
+        vertical: isMobile ? 40 : 60,
+        horizontal: isMobile ? 24 : 60,
+      ),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Section Badge
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: accentColor.withValues(alpha: 0.1),
+                  border: Border.all(color: accentColor.withValues(alpha: 0.3)),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: const Text(
+                  'DESIGN SYSTEM SPEC',
+                  style: TextStyle(
+                    color: accentColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 10,
+                    letterSpacing: 1.2,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '통합 디자인 시스템 구성 명세 (Atomic Architecture)',
+                style: TextStyle(
+                  color: isDark ? Colors.white : const Color(0xFF1E293B),
+                  fontWeight: FontWeight.w900,
+                  fontSize: isMobile ? 22 : 28,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'SAM MES+ERP 솔루션의 고품질 일관성을 보장하기 위해 도입된 디자인 시스템 구성 요소입니다. React 컴포넌트 라이브러리 및 공통 스타일 명세를 구조화하여 대기업용 시스템 완성도를 확보했습니다.',
+                style: TextStyle(
+                  color: isDark ? Colors.white70 : const Color(0xFF64748B),
+                  fontSize: 14,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 40),
+
+              // Grid of Design System Tiers
+              Wrap(
+                spacing: 24,
+                runSpacing: 24,
+                children: categories.map((cat) {
+                  final catColor = cat['color'] as Color;
+                  final double cardWidth = isMobile
+                      ? screenWidth - 48.0
+                      : (screenWidth > 1200 ? 564.0 : (screenWidth - 144.0) / 2);
+                  return Container(
+                    width: cardWidth,
+                    padding: const EdgeInsets.all(24),
+                    decoration: BoxDecoration(
+                      color: isDark ? const Color(0xFF161B22) : Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: isDark
+                            ? const Color(0xFF30363D)
+                            : const Color(0xFFE2E8F0),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Icon + Title
+                        Row(
+                          children: [
+                            Icon(cat['icon'] as IconData, color: catColor, size: 24),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                cat['title'] as String,
+                                style: TextStyle(
+                                  color: isDark ? Colors.white : const Color(0xFF1E293B),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          cat['desc'] as String,
+                          style: TextStyle(
+                            color: isDark ? Colors.white54 : const Color(0xFF94A3B8),
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        // Component Badges
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: (cat['tags'] as List<String>).map((tag) {
+                            return Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: catColor.withValues(alpha: 0.1),
+                                border: Border.all(color: catColor.withValues(alpha: 0.2), width: 0.8),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                tag,
+                                style: TextStyle(
+                                  color: isDark ? catColor : catColor.withValues(alpha: 0.9),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
       ),
     );
   }
