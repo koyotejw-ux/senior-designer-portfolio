@@ -922,14 +922,18 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
   }
 
   Widget _buildDesignSystemSection({required bool isDark}) {
-    // Light-theme colors from original React project (DesignSystem.tsx)
+    // Light/Dark adaptive color palette (from DesignSystem.tsx design tokens)
     const mesPrimaryBlue = Color(0xFF3B82F6);
     const mesSuccessGreen = Color(0xFF10B981);
     const mesWarningAmber = Color(0xFFF59E0B);
     const mesErrorRed = Color(0xFFEF4444);
-    const mesSlateDark = Color(0xFF1F2937);
-    const mesSlateLight = Color(0xFFF9FAFB);
-    const mesBorderColor = Color(0xFFE5E7EB);
+
+    final mesSlateDark = isDark ? const Color(0xFFF9FAFB) : const Color(0xFF1F2937);
+    final mesSlateLight = isDark ? const Color(0xFF0F172A) : const Color(0xFFF9FAFB);
+    final mesBorderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE5E7EB);
+    final mesCardBg = isDark ? const Color(0xFF1E293B) : Colors.white;
+    final mesBgColor = isDark ? const Color(0xFF0F172A) : Colors.white;
+    final mesTextSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
 
     final categories = [
       {
@@ -941,7 +945,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'preview': Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Color Palette', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Color Palette', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Wrap(
               spacing: 8,
@@ -955,7 +959,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ],
             ),
             const SizedBox(height: 14),
-            const Text('Typography (Pretendard)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Typography (Pretendard)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Text('Heading 1 - 24px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 13)),
             Text('Heading 2 - 20px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 12)),
@@ -966,17 +970,17 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
             Text('Paragraph - 14px Regular', style: TextStyle(fontFamily: AppTypography.pretendard, color: mesSlateDark.withValues(alpha: 0.7), fontSize: 9)),
             Text('Small Text - 12px Regular', style: TextStyle(fontFamily: AppTypography.pretendard, color: mesSlateDark.withValues(alpha: 0.5), fontSize: 8)),
             const SizedBox(height: 14),
-            const Text('Spacing', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Spacing', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Wrap(
               spacing: 12,
               runSpacing: 6,
               children: [
-                _buildSpacingBox(4, '4px'),
-                _buildSpacingBox(8, '8px'),
-                _buildSpacingBox(12, '12px'),
-                _buildSpacingBox(16, '16px'),
-                _buildSpacingBox(20, '20px'),
+                _buildSpacingBox(4, '4px', isDark: isDark),
+                _buildSpacingBox(8, '8px', isDark: isDark),
+                _buildSpacingBox(12, '12px', isDark: isDark),
+                _buildSpacingBox(16, '16px', isDark: isDark),
+                _buildSpacingBox(20, '20px', isDark: isDark),
               ],
             ),
           ],
@@ -991,15 +995,15 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'preview': Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Button & Badge', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Button & Badge', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Wrap(
               spacing: 6,
               runSpacing: 6,
               children: [
-                _buildActionBtn(Icons.check, '기본', mesPrimaryBlue, Colors.white),
-                _buildActionBtn(Icons.close, 'Outline', Colors.white, mesSlateDark),
-                _buildActionBtn(Icons.delete_outline, 'Destructive', mesErrorRed, Colors.white),
+                _buildActionBtn(Icons.check, '기본', mesPrimaryBlue, Colors.white, borderColor: mesPrimaryBlue),
+                _buildActionBtn(Icons.close, 'Outline', mesCardBg, mesSlateDark, borderColor: mesBorderColor),
+                _buildActionBtn(Icons.delete_outline, 'Destructive', mesErrorRed, Colors.white, borderColor: mesErrorRed),
               ],
             ),
             const SizedBox(height: 6),
@@ -1025,29 +1029,29 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ],
             ),
             const SizedBox(height: 12),
-            const Text('Input Fields & Controls', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Input Fields & Controls', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Container(
               padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: const Row(
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+              child: Row(
                 children: [
-                  Text('이름을 입력하세요 (Input)', style: TextStyle(color: Colors.black38, fontSize: 8)),
+                  Text('이름을 입력하세요 (Input)', style: TextStyle(color: isDark ? Colors.white54 : Colors.black38, fontSize: 8)),
                 ],
               ),
             ),
             const SizedBox(height: 6),
             Row(
               children: [
-                _buildSmallTab('체크박스 선택됨', true),
+                _buildSmallTab('체크박스 선택됨', true, isDark: isDark),
                 const SizedBox(width: 6),
-                const Text('Label 텍스트', style: TextStyle(color: mesSlateDark, fontSize: 8, fontWeight: FontWeight.bold)),
+                Text('Label 텍스트', style: TextStyle(color: mesSlateDark, fontSize: 8, fontWeight: FontWeight.bold)),
               ],
             ),
             const SizedBox(height: 8),
             Row(
               children: [
-                const Text('스위치 활성', style: TextStyle(color: mesSlateDark, fontSize: 8)),
+                Text('스위치 활성', style: TextStyle(color: mesSlateDark, fontSize: 8)),
                 const SizedBox(width: 6),
                 Container(
                   width: 24,
@@ -1064,7 +1068,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ],
             ),
             const SizedBox(height: 8),
-            const Text('Separator (구분선)', style: TextStyle(color: mesSlateDark, fontSize: 8)),
+            Text('Separator (구분선)', style: TextStyle(color: mesSlateDark, fontSize: 8)),
             const SizedBox(height: 4),
             Container(height: 1, color: mesBorderColor),
           ],
@@ -1079,12 +1083,12 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'preview': Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Select (드롭다운)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Select (드롭다운)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: const Row(
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('옵션을 선택하세요 (활성 상태)', style: TextStyle(color: mesSlateDark, fontSize: 8)),
@@ -1093,12 +1097,12 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ),
             ),
             const SizedBox(height: 10),
-            const Text('Accordion (접고 펼치기)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Accordion (접고 펼치기)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: const Column(
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
@@ -1108,22 +1112,22 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                       Icon(Icons.keyboard_arrow_up, size: 12, color: mesSlateDark),
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Text('회사명: SAM 시스템\n업종: 제조업\n설립일: 2024-01-01', style: TextStyle(color: Colors.black54, fontSize: 7, height: 1.4)),
+                  const SizedBox(height: 4),
+                  Text('회사명: SAM 시스템\n업종: 제조업\n설립일: 2024-01-01', style: TextStyle(color: isDark ? Colors.white70 : Colors.black54, fontSize: 7, height: 1.4)),
                 ],
               ),
             ),
             const SizedBox(height: 10),
-            const Text('Card & Search Filter', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Card & Search Filter', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: const Row(
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+              child: Row(
                 children: [
-                  Icon(Icons.search, size: 12, color: Colors.black38),
-                  SizedBox(width: 6),
-                  Text('견적번호, 고객사명 검색... (Search Filter)', style: TextStyle(color: Colors.black38, fontSize: 8)),
+                  Icon(Icons.search, size: 12, color: isDark ? Colors.white54 : Colors.black38),
+                  const SizedBox(width: 6),
+                  Text('견적번호, 고객사명 검색... (Search Filter)', style: TextStyle(color: isDark ? Colors.white54 : Colors.black38, fontSize: 8)),
                 ],
               ),
             ),
@@ -1139,20 +1143,20 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'preview': Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Page Header (페이지 헤더)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Page Header (페이지 헤더)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('디자인 시스템', style: TextStyle(color: mesSlateDark, fontSize: 10, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 2),
-                      Text('SAM 시스템의 모든 UI 컴포넌트', style: TextStyle(color: Colors.black45, fontSize: 7)),
+                      const SizedBox(height: 2),
+                      Text('SAM 시스템의 모든 UI 컴포넌트', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 7)),
                     ],
                   ),
                   Container(
@@ -1164,20 +1168,20 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ),
             ),
             const SizedBox(height: 10),
-            const Text('Stat Cards (통계 카드 그리드)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Stat Cards (통계 카드 그리드)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Row(
               children: [
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: const Column(
+                    decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('전체 견적', style: TextStyle(color: Colors.black45, fontSize: 6)),
-                        SizedBox(height: 2),
-                        Text('124 건', style: TextStyle(color: mesPrimaryBlue, fontSize: 10, fontWeight: FontWeight.bold)),
+                        Text('전체 견적', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 6)),
+                        const SizedBox(height: 2),
+                        const Text('124 건', style: TextStyle(color: mesPrimaryBlue, fontSize: 10, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
@@ -1186,13 +1190,13 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: const Column(
+                    decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('승인 완료', style: TextStyle(color: Colors.black45, fontSize: 6)),
-                        SizedBox(height: 2),
-                        Text('98 건', style: TextStyle(color: mesSuccessGreen, fontSize: 10, fontWeight: FontWeight.bold)),
+                        Text('승인 완료', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 6)),
+                        const SizedBox(height: 2),
+                        const Text('98 건', style: TextStyle(color: mesSuccessGreen, fontSize: 10, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
@@ -1200,15 +1204,15 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ],
             ),
             const SizedBox(height: 10),
-            const Text('Form Section (폼 그룹)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Form Section (폼 그룹)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 4),
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('기본 정보', style: TextStyle(color: mesSlateDark, fontSize: 8, fontWeight: FontWeight.bold)),
+                  Text('기본 정보', style: TextStyle(color: mesSlateDark, fontSize: 8, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 6),
                   Row(
                     children: [
@@ -1216,7 +1220,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(color: mesSlateLight, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                          child: const Text('이름 입력', style: TextStyle(color: Colors.black38, fontSize: 6)),
+                          child: Text('이름 입력', style: TextStyle(color: isDark ? Colors.white54 : Colors.black38, fontSize: 6)),
                         ),
                       ),
                       const SizedBox(width: 6),
@@ -1224,7 +1228,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                         child: Container(
                           padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(color: mesSlateLight, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                          child: const Text('이메일 입력', style: TextStyle(color: Colors.black38, fontSize: 6)),
+                          child: Text('이메일 입력', style: TextStyle(color: isDark ? Colors.white54 : Colors.black38, fontSize: 6)),
                         ),
                       ),
                     ],
@@ -1244,14 +1248,14 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'preview': Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Unified List & Form Template Layout', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Unified List & Form Template Layout', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Row(
               children: [
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+                    decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1268,7 +1272,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+                    decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1288,14 +1292,14 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ],
             ),
             const SizedBox(height: 10),
-            const Text('Unified Detail & Dashboard Layout', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
+            Text('Unified Detail & Dashboard Layout', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
             const SizedBox(height: 6),
             Row(
               children: [
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+                    decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1318,7 +1322,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
+                    decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -1353,7 +1357,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
             Container(
               padding: const EdgeInsets.all(8),
               margin: const EdgeInsets.bottom(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1373,14 +1377,14 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                     ],
                   ),
                   const SizedBox(height: 4),
-                  const Text('서울 오피스텔 프로젝트', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
-                  const Text('삼성건설', style: TextStyle(color: Colors.black45, fontSize: 8)),
+                  Text('서울 오피스텔 프로젝트', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
+                  Text('삼성건설', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 8)),
                   const SizedBox(height: 4),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.between,
                     children: [
                       const Text('25,600,000 원', style: TextStyle(color: mesPrimaryBlue, fontSize: 9, fontWeight: FontWeight.bold)),
-                      const Text('유효기한: 2024-02-15', style: TextStyle(color: Colors.black45, fontSize: 7)),
+                      Text('유효기한: 2024-02-15', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 7)),
                     ],
                   ),
                 ],
@@ -1390,7 +1394,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
             Container(
               padding: const EdgeInsets.all(8),
               margin: const EdgeInsets.bottom(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1410,16 +1414,16 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                     ],
                   ),
                   const SizedBox(height: 4),
-                  const Text('부산 아파트 프로젝트', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
-                  const Text('현대건설', style: TextStyle(color: Colors.black45, fontSize: 8)),
+                  Text('부산 아파트 프로젝트', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
+                  Text('현대건설', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 8)),
                   const SizedBox(height: 4),
                   const Text('48,000,000 원', style: TextStyle(color: Colors.purple, fontSize: 9, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 4),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.between,
                     children: [
-                      Text('출하 진행률', style: TextStyle(color: Colors.black45, fontSize: 7)),
-                      Text('60%', style: TextStyle(color: mesPrimaryBlue, fontSize: 7, fontWeight: FontWeight.bold)),
+                      Text('출하 진행률', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 7)),
+                      const Text('60%', style: TextStyle(color: mesPrimaryBlue, fontSize: 7, fontWeight: FontWeight.bold)),
                     ],
                   ),
                   const SizedBox(height: 2),
@@ -1441,7 +1445,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
             Container(
               padding: const EdgeInsets.all(8),
               margin: const EdgeInsets.bottom(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -1461,14 +1465,14 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                     ],
                   ),
                   const SizedBox(height: 4),
-                  const Text('스크린 도어', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
-                  const Text('규격: 1800x2100', style: TextStyle(color: Colors.black45, fontSize: 8)),
+                  Text('스크린 도어', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
+                  Text('규격: 1800x2100', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 8)),
                   const SizedBox(height: 4),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.between,
                     children: [
-                      Text('원가: 150,000원', style: TextStyle(color: Colors.black54, fontSize: 8)),
-                      Text('판매가: 200,000원', style: TextStyle(color: mesPrimaryBlue, fontSize: 8, fontWeight: FontWeight.bold)),
+                      Text('원가: 150,000원', style: TextStyle(color: isDark ? Colors.white54 : Colors.black54, fontSize: 8)),
+                      const Text('판매가: 200,000원', style: TextStyle(color: mesPrimaryBlue, fontSize: 8, fontWeight: FontWeight.bold)),
                     ],
                   ),
                 ],
@@ -1478,39 +1482,39 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
             Container(
               padding: const EdgeInsets.all(8),
               margin: const EdgeInsets.bottom(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
-              child: const Column(
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.between,
                     children: [
                       Text('C-001 | 삼성건설', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
-                      Text('대표: 홍길동', style: TextStyle(color: Colors.black45, fontSize: 8)),
+                      Text('대표: 홍길동', style: TextStyle(color: isDark ? Colors.white54 : Colors.black45, fontSize: 8)),
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Text('사업자번호: 123-45-67890', style: TextStyle(color: Colors.black54, fontSize: 8)),
-                  Text('전화번호: 02-1234-5678', style: TextStyle(color: Colors.black54, fontSize: 8)),
+                  const SizedBox(height: 4),
+                  Text('사업자번호: 123-45-67890', style: TextStyle(color: isDark ? Colors.white54 : Colors.black54, fontSize: 8)),
+                  Text('전화번호: 02-1234-5678', style: TextStyle(color: isDark ? Colors.white54 : Colors.black54, fontSize: 8)),
                 ],
               ),
             ),
             // 5. Site Card
             Container(
               padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
-              child: const Column(
+              decoration: BoxDecoration(color: mesCardBg, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.between,
                     children: [
                       Text('SITE-001 | 서울 강남 현장', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
-                      Text('진행중', style: TextStyle(color: mesSuccessGreen, fontSize: 7, fontWeight: FontWeight.bold)),
+                      const Text('진행중', style: TextStyle(color: mesSuccessGreen, fontSize: 7, fontWeight: FontWeight.bold)),
                     ],
                   ),
-                  SizedBox(height: 4),
-                  Text('주소: 서울시 강남구 테헤란로 123', style: TextStyle(color: Colors.black54, fontSize: 8)),
+                  const SizedBox(height: 4),
+                  Text('주소: 서울시 강남구 테헤란로 123', style: TextStyle(color: isDark ? Colors.white54 : Colors.black54, fontSize: 8)),
                 ],
               ),
             ),
@@ -1524,7 +1528,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
 
     return Container(
       width: double.infinity,
-      color: Colors.white, // 전체 이미지에 맞게 배경 화이트로 설정
+      color: mesBgColor,
       padding: EdgeInsets.symmetric(
         vertical: isMobile ? 40 : 80,
         horizontal: isMobile ? 24 : 60,
@@ -1565,10 +1569,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                 ),
               ),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 'SAM MES+ERP 솔루션의 고품질 일관성을 보장하기 위해 도입된 디자인 시스템 구성 요소입니다. React 컴포넌트 라이브러리 및 공통 스타일 명세를 구조화하여 대기업용 시스템 완성도를 확보했습니다.',
                 style: TextStyle(
-                  color: Color(0xFF475569),
+                  color: mesTextSub,
                   fontSize: 14,
                   height: 1.5,
                 ),
@@ -1588,14 +1592,14 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                     width: cardWidth,
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: mesCardBg,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
                         color: mesBorderColor,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.05),
+                          color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -1612,7 +1616,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                             Expanded(
                               child: Text(
                                 cat['title'] as String,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: mesSlateDark,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -1624,8 +1628,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                         const SizedBox(height: 8),
                         Text(
                           cat['desc'] as String,
-                          style: const TextStyle(
-                            color: Color(0xFF64748B),
+                          style: TextStyle(
+                            color: mesTextSub,
                             fontSize: 12,
                           ),
                         ),
@@ -1705,7 +1709,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
     );
   }
 
-  Widget _buildSpacingBox(double size, String label) {
+  Widget _buildSpacingBox(double size, String label, {required bool isDark}) {
     return Column(
       children: [
         Container(
@@ -1716,51 +1720,25 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         const SizedBox(height: 4),
         Text(
           label,
-          style: const TextStyle(color: Color(0xFF0F172A), fontSize: 8),
+          style: TextStyle(color: isDark ? Colors.white70 : const Color(0xFF0F172A), fontSize: 8),
         ),
       ],
     );
   }
 
-  Widget _buildShadowPreview(String name, String shadowValue) {
-    return Expanded(
-      child: Container(
-        height: 36,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(color: const Color(0xFFE2E8F0)),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 3,
-              offset: Offset(0, 1),
-            ),
-          ],
-        ),
-        child: Center(
-          child: Text(
-            name,
-            style: const TextStyle(color: Color(0xFF0F172A), fontSize: 8, fontWeight: FontWeight.bold),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSmallTab(String label, bool isSelected) {
+  Widget _buildSmallTab(String label, bool isSelected, {required bool isDark}) {
     return Container(
       margin: const EdgeInsets.only(right: 6),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
-        color: isSelected ? const Color(0xFF1E5EFF) : Colors.white,
-        border: Border.all(color: isSelected ? const Color(0xFF1E5EFF) : const Color(0xFFE2E8F0)),
+        color: isSelected ? const Color(0xFF1E5EFF) : (isDark ? const Color(0xFF1E293B) : Colors.white),
+        border: Border.all(color: isSelected ? const Color(0xFF1E5EFF) : (isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0))),
         borderRadius: BorderRadius.circular(3),
       ),
       child: Text(
         label,
         style: TextStyle(
-          color: isSelected ? Colors.white : const Color(0xFF0F172A),
+          color: isSelected ? Colors.white : (isDark ? Colors.white70 : const Color(0xFF0F172A)),
           fontSize: 8,
           fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
         ),
@@ -1768,12 +1746,12 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
     );
   }
 
-  Widget _buildActionBtn(IconData icon, String label, Color bgColor, Color textColor) {
+  Widget _buildActionBtn(IconData icon, String label, Color bgColor, Color textColor, {required Color borderColor}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
       decoration: BoxDecoration(
         color: bgColor,
-        border: Border.all(color: const Color(0xFFE2E8F0)),
+        border: Border.all(color: borderColor),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
