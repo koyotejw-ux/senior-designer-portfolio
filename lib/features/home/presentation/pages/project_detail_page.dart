@@ -9,6 +9,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:image/image.dart' as img;
 import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_typography.dart';
 import '../../data/providers/content_provider.dart';
 import '../widgets/floating_dots_background.dart';
 import '../widgets/web_optimized_image.dart';
@@ -931,6 +932,29 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'desc': '브랜드 가이드라인 및 공통 스타일 토큰 정의',
         'tags': ['Color Palette', 'Typography', 'Spacing', 'Design Tokens'],
         'color': accentColor,
+        'preview': Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Colors', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                _buildColorChip(AppColors.primaryBlue, 'Blue'),
+                const SizedBox(width: 8),
+                _buildColorChip(AppColors.accentCyan, 'Cyan'),
+                const SizedBox(width: 8),
+                _buildColorChip(AppColors.highlightGreen, 'Green'),
+                const SizedBox(width: 8),
+                _buildColorChip(const Color(0xFF1E293B), 'Slate'),
+              ],
+            ),
+            const SizedBox(height: 12),
+            const Text('Typography', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 4),
+            Text('Pretendard Bold - H1 스타일', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: Colors.white.withValues(alpha: 0.9), fontSize: 13)),
+            Text('Pretendard Regular - 본문 스타일', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.normal, color: Colors.white.withValues(alpha: 0.6), fontSize: 11)),
+          ],
+        ),
       },
       {
         'title': '02. Atoms (원자)',
@@ -938,6 +962,54 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'desc': '더 이상 나눌 수 없는 최소 단위의 기본 UI 요소',
         'tags': ['Button', 'Badge', 'Input', 'Checkbox', 'Switch', 'Label', 'Separator'],
         'color': primaryColor,
+        'preview': Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Buttons & Badges', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    color: AppColors.primaryBlue,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text('확인', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white24),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: const Text('취소', style: TextStyle(color: Colors.white60, fontSize: 10)),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: AppColors.highlightGreen.withValues(alpha: 0.15),
+                    border: Border.all(color: AppColors.highlightGreen.withValues(alpha: 0.3), width: 0.8),
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  child: const Text('SUCCESS', style: TextStyle(color: AppColors.highlightGreen, fontSize: 8, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: Colors.redAccent.withValues(alpha: 0.15),
+                    border: Border.all(color: Colors.redAccent.withValues(alpha: 0.3), width: 0.8),
+                    borderRadius: BorderRadius.circular(3),
+                  ),
+                  child: const Text('ERROR', style: TextStyle(color: Colors.redAccent, fontSize: 8, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+                ),
+              ],
+            ),
+          ],
+        ),
       },
       {
         'title': '03. Molecules (분자)',
@@ -945,6 +1017,44 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'desc': '원자 컴포넌트의 단순 조합으로 구현된 기능 단위',
         'tags': ['Select', 'Accordion', 'Card', 'Search Filter'],
         'color': AppColors.highlightGreen,
+        'preview': Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Search & Selection', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                border: Border.all(color: Colors.white12),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('조회 조건 선택', style: TextStyle(color: Colors.white60, fontSize: 10)),
+                  Icon(Icons.arrow_drop_down, color: Colors.white38, size: 14),
+                ],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+              decoration: BoxDecoration(
+                color: Colors.black26,
+                border: Border.all(color: Colors.white12),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.search, color: Colors.white38, size: 12),
+                  SizedBox(width: 6),
+                  Text('검색어를 입력하세요...', style: TextStyle(color: Colors.white24, fontSize: 10)),
+                ],
+              ),
+            ),
+          ],
+        ),
       },
       {
         'title': '04. Organisms (유기체)',
@@ -952,6 +1062,33 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'desc': '분자 및 원자의 결합으로 완성된 복합 관제 인터페이스',
         'tags': ['Page Header', 'Stat Cards', 'Form Section'],
         'color': Colors.amber,
+        'preview': Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('System Status Banner', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.primaryBlue.withValues(alpha: 0.08),
+                border: Border.all(color: AppColors.primaryBlue.withValues(alpha: 0.25)),
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: const Row(
+                children: [
+                  Icon(Icons.info, color: AppColors.primaryBlue, size: 14),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      '실시간 가동 현황: 전체 8개 설비 정상 가동 중',
+                      style: TextStyle(color: Colors.white70, fontSize: 9),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       },
       {
         'title': '05. Templates (템플릿)',
@@ -959,6 +1096,42 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'desc': '레이아웃 및 일관된 레이어 분할 표준 구조 정의',
         'tags': ['Unified List Template', 'Unified Form Template', 'Unified Detail Template', 'Unified Dashboard'],
         'color': Colors.purple,
+        'preview': Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Layout Structure Diagram', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Row(
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.03),
+                      border: Border.all(color: Colors.white10),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Center(child: Text('Sidebar', style: TextStyle(color: Colors.white38, fontSize: 8))),
+                  ),
+                ),
+                const SizedBox(width: 4),
+                Expanded(
+                  flex: 7,
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.05),
+                      border: Border.all(color: Colors.white10),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: const Center(child: Text('Data Grid Workspace', style: TextStyle(color: Colors.white38, fontSize: 8))),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       },
       {
         'title': '06. Cards (카드)',
@@ -966,6 +1139,43 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
         'desc': '대규모 데이터를 압축하여 전달하는 업무 중심 카드 세트',
         'tags': ['Quote Card', 'Sales Order Card', 'Item Master Card', 'Client Card', 'Site Card'],
         'color': Colors.pink,
+        'preview': Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Production Order Card', style: TextStyle(color: Colors.white38, fontSize: 10, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 6),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.02),
+                border: Border.all(color: Colors.white10),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text('PO-2026-081', style: TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold)),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.withValues(alpha: 0.15),
+                          borderRadius: BorderRadius.circular(2),
+                        ),
+                        child: const Text('생산 대기', style: TextStyle(color: Colors.amber, fontSize: 7, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  const Text('품명: 자동차 실린더 블록 H3', style: TextStyle(color: Colors.white54, fontSize: 8)),
+                  const Text('목표 수량: 1,500 EA', style: TextStyle(color: Colors.white70, fontSize: 9, fontWeight: FontWeight.w600)),
+                ],
+              ),
+            ),
+          ],
+        ),
       },
     ];
 
@@ -976,7 +1186,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
       width: double.infinity,
       color: isDark ? const Color(0xFF0D1117) : const Color(0xFFF8FAFC),
       padding: EdgeInsets.symmetric(
-        vertical: isMobile ? 40 : 60,
+        vertical: isMobile ? 40 : 80,
         horizontal: isMobile ? 24 : 60,
       ),
       child: Center(
@@ -1005,11 +1215,13 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               ),
               const SizedBox(height: 16),
               Text(
-                '통합 디자인 시스템 구성 명세 (Atomic Architecture)',
+                '디자인시스템',
                 style: TextStyle(
+                  fontFamily: AppTypography.pretendard,
                   color: isDark ? Colors.white : const Color(0xFF1E293B),
-                  fontWeight: FontWeight.w900,
-                  fontSize: isMobile ? 22 : 28,
+                  fontWeight: FontWeight.w800,
+                  fontSize: isMobile ? 28 : 38,
+                  letterSpacing: -1.0,
                 ),
               ),
               const SizedBox(height: 8),
@@ -1079,7 +1291,21 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                             fontSize: 12,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 20),
+                        // Real UI Preview Panel
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: isDark ? const Color(0xFF0D1117) : const Color(0xFFF1F5F9),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: isDark ? const Color(0xFF21262D) : const Color(0xFFE2E8F0),
+                            ),
+                          ),
+                          child: cat['preview'] as Widget,
+                        ),
+                        const SizedBox(height: 20),
                         // Component Badges
                         Wrap(
                           spacing: 8,
@@ -1113,6 +1339,27 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildColorChip(Color color, String name) {
+    return Column(
+      children: [
+        Container(
+          width: 24,
+          height: 24,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+            border: Border.all(color: Colors.white24, width: 1),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          name,
+          style: const TextStyle(color: Colors.white54, fontSize: 8),
+        ),
+      ],
     );
   }
 }
