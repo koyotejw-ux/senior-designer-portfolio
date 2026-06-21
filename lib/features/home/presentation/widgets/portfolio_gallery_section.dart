@@ -10,7 +10,6 @@ import '../../../../core/theme/theme_provider.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../data/models/project_model.dart';
 import '../../data/providers/content_provider.dart';
-import '../pages/project_detail_page.dart';
 import 'holographic_card.dart';
 import 'web_optimized_image.dart';
 
@@ -230,13 +229,7 @@ class _PortfolioGallerySectionState
           child: GestureDetector(
             onTap: () {
               // Navigate to detail page
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      ProjectDetailPage(projectId: project.id),
-                ),
-              );
+              context.push('/portfolio/${project.id}');
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 300),
@@ -256,13 +249,7 @@ class _PortfolioGallerySectionState
                         GestureDetector(
                           onTap: () {
                             // Navigate to detail page when image is tapped
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ProjectDetailPage(projectId: project.id),
-                              ),
-                            );
+                            context.push('/portfolio/${project.id}');
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
