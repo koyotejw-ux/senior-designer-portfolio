@@ -924,8 +924,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
   }
 
   Widget _buildColorTokenCard(Color color, String name, String token, String hex) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
     return Container(
-      width: 250,
+      width: isMobile ? double.infinity : 250,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -1038,8 +1040,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
     Color codeColor,
     Color statusColor,
   ) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
     return Container(
-      width: 250,
+      width: isMobile ? double.infinity : 250,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -1072,7 +1076,15 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(price, style: TextStyle(color: codeColor, fontSize: 11, fontWeight: FontWeight.bold)),
-    Widget _buildDesignSystemSection({required bool isDark}) {
+              Text(sub, style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 8)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDesignSystemSection({required bool isDark}) {
     const mesPrimaryBlue = Color(0xFF3B82F6);
     const mesSuccessGreen = Color(0xFF10B981);
     const mesWarningAmber = Color(0xFFF59E0B);
@@ -1862,13 +1874,6 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                   color: isDark ? const Color(0xFF0B0F19) : Colors.white,
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: borderColor),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.1),
-                      blurRadius: 20,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
                 ),
                 child: Column(
                   children: [
