@@ -923,521 +923,164 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
     );
   }
 
-  Widget _buildDesignSystemSection({required bool isDark}) {
-    // Tone & manner: Always white background, dark gray text and borders
+  Widget _buildColorTokenCard(Color color, String name, String token, String hex) {
+    return Container(
+      width: 250,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 32,
+            height: 32,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: const Color(0xFFE2E8F0)),
+            ),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    color: Color(0xFF1F2937),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 11,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  token,
+                  style: const TextStyle(
+                    color: Color(0xFF64748B),
+                    fontFamily: 'monospace',
+                    fontSize: 8,
+                  ),
+                ),
+                Text(
+                  hex,
+                  style: const TextStyle(
+                    color: Color(0xFF94A3B8),
+                    fontSize: 8,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDSHeader(String title, String desc) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            color: Color(0xFF1F2937),
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          desc,
+          style: const TextStyle(
+            color: Color(0xFF64748B),
+            fontSize: 12,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTypographyRow(String label, String token, String detail) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(color: Color(0xFF1F2937), fontSize: 11, fontWeight: FontWeight.bold),
+          ),
+          Text(
+            token,
+            style: const TextStyle(color: Color(0xFF64748B), fontFamily: 'monospace', fontSize: 10),
+          ),
+          Text(
+            detail,
+            style: const TextStyle(color: Color(0xFF94A3B8), fontSize: 10),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInlineCard(
+    String code,
+    String status,
+    String title,
+    String client,
+    String price,
+    String sub,
+    Color codeColor,
+    Color statusColor,
+  ) {
+    return Container(
+      width: 250,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: const Color(0xFFE2E8F0)),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(color: codeColor.withOpacity(0.1), borderRadius: BorderRadius.circular(2)),
+                child: Text(code, style: TextStyle(color: codeColor, fontSize: 8, fontWeight: FontWeight.bold)),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(color: statusColor.withOpacity(0.1), borderRadius: BorderRadius.circular(2)),
+                child: Text(status, style: TextStyle(color: statusColor, fontSize: 8, fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(title, style: const TextStyle(color: Color(0xFF1F2937), fontSize: 11, fontWeight: FontWeight.bold)),
+          Text(client, style: const TextStyle(color: Color(0xFF64748B), fontSize: 10)),
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(price, style: TextStyle(color: codeColor, fontSize: 11, fontWeight: FontWeight.bold)),
+    Widget _buildDesignSystemSection({required bool isDark}) {
     const mesPrimaryBlue = Color(0xFF3B82F6);
     const mesSuccessGreen = Color(0xFF10B981);
     const mesWarningAmber = Color(0xFFF59E0B);
     const mesErrorRed = Color(0xFFEF4444);
 
     const mesSlateDark = Color(0xFF1F2937);
-    const mesSlateLight = Color(0xFFF8FAFC);
     const mesBorderColor = Color(0xFFE2E8F0);
-    const mesCardBg = Color(0xFFF8FAFC);
     const mesBgColor = Colors.white;
-    const mesTextSub = Color(0xFF475569);
-
-    final categories = [
-      {
-        'title': '01. Foundation (기초)',
-        'icon': Icons.layers_outlined,
-        'desc': '디자인 시스템의 기초 토큰 (컬러, 타이포그래피, 스페이싱)',
-        'tags': ['Color Palette', 'Typography', 'Spacing'],
-        'color': mesPrimaryBlue,
-        'preview': Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Color Palette', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: [
-                _buildColorChip(mesPrimaryBlue, 'Blue-500', '#3B82F6', mesSlateDark),
-                _buildColorChip(mesSuccessGreen, 'Green-500', '#10B981', mesSlateDark),
-                _buildColorChip(mesErrorRed, 'Red-500', '#EF4444', mesSlateDark),
-                _buildColorChip(mesWarningAmber, 'Yellow-500', '#F59E0B', mesSlateDark),
-                _buildColorChip(const Color(0xFF6B7280), 'Gray-500', '#6B7280', mesSlateDark),
-              ],
-            ),
-            const SizedBox(height: 14),
-            Text('Typography (Pretendard)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Text('Heading 1 - 24px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 13)),
-            Text('Heading 2 - 20px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 12)),
-            Text('Heading 3 - 18px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 11)),
-            Text('Heading 4 - 16px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 10)),
-            Text('Heading 5 - 14px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 9)),
-            Text('Heading 6 - 12px Bold', style: TextStyle(fontFamily: AppTypography.pretendard, fontWeight: FontWeight.bold, color: mesSlateDark, fontSize: 8)),
-            Text('Paragraph - 14px Regular', style: TextStyle(fontFamily: AppTypography.pretendard, color: mesSlateDark.withOpacity(0.7), fontSize: 9)),
-            Text('Small Text - 12px Regular', style: TextStyle(fontFamily: AppTypography.pretendard, color: mesSlateDark.withOpacity(0.5), fontSize: 8)),
-            const SizedBox(height: 14),
-            Text('Spacing', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Wrap(
-              spacing: 12,
-              runSpacing: 6,
-              children: [
-                _buildSpacingBox(4, '4px', isDark: isDark),
-                _buildSpacingBox(8, '8px', isDark: isDark),
-                _buildSpacingBox(12, '12px', isDark: isDark),
-                _buildSpacingBox(16, '16px', isDark: isDark),
-                _buildSpacingBox(20, '20px', isDark: isDark),
-              ],
-            ),
-          ],
-        ),
-      },
-      {
-        'title': '02. Atoms (원자)',
-        'icon': Icons.auto_awesome_mosaic_outlined,
-        'desc': '가장 기본적인 UI 빌딩 블록 (버튼, 뱃지, 입력 필드 등)',
-        'tags': ['Button', 'Badge', 'Input', 'Checkbox', 'Switch', 'Label', 'Separator'],
-        'color': mesPrimaryBlue,
-        'preview': Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Button & Badge', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: [
-                _buildActionBtn(Icons.check, '기본', mesPrimaryBlue, Colors.white, borderColor: mesPrimaryBlue),
-                _buildActionBtn(Icons.close, 'Outline', mesCardBg, mesSlateDark, borderColor: mesBorderColor),
-                _buildActionBtn(Icons.delete_outline, 'Destructive', mesErrorRed, Colors.white, borderColor: mesErrorRed),
-              ],
-            ),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: mesPrimaryBlue.withOpacity(0.15), borderRadius: BorderRadius.circular(2)),
-                  child: const Text('기본 뱃지', style: TextStyle(color: mesPrimaryBlue, fontSize: 8, fontWeight: FontWeight.bold)),
-                ),
-                const SizedBox(width: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: mesSuccessGreen.withOpacity(0.15), borderRadius: BorderRadius.circular(2)),
-                  child: const Text('성공 뱃지', style: TextStyle(color: mesSuccessGreen, fontSize: 8, fontWeight: FontWeight.bold)),
-                ),
-                const SizedBox(width: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(color: mesErrorRed.withOpacity(0.15), borderRadius: BorderRadius.circular(2)),
-                  child: const Text('삭제 뱃지', style: TextStyle(color: mesErrorRed, fontSize: 8, fontWeight: FontWeight.bold)),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            Text('Input Fields & Controls', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: const Row(
-                children: [
-                  Text('이름을 입력하세요 (Input)', style: TextStyle(color: Colors.black38, fontSize: 8)),
-                ],
-              ),
-            ),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                _buildSmallTab('체크박스 선택됨', true, isDark: isDark),
-                const SizedBox(width: 6),
-                Text('Label 텍스트', style: TextStyle(color: mesSlateDark, fontSize: 8, fontWeight: FontWeight.bold)),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                Text('스위치 활성', style: TextStyle(color: mesSlateDark, fontSize: 8)),
-                const SizedBox(width: 6),
-                Container(
-                  width: 24,
-                  height: 12,
-                  decoration: BoxDecoration(color: mesPrimaryBlue, borderRadius: BorderRadius.circular(6)),
-                  child: const Align(
-                    alignment: Alignment.centerRight,
-                    child: Padding(
-                      padding: EdgeInsets.all(1.0),
-                      child: CircleAvatar(backgroundColor: Colors.white, radius: 5),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text('Separator (구분선)', style: TextStyle(color: mesSlateDark, fontSize: 8)),
-            const SizedBox(height: 4),
-            Container(height: 1, color: mesBorderColor),
-          ],
-        ),
-      },
-      {
-        'title': '03. Molecules (분자)',
-        'icon': Icons.grid_view_outlined,
-        'desc': '원자 컴포넌트들의 결합으로 구성된 단위 컴포넌트',
-        'tags': ['Select', 'Accordion', 'Card', 'Search Filter'],
-        'color': mesSuccessGreen,
-        'preview': Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Select (드롭다운)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('옵션을 선택하세요 (활성 상태)', style: TextStyle(color: mesSlateDark, fontSize: 8)),
-                  Icon(Icons.arrow_drop_down, size: 12, color: mesSlateDark),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text('Accordion (접고 펼치기)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('기본 정보 (Accordion Title)', style: TextStyle(color: mesSlateDark, fontSize: 8, fontWeight: FontWeight.bold)),
-                      Icon(Icons.keyboard_arrow_up, size: 12, color: mesSlateDark),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text('회사명: SAM 시스템\n업종: 제조업\n설립일: 2024-01-01', style: TextStyle(color: Colors.black54, fontSize: 7, height: 1.4)),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text('Card & Search Filter', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-              child: const Row(
-                children: [
-                  Icon(Icons.search, size: 12, color: Colors.black38),
-                  SizedBox(width: 6),
-                  Text('견적번호, 고객사명 검색... (Search Filter)', style: TextStyle(color: Colors.black38, fontSize: 8)),
-                ],
-              ),
-            ),
-          ],
-        ),
-      },
-      {
-        'title': '04. Organisms (유기체)',
-        'icon': Icons.dashboard_customize_outlined,
-        'desc': '분자 컴포넌트와 원자들이 모여 만든 독립적인 기능 영역',
-        'tags': ['Page Header', 'Stat Cards', 'Form Section', 'Cards'],
-        'color': mesWarningAmber,
-        'preview': Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Page Header (페이지 헤더)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('디자인 시스템', style: TextStyle(color: mesSlateDark, fontSize: 10, fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 2),
-                      const Text('SAM 시스템의 모든 UI 컴포넌트', style: TextStyle(color: Colors.black45, fontSize: 7)),
-                    ],
-                  ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                    decoration: BoxDecoration(color: mesPrimaryBlue, borderRadius: BorderRadius.circular(4)),
-                    child: const Text('액션 버튼', style: TextStyle(color: Colors.white, fontSize: 7, fontWeight: FontWeight.bold)),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text('Stat Cards (통계 카드 그리드)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('전체 견적', style: TextStyle(color: Colors.black45, fontSize: 6)),
-                        SizedBox(height: 2),
-                        Text('124 건', style: TextStyle(color: mesPrimaryBlue, fontSize: 10, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: const Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('승인 완료', style: TextStyle(color: Colors.black45, fontSize: 6)),
-                        SizedBox(height: 2),
-                        Text('98 건', style: TextStyle(color: mesSuccessGreen, fontSize: 10, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text('Form Section (폼 그룹)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 4),
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('기본 정보', style: TextStyle(color: mesSlateDark, fontSize: 8, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(color: mesSlateLight, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                          child: const Text('이름 입력', style: TextStyle(color: Colors.black38, fontSize: 6)),
-                        ),
-                      ),
-                      const SizedBox(width: 6),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(color: mesSlateLight, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                          child: const Text('이메일 입력', style: TextStyle(color: Colors.black38, fontSize: 6)),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text('Cards (실물 카드 컴포넌트)', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            // 1. Quote Card
-            Container(
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                        decoration: BoxDecoration(color: mesPrimaryBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(2)),
-                        child: const Text('Q-2024-001', style: TextStyle(color: mesPrimaryBlue, fontSize: 7, fontWeight: FontWeight.bold)),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                        decoration: BoxDecoration(color: mesSuccessGreen.withOpacity(0.1), borderRadius: BorderRadius.circular(2)),
-                        child: const Text('승인', style: TextStyle(color: mesSuccessGreen, fontSize: 7, fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  const Text('서울 오피스텔 프로젝트', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
-                  const Text('삼성건설', style: TextStyle(color: Colors.black45, fontSize: 8)),
-                  const SizedBox(height: 4),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('25,600,000 원', style: TextStyle(color: mesPrimaryBlue, fontSize: 9, fontWeight: FontWeight.bold)),
-                      Text('유효기한: 2024-02-15', style: TextStyle(color: Colors.black45, fontSize: 7)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            // 2. Sales Order Card
-            Container(
-              padding: const EdgeInsets.all(8),
-              margin: const EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(6)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                        decoration: BoxDecoration(color: Colors.purple.withOpacity(0.1), borderRadius: BorderRadius.circular(2)),
-                        child: const Text('SO-2024-001', style: TextStyle(color: Colors.purple, fontSize: 7, fontWeight: FontWeight.bold)),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 1),
-                        decoration: BoxDecoration(color: mesPrimaryBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(2)),
-                        child: const Text('생산중', style: TextStyle(color: mesPrimaryBlue, fontSize: 7, fontWeight: FontWeight.bold)),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  const Text('부산 아파트 프로젝트', style: TextStyle(color: mesSlateDark, fontSize: 9, fontWeight: FontWeight.bold)),
-                  const Text('현대건설', style: TextStyle(color: Colors.black45, fontSize: 8)),
-                  const SizedBox(height: 4),
-                  const Text('48,000,000 원', style: TextStyle(color: Colors.purple, fontSize: 9, fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 4),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('출하 진행률', style: TextStyle(color: Colors.black45, fontSize: 7)),
-                      Text('60%', style: TextStyle(color: mesPrimaryBlue, fontSize: 7, fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  const SizedBox(height: 2),
-                  Container(
-                    width: double.infinity,
-                    height: 4,
-                    decoration: BoxDecoration(color: mesBorderColor, borderRadius: BorderRadius.circular(2)),
-                    child: Row(
-                      children: [
-                        Expanded(flex: 60, child: Container(color: mesPrimaryBlue)),
-                        Expanded(flex: 40, child: const SizedBox()),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      },
-      {
-        'title': '05. Templates (템플릿)',
-        'icon': Icons.splitscreen_outlined,
-        'desc': '업무 화면의 레이아웃 배치 표준 정의',
-        'tags': ['Unified List Template', 'Unified Form Template', 'Unified Detail Template', 'Unified Dashboard'],
-        'color': Colors.purple,
-        'preview': Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Unified List & Form Template Layout', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('List Template', style: TextStyle(color: mesPrimaryBlue, fontSize: 7, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 4),
-                        Container(height: 6, color: mesSlateLight),
-                        const SizedBox(height: 3),
-                        Container(height: 12, color: mesSlateLight),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Form Template', style: TextStyle(color: mesSuccessGreen, fontSize: 7, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Expanded(child: Container(height: 12, color: mesSlateLight)),
-                            const SizedBox(width: 3),
-                            Expanded(child: Container(height: 12, color: mesSlateLight)),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text('Unified Detail & Dashboard Layout', style: TextStyle(color: mesSlateDark, fontSize: 11, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 6),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Detail Template (3컬럼)', style: TextStyle(color: mesWarningAmber, fontSize: 7, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Expanded(child: Container(height: 10, color: mesSlateLight)),
-                            const SizedBox(width: 2),
-                            Expanded(child: Container(height: 10, color: mesSlateLight)),
-                            const SizedBox(width: 2),
-                            Expanded(child: Container(height: 10, color: mesSlateLight)),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: mesBorderColor), borderRadius: BorderRadius.circular(4)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Dashboard Template', style: TextStyle(color: Colors.purple, fontSize: 7, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Expanded(child: Container(height: 10, color: mesSlateLight)),
-                            const SizedBox(width: 2),
-                            Expanded(child: Container(height: 10, color: mesSlateLight)),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      },
-    ];
 
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 600;
@@ -1459,8 +1102,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: mesPrimaryBlue.withValues(alpha: 0.1),
-                  border: Border.all(color: mesPrimaryBlue.withValues(alpha: 0.3)),
+                  color: mesPrimaryBlue.withOpacity(0.1),
+                  border: Border.all(color: mesPrimaryBlue.withOpacity(0.3)),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: const Text(
@@ -1474,134 +1117,412 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              Text(
-                '디자인시스템',
+              const Text(
+                '디자인시스템_최종',
                 style: TextStyle(
                   fontFamily: AppTypography.pretendard,
-                  color: mesSlateDark,
+                  color: Color(0xFF1F2937),
                   fontWeight: FontWeight.w800,
-                  fontSize: isMobile ? 28 : 38,
+                  fontSize: 32,
                   letterSpacing: -1.0,
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                'SAM MES+ERP 솔루션의 고품질 일관성을 보장하기 위해 도입된 디자인 시스템 구성 요소입니다. React 컴포넌트 라이브러리 및 공통 스타일 명세를 구조화하여 대기업용 시스템 완성도를 확보했습니다.',
+              const Text(
+                'SAM MES+ERP의 파운데이션, 이토믹 디자인 시스템, 대시보드 위젯을 모두 확인할 수 있습니다. 디자인 토큰 명명 규칙(Naming Rule)을 정립하여 대기업용 엔터프라이즈 환경에서 일관성 있고 확장 가능한 설계 프로세스를 수립했습니다.',
                 style: TextStyle(
-                  color: mesTextSub,
+                  color: Color(0xFF475569),
                   fontSize: 14,
                   height: 1.5,
                 ),
               ),
               const SizedBox(height: 40),
+              const Divider(color: Color(0xFFE2E8F0)),
+              const SizedBox(height: 30),
 
-              // Grid of Design System Tiers
-              Wrap(
-                spacing: 24,
-                runSpacing: 24,
-                children: categories.map((cat) {
-                  final catColor = cat['color'] as Color;
-                  final double cardWidth = isMobile
-                      ? screenWidth - 48.0
-                      : (screenWidth > 1200 ? 564.0 : (screenWidth - 144.0) / 2);
-                  return Container(
-                    width: cardWidth,
-                    height: isMobile ? null : 680.0, // Fixed height for perfect grid alignment on desktop
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: mesCardBg,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(
-                        color: mesBorderColor,
+              // 1. Foundation & Token Naming Rule
+              _buildDSHeader('01. Foundation (기초 및 토큰 네이밍 룰)', '디자인 시스템의 기초 규격 및 디자인 토큰 체계'),
+              const SizedBox(height: 24),
+              
+              // Naming Rule Block - Clean document design with left accent line
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.only(left: 20, top: 12, bottom: 12, right: 12),
+                decoration: const BoxDecoration(
+                  border: Border(
+                    left: BorderSide(color: mesPrimaryBlue, width: 4),
+                  ),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Design Token Naming Rule (디자인 토큰 명명 규칙)',
+                      style: TextStyle(color: Color(0xFF1F2937), fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    RichText(
+                      text: const TextSpan(
+                        style: TextStyle(color: Color(0xFF475569), fontSize: 13, height: 1.6, fontFamily: AppTypography.pretendard),
+                        children: [
+                          TextSpan(
+                            text: '규칙 표준: ',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(
+                            text: '--{category}-{type/use}-{scale/variant}\n',
+                            style: TextStyle(fontFamily: 'monospace', color: mesPrimaryBlue, fontWeight: FontWeight.bold),
+                          ),
+                          TextSpan(text: '• '),
+                          TextSpan(text: 'Prefix', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: ': W3C Design Tokens 표준 규격 및 CSS 커스텀 속성 표준(--)을 준수합니다.\n'),
+                          TextSpan(text: '• '),
+                          TextSpan(text: 'Category', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: ': color(색상), typography(서체), spacing(여백), border(테두리), shadow(그림자) 등 시각적 속성으로 분류.\n'),
+                          TextSpan(text: '• '),
+                          TextSpan(text: 'Type/Use', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: ': primary, success, warning, error, info, background, text 등 구체적 용도를 명시.\n'),
+                          TextSpan(text: '• '),
+                          TextSpan(text: 'Scale/Variant', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: ': main, hover, active, light, dark 또는 100~900 단위 수치로 확장성 부여.'),
+                        ],
                       ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withValues(alpha: isDark ? 0.2 : 0.05),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 40),
+              
+              // Color Tokens Grouped
+              const Text('Color Tokens', style: TextStyle(color: Color(0xFF1F2937), fontSize: 16, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 16),
+              
+              // Primary Group
+              const Text('Primary', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                children: [
+                  _buildColorTokenCard(mesPrimaryBlue, 'Primary', '--primary', '#3B82F6'),
+                  _buildColorTokenCard(Colors.white, 'Primary Foreground', '--primary-foreground', '#FFFFFF'),
+                ],
+              ),
+              const SizedBox(height: 24),
+              
+              // Semantic Group
+              const Text('Semantic', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                children: [
+                  _buildColorTokenCard(mesSuccessGreen, 'Success', '--success-color', '#10B981'),
+                  _buildColorTokenCard(mesWarningAmber, 'Warning', '--warning-color', '#F59E0B'),
+                  _buildColorTokenCard(mesErrorRed, 'Error', '--error-color', '#EF4444'),
+                  _buildColorTokenCard(mesPrimaryBlue, 'Info', '--info-color', '#3B82F6'),
+                ],
+              ),
+              const SizedBox(height: 24),
+
+              // Functional Group
+              const Text('Functional', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                children: [
+                  _buildColorTokenCard(Colors.white, 'Background Primary', '--background-color', '#FFFFFF'),
+                  _buildColorTokenCard(const Color(0xFFF8FAFC), 'Background Secondary', '--background-secondary-color', '#F8FAFC'),
+                  _buildColorTokenCard(const Color(0xFF1F2937), 'Text Primary', '--text-primary-color', '#1F2937'),
+                  _buildColorTokenCard(const Color(0xFFE2E8F0), 'Border Light', '--border-color', '#E2E8F0'),
+                ],
+              ),
+              const SizedBox(height: 40),
+
+              // Typography & Spacing
+              const Text('Typography & Spacing Scale', style: TextStyle(color: Color(0xFF1F2937), fontSize: 16, fontWeight: FontWeight.bold)),
+              const SizedBox(height: 16),
+              
+              Wrap(
+                spacing: 40,
+                runSpacing: 30,
+                children: [
+                  // Typography Card (Spacious Table Format)
+                  Container(
+                    width: isMobile ? double.infinity : 550,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Typography (Pretendard 명세)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 12),
+                        _buildTypographyRow('Heading 1', '--font-size-h1', '24px Bold'),
+                        _buildTypographyRow('Heading 2', '--font-size-h2', '20px Bold'),
+                        _buildTypographyRow('Heading 3', '--font-size-h3', '18px Bold'),
+                        _buildTypographyRow('Paragraph', '--font-size-body', '14px Regular'),
+                        _buildTypographyRow('Small Text', '--font-size-small', '12px Regular'),
+                      ],
+                    ),
+                  ),
+                  // Spacing Card
+                  Container(
+                    width: isMobile ? double.infinity : 550,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Spacing Scale (여백 토큰)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          spacing: 16,
+                          runSpacing: 12,
+                          children: [
+                            _buildSpacingBox(4, 'xs (4px)', isDark: isDark),
+                            _buildSpacingBox(8, 'sm (8px)', isDark: isDark),
+                            _buildSpacingBox(12, 'md (12px)', isDark: isDark),
+                            _buildSpacingBox(16, 'lg (16px)', isDark: isDark),
+                            _buildSpacingBox(20, 'xl (20px)', isDark: isDark),
+                          ],
                         ),
                       ],
+                    ),
+                  ),
+                ],
+              ),
+              
+              const SizedBox(height: 40),
+              const Divider(color: Color(0xFFE2E8F0)),
+              const SizedBox(height: 30),
+
+              // 2. Atoms (Open Layout, No wrapping grey card)
+              _buildDSHeader('02. Atoms (원자)', '가장 기본적인 UI 빌딩 블록 (버튼, 뱃지, 입력 필드 등)'),
+              const SizedBox(height: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Button & Badge', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      _buildActionBtn(Icons.check, '기본', mesPrimaryBlue, Colors.white, borderColor: mesPrimaryBlue),
+                      _buildActionBtn(Icons.close, 'Outline', Colors.white, mesSlateDark, borderColor: const Color(0xFFE2E8F0)),
+                      _buildActionBtn(Icons.delete_outline, 'Destructive', mesErrorRed, Colors.white, borderColor: mesErrorRed),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(color: mesPrimaryBlue.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                        child: const Text('기본 뱃지', style: TextStyle(color: mesPrimaryBlue, fontSize: 9, fontWeight: FontWeight.bold)),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(color: mesSuccessGreen.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                        child: const Text('성공 뱃지', style: TextStyle(color: mesSuccessGreen, fontSize: 9, fontWeight: FontWeight.bold)),
+                      ),
+                      const SizedBox(width: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(color: mesErrorRed.withOpacity(0.1), borderRadius: BorderRadius.circular(4)),
+                        child: const Text('삭제 뱃지', style: TextStyle(color: mesErrorRed, fontSize: 9, fontWeight: FontWeight.bold)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  Text('Input Fields & Separator', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  Container(
+                    width: double.infinity,
+                    maxConstraints: const BoxConstraints(maxWidth: 400),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.white, 
+                      border: Border.all(color: const Color(0xFFE2E8F0)), 
+                      borderRadius: BorderRadius.circular(6)
+                    ),
+                    child: const Text('이름을 입력하세요 (Input Field)', style: TextStyle(color: Colors.black38, fontSize: 12)),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(height: 1, color: const Color(0xFFE2E8F0)),
+                ],
+              ),
+
+              const SizedBox(height: 40),
+              const Divider(color: Color(0xFFE2E8F0)),
+              const SizedBox(height: 30),
+
+              // 3. Molecules (Open Layout)
+              _buildDSHeader('03. Molecules (분자)', '원자 컴포넌트들의 결합으로 구성된 단위 컴포넌트'),
+              const SizedBox(height: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Select (드롭다운)', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  Container(
+                    width: double.infinity,
+                    maxConstraints: const BoxConstraints(maxWidth: 400),
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    decoration: BoxDecoration(color: Colors.white, border: Border.all(color: const Color(0xFFE2E8F0)), borderRadius: BorderRadius.circular(6)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('옵션을 선택하세요 (활성 상태)', style: TextStyle(color: mesSlateDark, fontSize: 12)),
+                        Icon(Icons.arrow_drop_down, size: 18, color: mesSlateDark),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Text('Accordion (접고 펼치기)', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  Container(
+                    width: double.infinity,
+                    maxConstraints: const BoxConstraints(maxWidth: 500),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white, 
+                      border: Border.all(color: const Color(0xFFE2E8F0)), 
+                      borderRadius: BorderRadius.circular(6)
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Icon + Title
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(cat['icon'] as IconData, color: catColor, size: 24),
-                            const SizedBox(width: 12),
-                            Expanded(
-                              child: Text(
-                                cat['title'] as String,
-                                style: TextStyle(
-                                  color: mesSlateDark,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
+                            Text('기본 정보 (Accordion Title)', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                            Icon(Icons.keyboard_arrow_up, size: 18, color: mesSlateDark),
                           ],
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          cat['desc'] as String,
-                          style: TextStyle(
-                            color: mesTextSub,
-                            fontSize: 12,
-                          ),
+                        const SizedBox(height: 10),
+                        Text('회사명: SAM 시스템\n업종: 제조업\n설립일: 2024-01-01', style: TextStyle(color: Colors.black54, fontSize: 11, height: 1.6)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 40),
+              const Divider(color: Color(0xFFE2E8F0)),
+              const SizedBox(height: 30),
+
+              // 4. Organisms (Open Layout, incorporating Cards)
+              _buildDSHeader('04. Organisms (유기체 및 카드)', '분자 컴포넌트와 원자들이 결합하여 구성하는 실물 화면 단위 및 카드 컴포넌트'),
+              const SizedBox(height: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Page Header & Stat Cards', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white, 
+                      border: Border.all(color: const Color(0xFFE2E8F0)), 
+                      borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('수주 관리 대시보드', style: TextStyle(color: mesSlateDark, fontSize: 14, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 4),
+                            const Text('실시간 주문 현황판', style: TextStyle(color: Colors.black45, fontSize: 10)),
+                          ],
                         ),
-                        const SizedBox(height: 20),
-                        // Real UI Preview Panel (Expanded to take remaining uniform height)
-                        Expanded(
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(16),
-                            decoration: BoxDecoration(
-                              color: mesSlateLight,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: mesBorderColor,
-                              ),
-                            ),
-                            child: cat['preview'] as Widget,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        // Component Badges
-                        Wrap(
-                          spacing: 8,
-                          runSpacing: 8,
-                          children: (cat['tags'] as List<String>).map((tag) {
-                            return Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: catColor.withValues(alpha: 0.1),
-                                border: Border.all(color: catColor.withValues(alpha: 0.2), width: 0.8),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Text(
-                                tag,
-                                style: TextStyle(
-                                  color: catColor.withValues(alpha: 0.9),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 11,
-                                ),
-                              ),
-                            );
-                          }).toList(),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          decoration: BoxDecoration(color: mesPrimaryBlue, borderRadius: BorderRadius.circular(4)),
+                          child: const Text('신규 주문 등록', style: TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
-                  );
-                }).toList(),
+                  ),
+                  const SizedBox(height: 24),
+                  Text('Business Cards Preview (실물 카드 컴포넌트)', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      // Quote Card
+                      _buildInlineCard('Q-2024-001', '승인', '서울 오피스텔 프로젝트', '삼성건설', '25,600,000 원', '유효기한: 2024-02-15', mesPrimaryBlue, mesSuccessGreen),
+                      // Sales Order Card
+                      _buildInlineCard('SO-2024-001', '생산중', '부산 아파트 프로젝트', '현대건설', '48,000,000 원', '출하 진행률: 60%', Colors.purple, mesPrimaryBlue),
+                    ],
+                  ),
+                ],
               ),
-              const SizedBox(height: 20),
+
+              const SizedBox(height: 40),
+              const Divider(color: Color(0xFFE2E8F0)),
+              const SizedBox(height: 30),
+
+              // 5. Templates (Open Layout)
+              _buildDSHeader('05. Templates (템플릿)', '업무 화면의 레이아웃 배치 표준 정의'),
+              const SizedBox(height: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Unified List & Form Template Layout', style: TextStyle(color: mesSlateDark, fontSize: 12, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    children: [
+                      Container(
+                        width: isMobile ? double.infinity : 280,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(color: Colors.white, border: Border.all(color: const Color(0xFFE2E8F0)), borderRadius: BorderRadius.circular(6)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('List Template', style: TextStyle(color: mesPrimaryBlue, fontSize: 10, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 8),
+                            Container(height: 10, color: const Color(0xFFF1F5F9)),
+                            const SizedBox(height: 6),
+                            Container(height: 20, color: const Color(0xFFF1F5F9)),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        width: isMobile ? double.infinity : 280,
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(color: Colors.white, border: Border.all(color: const Color(0xFFE2E8F0)), borderRadius: BorderRadius.circular(6)),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Form Template', style: TextStyle(color: mesSuccessGreen, fontSize: 10, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Expanded(child: Container(height: 20, color: const Color(0xFFF1F5F9))),
+                                const SizedBox(width: 6),
+                                Expanded(child: Container(height: 20, color: const Color(0xFFF1F5F9))),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 40),
             ],
           ),
         ),
       ),
     );
   }
+
 
   Widget _buildColorChip(Color color, String name, String hex, Color textColor) {
     return Column(
