@@ -1506,6 +1506,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                       : (screenWidth > 1200 ? 564.0 : (screenWidth - 144.0) / 2);
                   return Container(
                     width: cardWidth,
+                    height: isMobile ? null : 680.0, // Fixed height for perfect grid alignment on desktop
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       color: mesCardBg,
@@ -1550,18 +1551,20 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        // Real UI Preview Panel
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: mesSlateLight,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: mesBorderColor,
+                        // Real UI Preview Panel (Expanded to take remaining uniform height)
+                        Expanded(
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: mesSlateLight,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: mesBorderColor,
+                              ),
                             ),
+                            child: cat['preview'] as Widget,
                           ),
-                          child: cat['preview'] as Widget,
                         ),
                         const SizedBox(height: 20),
                         // Component Badges
