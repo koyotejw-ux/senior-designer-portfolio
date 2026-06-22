@@ -1317,63 +1317,114 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               const SizedBox(height: 40),
 
               // Typography, Spacing, and Breakpoints - 3 Column Layout (No empty space)
-              Wrap(
-                spacing: 40,
-                runSpacing: 30,
-                children: [
-                  // Typography Card (Spacious Table Format)
-                  Container(
-                    width: isMobile ? double.infinity : 360,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Typography (Pretendard 명세)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 12),
-                        _buildTypographyRow('Heading 1', '--font-size-h1', '24px Bold'),
-                        _buildTypographyRow('Heading 2', '--font-size-h2', '20px Bold'),
-                        _buildTypographyRow('Heading 3', '--font-size-h3', '18px Bold'),
-                        _buildTypographyRow('Paragraph', '--font-size-body', '14px Regular'),
-                        _buildTypographyRow('Small Text', '--font-size-small', '12px Regular'),
-                      ],
-                    ),
-                  ),
-                  // Spacing Card
-                  Container(
-                    width: isMobile ? double.infinity : 360,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Spacing Scale (여백 토큰)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 12),
-                        Wrap(
-                          spacing: 12,
-                          runSpacing: 10,
+              // Typography, Spacing, and Breakpoints - 2 Column Layout
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final isWideScreen = constraints.maxWidth > 800;
+                  final itemWidth = isWideScreen ? (constraints.maxWidth - 40) / 2 : double.infinity;
+
+                  return Wrap(
+                    spacing: 40,
+                    runSpacing: 30,
+                    children: [
+                      // Column 1: Typography (Pretendard 명세)
+                      Container(
+                        width: itemWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            _buildSpacingBox(4, 'xs (4px)', isDark: isDark),
-                            _buildSpacingBox(8, 'sm (8px)', isDark: isDark),
-                            _buildSpacingBox(12, 'md (12px)', isDark: isDark),
-                            _buildSpacingBox(16, 'lg (16px)', isDark: isDark),
-                            _buildSpacingBox(20, 'xl (20px)', isDark: isDark),
+                            const Text('Typography (Pretendard 명세)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 12),
+                            _buildTypographyRow('Heading 1', '--font-size-h1', '24px Bold'),
+                            _buildTypographyRow('Heading 2', '--font-size-h2', '20px Bold'),
+                            _buildTypographyRow('Heading 3', '--font-size-h3', '18px Bold'),
+                            _buildTypographyRow('Paragraph', '--font-size-body', '14px Regular'),
+                            _buildTypographyRow('Small Text', '--font-size-small', '12px Regular'),
                           ],
                         ),
-                      ],
-                    ),
-                  ),
-                  // Breakpoints Card (반응형 중단점 명세 추가)
-                  Container(
-                    width: isMobile ? double.infinity : 360,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Responsive Breakpoints (반응형 중단점)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
-                        const SizedBox(height: 12),
-                        _buildTypographyRow('Mobile', '--breakpoint-mobile', '0px ~ 767px'),
-                        _buildTypographyRow('Tablet', '--breakpoint-tablet', '768px ~ 1023px'),
-                        _buildTypographyRow('Desktop', '--breakpoint-desktop', '1024px+'),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                      // Column 2: Spacing Scale (여백 토큰)
+                      Container(
+                        width: itemWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Spacing Scale (여백 토큰)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 12),
+                            Table(
+                              columnWidths: const {
+                                0: FlexColumnWidth(1.0),
+                                1: FlexColumnWidth(2.0),
+                                2: FlexColumnWidth(1.5),
+                              },
+                              border: const TableBorder(
+                                horizontalInside: BorderSide(color: Color(0xFFE2E8F0), width: 0.5),
+                              ),
+                              children: [
+                                TableRow(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('크기', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Color(0xFF64748B)))),
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('토큰 패턴 (Token Pattern)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Color(0xFF64748B)))),
+                                    Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Text('실물 크기 (Visual)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: const Color(0xFF64748B)))),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('xs (4px)', style: TextStyle(fontSize: 11, color: Color(0xFF1F2937)))),
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('--spacing-xs', style: TextStyle(fontFamily: 'monospace', fontSize: 11, color: Color(0xFF475569)))),
+                                    Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Align(alignment: Alignment.centerLeft, child: _buildSpacingBox(4, '', isDark: isDark))),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('sm (8px)', style: TextStyle(fontSize: 11, color: Color(0xFF1F2937)))),
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('--spacing-sm', style: TextStyle(fontFamily: 'monospace', fontSize: 11, color: Color(0xFF475569)))),
+                                    Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Align(alignment: Alignment.centerLeft, child: _buildSpacingBox(8, '', isDark: isDark))),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('md (12px)', style: TextStyle(fontSize: 11, color: Color(0xFF1F2937)))),
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('--spacing-md', style: TextStyle(fontFamily: 'monospace', fontSize: 11, color: Color(0xFF475569)))),
+                                    Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Align(alignment: Alignment.centerLeft, child: _buildSpacingBox(12, '', isDark: isDark))),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('lg (16px)', style: TextStyle(fontSize: 11, color: Color(0xFF1F2937)))),
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('--spacing-lg', style: TextStyle(fontFamily: 'monospace', fontSize: 11, color: Color(0xFF475569)))),
+                                    Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Align(alignment: Alignment.centerLeft, child: _buildSpacingBox(16, '', isDark: isDark))),
+                                  ],
+                                ),
+                                TableRow(
+                                  children: [
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('xl (20px)', style: TextStyle(fontSize: 11, color: Color(0xFF1F2937)))),
+                                    const Padding(padding: EdgeInsets.symmetric(vertical: 6), child: Text('--spacing-xl', style: TextStyle(fontFamily: 'monospace', fontSize: 11, color: Color(0xFF475569)))),
+                                    Padding(padding: const EdgeInsets.symmetric(vertical: 6), child: Align(alignment: Alignment.centerLeft, child: _buildSpacingBox(20, '', isDark: isDark))),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Column 3: Breakpoints Card (반응형 중단점)
+                      Container(
+                        width: itemWidth,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text('Responsive Breakpoints (반응형 중단점)', style: TextStyle(color: Color(0xFF64748B), fontSize: 12, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 12),
+                            _buildTypographyRow('Mobile', '--breakpoint-mobile', '0px ~ 767px'),
+                            _buildTypographyRow('Tablet', '--breakpoint-tablet', '768px ~ 1023px'),
+                            _buildTypographyRow('Desktop', '--breakpoint-desktop', '1024px+'),
+                          ],
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               
               const SizedBox(height: 40),
@@ -2251,11 +2302,10 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      _buildAdminTabItem('Foundation', Icons.layers_outlined, false, isDark),
+                      _buildAdminTabItem('Foundation', Icons.layers_outlined, true, isDark),
                       _buildAdminTabItem('Components', Icons.widgets_outlined, false, isDark),
                       _buildAdminTabItem('Modules', Icons.view_module_outlined, false, isDark),
                       _buildAdminTabItem('Tokens', Icons.code_outlined, false, isDark),
-                      _buildAdminTabItem('Responsive', Icons.devices_outlined, true, isDark),
                     ],
                   ),
                 ),
