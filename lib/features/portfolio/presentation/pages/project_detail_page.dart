@@ -494,7 +494,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
               children: [
                 const Icon(Icons.cancel, color: Color(0xFFEF4444), size: 14),
                 const SizedBox(width: 6),
-                Text('DON'T (금지 사항)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: isDark ? const Color(0xFFF87171) : const Color(0xFFDC2626))),
+                Text("DON'T (금지 사항)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: isDark ? const Color(0xFFF87171) : const Color(0xFFDC2626))),
               ],
             ),
             const SizedBox(height: 6),
@@ -2043,71 +2043,358 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     bool isTablet,
     bool isDark,
   ) {
-    final ds = projectData['designSystem'] as DesignSystemModel?;
+    final category = (projectData['category'] as String? ?? '').toLowerCase();
+    final List<Color> gradient = (projectData['gradient'] as List<dynamic>?)?.cast<Color>() ?? [AppColors.primaryBlue, AppColors.accentCyan];
+    final primaryColor = gradient.isNotEmpty ? gradient[0] : AppColors.primaryBlue;
+    final secondaryColor = gradient.length > 1 ? gradient[1] : AppColors.accentCyan;
 
-    return _buildSection(
-      title: 'Design System Analysis',
-      content: Column(
+    final textMain = isDark ? Colors.white : const Color(0xFF1F2937);
+    final textSub = isDark ? const Color(0xFF94A3B8) : const Color(0xFF475569);
+    final bgColor = isDark ? const Color(0xFF0F172A) : Colors.white;
+    final borderColor = isDark ? const Color(0xFF334155) : const Color(0xFFE2E8F0);
+    final cardBg = isDark ? const Color(0xFF1E293B) : const Color(0xFFF8FAFC);
+
+    Widget buildTokenRow(String name, String token, Color light, String lightHex, Color dark, String darkHex) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          children: [
+            SizedBox(width: 100, child: Text(name, style: TextStyle(fontSize: 11, color: textSub))),
+            Expanded(flex: 2, child: Text(token, style: TextStyle(fontFamily: 'monospace', fontSize: 10, color: primaryColor))),
+            Row(children: [
+              Container(width: 14, height: 14, decoration: BoxDecoration(color: light, border: Border.all(color: borderColor, width: 0.5), borderRadius: BorderRadius.circular(2))),
+              const SizedBox(width: 4),
+              Text(lightHex, style: TextStyle(fontFamily: 'monospace', fontSize: 10, color: textSub)),
+            ]),
+            const SizedBox(width: 12),
+            Row(children: [
+              Container(width: 14, height: 14, decoration: BoxDecoration(color: dark, border: Border.all(color: borderColor, width: 0.5), borderRadius: BorderRadius.circular(2))),
+              const SizedBox(width: 4),
+              Text(darkHex, style: TextStyle(fontFamily: 'monospace', fontSize: 10, color: textSub)),
+            ]),
+          ],
+        ),
+      );
+    }
+
+    Widget buildSectionHeader(String num, String title, String subtitle) {
+      return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (ds == null)
-            Center(
-              child: Column(
-                children: [
-                  const Text(
-                    '이미지를 분석하여 디자인 시스템을 도출할 수 있습니다.',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton.icon(
-                    onPressed: _isAnalyzing
-                        ? null
-                        : () => _analyzeDesignSystem(projectData),
-                    icon: _isAnalyzing
-                        ? const SizedBox(
-                            width: 16,
-                            height: 16,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : const Icon(Icons.auto_awesome),
-                    label: Text(_isAnalyzing ? '분석 중...' : 'AI 분석 시작'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryBlue,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 12,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          else
-            Column(
-              children: [
-                _buildDesignSystemSubSection('Foundation', [
-                  _buildDSItem('Colors', ds.foundation.colors, isDark),
-                  _buildDSItem('Typography', ds.foundation.typography, isDark),
-                  _buildDSItem('Spacing', ds.foundation.spacing, isDark),
-                ], isDark),
-                const SizedBox(height: 32),
-                _buildDesignSystemSubSection('Atomic Design', [
-                  _buildDSItem('Atoms', ds.atomic.atoms, isDark),
-                  _buildDSItem('Molecules', ds.atomic.molecules, isDark),
-                  _buildDSItem('Organisms', ds.atomic.organisms, isDark),
-                ], isDark),
-              ],
+          Row(children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              decoration: BoxDecoration(color: primaryColor.withOpacity(0.1), border: Border.all(color: primaryColor.withOpacity(0.3)), borderRadius: BorderRadius.circular(4)),
+              child: Text(num, style: TextStyle(color: primaryColor, fontSize: 10, fontWeight: FontWeight.bold, letterSpacing: 0.5)),
             ),
+            const SizedBox(width: 10),
+            Expanded(child: Text(title, style: TextStyle(color: textMain, fontSize: 15, fontWeight: FontWeight.w800))),
+          ]),
+          const SizedBox(height: 4),
+          Padding(padding: const EdgeInsets.only(left: 2), child: Text(subtitle, style: TextStyle(color: textSub, fontSize: 12, height: 1.4))),
         ],
+      );
+    }
+
+    Widget buildSpecColumn({required String deviceLabel, required IconData deviceIcon, required Widget preview, required List<String> dos, required List<String> donts}) {
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(color: bgColor, border: Border.all(color: borderColor), borderRadius: BorderRadius.circular(8)),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            Icon(deviceIcon, size: 14, color: primaryColor),
+            const SizedBox(width: 6),
+            Text(deviceLabel, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: textMain)),
+          ]),
+          const SizedBox(height: 12),
+          Container(width: double.infinity, padding: const EdgeInsets.all(16), decoration: BoxDecoration(color: cardBg, border: Border.all(color: borderColor), borderRadius: BorderRadius.circular(6)), child: Center(child: preview)),
+          const SizedBox(height: 14),
+          Row(children: [const Icon(Icons.check_circle, color: Color(0xFF10B981), size: 13), const SizedBox(width: 5), Text('DO', style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: isDark ? const Color(0xFF10B981) : const Color(0xFF059669)))]),
+          const SizedBox(height: 4),
+          ...dos.map((d) => Padding(padding: const EdgeInsets.only(left: 18, bottom: 3), child: Text('• $d', style: TextStyle(fontSize: 11, color: textSub, height: 1.4)))),
+          const SizedBox(height: 10),
+          Row(children: [const Icon(Icons.cancel, color: Color(0xFFEF4444), size: 13), const SizedBox(width: 5), Text("DON'T", style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: isDark ? const Color(0xFFF87171) : const Color(0xFFDC2626)))]),
+          const SizedBox(height: 4),
+          ...donts.map((d) => Padding(padding: const EdgeInsets.only(left: 18, bottom: 3), child: Text('• $d', style: TextStyle(fontSize: 11, color: textSub, height: 1.4)))),
+        ]),
+      );
+    }
+
+    Widget buildSpecRow({required Widget mobilePreview, required List<String> mobileDos, required List<String> mobileDonts, required Widget desktopPreview, required List<String> desktopDos, required List<String> desktopDonts}) {
+      if (isMobile) {
+        return Column(children: [
+          buildSpecColumn(deviceLabel: '모바일 (Mobile) 규격', deviceIcon: Icons.phone_android, preview: mobilePreview, dos: mobileDos, donts: mobileDonts),
+          const SizedBox(height: 16),
+          buildSpecColumn(deviceLabel: '태블릿 & 데스크톱 규격', deviceIcon: Icons.desktop_windows, preview: desktopPreview, dos: desktopDos, donts: desktopDonts),
+        ]);
+      }
+      return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Expanded(child: buildSpecColumn(deviceLabel: '모바일 (Mobile) 규격', deviceIcon: Icons.phone_android, preview: mobilePreview, dos: mobileDos, donts: mobileDonts)),
+        const SizedBox(width: 20),
+        Expanded(child: buildSpecColumn(deviceLabel: '태블릿 & 데스크톱 규격', deviceIcon: Icons.desktop_windows, preview: desktopPreview, dos: desktopDos, donts: desktopDonts)),
+      ]);
+    }
+
+    final isMobileApp = category.contains('mobile') || category.contains('app') || category.contains('ios') || category.contains('android');
+    final btnColor = primaryColor;
+
+    return Container(
+      width: double.infinity,
+      color: isDark ? const Color(0xFF080E1A) : const Color(0xFFF9FAFB),
+      padding: EdgeInsets.symmetric(vertical: isMobile ? 48 : 80, horizontal: isMobile ? 24 : 60),
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1200),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(color: primaryColor.withOpacity(0.1), border: Border.all(color: primaryColor.withOpacity(0.3)), borderRadius: BorderRadius.circular(4)),
+                child: Text('DESIGN SYSTEM SPEC', style: TextStyle(color: primaryColor, fontWeight: FontWeight.bold, fontSize: 10, letterSpacing: 1.2)),
+              ),
+              const SizedBox(height: 12),
+              Text('디자인 시스템', style: TextStyle(color: textMain, fontWeight: FontWeight.w800, fontSize: 28, letterSpacing: -1.0)),
+              const SizedBox(height: 8),
+              Text(
+                isMobileApp
+                    ? '모바일 앱의 파운데이션(색상 토큰, 타이포그래피, 스페이싱)과 아토믹 디자인 컴포넌트를 정의합니다. 디자인 토큰 네이밍 룰로 개발 핸드오프 효율을 높입니다.'
+                    : '제품의 디자인 파운데이션과 컴포넌트 시스템을 정의합니다. 토큰 네이밍 룰로 개발과 디자인의 일관성을 보장합니다.',
+                style: TextStyle(color: textSub, fontSize: 14, height: 1.5),
+              ),
+              const SizedBox(height: 40),
+              Divider(color: borderColor),
+              const SizedBox(height: 32),
+
+              // 01. Foundation
+              buildSectionHeader('01', 'Foundation (기초 및 토큰 네이밍 룰)', '디자인 시스템의 핵심 기반 — 색상, 서체, 여백, 중단점'),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.only(left: 16, top: 12, bottom: 12, right: 12),
+                decoration: BoxDecoration(border: Border(left: BorderSide(color: primaryColor, width: 3))),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Design Token Naming Rule (디자인 토큰 명명 규칙)', style: TextStyle(color: textMain, fontSize: 14, fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 8),
+                    RichText(text: TextSpan(style: TextStyle(color: textSub, fontSize: 12, height: 1.6), children: [
+                      const TextSpan(text: '표준 패턴: ', style: TextStyle(fontWeight: FontWeight.bold)),
+                      TextSpan(text: '--{category}-{type}-{scale}\n', style: TextStyle(fontFamily: 'monospace', color: primaryColor, fontWeight: FontWeight.bold)),
+                      const TextSpan(text: '• Category: color, font, space, breakpoint\n'),
+                      const TextSpan(text: '• Type: primary, secondary, bg, text, border, error, success\n'),
+                      const TextSpan(text: '• Scale: xs, sm, md, lg, xl, 2xl (여백) / h1, h2, body, label (서체)'),
+                    ])),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 24),
+
+              // Color Tokens
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(color: cardBg, border: Border.all(color: borderColor), borderRadius: BorderRadius.circular(8)),
+                child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Text('Color Tokens — Light / Dark Mode', style: TextStyle(color: textMain, fontSize: 13, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 4),
+                  Text('동일 토큰명, 모드별 다른 값 적용 (CSS custom property 기반)', style: TextStyle(color: textSub, fontSize: 11)),
+                  const SizedBox(height: 12),
+                  Row(children: [
+                    SizedBox(width: 100, child: Text('분류', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: textSub))),
+                    Expanded(flex: 2, child: Text('토큰명', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: textSub))),
+                    Text('Light', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: textSub)),
+                    const SizedBox(width: 55),
+                    Text('Dark', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: textSub)),
+                  ]),
+                  Divider(color: borderColor, height: 16),
+                  buildTokenRow('Primary', '--color-primary-main', primaryColor, '#' + primaryColor.value.toRadixString(16).substring(2).toUpperCase(), secondaryColor, '#' + secondaryColor.value.toRadixString(16).substring(2).toUpperCase()),
+                  buildTokenRow('Bg Primary', '--color-bg-primary', Colors.white, '#FFFFFF', const Color(0xFF0F172A), '#0F172A'),
+                  buildTokenRow('Bg Secondary', '--color-bg-secondary', const Color(0xFFF8FAFC), '#F8FAFC', const Color(0xFF1E293B), '#1E293B'),
+                  buildTokenRow('Text Primary', '--color-text-primary', const Color(0xFF1F2937), '#1F2937', const Color(0xFFF9FAFB), '#F9FAFB'),
+                  buildTokenRow('Text Secondary', '--color-text-secondary', const Color(0xFF475569), '#475569', const Color(0xFF94A3B8), '#94A3B8'),
+                  buildTokenRow('Border', '--color-border-default', const Color(0xFFE2E8F0), '#E2E8F0', const Color(0xFF334155), '#334155'),
+                  buildTokenRow('Success', '--color-success-main', const Color(0xFF10B981), '#10B981', const Color(0xFF059669), '#059669'),
+                  buildTokenRow('Error', '--color-error-main', const Color(0xFFEF4444), '#EF4444', const Color(0xFFDC2626), '#DC2626'),
+                ]),
+              ),
+              const SizedBox(height: 20),
+
+              // Typography & Spacing
+              LayoutBuilder(builder: (context, constraints) {
+                final isWide = constraints.maxWidth > 720;
+                final itemW = isWide ? (constraints.maxWidth - 20) / 2 : constraints.maxWidth;
+                return Wrap(spacing: 20, runSpacing: 16, children: [
+                  SizedBox(width: itemW, child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(color: cardBg, border: Border.all(color: borderColor), borderRadius: BorderRadius.circular(8)),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text('Typography (서체 토큰)', style: TextStyle(color: textMain, fontSize: 13, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 12),
+                      ...[
+                        ['Display', '--font-size-display', '36px', '700'],
+                        ['H1', '--font-size-h1', isMobileApp ? '24px' : '28px', '700'],
+                        ['H2', '--font-size-h2', isMobileApp ? '20px' : '22px', '700'],
+                        ['Body', '--font-size-body', '14px', '400'],
+                        ['Label', '--font-size-label', '12px', '500'],
+                        ['Caption', '--font-size-caption', '11px', '400'],
+                      ].map((row) => Padding(padding: const EdgeInsets.symmetric(vertical: 4), child: Row(children: [
+                        SizedBox(width: 60, child: Text(row[0], style: TextStyle(fontSize: 11, color: textMain))),
+                        Expanded(child: Text(row[1], style: TextStyle(fontFamily: 'monospace', fontSize: 10, color: primaryColor))),
+                        Text('\${row[2]}  W\${row[3]}', style: TextStyle(fontSize: 10, color: textSub)),
+                      ]))),
+                    ]),
+                  )),
+                  SizedBox(width: itemW, child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(color: cardBg, border: Border.all(color: borderColor), borderRadius: BorderRadius.circular(8)),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Text('Spacing & Breakpoints (여백 & 중단점)', style: TextStyle(color: textMain, fontSize: 13, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 12),
+                      ...[
+                        ['--spacing-xs', '4px', 4.0],
+                        ['--spacing-sm', '8px', 8.0],
+                        ['--spacing-md', '12px', 12.0],
+                        ['--spacing-lg', '16px', 16.0],
+                        ['--spacing-xl', '24px', 24.0],
+                        ['--spacing-2xl', '40px', 40.0],
+                      ].map((row) => Padding(padding: const EdgeInsets.symmetric(vertical: 3), child: Row(children: [
+                        Expanded(child: Text(row[0] as String, style: TextStyle(fontFamily: 'monospace', fontSize: 10, color: primaryColor))),
+                        Text(row[1] as String, style: TextStyle(fontSize: 10, color: textSub)),
+                        const SizedBox(width: 8),
+                        Container(height: 6, width: (row[2] as double) * 1.2, color: primaryColor.withOpacity(0.35)),
+                      ]))),
+                      const SizedBox(height: 12),
+                      Divider(color: borderColor, height: 8),
+                      const SizedBox(height: 8),
+                      ...[
+                        ['--breakpoint-mobile', '< 600px'],
+                        ['--breakpoint-tablet', '600–1024px'],
+                        ['--breakpoint-desktop', '>= 1024px'],
+                      ].map((row) => Padding(padding: const EdgeInsets.symmetric(vertical: 3), child: Row(children: [
+                        Expanded(child: Text(row[0], style: TextStyle(fontFamily: 'monospace', fontSize: 10, color: secondaryColor))),
+                        Text(row[1], style: TextStyle(fontSize: 10, color: textSub)),
+                      ]))),
+                    ]),
+                  )),
+                ]);
+              }),
+
+              const SizedBox(height: 40),
+              Divider(color: borderColor),
+              const SizedBox(height: 32),
+
+              // 02. Atoms
+              buildSectionHeader('02', 'Atoms (원자 컴포넌트)', '가장 기본적인 UI 요소 — 버튼, 뱃지, 입력 필드, 아이콘'),
+              const SizedBox(height: 20),
+              buildSpecRow(
+                mobilePreview: Column(children: [
+                  SizedBox(width: double.infinity, height: 48, child: ElevatedButton(onPressed: () {}, style: ElevatedButton.styleFrom(backgroundColor: btnColor, foregroundColor: Colors.white, elevation: 0, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(isMobileApp ? 12 : 6))), child: const Text('확인', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)))),
+                  const SizedBox(height: 10),
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                    Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5), decoration: BoxDecoration(color: btnColor.withOpacity(0.1), borderRadius: BorderRadius.circular(4)), child: Text('기본', style: TextStyle(color: btnColor, fontSize: 10, fontWeight: FontWeight.bold))),
+                    Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5), decoration: BoxDecoration(color: const Color(0xFF10B981).withOpacity(0.1), borderRadius: BorderRadius.circular(4)), child: const Text('성공', style: TextStyle(color: Color(0xFF10B981), fontSize: 10, fontWeight: FontWeight.bold))),
+                    Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5), decoration: BoxDecoration(color: const Color(0xFFEF4444).withOpacity(0.1), borderRadius: BorderRadius.circular(4)), child: const Text('오류', style: TextStyle(color: Color(0xFFEF4444), fontSize: 10, fontWeight: FontWeight.bold))),
+                  ]),
+                ]),
+                mobileDos: ['터치 영역은 최소 44×44px 이상 확보하십시오.', '가장 중요한 CTA는 Full Width 버튼으로 배치하십시오.'],
+                mobileDonts: ['작은 화면에서 3개 이상의 버튼을 가로 일렬 배치하지 마십시오.', '폰트 크기를 12px 미만으로 낮추지 마십시오.'],
+                desktopPreview: Row(mainAxisSize: MainAxisSize.min, children: [
+                  ElevatedButton.icon(onPressed: () {}, icon: const Icon(Icons.check, size: 13), label: const Text('저장', style: TextStyle(fontSize: 12)), style: ElevatedButton.styleFrom(backgroundColor: btnColor, foregroundColor: Colors.white, elevation: 0, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)), padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8))),
+                  const SizedBox(width: 8),
+                  OutlinedButton(onPressed: () {}, style: OutlinedButton.styleFrom(side: BorderSide(color: borderColor), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)), padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8)), child: Text('취소', style: TextStyle(fontSize: 12, color: textMain))),
+                ]),
+                desktopDos: ['마우스 포인팅이 가능하므로 인라인 배치(8–12px 간격)를 권장합니다.', 'Primary/Secondary 액션을 시각적으로 명확히 구분하십시오.'],
+                desktopDonts: ['Full Width 버튼을 데스크톱 화면 전체 너비에 사용하지 마십시오.', '비슷한 스타일의 버튼을 4개 이상 병렬 배치하지 마십시오.'],
+              ),
+
+              const SizedBox(height: 40),
+              Divider(color: borderColor),
+              const SizedBox(height: 32),
+
+              // 03. Molecules
+              buildSectionHeader('03', 'Molecules (분자 컴포넌트)', '원자 요소들을 결합한 단순 UI 유닛 — 검색창, 드롭다운, 카드 헤더'),
+              const SizedBox(height: 20),
+              buildSpecRow(
+                mobilePreview: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(color: isDark ? const Color(0xFF1E293B) : Colors.white, border: Border.all(color: borderColor), borderRadius: BorderRadius.circular(8)),
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                    Text('항목 선택', style: TextStyle(color: textMain, fontSize: 13)),
+                    Icon(Icons.keyboard_arrow_down, size: 18, color: textSub),
+                  ]),
+                ),
+                mobileDos: ['드롭다운 클릭 시 Bottom Sheet 방식으로 화면 하단에서 슬라이드하여 표시하십시오.', '항목 높이는 48px 이상으로 터치 편의성을 확보하십시오.'],
+                mobileDonts: ['플로팅 드롭다운 레이어를 작은 화면에 겹쳐 표시하지 마십시오.', '한 화면에 드롭다운을 3개 이상 나열하지 마십시오.'],
+                desktopPreview: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(color: isDark ? const Color(0xFF1E293B) : Colors.white, border: Border.all(color: borderColor), borderRadius: BorderRadius.circular(6)),
+                  child: Row(children: [
+                    Icon(Icons.search, size: 15, color: textSub),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text('검색어 입력...', style: TextStyle(color: textSub, fontSize: 12))),
+                    Container(padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4), decoration: BoxDecoration(color: btnColor, borderRadius: BorderRadius.circular(4)), child: const Text('검색', style: TextStyle(color: Colors.white, fontSize: 11))),
+                  ]),
+                ),
+                desktopDos: ['검색 입력창과 버튼을 인라인(가로 배치)으로 구성하십시오.', '자동완성 드롭다운은 입력창 바로 아래 위치하고 최대 8개 항목까지 표시하십시오.'],
+                desktopDonts: ['검색창 너비를 화면 전체(100%)로 확장하지 마십시오.', '필터와 검색 입력창을 같은 줄에 3개 이상 배치하지 마십시오.'],
+              ),
+
+              const SizedBox(height: 40),
+              Divider(color: borderColor),
+              const SizedBox(height: 32),
+
+              // 04. Organisms
+              buildSectionHeader('04', 'Organisms (유기체 컴포넌트)', '복잡한 UI 영역 — 헤더, 네비게이션, 콘텐츠 섹션'),
+              const SizedBox(height: 20),
+              buildSpecRow(
+                mobilePreview: Column(children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                    decoration: BoxDecoration(color: isDark ? const Color(0xFF1E293B) : Colors.white, border: Border.all(color: borderColor)),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                      Text('앱 타이틀', style: TextStyle(color: textMain, fontSize: 14, fontWeight: FontWeight.bold)),
+                      Row(children: [Icon(Icons.notifications_outlined, size: 20, color: textSub), const SizedBox(width: 12), Icon(Icons.menu, size: 20, color: textSub)]),
+                    ]),
+                  ),
+                  const SizedBox(height: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    decoration: BoxDecoration(color: isDark ? const Color(0xFF0F172A) : const Color(0xFFF1F5F9), border: Border(top: BorderSide(color: borderColor))),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+                      Column(children: [Icon(Icons.home, size: 20, color: btnColor), const SizedBox(height: 2), Text('홈', style: TextStyle(color: btnColor, fontSize: 10))]),
+                      Column(children: [Icon(Icons.search, size: 20, color: textSub), const SizedBox(height: 2), Text('검색', style: TextStyle(color: textSub, fontSize: 10))]),
+                      Column(children: [Icon(Icons.person_outline, size: 20, color: textSub), const SizedBox(height: 2), Text('마이', style: TextStyle(color: textSub, fontSize: 10))]),
+                    ]),
+                  ),
+                ]),
+                mobileDos: ['하단 탭 바(Bottom Navigation)는 3–5개 항목만 표시하십시오.', '현재 활성 탭은 색상 및 아이콘으로 명확히 구분하십시오.'],
+                mobileDonts: ['상단과 하단 동시에 내비게이션을 중복 배치하지 마십시오.', '탭 아이콘 없이 텍스트만으로 탭 바를 구성하지 마십시오.'],
+                desktopPreview: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  decoration: BoxDecoration(color: isDark ? const Color(0xFF1E293B) : Colors.white, border: Border.all(color: borderColor)),
+                  child: Row(children: [
+                    Text('로고', style: TextStyle(color: primaryColor, fontSize: 14, fontWeight: FontWeight.w900)),
+                    const SizedBox(width: 24),
+                    ...[('홈'), ('서비스'), ('포트폴리오')].map((t) => Padding(padding: const EdgeInsets.only(right: 16), child: Text(t, style: TextStyle(color: textSub, fontSize: 12)))),
+                    const Spacer(),
+                    Container(padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6), decoration: BoxDecoration(color: btnColor, borderRadius: BorderRadius.circular(4)), child: const Text('시작하기', style: TextStyle(color: Colors.white, fontSize: 11))),
+                  ]),
+                ),
+                desktopDos: ['상단 GNB(Global Navigation Bar)는 64px 높이를 권장합니다.', '로고, 메뉴, CTA 버튼을 왼쪽-중앙-오른쪽 구조로 배치하십시오.'],
+                desktopDonts: ['데스크톱에서 하단 탭 바를 사용하지 마십시오.', 'GNB에 6개 이상의 메뉴 항목을 나열하지 마십시오.'],
+              ),
+              const SizedBox(height: 32),
+            ],
+          ),
+        ),
       ),
-      isMobile: isMobile,
-      isTablet: isTablet,
-      isDark: isDark,
-      delay: const Duration(milliseconds: 1500),
     );
   }
 
+  Widget _buildDesignSystemSubSection(
   Widget _buildDesignSystemSubSection(
     String title,
     List<Widget> children,
