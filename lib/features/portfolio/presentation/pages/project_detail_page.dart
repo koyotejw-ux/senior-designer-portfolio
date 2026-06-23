@@ -2395,7 +2395,6 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
   }
 
   Widget _buildDesignSystemSubSection(
-  Widget _buildDesignSystemSubSection(
     String title,
     List<Widget> children,
     bool isDark,
