@@ -3,7 +3,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:go_router/go_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/theme/theme_provider.dart';
@@ -12,7 +11,6 @@ import '../../data/models/project_model.dart';
 import '../../data/providers/content_provider.dart';
 import '../pages/project_detail_page.dart';
 import 'holographic_card.dart';
-import 'web_optimized_image.dart';
 
 class PortfolioGallerySection extends ConsumerStatefulWidget {
   const PortfolioGallerySection({super.key});
@@ -93,43 +91,52 @@ class _PortfolioGallerySectionState
                       ),
                     );
                   }
-                  if (isMobile || isTablet) {
-                    return Column(
-                      children: projects.asMap().entries.map((entry) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 24),
-                          child: _buildProjectCard(
-                            entry.value,
-                            isDark,
-                            isMobile,
-                            entry.key,
+                  // Use LayoutBuilder for responsive, auto-height columns
+                  return LayoutBuilder(
+                    builder: (context, constraints) {
+                      final totalWidth = constraints.maxWidth;
+                      // Mobile: 1 column, Tablet: 1 column, Desktop: 2 columns
+                      final columns = totalWidth < 900 ? 1 : 2;
+                      const spacing = 32.0;
+                      final cardWidth = columns == 1
+                          ? totalWidth
+                          : (totalWidth - spacing) / 2;
+
+                      // Build rows of cards
+                      final List<Widget> rows = [];
+                      for (int i = 0; i < projects.length; i += columns) {
+                        final rowItems = <Widget>[];
+                        for (int j = 0; j < columns && i + j < projects.length; j++) {
+                          if (j > 0) rowItems.add(const SizedBox(width: spacing));
+                          rowItems.add(
+                            SizedBox(
+                              width: cardWidth,
+                              child: _buildProjectCard(
+                                projects[i + j],
+                                isDark,
+                                isMobile,
+                                i + j,
+                              ),
+                            ),
+                          );
+                        }
+                        // If last row has only 1 card in 2-column mode, fill remaining space
+                        if (columns == 2 && rowItems.length == 1) {
+                          rowItems.add(SizedBox(width: cardWidth + spacing));
+                        }
+                        rows.add(
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 32),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: rowItems,
+                            ),
                           ),
                         );
-                      }).toList(),
-                    );
-                  } else {
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: isTablet ? 1 : 2,
-                        crossAxisSpacing: 32,
-                        mainAxisSpacing: 32,
-                        childAspectRatio: isTablet
-                            ? 1.8
-                            : 1.1, // Increased for tablet to prevent overflow
-                      ),
-                      itemCount: projects.length,
-                      itemBuilder: (context, index) {
-                        return _buildProjectCard(
-                          projects[index],
-                          isDark,
-                          isMobile,
-                          index,
-                        );
-                      },
-                    );
-                  }
+                      }
+                      return Column(children: rows);
+                    },
+                  );
                 },
                 loading: () => const Center(child: CircularProgressIndicator()),
                 error: (err, stack) => Center(
@@ -146,71 +153,6 @@ class _PortfolioGallerySectionState
         ),
       ),
     );
-  }
-
-  Widget _buildNavButton(
-    String label,
-    IconData icon,
-    List<Color> colors,
-    VoidCallback onTap,
-    bool isDark,
-  ) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 22),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: colors,
-            ),
-            borderRadius: BorderRadius.circular(40),
-            boxShadow: [
-              BoxShadow(
-                color: colors[0].withValues(alpha: 0.5),
-                blurRadius: 25,
-                offset: const Offset(0, 10),
-              ),
-              BoxShadow(
-                color: colors[1].withValues(alpha: 0.3),
-                blurRadius: 50,
-                offset: const Offset(0, 15),
-              ),
-            ],
-            border: Border.all(
-              color: Colors.white.withValues(alpha: 0.3),
-              width: 2,
-            ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(icon, color: Colors.white, size: 28),
-              const SizedBox(width: 16),
-              Text(
-                label.toUpperCase(),
-                style: AppTypography.h3.copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 20,
-                  letterSpacing: 2.0,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withValues(alpha: 0.5),
-                      offset: const Offset(0, 2),
-                      blurRadius: 8,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.2, end: 0);
   }
 
   Widget _buildProjectCard(
@@ -246,11 +188,10 @@ class _PortfolioGallerySectionState
                   : Matrix4.identity(),
               child: HolographicCard(
                 accentColor: accentColor,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
                       // Image (if available)
                       if (project.imageUrl != null) ...[
                         GestureDetector(
@@ -484,7 +425,6 @@ class _PortfolioGallerySectionState
                 ),
               ),
             ),
-          ),
         )
         .animate()
         .fadeIn(duration: 800.ms, delay: (200 + index * 100).ms)
