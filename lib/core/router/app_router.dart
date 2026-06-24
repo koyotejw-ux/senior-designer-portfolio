@@ -16,6 +16,8 @@ import '../constants/app_constants.dart';
 class AppRouter {
   AppRouter._();
 
+  static bool isAdminLoggedIn = false;
+
   static final GoRouter router = GoRouter(
     initialLocation: '/',
     debugLogDiagnostics: true,
@@ -82,10 +84,8 @@ class AppRouter {
         name: 'admin-dashboard',
         builder: (context, state) => const AdminPage(),
         redirect: (context, state) {
-          final user = FirebaseAuth.instance.currentUser;
-          final isAdmin = user != null && user.uid == AppConstants.adminUid;
-          if (!isAdmin) {
-            return '/';
+          if (!isAdminLoggedIn) {
+            return '/admin/login';
           }
           return null;
         },

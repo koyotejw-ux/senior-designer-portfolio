@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -70,45 +71,90 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       List<img.Image> allDecodedImages = [];
 
       // Step 1: 모든 프로젝트 이미지 다운로드 및 디코딩
+      final introImages = [
+        'assets/images/int_01.jpg',
+        'assets/images/int_02.png',
+        'assets/images/int_03.jpg',
+      ];
+
+      for (int i = 0; i < introImages.length; i++) {
+        setState(() {
+          _statusMessage = 'Loading Intro Image ${i + 1}/${introImages.length}';
+        });
+        await Future.delayed(const Duration(milliseconds: 50));
+        try {
+          final ByteData data = await rootBundle.load(introImages[i]);
+          final rawBytes = data.buffer.asUint8List();
+          img.Image? decoded = img.decodeImage(rawBytes);
+          if (decoded != null) {
+            if (decoded.width != targetW.toInt()) {
+              var interp = targetW > decoded.width
+                  ? img.Interpolation.cubic
+                  : img.Interpolation.average;
+              decoded = img.copyResize(
+                decoded,
+                width: targetW.toInt(),
+                interpolation: interp,
+              );
+            }
+            allDecodedImages.add(decoded);
+          }
+        } catch (e) {
+          debugPrint('Error loading intro image ${introImages[i]}: $e');
+        }
+      }
+
       for (int i = 0; i < _orderedProjects.length; i++) {
         final project = _orderedProjects[i];
-        if (project.imageUrl == null) continue;
+        final imagesToProcess = project.mainScreenImages.isNotEmpty 
+            ? project.mainScreenImages 
+            : (project.imageUrl != null ? [project.imageUrl!] : []);
 
-        setState(() {
-          _statusMessage =
-              'Downloading ${i + 1}/${_orderedProjects.length}\n${project.title}';
-        });
-        await Future.delayed(Duration(milliseconds: 50));
+        for (int j = 0; j < imagesToProcess.length; j++) {
+          final imagePath = imagesToProcess[j];
+          setState(() {
+            _statusMessage =
+                'Loading ${i + 1}/${_orderedProjects.length}\n${project.title} (${j + 1}/${imagesToProcess.length})';
+          });
+          await Future.delayed(const Duration(milliseconds: 50));
 
-        try {
-          final resp = await http.get(Uri.parse(project.imageUrl!));
-          if (resp.statusCode != 200) {
-            debugPrint('HTTP Error ${resp.statusCode} for ${project.imageUrl}');
-            continue;
+          try {
+            Uint8List rawBytes;
+            if (imagePath.startsWith('http')) {
+              final resp = await http.get(Uri.parse(imagePath));
+              if (resp.statusCode != 200) {
+                debugPrint('HTTP Error ${resp.statusCode} for $imagePath');
+                continue;
+              }
+              rawBytes = resp.bodyBytes;
+            } else {
+              // It's a local asset
+              final ByteData data = await rootBundle.load(imagePath);
+              rawBytes = data.buffer.asUint8List();
+            }
+
+            img.Image? decoded = img.decodeImage(rawBytes);
+            if (decoded == null) {
+              debugPrint('Failed to decode image: $imagePath');
+              continue;
+            }
+
+            // Resize to target width
+            if (decoded.width != targetW.toInt()) {
+              var interp = targetW > decoded.width
+                  ? img.Interpolation.cubic
+                  : img.Interpolation.average;
+              decoded = img.copyResize(
+                decoded,
+                width: targetW.toInt(),
+                interpolation: interp,
+              );
+            }
+
+            allDecodedImages.add(decoded);
+          } catch (e) {
+            debugPrint('Error processing ${project.title} ($imagePath): $e');
           }
-
-          final rawBytes = resp.bodyBytes;
-          img.Image? decoded = img.decodeImage(rawBytes);
-          if (decoded == null) {
-            debugPrint('Failed to decode image: ${project.imageUrl}');
-            continue;
-          }
-
-          // Resize to target width
-          if (decoded.width != targetW.toInt()) {
-            var interp = targetW > decoded.width
-                ? img.Interpolation.cubic
-                : img.Interpolation.average;
-            decoded = img.copyResize(
-              decoded,
-              width: targetW.toInt(),
-              interpolation: interp,
-            );
-          }
-
-          allDecodedImages.add(decoded);
-        } catch (e) {
-          debugPrint('Error processing ${project.title}: $e');
         }
       }
 

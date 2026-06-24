@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script type="text/javascript">
+    var pathname = window.location.pathname;
+    // Check if we are running under the GitHub Pages repo path
+    var baseHref = '/';
+    if (pathname.indexOf('/senior-designer-portfolio/') === 0) {
+      baseHref = '/senior-designer-portfolio/';
+    }
+    
+    // Get the relative path
+    var path = pathname;
+    if (path.indexOf(baseHref) === 0) {
+      path = path.substring(baseHref.length);
+    } else if (path.indexOf('/') === 0) {
+      path = path.substring(1);
+    }
+    
+    // Build target hash URL
+    var search = window.location.search || '';
+    var hash = window.location.hash || '';
+    
+    var targetUrl = window.location.protocol + '//' + window.location.host + baseHref + '#' + '/' + path + search + hash;
+    window.location.replace(targetUrl);
+  </script>
+</head>
+<body>
+  Redirecting...
+</body>
+</html>
