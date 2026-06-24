@@ -661,8 +661,56 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                       }).toList(),
                     );
                   } else if (isSamMes) {
-                    // SAM MES uses split layout: images 1-6, design system, images 7-8
-                    imageWidget = const SizedBox.shrink();
+                    final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
+                    final List<Map<String, dynamic>> samImages = [
+                      {
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes.jpg' : 'assets/images/sam_mes.jpg',
+                        'ratio': 22933 / 1920,
+                      },
+                    ];
+
+                    imageWidget = Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: samImages.map((imgData) {
+                        final String imgUrl = imgData['url'] as String;
+                        final double ratio = imgData['ratio'] as double;
+                        final double calculatedHeight = screenWidth * ratio;
+
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      }).toList(),
+                    );
                   } else if (project.imageUrl != null && project.imageUrl!.isNotEmpty) {
                     if (project.imageUrl!.startsWith('http')) {
                      // Use WebOptimizedImage for network images to bypass WebGL limits
@@ -725,69 +773,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                    );
                  }
 
-                if (isSamMes) {
-                  final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
-                  final samMesPart1 = <Map<String, dynamic>>[
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_1.jpg' : 'assets/images/sam_mes_1.jpg', 'ratio': 2866 / 1920},
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_2.jpg' : 'assets/images/sam_mes_2.jpg', 'ratio': 2866 / 1920},
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_3.jpg' : 'assets/images/sam_mes_3.jpg', 'ratio': 2866 / 1920},
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_4.jpg' : 'assets/images/sam_mes_4.jpg', 'ratio': 2866 / 1920},
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_5.jpg' : 'assets/images/sam_mes_5.jpg', 'ratio': 2866 / 1920},
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_6.jpg' : 'assets/images/sam_mes_6.jpg', 'ratio': 2866 / 1920},
-                  ];
-                  final samMesPart2 = <Map<String, dynamic>>[
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_7.jpg' : 'assets/images/sam_mes_7.jpg', 'ratio': 2866 / 1920},
-                    {'url': isNetwork ? 'http://localhost:8080/images/sam_mes_8.jpg' : 'assets/images/sam_mes_8.jpg', 'ratio': 2871 / 1920},
-                  ];
 
-                  Widget buildSamMesImageColumn(List<Map<String, dynamic>> images) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: images.map((imgData) {
-                        final String imgUrl = imgData['url'] as String;
-                        final double ratio = imgData['ratio'] as double;
-                        final double h = screenWidth * ratio;
-                        if (imgUrl.startsWith('http')) {
-                          return WebOptimizedImage(
-                            imageUrl: imgUrl, width: screenWidth, height: h,
-                            fit: BoxFit.fitWidth, alignment: Alignment.topCenter,
-                            loadingWidget: SizedBox(height: h > 500 ? 500 : h, child: const Center(child: CircularProgressIndicator())),
-                          );
-                        } else {
-                          return Image.asset(imgUrl, width: screenWidth, height: h, fit: BoxFit.fitWidth, alignment: Alignment.topCenter,
-                            errorBuilder: (c, e, s) => SizedBox(height: 300, child: Center(child: Text('Asset not found: $imgUrl', style: const TextStyle(color: Colors.white)))),
-                          );
-                        }
-                      }).toList(),
-                    );
-                  }
-
-                  return SingleChildScrollView(
-                    controller: _scrollController,
-                    physics: const ClampingScrollPhysics(),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // Part 1: Images 1-6
-                        SizedBox(
-                          key: _imageKey,
-                          width: double.infinity,
-                          child: buildSamMesImageColumn(samMesPart1),
-                        ),
-                        // Design System Specification Section
-                        _buildDesignSystemSection(isDark: isDark),
-                        // Admin Management UI Section
-                        _buildAdminManagementSection(isDark: isDark),
-                        // Part 2: Images 7-8 (UI Screens)
-                        SizedBox(
-                          width: double.infinity,
-                          child: buildSamMesImageColumn(samMesPart2),
-                        ),
-                      ],
-                    ),
-                  );
-                }
 
                 return SingleChildScrollView(
                   controller: _scrollController,
@@ -1159,7 +1145,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
               children: [
                 const Icon(Icons.cancel, color: Color(0xFFEF4444), size: 14),
                 const SizedBox(width: 6),
-                Text('DON'T (금지 사항)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: isDark ? const Color(0xFFF87171) : const Color(0xFFDC2626))),
+                Text("DON'T (금지 사항)", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: isDark ? const Color(0xFFF87171) : const Color(0xFFDC2626))),
               ],
             ),
             const SizedBox(height: 6),

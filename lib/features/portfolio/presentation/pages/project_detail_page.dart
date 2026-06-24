@@ -236,19 +236,12 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 // Hero Section
                 _buildHeroSection(projectData, isMobile, isTablet, isDark),
 
-                // Project Image(s) with Design System split for SAM MES+ERP
-                if (isSamMes) ...[
-                  _buildProjectImagesSplit(projectData, isMobile, isTablet, firstPart: true),
-                  _buildDesignSystemSection(isDark: isDark),
-                  _buildAdminManagementSection(isDark: isDark),
-                  _buildProjectImagesSplit(projectData, isMobile, isTablet, firstPart: false),
-                ] else ...[
-                  _buildProjectImages(
-                    projectData,
-                    isMobile,
-                    isTablet,
-                  ),
-                ],
+                // Project Image(s)
+                _buildProjectImages(
+                  projectData,
+                  isMobile,
+                  isTablet,
+                ),
 
                 // Project Info
                 if (!hideDetails) _buildProjectInfo(projectData, isMobile, isTablet, isDark),
@@ -2617,36 +2610,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     } else if (isSamMes) {
       imagesToRender = [
         {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_1.jpg' : 'assets/images/sam_mes_1.jpg',
-          'ratio': 2866 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_2.jpg' : 'assets/images/sam_mes_2.jpg',
-          'ratio': 2866 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_3.jpg' : 'assets/images/sam_mes_3.jpg',
-          'ratio': 2866 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_4.jpg' : 'assets/images/sam_mes_4.jpg',
-          'ratio': 2866 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_5.jpg' : 'assets/images/sam_mes_5.jpg',
-          'ratio': 2866 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_6.jpg' : 'assets/images/sam_mes_6.jpg',
-          'ratio': 2866 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_7.jpg' : 'assets/images/sam_mes_7.jpg',
-          'ratio': 2866 / 1920,
-        },
-        {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_8.jpg' : 'assets/images/sam_mes_8.jpg',
-          'ratio': 2871 / 1920,
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes.jpg' : 'assets/images/sam_mes.jpg',
+          'ratio': 22933 / 1920,
         },
       ];
     } else {
