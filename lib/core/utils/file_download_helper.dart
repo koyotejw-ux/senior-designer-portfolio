@@ -1,39 +1,32 @@
-import 'dart:typed_data';
-import 'dart:html' as html;
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:js_interop';
 import 'package:flutter/foundation.dart';
 
+/// JS interop 선언: window.savePdfFile(uint8Array, fileName, mimeType)
+@JS('savePdfFile')
+external void _savePdfFile(JSUint8Array bytes, JSString fileName, JSString mimeType);
+
+/// Web 전용 파일 다운로드 헬퍼.
+///
+/// web/index.html에 삽입된 FileSaver.js 기반의 `savePdfFile` JS 함수를
+/// dart:js_interop으로 직접 호출합니다.
+///
+/// Chrome 등 최신 브라우저에서 Blob URL이 UUID 파일명으로 저장되는 오류를
+/// 완벽하게 해결합니다.
 class FileDownloadHelper {
-  /// Downloads a file on Web by creating a Blob URL and triggering an anchor click.
-  /// It keeps the anchor element in the DOM and keeps the Blob URL alive for a short
-  /// delay (e.g., 15 seconds) to ensure that the browser (specifically Chrome) has
-  /// enough time to resolve the download metadata and apply the correct filename.
   static void downloadFile({
     required Uint8List bytes,
     required String fileName,
-    String mimeType = 'application/octet-stream',
+    String mimeType = 'application/pdf',
   }) {
     if (!kIsWeb) return;
+
     try {
-      final blob = html.Blob([bytes], mimeType);
-      final url = html.Url.createObjectUrlFromBlob(blob);
-      final anchor = html.document.createElement('a') as html.AnchorElement
-        ..href = url
-        ..download = fileName
-        ..style.display = 'none';
-
-      html.document.body?.children.add(anchor);
-      anchor.click();
-
-      // Delay removal and revocation to prevent Chrome from ignoring the filename
-      // or canceling the download.
-      Future.delayed(const Duration(seconds: 15), () {
-        try {
-          anchor.remove();
-          html.Url.revokeObjectUrl(url);
-        } catch (_) {}
-      });
+      // Dart Uint8List → JavaScript Uint8Array 변환
+      final jsBytes = bytes.toJS;
+      _savePdfFile(jsBytes, fileName.toJS, mimeType.toJS);
     } catch (e) {
-      debugPrint('Error downloading file: $e');
+      debugPrint('FileDownloadHelper JS interop error: $e');
     }
   }
 }
