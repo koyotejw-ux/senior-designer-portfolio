@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'dart:html' as html;
 
 import 'package:flutter/material.dart';
+import '../../../../core/utils/file_download_helper.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:pdf/pdf.dart';
@@ -1138,14 +1139,10 @@ class ProfessionalResumePDF {
 
   /// Download PDF with given bytes and filename
   static void downloadPDF(Uint8List bytes, String filename) {
-    final blob = html.Blob([bytes], 'application/pdf');
-    final url = html.Url.createObjectUrlFromBlob(blob);
-    final anchor = html.AnchorElement(href: url)
-      ..setAttribute('download', '$filename.pdf')
-      ..style.display = 'none';
-    html.document.body?.children.add(anchor);
-    anchor.click();
-    html.document.body?.children.remove(anchor);
-    html.Url.revokeObjectUrl(url);
+    FileDownloadHelper.downloadFile(
+      bytes: bytes,
+      fileName: '$filename.pdf',
+      mimeType: 'application/pdf',
+    );
   }
 }

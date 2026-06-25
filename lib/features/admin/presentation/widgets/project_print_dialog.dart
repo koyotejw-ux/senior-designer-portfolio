@@ -9,6 +9,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:image/image.dart' as img;
 
+import '../../../../core/utils/file_download_helper.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../home/data/models/project_model.dart';
 
@@ -337,9 +338,13 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
     }
   }
 
-  void _download() async {
+  void _download() {
     if (_finalBytes == null) return;
-    await Printing.sharePdf(bytes: _finalBytes!, filename: 'portfolio_master.pdf');
+    FileDownloadHelper.downloadFile(
+      bytes: _finalBytes!,
+      fileName: 'portfolio_master.pdf',
+      mimeType: 'application/pdf',
+    );
   }
 
   @override

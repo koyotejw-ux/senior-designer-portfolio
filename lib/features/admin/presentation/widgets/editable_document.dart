@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
+import 'dart:typed_data';
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
+import '../../../../core/utils/file_download_helper.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -232,32 +234,14 @@ class _EditableDocumentState extends State<EditableDocument> {
     try {
       final document = _generateDocument(format: format);
       final bytes = utf8.encode(document);
-      final blob = html.Blob([bytes]);
-      final url = html.Url.createObjectUrlFromBlob(blob);
-
-      // 파일 확장자 설정
-      String extension;
-      switch (format) {
-        case 'md':
-          extension = 'md';
-          break;
-        case 'html':
-          extension = 'html';
-          break;
-        default:
-          extension = 'txt';
-      }
-
-      final anchor = html.document.createElement('a') as html.AnchorElement
-        ..href = url
-        ..style.display = 'none'
-        ..download = '${widget.title}_${DateTime.now().toString().substring(0, 10)}.$extension';
-      html.document.body?.children.add(anchor);
-
-      anchor.click();
-
-      html.document.body?.children.remove(anchor);
-      html.Url.revokeObjectUrl(url);
+      // 파일 다운로드 헬퍼 호출
+      final extension = format == 'html' ? 'html' : (format == 'md' ? 'md' : 'txt');
+      final mimeType = format == 'html' ? 'text/html' : (format == 'md' ? 'text/markdown' : 'text/plain');
+      FileDownloadHelper.downloadFile(
+        bytes: Uint8List.fromList(bytes),
+        fileName: '${widget.title}_${DateTime.now().toString().substring(0, 10)}.$extension',
+        mimeType: '$mimeType;charset=utf-8',
+      );
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

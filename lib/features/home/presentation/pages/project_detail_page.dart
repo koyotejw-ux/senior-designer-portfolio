@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'dart:html' as html;
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
+import '../../../../core/utils/file_download_helper.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:image/image.dart' as img;
@@ -109,13 +110,11 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
       final Uint8List pdfBytes = await pdf.save();
 
       // Download
-      final blob = html.Blob([pdfBytes], 'application/pdf');
-      final url = html.Url.createObjectUrlFromBlob(blob);
-      final anchor = html.AnchorElement(href: url)
-        ..download = '${projectTitle.replaceAll(' ', '_')}.pdf'
-        ..click();
-
-      html.Url.revokeObjectUrl(url);
+      FileDownloadHelper.downloadFile(
+        bytes: pdfBytes,
+        fileName: '${projectTitle.replaceAll(' ', '_')}.pdf',
+        mimeType: 'application/pdf',
+      );
 
       if (mounted) {
         setState(() {
