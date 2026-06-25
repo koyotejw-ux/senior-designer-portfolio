@@ -142,16 +142,15 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
     });
 
     try {
-      final pdf = pw.Document();
-
       double targetW = 1920.0;
       final wInput = double.tryParse(_widthController.text);
       if (wInput != null && wInput > 0) targetW = wInput;
+      final int targetWInt = targetW.toInt();
 
       final isLossless = _quality >= 10.0;
       final jpgQuality = (_quality * 10).toInt().clamp(10, 90);
 
-      // Calculate total work items for progress
+      // 1. Count total items
       int totalItems = 0;
       for (final entry in _introEntries) {
         if (entry.selected) totalItems++;
@@ -159,172 +158,162 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       for (int i = 0; i < _orderedProjects.length; i++) {
         if (!_projectSelected[i]) continue;
         final project = _orderedProjects[i];
-        final images = project.mainScreenImages.isNotEmpty
-            ? project.mainScreenImages
-            : (project.imageUrl != null ? [project.imageUrl!] : []);
-        totalItems += images.length;
+        totalItems += (project.mainScreenImages.isNotEmpty
+                ? project.mainScreenImages
+                : (project.imageUrl != null ? [project.imageUrl!] : []))
+            .length;
       }
-
-      if (totalItems == 0) {
-        throw Exception('No items selected.');
-      }
+      if (totalItems == 0) throw Exception('No items selected.');
 
       int processedItems = 0;
 
-      // Max page height in pixels (to split tall images)
-      // Using a reasonable max height per PDF page
-      final int maxPageHeightPx = (targetW * 1.414).toInt(); // ~A4 ratio
+      // 2. Load all images resized to targetW
+      final List<img.Image> allImages = [];
 
-      List<pw.Widget> currentPageWidgets = [];
-      double currentPageHeight = 0;
-      final double maxPdfPageHeight = 14000.0; // PDF format safe limit
-
-      /// Helper: decode bytes -> resize to targetW -> split -> pack into pages
-      void addImageToPdf(Uint8List rawBytes, String label) {
-        img.Image? decoded = img.decodeImage(rawBytes);
-        if (decoded == null) {
-          debugPrint('Failed to decode image: $label');
-          return;
-        }
-
-        if (decoded.width != targetW.toInt()) {
-          var interp = targetW > decoded.width
-              ? img.Interpolation.cubic
-              : img.Interpolation.average;
-          decoded = img.copyResize(
-            decoded,
-            width: targetW.toInt(),
-            interpolation: interp,
-          );
-        }
-
-        int remainingY = 0;
-        while (remainingY < decoded.height) {
-          int chunkH = (decoded.height - remainingY).clamp(1, maxPageHeightPx);
-
-          final chunk = img.copyCrop(
-            decoded,
-            x: 0,
-            y: remainingY,
-            width: decoded.width,
-            height: chunkH,
-          );
-
-          Uint8List chunkBytes;
-          if (isLossless) {
-            chunkBytes = Uint8List.fromList(img.encodePng(chunk));
-          } else {
-            chunkBytes = Uint8List.fromList(
-              img.encodeJpg(chunk, quality: jpgQuality),
-            );
-          }
-
-          // Check if adding this chunk exceeds the max page height
-          if (currentPageHeight + chunkH > maxPdfPageHeight && currentPageWidgets.isNotEmpty) {
-            // Flush current page
-            pdf.addPage(
-              pw.Page(
-                pageFormat: PdfPageFormat(targetW, currentPageHeight, marginAll: 0),
-                margin: pw.EdgeInsets.zero,
-                build: (ctx) => pw.Column(
-                  mainAxisSize: pw.MainAxisSize.min,
-                  crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-                  children: List.from(currentPageWidgets),
-                ),
-              ),
-            );
-            currentPageWidgets.clear();
-            currentPageHeight = 0;
-          }
-
-          currentPageWidgets.add(
-            pw.Image(
-              pw.MemoryImage(chunkBytes),
-              width: targetW,
-              height: chunkH.toDouble(),
-              fit: pw.BoxFit.fill,
-            ),
-          );
-          currentPageHeight += chunkH.toDouble();
-          remainingY += chunkH;
-        }
+      img.Image resizeTo(img.Image src) {
+        if (src.width == targetWInt) return src;
+        final interp = targetWInt > src.width
+            ? img.Interpolation.cubic
+            : img.Interpolation.average;
+        return img.copyResize(src, width: targetWInt, interpolation: interp);
       }
 
-      // --- STEP 1: Process selected intro images ---
-      for (int i = 0; i < _introEntries.length; i++) {
-        final entry = _introEntries[i];
+      // Intro images
+      for (final entry in _introEntries) {
         if (!entry.selected) continue;
-
         setState(() {
-          _statusMessage = 'Loading Intro: ${entry.label}';
-          _progress = processedItems / totalItems;
+          _statusMessage = 'Loading intro: ${entry.label}';
+          _progress = processedItems / totalItems * 0.75;
         });
         await Future.delayed(const Duration(milliseconds: 30));
-
         final bytes = await _loadIntroImageBytes(entry);
         if (bytes != null) {
-          addImageToPdf(bytes, entry.label);
+          final decoded = img.decodeImage(bytes);
+          if (decoded != null) allImages.add(resizeTo(decoded));
         }
         processedItems++;
       }
 
-      // --- STEP 2: Process selected project images ---
+      // Portfolio images
       for (int i = 0; i < _orderedProjects.length; i++) {
         if (!_projectSelected[i]) continue;
-
         final project = _orderedProjects[i];
-        final imagePaths = project.mainScreenImages.isNotEmpty
+        final paths = project.mainScreenImages.isNotEmpty
             ? project.mainScreenImages
-            : (project.imageUrl != null ? [project.imageUrl!] : []);
+            : (project.imageUrl != null ? [project.imageUrl!] : <String>[]);
 
-        for (int j = 0; j < imagePaths.length; j++) {
-          final imagePath = imagePaths[j];
-
+        for (int j = 0; j < paths.length; j++) {
           setState(() {
             _statusMessage =
-                'Loading: ${project.title}\n(${j + 1}/${imagePaths.length})';
-            _progress = processedItems / totalItems;
+                'Loading: ${project.title} (${j + 1}/${paths.length})';
+            _progress = processedItems / totalItems * 0.75;
           });
           await Future.delayed(const Duration(milliseconds: 30));
-
-          final bytes = await _loadImageBytes(imagePath);
+          final bytes = await _loadImageBytes(paths[j]);
           if (bytes != null) {
-            addImageToPdf(bytes, '${project.title} - $imagePath');
+            final decoded = img.decodeImage(bytes);
+            if (decoded != null) allImages.add(resizeTo(decoded));
           }
           processedItems++;
         }
       }
 
-      if (currentPageWidgets.isNotEmpty) {
+      if (allImages.isEmpty) throw Exception('No images could be loaded.');
+
+      // 3. Calculate cumulative Y start positions
+      final List<int> imageStartY = [];
+      int cumY = 0;
+      for (final im in allImages) {
+        imageStartY.add(cumY);
+        cumY += im.height;
+      }
+      final int totalH = cumY;
+
+      // 4. Build PDF pages via canvas compositing (zero gaps guaranteed)
+      const int maxPageH = 14000;
+      final pdf = pw.Document();
+      int pageStartY = 0;
+      int pageIndex = 0;
+      final int totalPages = ((totalH - 1) ~/ maxPageH) + 1;
+
+      while (pageStartY < totalH) {
+        final int pageH = (totalH - pageStartY).clamp(1, maxPageH);
+        final int pageEndY = pageStartY + pageH;
+
+        setState(() {
+          _statusMessage = 'Building page ${pageIndex + 1}/$totalPages...';
+          _progress = 0.75 + 0.2 * pageIndex / totalPages;
+        });
+        await Future.delayed(const Duration(milliseconds: 30));
+
+        // Blank canvas for this page
+        final canvas = img.Image(width: targetWInt, height: pageH);
+
+        // Composite every overlapping image slice at exact pixel positions
+        for (int i = 0; i < allImages.length; i++) {
+          final imgStart = imageStartY[i];
+          final imgEnd = imgStart + allImages[i].height;
+          if (imgEnd <= pageStartY || imgStart >= pageEndY) continue;
+
+          final overlapStart = imgStart < pageStartY ? pageStartY : imgStart;
+          final overlapEnd = imgEnd > pageEndY ? pageEndY : imgEnd;
+          final sliceH = overlapEnd - overlapStart;
+          if (sliceH <= 0) continue;
+
+          final srcY = overlapStart - imgStart;
+          final dstY = overlapStart - pageStartY;
+
+          final slice = img.copyCrop(
+            allImages[i],
+            x: 0,
+            y: srcY,
+            width: targetWInt,
+            height: sliceH,
+          );
+          img.compositeImage(canvas, slice, dstX: 0, dstY: dstY);
+        }
+
+        // Encode merged canvas as a single image
+        final Uint8List pageBytes = isLossless
+            ? Uint8List.fromList(img.encodePng(canvas))
+            : Uint8List.fromList(img.encodeJpg(canvas, quality: jpgQuality));
+
+        // One image per PDF page — no layout engine, no gaps
+        final capturedH = pageH;
+        final capturedBytes = pageBytes;
         pdf.addPage(
           pw.Page(
-            pageFormat: PdfPageFormat(targetW, currentPageHeight, marginAll: 0),
+            pageFormat:
+                PdfPageFormat(targetW, capturedH.toDouble(), marginAll: 0),
             margin: pw.EdgeInsets.zero,
-            build: (ctx) => pw.Column(
-              mainAxisSize: pw.MainAxisSize.min,
-              crossAxisAlignment: pw.CrossAxisAlignment.stretch,
-              children: List.from(currentPageWidgets),
+            build: (ctx) => pw.Image(
+              pw.MemoryImage(capturedBytes),
+              width: targetW,
+              height: capturedH.toDouble(),
+              fit: pw.BoxFit.fill,
             ),
           ),
         );
+
+        pageStartY = pageEndY;
+        pageIndex++;
       }
 
+      // 5. Save PDF
       setState(() {
         _statusMessage = 'Finalizing PDF...';
-        _progress = 1.0;
+        _progress = 0.98;
       });
       await Future.delayed(const Duration(milliseconds: 100));
 
       final pdfBytes = await pdf.save();
-      final blob = html.Blob([pdfBytes], 'application/pdf');
-      final url = html.Url.createObjectUrlFromBlob(blob);
 
       if (mounted) {
         setState(() {
           _isProcessing = false;
           _statusMessage = 'Complete!';
           _finalBytes = pdfBytes;
-          _blobUrl = url;
+          _blobUrl = null;
         });
       }
     } catch (e) {

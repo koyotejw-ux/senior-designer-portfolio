@@ -78,8 +78,8 @@
           bytes[i] = binaryString.charCodeAt(i);
         }
 
-        // 2. Blob 생성
-        var blob = new Blob([bytes.buffer], { type: mimeType || 'application/pdf' });
+        // 2. Blob 생성 (ArrayBuffer 대신 Uint8Array 자체를 전달하여 올바른 offset/length 유지)
+        var blob = new Blob([bytes], { type: mimeType || 'application/pdf' });
 
         // 3. msSaveBlob (IE/Legacy Edge 지원)
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
