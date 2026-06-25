@@ -60,25 +60,56 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
-  <!-- FileSaver.js for reliable PDF/file downloads -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   <script>
-    // Called from Dart via JS interop to save a file with a correct filename
-    function savePdfFile(uint8Array, fileName, mimeType) {
+    /**
+     * Dart에서 Base64 인코딩된 PDF 바이트를 받아 파일로 저장합니다.
+     * CDN 없이 순수 브라우저 API만 사용하며, Chrome/Firefox/Safari 모두 지원합니다.
+     *
+     * @param {string} base64Data - Base64로 인코딩된 파일 바이트
+     * @param {string} fileName   - 저장할 파일명 (예: portfolio_master.pdf)
+     * @param {string} mimeType   - MIME 타입 (예: application/pdf)
+     */
+    function downloadFileFromBase64(base64Data, fileName, mimeType) {
       try {
-        var blob = new Blob([uint8Array], { type: mimeType || 'application/pdf' });
-        saveAs(blob, fileName);
+        // 1. Base64 → binary string → Uint8Array
+        var binaryString = atob(base64Data);
+        var bytes = new Uint8Array(binaryString.length);
+        for (var i = 0; i < binaryString.length; i++) {
+          bytes[i] = binaryString.charCodeAt(i);
+        }
+
+        // 2. Blob 생성
+        var blob = new Blob([bytes.buffer], { type: mimeType || 'application/pdf' });
+
+        // 3. msSaveBlob (IE/Legacy Edge 지원)
+        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          window.navigator.msSaveOrOpenBlob(blob, fileName);
+          return;
+        }
+
+        // 4. 표준 anchor download 방식 (Chrome, Firefox, Safari)
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.style.display = 'none';
+        link.href = url;
+        link.setAttribute('download', fileName);
+
+        // 일부 브라우저는 body에 추가해야 click이 동작합니다
+        document.body.appendChild(link);
+
+        // click 이벤트를 직접 dispatch (programmatic click보다 안정적)
+        link.dispatchEvent(
+          new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
+        );
+
+        // 60초 뒤 정리 (다운로드가 완전히 완료된 뒤 URL revoke)
+        setTimeout(function() {
+          link.remove();
+          URL.revokeObjectURL(url);
+        }, 60000);
+
       } catch (e) {
-        console.error('savePdfFile error:', e);
-        // Fallback: direct anchor approach with long-lived URL
-        var url = URL.createObjectURL(new Blob([uint8Array], { type: mimeType || 'application/pdf' }));
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = fileName;
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function() { a.remove(); URL.revokeObjectURL(url); }, 30000);
+        console.error('[downloadFileFromBase64] Error:', e);
       }
     }
   </script>
