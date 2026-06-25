@@ -2481,4 +2481,21 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
       ),
     );
   }
+
+  Widget _buildSpacingBox(double size, String label, {required bool isDark}) {
+    return Column(
+      children: [
+        Container(
+          width: size * 1.5,
+          height: 12,
+          color: const Color(0xFF3B82F6).withValues(alpha: 0.2),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          label,
+          style: TextStyle(color: isDark ? Colors.white70 : const Color(0xFF0F172A), fontSize: 8),
+        ),
+      ],
+    );
+  }
 }
