@@ -337,10 +337,9 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
   }
 
   void _download() {
-    if (_blobUrl == null) return;
-    final anchor = html.AnchorElement(href: _blobUrl)
-      ..setAttribute('download', 'portfolio_master.pdf')
-      ..style.display = 'none';
+    final anchor = html.AnchorElement(href: _blobUrl!)
+      ..download = 'portfolio_master.pdf'
+      ..target = 'blank';
     html.document.body?.append(anchor);
     anchor.click();
     anchor.remove();

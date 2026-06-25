@@ -271,13 +271,45 @@ class _ProjectsTabState extends ConsumerState<_ProjectsTab> {
               .where((p) => p.isCorporate == widget.isCorporate)
               .toList();
 
-          return ReorderableListView.builder(
-            padding: const EdgeInsets.only(
-              left: 20,
-              right: 20,
-              top: 20,
-              bottom: 100, // Space for FABs
-            ),
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Row(
+                  children: [
+                    TextButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          for (final p in filteredProjects) {
+                            _selectedProjectIds.add(p.id);
+                          }
+                        });
+                      },
+                      icon: const Icon(Icons.select_all, size: 18),
+                      label: const Text('Select All'),
+                      style: TextButton.styleFrom(foregroundColor: Colors.white70),
+                    ),
+                    const SizedBox(width: 8),
+                    TextButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          _selectedProjectIds.clear();
+                        });
+                      },
+                      icon: const Icon(Icons.deselect, size: 18),
+                      label: const Text('Select None'),
+                      style: TextButton.styleFrom(foregroundColor: Colors.white70),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: ReorderableListView.builder(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                    bottom: 100, // Space for FABs
+                  ),
             itemCount: filteredProjects.length,
             onReorder: (oldIndex, newIndex) => _reorderProjects(
               context,
@@ -374,6 +406,9 @@ class _ProjectsTabState extends ConsumerState<_ProjectsTab> {
                 ),
               );
             },
+          )
+              )
+            ],
           );
         },
         loading: () => const Center(child: CircularProgressIndicator()),
