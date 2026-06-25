@@ -62,54 +62,53 @@
 <body>
   <script>
     /**
-     * Dart에서 Base64 인코딩된 PDF 바이트를 받아 파일로 저장합니다.
-     * CDN 없이 순수 브라우저 API만 사용하며, Chrome/Firefox/Safari 모두 지원합니다.
+     * Dart에서 Uint8Array를 직접 받아 PDF 파일로 저장합니다.
+     * Base64 인코딩을 사용하지 않으므로 크롬에서도 대용량 파일을 안정적으로 다운로드합니다.
      *
-     * @param {string} base64Data - Base64로 인코딩된 파일 바이트
-     * @param {string} fileName   - 저장할 파일명 (예: portfolio_master.pdf)
-     * @param {string} mimeType   - MIME 타입 (예: application/pdf)
+     * @param {Uint8Array} bytesArray - 파일 바이트 (Dart Uint8List → JSUint8Array)
+     * @param {string} fileName      - 저장할 파일명 (예: portfolio_master.pdf)
+     * @param {string} mimeType      - MIME 타입 (예: application/pdf)
      */
-    function downloadFileFromBase64(base64Data, fileName, mimeType) {
+    function downloadFileFromBytes(bytesArray, fileName, mimeType) {
       try {
-        // 1. Base64 → binary string → Uint8Array
-        var binaryString = atob(base64Data);
-        var bytes = new Uint8Array(binaryString.length);
-        for (var i = 0; i < binaryString.length; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
+        // 1. Blob 생성 — Uint8Array를 직접 사용 (Base64 변환 없음)
+        var blob = new Blob([bytesArray], { type: mimeType || 'application/pdf' });
 
-        // 2. Blob 생성 (ArrayBuffer 대신 Uint8Array 자체를 전달하여 올바른 offset/length 유지)
-        var blob = new Blob([bytes], { type: mimeType || 'application/pdf' });
-
-        // 3. msSaveBlob (IE/Legacy Edge 지원)
+        // 2. msSaveBlob (IE/Legacy Edge 지원)
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
           window.navigator.msSaveOrOpenBlob(blob, fileName);
           return;
         }
 
-        // 4. 표준 anchor download 방식 (Chrome, Firefox, Safari)
+        // 3. 표준 anchor download 방식 (Chrome, Firefox, Safari)
         var url = URL.createObjectURL(blob);
         var link = document.createElement('a');
         link.style.display = 'none';
         link.href = url;
         link.setAttribute('download', fileName);
 
-        // 일부 브라우저는 body에 추가해야 click이 동작합니다
+        // body에 추가해야 Chrome에서 click이 동작합니다
         document.body.appendChild(link);
 
-        // click 이벤트를 직접 dispatch (programmatic click보다 안정적)
-        link.dispatchEvent(
-          new MouseEvent('click', { bubbles: true, cancelable: true, view: window })
-        );
+        // 동기적 click (Chrome 호환)
+        link.click();
 
-        // 60초 뒤 정리 (다운로드가 완전히 완료된 뒤 URL revoke)
+        // 120초 뒤 정리 (대용량 다운로드 완료 대기)
         setTimeout(function() {
-          link.remove();
+          if (link.parentNode) link.parentNode.removeChild(link);
           URL.revokeObjectURL(url);
-        }, 60000);
+        }, 120000);
 
       } catch (e) {
-        console.error('[downloadFileFromBase64] Error:', e);
+        console.error('[downloadFileFromBytes] Error:', e);
+        // 폴백: 새 탭에서 Blob URL 열기
+        try {
+          var fallbackBlob = new Blob([bytesArray], { type: mimeType || 'application/pdf' });
+          var fallbackUrl = URL.createObjectURL(fallbackBlob);
+          window.open(fallbackUrl, '_blank');
+        } catch (e2) {
+          console.error('[downloadFileFromBytes] Fallback also failed:', e2);
+        }
       }
     }
   </script>
