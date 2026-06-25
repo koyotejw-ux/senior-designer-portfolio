@@ -246,10 +246,12 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         });
         await Future.delayed(const Duration(milliseconds: 30));
 
-        // Blank canvas for this page
+        // White-filled canvas for this page (투명 배경 → 흰색 배경으로 간격 방지)
         final canvas = img.Image(width: targetWInt, height: pageH);
+        img.fill(canvas, color: img.ColorRgba8(255, 255, 255, 255));
 
         // Composite every overlapping image slice at exact pixel positions
+        // BlendMode.direct: 알파 블렌딩 없이 픽셀 직접 복사 → 이미지 경계 간격 제거
         for (int i = 0; i < allImages.length; i++) {
           final imgStart = imageStartY[i];
           final imgEnd = imgStart + allImages[i].height;
@@ -270,7 +272,8 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             width: targetWInt,
             height: sliceH,
           );
-          img.compositeImage(canvas, slice, dstX: 0, dstY: dstY);
+          img.compositeImage(canvas, slice, dstX: 0, dstY: dstY,
+              blend: img.BlendMode.direct);
         }
 
         // Encode merged canvas as a single image
