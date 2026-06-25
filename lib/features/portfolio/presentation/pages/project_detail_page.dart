@@ -2610,7 +2610,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     } else if (isSamMes) {
       imagesToRender = [
         {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes.jpg' : 'assets/images/sam_mes.jpg',
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_final.jpg' : 'assets/images/sam_mes_final.jpg',
           'ratio': 22933 / 1920,
         },
       ];

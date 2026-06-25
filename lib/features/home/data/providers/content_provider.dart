@@ -58,7 +58,7 @@ class ContentRepository {
           "role": "Lead Product Designer",
           "duration": "5개월 (2025.09-2026.01)",
           "teamSize": "10명 (디자이너 2명, 개발자 6명, PM 2명)",
-          "mainScreenImages": ["assets/images/sam_mes.jpg"],
+          "mainScreenImages": ["assets/images/sam_mes_final.jpg"],
           "isCorporate": false,
           "order": 0
         },

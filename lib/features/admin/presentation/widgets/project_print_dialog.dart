@@ -218,20 +218,27 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             );
           }
 
-          // Add as a PDF page with exact pixel dimensions (no margins)
+          // Add as a PDF page with exact pixel dimensions (no margins, no gaps)
+          final pageW = targetW;
+          final pageH = chunkH.toDouble();
+          final format = PdfPageFormat(pageW, pageH, marginAll: 0);
+
           pdf.addPage(
             pw.Page(
-              pageFormat: PdfPageFormat(
-                targetW,
-                chunkH.toDouble(),
-                marginAll: 0,
-              ),
+              pageFormat: format,
               margin: pw.EdgeInsets.zero,
-              build: (ctx) => pw.Image(
-                pw.MemoryImage(chunkBytes),
-                width: targetW,
-                height: chunkH.toDouble(),
-                fit: pw.BoxFit.fill,
+              clip: true,
+              build: (ctx) => pw.Container(
+                width: pageW,
+                height: pageH,
+                margin: pw.EdgeInsets.zero,
+                padding: pw.EdgeInsets.zero,
+                child: pw.Image(
+                  pw.MemoryImage(chunkBytes),
+                  width: pageW,
+                  height: pageH,
+                  fit: pw.BoxFit.cover,
+                ),
               ),
             ),
           );

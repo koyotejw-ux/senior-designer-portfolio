@@ -664,7 +664,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                     final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
                     final List<Map<String, dynamic>> samImages = [
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes.jpg' : 'assets/images/sam_mes.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_final.jpg' : 'assets/images/sam_mes_final.jpg',
                         'ratio': 22933 / 1920,
                       },
                     ];
