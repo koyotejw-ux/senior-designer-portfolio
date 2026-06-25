@@ -174,7 +174,11 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       // Using a reasonable max height per PDF page
       final int maxPageHeightPx = (targetW * 1.414).toInt(); // ~A4 ratio
 
-      /// Helper: decode bytes -> resize to targetW -> split into pages -> add to PDF
+      List<pw.Widget> currentPageWidgets = [];
+      double currentPageHeight = 0;
+      final double maxPdfPageHeight = 14000.0; // PDF format safe limit
+
+      /// Helper: decode bytes -> resize to targetW -> split -> pack into pages
       void addImageToPdf(Uint8List rawBytes, String label) {
         img.Image? decoded = img.decodeImage(rawBytes);
         if (decoded == null) {
@@ -182,7 +186,6 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
           return;
         }
 
-        // Resize to target width if needed
         if (decoded.width != targetW.toInt()) {
           var interp = targetW > decoded.width
               ? img.Interpolation.cubic
@@ -194,12 +197,10 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
           );
         }
 
-        // Split tall images into chunks that fit maxPageHeightPx
         int remainingY = 0;
         while (remainingY < decoded.height) {
           int chunkH = (decoded.height - remainingY).clamp(1, maxPageHeightPx);
 
-          // Crop the chunk from the decoded image
           final chunk = img.copyCrop(
             decoded,
             x: 0,
@@ -208,7 +209,6 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             height: chunkH,
           );
 
-          // Encode the chunk
           Uint8List chunkBytes;
           if (isLossless) {
             chunkBytes = Uint8List.fromList(img.encodePng(chunk));
@@ -218,31 +218,33 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             );
           }
 
-          // Add as a PDF page with exact pixel dimensions (no margins, no gaps)
-          final pageW = targetW;
-          final pageH = chunkH.toDouble();
-          final format = PdfPageFormat(pageW, pageH, marginAll: 0);
-
-          pdf.addPage(
-            pw.Page(
-              pageFormat: format,
-              margin: pw.EdgeInsets.zero,
-              clip: true,
-              build: (ctx) => pw.Container(
-                width: pageW,
-                height: pageH,
+          // Check if adding this chunk exceeds the max page height
+          if (currentPageHeight + chunkH > maxPdfPageHeight && currentPageWidgets.isNotEmpty) {
+            // Flush current page
+            pdf.addPage(
+              pw.Page(
+                pageFormat: PdfPageFormat(targetW, currentPageHeight, marginAll: 0),
                 margin: pw.EdgeInsets.zero,
-                padding: pw.EdgeInsets.zero,
-                child: pw.Image(
-                  pw.MemoryImage(chunkBytes),
-                  width: pageW,
-                  height: pageH,
-                  fit: pw.BoxFit.cover,
+                build: (ctx) => pw.Column(
+                  mainAxisSize: pw.MainAxisSize.min,
+                  crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+                  children: List.from(currentPageWidgets),
                 ),
               ),
+            );
+            currentPageWidgets.clear();
+            currentPageHeight = 0;
+          }
+
+          currentPageWidgets.add(
+            pw.Image(
+              pw.MemoryImage(chunkBytes),
+              width: targetW,
+              height: chunkH.toDouble(),
+              fit: pw.BoxFit.fill,
             ),
           );
-
+          currentPageHeight += chunkH.toDouble();
           remainingY += chunkH;
         }
       }
@@ -290,6 +292,20 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
           }
           processedItems++;
         }
+      }
+
+      if (currentPageWidgets.isNotEmpty) {
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat(targetW, currentPageHeight, marginAll: 0),
+            margin: pw.EdgeInsets.zero,
+            build: (ctx) => pw.Column(
+              mainAxisSize: pw.MainAxisSize.min,
+              crossAxisAlignment: pw.CrossAxisAlignment.stretch,
+              children: List.from(currentPageWidgets),
+            ),
+          ),
+        );
       }
 
       setState(() {
