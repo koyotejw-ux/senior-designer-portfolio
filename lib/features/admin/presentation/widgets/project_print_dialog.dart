@@ -6,6 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import 'package:image/image.dart' as img;
 
 import '../../../../core/theme/app_colors.dart';
@@ -336,14 +337,9 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
     }
   }
 
-  void _download() {
-    final anchor = html.AnchorElement(href: _blobUrl!)
-      ..download = 'portfolio_master.pdf'
-      ..setAttribute('download', 'portfolio_master.pdf')
-      ..style.display = 'none';
-    html.document.body?.append(anchor);
-    anchor.click();
-    anchor.remove();
+  void _download() async {
+    if (_finalBytes == null) return;
+    await Printing.sharePdf(bytes: _finalBytes!, filename: 'portfolio_master.pdf');
   }
 
   @override
