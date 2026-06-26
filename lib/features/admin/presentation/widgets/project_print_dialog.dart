@@ -286,8 +286,14 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         final capturedBytes = pageBytes;
         pdf.addPage(
           pw.Page(
-            pageFormat:
-                PdfPageFormat(targetW, capturedH.toDouble(), marginAll: 0),
+            pageFormat: PdfPageFormat(
+              targetW,
+              capturedH.toDouble(),
+              marginTop: 0,
+              marginBottom: 0,
+              marginLeft: 0,
+              marginRight: 0,
+            ),
             margin: pw.EdgeInsets.zero,
             build: (ctx) => pw.Image(
               pw.MemoryImage(capturedBytes),
