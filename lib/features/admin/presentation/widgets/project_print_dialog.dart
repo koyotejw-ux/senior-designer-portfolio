@@ -268,7 +268,7 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             pw.MemoryImage(pageBytes),
             width: targetW,
             height: totalH.toDouble(),
-            fit: pw.BoxFit.fill,
+            fit: pw.BoxFit.contain,
           ),
         ),
       );
