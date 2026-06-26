@@ -407,6 +407,14 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             ),
             onPressed: _download,
           ),
+          const SizedBox(height: 16),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text(
+              'Close',
+              style: TextStyle(color: Colors.white70),
+            ),
+          ),
         ],
       ),
     );
