@@ -229,84 +229,49 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       }
       final int totalH = cumY;
 
-      // 4. Build PDF pages via canvas compositing (zero gaps guaranteed)
-      const int maxPageH = 14000;
+      // 4. Build PDF pages via canvas compositing (single long page, zero gaps guaranteed)
       final pdf = pw.Document();
-      int pageStartY = 0;
-      int pageIndex = 0;
-      final int totalPages = ((totalH - 1) ~/ maxPageH) + 1;
 
-      while (pageStartY < totalH) {
-        final int pageH = (totalH - pageStartY).clamp(1, maxPageH);
-        final int pageEndY = pageStartY + pageH;
+      // White-filled canvas for the entire document height
+      final canvas = img.Image(width: targetWInt, height: totalH);
+      img.fill(canvas, color: img.ColorRgba8(255, 255, 255, 255));
 
-        setState(() {
-          _statusMessage = 'Building page ${pageIndex + 1}/$totalPages...';
-          _progress = 0.75 + 0.2 * pageIndex / totalPages;
-        });
-        await Future.delayed(const Duration(milliseconds: 30));
-
-        // White-filled canvas for this page (투명 배경 → 흰색 배경으로 간격 방지)
-        final canvas = img.Image(width: targetWInt, height: pageH);
-        img.fill(canvas, color: img.ColorRgba8(255, 255, 255, 255));
-
-        // Composite every overlapping image slice at exact pixel positions
-        // BlendMode.direct: 알파 블렌딩 없이 픽셀 직접 복사 → 이미지 경계 간격 제거
-        for (int i = 0; i < allImages.length; i++) {
-          final imgStart = imageStartY[i];
-          final imgEnd = imgStart + allImages[i].height;
-          if (imgEnd <= pageStartY || imgStart >= pageEndY) continue;
-
-          final overlapStart = imgStart < pageStartY ? pageStartY : imgStart;
-          final overlapEnd = imgEnd > pageEndY ? pageEndY : imgEnd;
-          final sliceH = overlapEnd - overlapStart;
-          if (sliceH <= 0) continue;
-
-          final srcY = overlapStart - imgStart;
-          final dstY = overlapStart - pageStartY;
-
-          final slice = img.copyCrop(
-            allImages[i],
-            x: 0,
-            y: srcY,
-            width: targetWInt,
-            height: sliceH,
-          );
-          img.compositeImage(canvas, slice, dstX: 0, dstY: dstY,
-              blend: img.BlendMode.direct);
-        }
-
-        // Encode merged canvas as a single image
-        final Uint8List pageBytes = isLossless
-            ? Uint8List.fromList(img.encodePng(canvas))
-            : Uint8List.fromList(img.encodeJpg(canvas, quality: jpgQuality));
-
-        // One image per PDF page — no layout engine, no gaps
-        final capturedH = pageH;
-        final capturedBytes = pageBytes;
-        pdf.addPage(
-          pw.Page(
-            pageFormat: PdfPageFormat(
-              targetW,
-              capturedH.toDouble(),
-              marginTop: 0,
-              marginBottom: 0,
-              marginLeft: 0,
-              marginRight: 0,
-            ),
-            margin: pw.EdgeInsets.zero,
-            build: (ctx) => pw.Image(
-              pw.MemoryImage(capturedBytes),
-              width: targetW,
-              height: capturedH.toDouble(),
-              fit: pw.BoxFit.fill,
-            ),
-          ),
+      // Composite every image at its exact pixel start Y
+      for (int i = 0; i < allImages.length; i++) {
+        final imgStart = imageStartY[i];
+        img.compositeImage(
+          canvas,
+          allImages[i],
+          dstX: 0,
+          dstY: imgStart,
+          blend: img.BlendMode.direct,
         );
-
-        pageStartY = pageEndY;
-        pageIndex++;
       }
+
+      // Encode merged canvas as a single image
+      final Uint8List pageBytes = isLossless
+          ? Uint8List.fromList(img.encodePng(canvas))
+          : Uint8List.fromList(img.encodeJpg(canvas, quality: jpgQuality));
+
+      pdf.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat(
+            targetW,
+            totalH.toDouble(),
+            marginTop: 0,
+            marginBottom: 0,
+            marginLeft: 0,
+            marginRight: 0,
+          ),
+          margin: pw.EdgeInsets.zero,
+          build: (ctx) => pw.Image(
+            pw.MemoryImage(pageBytes),
+            width: targetW,
+            height: totalH.toDouble(),
+            fit: pw.BoxFit.fill,
+          ),
+        ),
+      );
 
       // 5. Save PDF
       setState(() {
