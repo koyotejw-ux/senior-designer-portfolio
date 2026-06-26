@@ -44,7 +44,7 @@ class _PortfolioPageState extends ConsumerState<PortfolioPage>
       'tags': ['플랫폼: WEB 반응형', 'Figma', 'Enterprise', 'Dashboard'],
       'gradient': [AppColors.primaryBlue, AppColors.accentCyan],
       'imageUrl': 'assets/images/sam_mes_thumbnail.jpg',
-      'mainScreenImages': ['assets/images/sam_mes_final.jpg'],
+      'mainScreenImages': ['assets/images/sam_mes_finalff.jpg'],
       'details': {
         'role': 'Lead Product Designer',
         'duration': '5개월 (2025.09-2026.01)',

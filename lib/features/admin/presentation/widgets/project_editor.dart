@@ -1,4 +1,5 @@
 import 'dart:typed_data';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -265,14 +266,48 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
     setState(() => _isUploading = true);
 
     try {
-      final imageUrl = await _uploadImage();
-      debugPrint('Final image URL: $imageUrl');
+      final uploadResponse = await _uploadImage();
+      debugPrint('Upload response: $uploadResponse');
+
+      String finalImageUrl = _imageUrl ?? '';
+      List<String> finalMainScreenImages = [];
+
+      if (uploadResponse != null) {
+        if (uploadResponse.trim().startsWith('{')) {
+          try {
+            final Map<String, dynamic> parsed = jsonDecode(uploadResponse);
+            finalImageUrl = parsed['imageUrl'] ?? '';
+            final List<dynamic> slicesList = parsed['slices'] ?? [];
+            finalMainScreenImages = slicesList.map((item) => item.toString()).toList();
+          } catch (e) {
+            debugPrint('Error parsing upload response JSON: $e');
+            finalImageUrl = uploadResponse;
+          }
+        } else {
+          finalImageUrl = uploadResponse;
+        }
+      }
 
       final tags = _tagsController.text
           .split(',')
           .map((e) => e.trim())
           .where((e) => e.isNotEmpty)
           .toList();
+
+      // If we didn't upload a new image, or if the uploadResponse did not contain slices,
+      // fallback to the manually entered main screen images.
+      if (finalMainScreenImages.isEmpty) {
+        finalMainScreenImages = _mainScreenImagesController.text
+            .split(',')
+            .map((e) => e.trim())
+            .where((e) => e.isNotEmpty)
+            .toList();
+      }
+
+      // If mainScreenImages is still empty but we have finalImageUrl, use it as a single entry.
+      if (finalMainScreenImages.isEmpty && finalImageUrl.isNotEmpty) {
+        finalMainScreenImages = [finalImageUrl];
+      }
 
       final project = ProjectModel(
         id: widget.project?.id ?? const Uuid().v4(),
@@ -283,7 +318,7 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
         category: _categoryController.text.trim(),
         description: _descriptionController.text.trim(),
         tags: tags,
-        imageUrl: imageUrl,
+        imageUrl: finalImageUrl,
         gradientColors:
             widget.project?.gradientColors ??
             [AppColors.primaryBlue, AppColors.accentCyan],
@@ -291,11 +326,7 @@ class _ProjectEditorState extends ConsumerState<ProjectEditor> {
         role: _roleController.text.trim(),
         duration: _durationController.text.trim(),
         teamSize: _teamSizeController.text.trim(),
-        mainScreenImages: _mainScreenImagesController.text
-            .split(',')
-            .map((e) => e.trim())
-            .where((e) => e.isNotEmpty)
-            .toList(),
+        mainScreenImages: finalMainScreenImages,
         designSystem: widget.project?.designSystem,
         isCorporate: _isCorporate,
       );

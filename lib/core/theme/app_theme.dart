@@ -11,6 +11,8 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.deepSpace,
+      // Disable ink sparkle shader to avoid Windows impellerc compile crash
+      splashFactory: InkRipple.splashFactory,
 
       // Color Scheme
       colorScheme: const ColorScheme.dark(
@@ -157,6 +159,8 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColors.lightBg,
+      // Disable ink sparkle shader to avoid Windows impellerc compile crash
+      splashFactory: InkRipple.splashFactory,
 
       // Color Scheme - 높은 대비
       colorScheme: const ColorScheme.light(

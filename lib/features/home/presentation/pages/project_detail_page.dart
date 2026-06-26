@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:html' as html;
 import 'dart:typed_data';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import '../../../../core/utils/file_download_helper.dart';
 import 'package:pdf/pdf.dart';
@@ -56,9 +57,25 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
     );
   }
 
-  void _downloadAsPdf(String imageUrl, String projectTitle) async {
+  Future<Uint8List?> _loadImageBytes(String path) async {
+    try {
+      if (path.startsWith('http')) {
+        final resp = await http.get(Uri.parse(path));
+        if (resp.statusCode != 200) return null;
+        return resp.bodyBytes;
+      } else {
+        final data = await rootBundle.load(path);
+        return data.buffer.asUint8List();
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+
+  void _downloadAsPdf(List<String> imageUrls, String projectTitle) async {
+    if (imageUrls.isEmpty) return;
     if (mounted) {
-      _isDownloading = true;
+      setState(() => _isDownloading = true);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('다운로드가 백그라운드에서 시작되었습니다. 잠시만 기다려주세요...'),
@@ -68,41 +85,72 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
     }
 
     try {
-      // Fetch image data
-
-      final response = await http.get(Uri.parse(imageUrl));
-      if (response.statusCode != 200) {
-        throw Exception('Failed to download image');
+      final List<img.Image> allImages = [];
+      for (final url in imageUrls) {
+        final bytes = await _loadImageBytes(url);
+        if (bytes != null) {
+          final decoded = img.decodeImage(bytes);
+          if (decoded != null) {
+            allImages.add(decoded);
+          }
+        }
       }
 
-      // Decoding
-
-      final decodedImage = img.decodeImage(response.bodyBytes);
-      if (decodedImage == null) {
-        throw Exception('Failed to decode image');
+      if (allImages.isEmpty) {
+        throw Exception('No images could be loaded.');
       }
 
-      final imageWidth = decodedImage.width.toDouble();
-      final imageHeight = decodedImage.height.toDouble();
-      final imageAspectRatio = imageWidth / imageHeight;
+      // Merge images vertically
+      int targetW = allImages[0].width;
+      for (final im in allImages) {
+        if (im.width > targetW) targetW = im.width;
+      }
 
-      final baseWidth = PdfPageFormat.a4.width;
-      final customHeight = baseWidth / imageAspectRatio;
+      int totalH = 0;
+      final List<int> imageStartY = [];
+      for (final im in allImages) {
+        // We will resize each image to match targetW
+        final resized = im.width == targetW
+            ? im
+            : img.copyResize(im, width: targetW);
+        imageStartY.add(totalH);
+        totalH += resized.height;
+      }
 
-      final pageFormat = PdfPageFormat(baseWidth, customHeight, marginAll: 0);
+      // White canvas for the entire height
+      final canvas = img.Image(width: targetW, height: totalH);
+      img.fill(canvas, color: img.ColorRgba8(255, 255, 255, 255));
 
-      // Creating PDF
-      // if (mounted) setState(() => _downloadProgress = 0.7);
+      for (int i = 0; i < allImages.length; i++) {
+        final im = allImages[i];
+        final resized = im.width == targetW
+            ? im
+            : img.copyResize(im, width: targetW);
+        img.compositeImage(
+          canvas,
+          resized,
+          dstX: 0,
+          dstY: imageStartY[i],
+          blend: img.BlendMode.direct,
+        );
+      }
+
+      // Encode as JPEG quality 85 to prevent memory crash in Chrome
+      final Uint8List pageBytes = Uint8List.fromList(img.encodeJpg(canvas, quality: 85));
 
       final pdf = pw.Document();
-      final image = pw.MemoryImage(response.bodyBytes);
+      final baseWidth = PdfPageFormat.a4.width;
+      final customHeight = baseWidth * (totalH / targetW);
 
       pdf.addPage(
         pw.Page(
-          pageFormat: pageFormat,
+          pageFormat: PdfPageFormat(baseWidth, customHeight, marginAll: 0),
           margin: pw.EdgeInsets.zero,
           build: (pw.Context context) {
-            return pw.Image(image, fit: pw.BoxFit.fill);
+            return pw.Image(
+              pw.MemoryImage(pageBytes),
+              fit: pw.BoxFit.fill,
+            );
           },
         ),
       );
@@ -663,8 +711,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                     final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
                     final List<Map<String, dynamic>> samImages = [
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_final.jpg' : 'assets/images/sam_mes_final.jpg',
-                        'ratio': 22933 / 1920,
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_finalff.jpg' : 'assets/images/sam_mes_finalff.jpg',
+                        'ratio': 21600 / 1920,
                       },
                     ];
 
@@ -672,6 +720,69 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: samImages.map((imgData) {
+                        final String imgUrl = imgData['url'] as String;
+                        final double ratio = imgData['ratio'] as double;
+                        final double calculatedHeight = screenWidth * ratio;
+
+                        if (imgUrl.startsWith('http')) {
+                          return WebOptimizedImage(
+                            imageUrl: imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            loadingWidget: SizedBox(
+                              height: calculatedHeight > 500 ? 500 : calculatedHeight,
+                              child: const Center(child: CircularProgressIndicator()),
+                            ),
+                          );
+                        } else {
+                          return Image.asset(
+                            imgUrl,
+                            width: screenWidth,
+                            height: calculatedHeight,
+                            fit: BoxFit.fitWidth,
+                            alignment: Alignment.topCenter,
+                            errorBuilder: (context, error, stackTrace) {
+                              return SizedBox(
+                                height: 300,
+                                child: Center(
+                                  child: Text(
+                                    'Asset not found: $imgUrl',
+                                    style: const TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      }).toList(),
+                    );
+                  } else if (project.mainScreenImages.isNotEmpty) {
+                    final List<Map<String, dynamic>> customImages = project.mainScreenImages.map((imgUrl) {
+                      double ratio = 1.0;
+                      try {
+                        final uri = Uri.parse(imgUrl);
+                        final wStr = uri.queryParameters['w'];
+                        final hStr = uri.queryParameters['h'];
+                        if (wStr != null && hStr != null) {
+                          final w = double.tryParse(wStr);
+                          final h = double.tryParse(hStr);
+                          if (w != null && h != null && w > 0) {
+                            ratio = h / w;
+                          }
+                        }
+                      } catch (_) {}
+                      return {
+                        'url': imgUrl,
+                        'ratio': ratio,
+                      };
+                    }).toList();
+
+                    imageWidget = Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: customImages.map((imgData) {
                         final String imgUrl = imgData['url'] as String;
                         final double ratio = imgData['ratio'] as double;
                         final double calculatedHeight = screenWidth * ratio;
@@ -837,8 +948,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                             (p) => p.id == widget.projectId,
                             orElse: () => projects.first,
                           );
-                          if (project.imageUrl == null ||
-                              !project.imageUrl!.startsWith('http')) {
+                          final bool hasImages = project.mainScreenImages.isNotEmpty || (project.imageUrl != null && project.imageUrl!.isNotEmpty);
+                          if (!hasImages) {
                             return const SizedBox.shrink();
                           }
                           return Material(
@@ -846,10 +957,12 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                             child: InkWell(
                               onTap: _isDownloading
                                   ? null
-                                  : () => _downloadAsPdf(
-                                      project.imageUrl!,
-                                      project.title,
-                                    ),
+                                  : () {
+                                      final List<String> paths = project.mainScreenImages.isNotEmpty
+                                          ? project.mainScreenImages
+                                          : (project.imageUrl != null ? [project.imageUrl!] : <String>[]);
+                                      _downloadAsPdf(paths, project.title);
+                                    },
                               borderRadius: BorderRadius.circular(30),
                               child: Container(
                                 padding: const EdgeInsets.all(12),

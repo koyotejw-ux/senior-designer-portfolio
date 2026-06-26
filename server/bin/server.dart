@@ -130,9 +130,64 @@ void main(List<String> args) async {
             final fileSize = await file.length();
             print('File saved successfully: $uniqueFilename (${fileSize} bytes)');
 
-            final imageUrl = 'http://localhost:$port/images/$uniqueFilename';
-            print('Returning image URL: $imageUrl');
-            return Response.ok(imageUrl);
+            // Slice the image if it is too tall (height > 2000)
+            final List<Map<String, dynamic>> slicesInfo = [];
+            final int maxSliceHeight = 2000;
+
+            if (image.height > maxSliceHeight) {
+              print('Image height (${image.height}) exceeds $maxSliceHeight. Slicing...');
+              int sliceIndex = 1;
+              for (int y = 0; y < image.height; y += maxSliceHeight) {
+                int currentSliceHeight = maxSliceHeight;
+                if (y + currentSliceHeight > image.height) {
+                  currentSliceHeight = image.height - y;
+                }
+
+                if (currentSliceHeight <= 0) break;
+
+                final sliceImage = img.copyCrop(
+                  image,
+                  x: 0,
+                  y: y,
+                  width: image.width,
+                  height: currentSliceHeight,
+                );
+
+                final sliceBytes = Uint8List.fromList(img.encodeJpg(sliceImage, quality: 90));
+                
+                final sliceFilename = '${path.basenameWithoutExtension(uniqueFilename)}_slice_$sliceIndex.jpg';
+                final sliceFile = File(path.join(imageDirectory, sliceFilename));
+                await sliceFile.writeAsBytes(sliceBytes);
+
+                print('Saved slice $sliceIndex: $sliceFilename (${sliceFile.lengthSync()} bytes), height: $currentSliceHeight');
+
+                slicesInfo.add({
+                  'url': 'http://localhost:$port/images/$sliceFilename?w=${image.width}&h=$currentSliceHeight',
+                  'width': image.width,
+                  'height': currentSliceHeight,
+                });
+                sliceIndex++;
+              }
+            } else {
+              // No slicing needed, just return original image as a single slice
+              slicesInfo.add({
+                'url': 'http://localhost:$port/images/$uniqueFilename?w=${image.width}&h=${image.height}',
+                'width': image.width,
+                'height': image.height,
+              });
+            }
+
+            final responsePayload = {
+              'imageUrl': 'http://localhost:$port/images/$uniqueFilename',
+              'slices': slicesInfo.map((s) => s['url']).toList(),
+            };
+
+            final jsonResponse = jsonEncode(responsePayload);
+            print('Returning JSON response: $jsonResponse');
+            return Response.ok(
+              jsonResponse,
+              headers: {'content-type': 'application/json'},
+            );
           }
         }
       }

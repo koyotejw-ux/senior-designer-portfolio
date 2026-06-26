@@ -2460,14 +2460,40 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     final isSamMes = widget.projectId == 'p8';
     final screenWidth = MediaQuery.of(context).size.width;
 
-    if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm && !isAia && !isSamMes) {
+    final mainScreenImagesRaw = projectData['mainScreenImages'];
+    final List<String> mainScreenImages = mainScreenImagesRaw is List
+        ? List<String>.from(mainScreenImagesRaw)
+        : [];
+    final hasCustomImages = mainScreenImages.isNotEmpty;
+
+    if (!isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm && !isAia && !isSamMes && !hasCustomImages) {
       return const SizedBox.shrink();
     }
 
     final isNetwork = projectData['imageUrl'] != null && projectData['imageUrl']!.toString().startsWith('http');
     
     final List<Map<String, dynamic>> imagesToRender;
-    if (isWallpad) {
+    if (hasCustomImages && !isWallpad && !isHtHome && !isSoulark && !isClosers && !isPromotion && !isFarm && !isAia && !isSamMes) {
+      imagesToRender = mainScreenImages.map((imgUrl) {
+        double ratio = 1.0;
+        try {
+          final uri = Uri.parse(imgUrl);
+          final wStr = uri.queryParameters['w'];
+          final hStr = uri.queryParameters['h'];
+          if (wStr != null && hStr != null) {
+            final w = double.tryParse(wStr);
+            final h = double.tryParse(hStr);
+            if (w != null && h != null && w > 0) {
+              ratio = h / w;
+            }
+          }
+        } catch (_) {}
+        return {
+          'url': imgUrl,
+          'ratio': ratio,
+        };
+      }).toList();
+    } else if (isWallpad) {
       imagesToRender = [];
       for (int i = 1; i <= 6; i++) {
         imagesToRender.add({
@@ -2610,8 +2636,8 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
     } else if (isSamMes) {
       imagesToRender = [
         {
-          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_final.jpg' : 'assets/images/sam_mes_final.jpg',
-          'ratio': 22933 / 1920,
+          'url': isNetwork ? 'http://localhost:8080/images/sam_mes_finalff.jpg' : 'assets/images/sam_mes_finalff.jpg',
+          'ratio': 21600 / 1920,
         },
       ];
     } else {
