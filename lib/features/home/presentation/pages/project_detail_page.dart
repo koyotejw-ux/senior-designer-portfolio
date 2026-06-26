@@ -711,35 +711,35 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage> {
                     final isNetwork = project.imageUrl != null && project.imageUrl!.startsWith('http');
                     final List<Map<String, dynamic>> samImages = [
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_1.jpg' : 'assets/images/sam_mes_f3_1.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_1.jpg' : 'assets/images/sam_mes_f4_1.jpg',
                         'ratio': 2700 / 1920,
                       },
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_2.jpg' : 'assets/images/sam_mes_f3_2.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_2.jpg' : 'assets/images/sam_mes_f4_2.jpg',
                         'ratio': 2700 / 1920,
                       },
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_3.jpg' : 'assets/images/sam_mes_f3_3.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_3.jpg' : 'assets/images/sam_mes_f4_3.jpg',
                         'ratio': 2700 / 1920,
                       },
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_4.jpg' : 'assets/images/sam_mes_f3_4.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_4.jpg' : 'assets/images/sam_mes_f4_4.jpg',
                         'ratio': 2700 / 1920,
                       },
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_5.jpg' : 'assets/images/sam_mes_f3_5.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_5.jpg' : 'assets/images/sam_mes_f4_5.jpg',
                         'ratio': 2700 / 1920,
                       },
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_6.jpg' : 'assets/images/sam_mes_f3_6.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_6.jpg' : 'assets/images/sam_mes_f4_6.jpg',
                         'ratio': 2700 / 1920,
                       },
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_7.jpg' : 'assets/images/sam_mes_f3_7.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_7.jpg' : 'assets/images/sam_mes_f4_7.jpg',
                         'ratio': 2700 / 1920,
                       },
                       {
-                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f3_8.jpg' : 'assets/images/sam_mes_f3_8.jpg',
+                        'url': isNetwork ? 'http://localhost:8080/images/sam_mes_f4_8.jpg' : 'assets/images/sam_mes_f4_8.jpg',
                         'ratio': 2700 / 1920,
                       },
                     ];
