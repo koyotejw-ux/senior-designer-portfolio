@@ -319,6 +319,7 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
                 _buildNavigation(isMobile, isTablet, isDark),
               ],
             ),
+           ),
           ),
 
           // AI Analysis Overlay (Optional, could be a FAB or a floating button)
