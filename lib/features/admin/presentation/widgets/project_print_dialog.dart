@@ -65,7 +65,7 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
     _introEntries = [
       _IntroImageEntry(assetPath: 'assets/images/int_01.jpg'),
       _IntroImageEntry(assetPath: 'assets/images/int_02.png'),
-      _IntroImageEntry(assetPath: 'assets/images/int_03.jpg'),
+      _IntroImageEntry(assetPath: 'assets/images/int_03_blank.jpg'),
     ];
   }
 
@@ -309,7 +309,115 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       }
 
       if (int03ImageIndex >= 0 && selectedTitles.isNotEmpty) {
-        // Build PDF with pw.Stack to overlay text on the int_03 region
+        // --- Figma CSS 기반 정확한 좌표 계산 ---
+        // 원본 이미지: 1920 x 1080px
+        // Frame 735: width=834.69px, height=210px (우측 배치)
+        //   → listContainerX = imgW - 834.69 ≈ 1085px
+        // padding-top: 70px, gap between rows: 66px
+        // 첫 항목 y = int03StartPt + (int03HeightPt * 0.444) + 70
+        //   (0.444 = 480/1080 ≈ 컨테이너 상단 y 비율, 피그마 스크린샷 기준)
+        // row height: 37px, gap: 66px → nextRowY = currentY + 37 + 66 = +103px
+        // 번호: font 30.92px (scaleRatio 적용), weight 800, opacity 0.5
+        //   width 43px, 이후 gap 36.08px
+        // 제목: font 30.92px, weight 700
+        //   이후 gap 20.62px
+        // 회사명: font 30.92px, weight 400, opacity 0.8
+
+        // Scale ratio: PDF canvas width / 1920
+        final double scaleRatio = targetW / 1920.0;
+        final double imgH = int03HeightPt; // px = pt (1:1)
+
+        // 리스트 컨테이너 좌상단 (Figma 기준 1920px canvas)
+        final double containerX = 1920.0 - 834.69; // ≈ 1085.31
+        // int_03 내부에서 컨테이너 상단 y 위치 (Figma 스크린샷 기준 ~44.4%)
+        final double containerTopInImg = imgH * 0.444;
+        final double paddingTop = 70.0 * scaleRatio;
+        final double rowH = 37.0 * scaleRatio;
+        final double rowGap = 66.0 * scaleRatio;
+        final double rowStep = rowH + rowGap; // 103px scaled
+
+        // 폰트 크기 (1920 기준 30.92px → 스케일)
+        final double fs = 30.9234 * scaleRatio;
+
+        // x 좌표 (스케일 적용)
+        final double numX = containerX * scaleRatio;
+        final double numW = 43.0 * scaleRatio;
+        final double gap1 = 36.08 * scaleRatio; // 번호 → 제목 간격
+        final double titleX = numX + numW + gap1;
+        final double gap2 = 20.62 * scaleRatio; // 제목 → 회사명 간격
+
+        // 첫 항목 y 위치
+        final double firstRowY =
+            int03StartPt + containerTopInImg * scaleRatio + paddingTop;
+
+        // 스타일 정의
+        final numStyle = pw.TextStyle(
+          font: pretendardBold,
+          fontSize: fs,
+          fontWeight: pw.FontWeight.bold,
+          color: const PdfColor(1, 1, 1, 0.5),
+          letterSpacing: 0.02 * fs,
+        );
+        final titleStyle = pw.TextStyle(
+          font: pretendardBold,
+          fontSize: fs,
+          fontWeight: pw.FontWeight.bold,
+          color: PdfColors.white,
+        );
+        final companyStyle = pw.TextStyle(
+          font: pretendardRegular,
+          fontSize: fs,
+          color: const PdfColor(1, 1, 1, 0.8),
+        );
+
+        // 선택된 프로젝트 + 회사명 수집
+        final List<Map<String, String>> selectedItems = [];
+        for (int i = 0; i < _orderedProjects.length; i++) {
+          if (_projectSelected[i]) {
+            selectedItems.add({
+              'title': _orderedProjects[i].title,
+              'company': _orderedProjects[i].company ?? '',
+            });
+          }
+        }
+
+        // Positioned 텍스트 위젯 생성
+        final List<pw.Widget> textWidgets = [];
+        for (int ti = 0; ti < selectedItems.length; ti++) {
+          final yPos = firstRowY + ti * rowStep;
+          final numStr = (ti + 1).toString().padLeft(2, '0');
+          final titleStr = selectedItems[ti]['title']!;
+          final companyStr = selectedItems[ti]['company']!;
+
+          // 번호
+          textWidgets.add(
+            pw.Positioned(
+              left: numX,
+              top: yPos,
+              child: pw.Text(numStr, style: numStyle),
+            ),
+          );
+          // 제목
+          textWidgets.add(
+            pw.Positioned(
+              left: titleX,
+              top: yPos,
+              child: pw.Text(titleStr, style: titleStyle),
+            ),
+          );
+          // 회사명 (제목 오른쪽, 동적 위치 계산 불가 → 고정 offset 사용)
+          // 제목 텍스트 width 추정: 한 글자 ≈ fs * 0.65
+          final double estTitleW = titleStr.length * fs * 0.65;
+          textWidgets.add(
+            pw.Positioned(
+              left: titleX + estTitleW + gap2,
+              top: yPos,
+              child: pw.Text(companyStr, style: companyStyle),
+            ),
+          );
+        }
+
+        // PDF 페이지 생성 (pw.Stack으로 이미지 위에 텍스트 오버레이)
         pdf.addPage(
           pw.Page(
             pageFormat: PdfPageFormat(
@@ -321,68 +429,17 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
               marginRight: 0,
             ),
             margin: pw.EdgeInsets.zero,
-            build: (ctx) {
-              // Text positioning on int_03:
-              // Right half starts at int03ImgWidth * 0.52
-              // First item starts at int03StartPt + int03HeightPt * 0.38
-              // Each row is spaced by int03HeightPt * 0.055
-              final double listX = int03ImgWidth * 0.52;
-              final double listStartY = int03StartPt + int03HeightPt * 0.38;
-              final double rowSpacing = int03HeightPt * 0.055;
-              final double fontSize = int03HeightPt * 0.028;
-
-              final textStyle = pw.TextStyle(
-                font: pretendardBold,
-                fontSize: fontSize,
-                color: PdfColors.white,
-              );
-              final numStyle = pw.TextStyle(
-                font: pretendardRegular,
-                fontSize: fontSize * 0.75,
-                color: const PdfColor(1, 1, 1, 0.6),
-              );
-
-              // Build positioned text widgets
-              final List<pw.Widget> textWidgets = [];
-              for (int ti = 0; ti < selectedTitles.length; ti++) {
-                final yPos = listStartY + ti * rowSpacing;
-                textWidgets.add(
-                  pw.Positioned(
-                    left: listX,
-                    top: yPos,
-                    child: pw.Row(
-                      crossAxisAlignment: pw.CrossAxisAlignment.center,
-                      children: [
-                        pw.Container(
-                          width: fontSize * 1.8,
-                          child: pw.Text(
-                            (ti + 1).toString().padLeft(2, '0'),
-                            style: numStyle,
-                          ),
-                        ),
-                        pw.SizedBox(width: fontSize * 0.5),
-                        pw.Text(
-                          selectedTitles[ti],
-                          style: textStyle,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }
-
-              return pw.Stack(
-                children: [
-                  pw.Image(
-                    pw.MemoryImage(pageBytes),
-                    width: targetW,
-                    height: totalH.toDouble(),
-                    fit: pw.BoxFit.contain,
-                  ),
-                  ...textWidgets,
-                ],
-              );
-            },
+            build: (ctx) => pw.Stack(
+              children: [
+                pw.Image(
+                  pw.MemoryImage(pageBytes),
+                  width: targetW,
+                  height: totalH.toDouble(),
+                  fit: pw.BoxFit.contain,
+                ),
+                ...textWidgets,
+              ],
+            ),
           ),
         );
       } else {
