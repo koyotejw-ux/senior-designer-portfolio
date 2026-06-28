@@ -300,14 +300,12 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       double int03StartPt = 0;
       double int03HeightPt = 0;
       double int03ImgWidth = 0;
-      double int03ImgHeight = 0;
       if (int03ImageIndex >= 0) {
         // Ratio: canvas pixel → PDF point
         // PDF page height = totalH pts, image height = totalH px → 1px = 1pt
         int03StartPt = imageStartY[int03ImageIndex].toDouble();
         int03HeightPt = allImages[int03ImageIndex].height.toDouble();
         int03ImgWidth = allImages[int03ImageIndex].width.toDouble();
-        int03ImgHeight = allImages[int03ImageIndex].height.toDouble();
       }
 
       if (int03ImageIndex >= 0 && selectedTitles.isNotEmpty) {
@@ -341,7 +339,7 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
               final numStyle = pw.TextStyle(
                 font: pretendardRegular,
                 fontSize: fontSize * 0.75,
-                color: PdfColors.white60,
+                color: const PdfColor(1, 1, 1, 0.6),
               );
 
               // Build positioned text widgets
@@ -358,7 +356,7 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
                         pw.Container(
                           width: fontSize * 1.8,
                           child: pw.Text(
-                            '${(ti + 1).toString().padLeft(2, '0')}',
+                            (ti + 1).toString().padLeft(2, '0'),
                             style: numStyle,
                           ),
                         ),
