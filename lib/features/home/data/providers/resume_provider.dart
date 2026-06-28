@@ -128,7 +128,7 @@ final resumeProvider = Provider<ResumeModel>((ref) {
         environment: 'Android / iOS (Unity3D)',
       ),
       Career(
-        period: '2010.10 ~ 2015.12',
+        period: '2010.10 ~ 2016.01',
         company: '(주)넥슨코리아',
         department: 'PITBULL팀',
         position: '과장',
@@ -176,7 +176,7 @@ final resumeProvider = Provider<ResumeModel>((ref) {
         environment: 'Web',
       ),
       Career(
-        period: '2005.11 ~ 2006.12',
+        period: '2005.12 ~ 2006.12',
         company: '씨앤디',
         department: '인테리어사업부',
         position: '팀원',
