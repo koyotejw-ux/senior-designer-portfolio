@@ -110,7 +110,7 @@ class ResumeSection extends ConsumerWidget {
                         ),
                         const SizedBox(width: 8),
                         Text(
-                          '총 경력: 17년 1개월',
+                          '총 경력: 16년 11개월',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 14,
