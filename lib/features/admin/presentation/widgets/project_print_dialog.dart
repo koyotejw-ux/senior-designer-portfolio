@@ -150,6 +150,19 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       final isLossless = _quality >= 10.0;
       final jpgQuality = (_quality * 10).toInt().clamp(10, 90);
 
+      // Load Pretendard font for Korean text rendering in PDF
+      setState(() { _statusMessage = 'Loading font...'; });
+      pw.Font? pretendardBold;
+      pw.Font? pretendardRegular;
+      try {
+        final boldData = await rootBundle.load('assets/fonts/Pretendard-Bold.ttf');
+        pretendardBold = pw.Font.ttf(boldData.buffer.asByteData());
+        final regData = await rootBundle.load('assets/fonts/Pretendard-Regular.ttf');
+        pretendardRegular = pw.Font.ttf(regData.buffer.asByteData());
+      } catch (e) {
+        debugPrint('Font load warning: $e — falling back to default font');
+      }
+
       // 1. Count total items
       int totalItems = 0;
       for (final entry in _introEntries) {
@@ -169,6 +182,8 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
 
       // 2. Load all images resized to targetW
       final List<img.Image> allImages = [];
+      // Track which allImages index corresponds to int_03
+      int int03ImageIndex = -1;
 
       img.Image resizeTo(img.Image src) {
         if (src.width == targetWInt) return src;
@@ -179,7 +194,8 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       }
 
       // Intro images
-      for (final entry in _introEntries) {
+      for (int ei = 0; ei < _introEntries.length; ei++) {
+        final entry = _introEntries[ei];
         if (!entry.selected) continue;
         setState(() {
           _statusMessage = 'Loading intro: ${entry.label}';
@@ -189,7 +205,13 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         final bytes = await _loadIntroImageBytes(entry);
         if (bytes != null) {
           final decoded = img.decodeImage(bytes);
-          if (decoded != null) allImages.add(resizeTo(decoded));
+          if (decoded != null) {
+            // Detect int_03 by asset path
+            if (entry.assetPath.contains('int_03')) {
+              int03ImageIndex = allImages.length;
+            }
+            allImages.add(resizeTo(decoded));
+          }
         }
         processedItems++;
       }
@@ -220,7 +242,7 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
 
       if (allImages.isEmpty) throw Exception('No images could be loaded.');
 
-      // 3. Calculate cumulative Y start positions
+      // 3. Calculate cumulative Y start positions for each image
       final List<int> imageStartY = [];
       int cumY = 0;
       for (final im in allImages) {
@@ -229,8 +251,28 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       }
       final int totalH = cumY;
 
-      // 4. Build PDF pages via canvas compositing (single long page, zero gaps guaranteed)
+      // 4. Build PDF — use pw.Stack for int_03 page, plain image for others
+      setState(() {
+        _statusMessage = 'Building PDF...';
+        _progress = 0.85;
+      });
+      await Future.delayed(const Duration(milliseconds: 50));
+
       final pdf = pw.Document();
+
+      // Build list of selected project titles (in order)
+      final List<String> selectedTitles = [];
+      for (int i = 0; i < _orderedProjects.length; i++) {
+        if (_projectSelected[i]) {
+          selectedTitles.add(_orderedProjects[i].title);
+        }
+      }
+
+      // Encode each image individually and add as separate pages,
+      // except int_03 which gets an overlay with the project list.
+      //
+      // For a single-page long-strip layout (existing behavior),
+      // we only overlay text on the int_03 slice of the canvas.
 
       // White-filled canvas for the entire document height
       final canvas = img.Image(width: targetWInt, height: totalH);
@@ -238,12 +280,11 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
 
       // Composite every image at its exact pixel start Y
       for (int i = 0; i < allImages.length; i++) {
-        final imgStart = imageStartY[i];
         img.compositeImage(
           canvas,
           allImages[i],
           dstX: 0,
-          dstY: imgStart,
+          dstY: imageStartY[i],
           blend: img.BlendMode.direct,
         );
       }
@@ -253,25 +294,121 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
           ? Uint8List.fromList(img.encodePng(canvas))
           : Uint8List.fromList(img.encodeJpg(canvas, quality: jpgQuality));
 
-      pdf.addPage(
-        pw.Page(
-          pageFormat: PdfPageFormat(
-            targetW,
-            totalH.toDouble(),
-            marginTop: 0,
-            marginBottom: 0,
-            marginLeft: 0,
-            marginRight: 0,
+      // Determine int_03 area in PDF coordinates (points)
+      // PDF uses pt (1pt = 1/72 inch). We map canvas pixels 1:1 in the PDF page.
+      // int_03 starts at imageStartY[int03ImageIndex] and has height allImages[int03ImageIndex].height
+      double int03StartPt = 0;
+      double int03HeightPt = 0;
+      double int03ImgWidth = 0;
+      double int03ImgHeight = 0;
+      if (int03ImageIndex >= 0) {
+        // Ratio: canvas pixel → PDF point
+        // PDF page height = totalH pts, image height = totalH px → 1px = 1pt
+        int03StartPt = imageStartY[int03ImageIndex].toDouble();
+        int03HeightPt = allImages[int03ImageIndex].height.toDouble();
+        int03ImgWidth = allImages[int03ImageIndex].width.toDouble();
+        int03ImgHeight = allImages[int03ImageIndex].height.toDouble();
+      }
+
+      if (int03ImageIndex >= 0 && selectedTitles.isNotEmpty) {
+        // Build PDF with pw.Stack to overlay text on the int_03 region
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat(
+              targetW,
+              totalH.toDouble(),
+              marginTop: 0,
+              marginBottom: 0,
+              marginLeft: 0,
+              marginRight: 0,
+            ),
+            margin: pw.EdgeInsets.zero,
+            build: (ctx) {
+              // Text positioning on int_03:
+              // Right half starts at int03ImgWidth * 0.52
+              // First item starts at int03StartPt + int03HeightPt * 0.38
+              // Each row is spaced by int03HeightPt * 0.055
+              final double listX = int03ImgWidth * 0.52;
+              final double listStartY = int03StartPt + int03HeightPt * 0.38;
+              final double rowSpacing = int03HeightPt * 0.055;
+              final double fontSize = int03HeightPt * 0.028;
+
+              final textStyle = pw.TextStyle(
+                font: pretendardBold,
+                fontSize: fontSize,
+                color: PdfColors.white,
+              );
+              final numStyle = pw.TextStyle(
+                font: pretendardRegular,
+                fontSize: fontSize * 0.75,
+                color: PdfColors.white60,
+              );
+
+              // Build positioned text widgets
+              final List<pw.Widget> textWidgets = [];
+              for (int ti = 0; ti < selectedTitles.length; ti++) {
+                final yPos = listStartY + ti * rowSpacing;
+                textWidgets.add(
+                  pw.Positioned(
+                    left: listX,
+                    top: yPos,
+                    child: pw.Row(
+                      crossAxisAlignment: pw.CrossAxisAlignment.center,
+                      children: [
+                        pw.Container(
+                          width: fontSize * 1.8,
+                          child: pw.Text(
+                            '${(ti + 1).toString().padLeft(2, '0')}',
+                            style: numStyle,
+                          ),
+                        ),
+                        pw.SizedBox(width: fontSize * 0.5),
+                        pw.Text(
+                          selectedTitles[ti],
+                          style: textStyle,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }
+
+              return pw.Stack(
+                children: [
+                  pw.Image(
+                    pw.MemoryImage(pageBytes),
+                    width: targetW,
+                    height: totalH.toDouble(),
+                    fit: pw.BoxFit.contain,
+                  ),
+                  ...textWidgets,
+                ],
+              );
+            },
           ),
-          margin: pw.EdgeInsets.zero,
-          build: (ctx) => pw.Image(
-            pw.MemoryImage(pageBytes),
-            width: targetW,
-            height: totalH.toDouble(),
-            fit: pw.BoxFit.contain,
+        );
+      } else {
+        // No int_03 or no projects — just the plain image
+        pdf.addPage(
+          pw.Page(
+            pageFormat: PdfPageFormat(
+              targetW,
+              totalH.toDouble(),
+              marginTop: 0,
+              marginBottom: 0,
+              marginLeft: 0,
+              marginRight: 0,
+            ),
+            margin: pw.EdgeInsets.zero,
+            build: (ctx) => pw.Image(
+              pw.MemoryImage(pageBytes),
+              width: targetW,
+              height: totalH.toDouble(),
+              fit: pw.BoxFit.contain,
+            ),
           ),
-        ),
-      );
+        );
+      }
 
       // 5. Save PDF
       setState(() {
@@ -299,6 +436,7 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       }
     }
   }
+
 
   void _download() {
     if (_finalBytes == null) return;
