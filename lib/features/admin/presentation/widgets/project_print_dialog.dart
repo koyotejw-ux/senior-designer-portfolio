@@ -238,20 +238,10 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
           }
           processedItems++;
         }
-      }
+      }      if (allImages.isEmpty) throw Exception('No images could be loaded.');
 
-      if (allImages.isEmpty) throw Exception('No images could be loaded.');
-
-      // 3. Calculate cumulative Y start positions for each image
-      final List<int> imageStartY = [];
-      int cumY = 0;
-      for (final im in allImages) {
-        imageStartY.add(cumY);
-        cumY += im.height;
-      }
-      final int totalH = cumY;
-
-      // 4. Build PDF — use pw.Stack for int_03 page, plain image for others
+      // 4. Build PDF — each image becomes its own page.
+      //    int_03 page gets a pw.Stack text overlay; all others are plain image pages.
       setState(() {
         _statusMessage = 'Building PDF...';
         _progress = 0.85;
@@ -260,204 +250,133 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
 
       final pdf = pw.Document();
 
-      // Build list of selected project titles (in order)
-      final List<String> selectedTitles = [];
+      // ─── 텍스트 오버레이용 데이터 준비 ────────────────────────────────
+      final double scaleRatio = targetW / 1920.0;
+
+      // X 좌표 (Figma Frame 735 기준)
+      final double numX  = (1920.0 - 834.69) * scaleRatio;
+      final double numW  = 43.0  * scaleRatio;
+      final double gap1  = 36.08 * scaleRatio;
+      final double gap2  = 20.62 * scaleRatio;
+      final double rowH  = 37.0  * scaleRatio;
+      final double rowGap = 66.0 * scaleRatio;
+      final double rowStep = rowH + rowGap;
+      final double fs = 30.9234 * scaleRatio;
+
+      final numStyle = pw.TextStyle(
+        font: pretendardBold,
+        fontSize: fs,
+        fontWeight: pw.FontWeight.bold,
+        color: const PdfColor(0.45, 0.48, 0.52),
+        letterSpacing: 0.02 * fs,
+      );
+      final titleStyle = pw.TextStyle(
+        font: pretendardBold,
+        fontSize: fs,
+        fontWeight: pw.FontWeight.bold,
+        color: PdfColors.white,
+      );
+      final companyStyle = pw.TextStyle(
+        font: pretendardRegular,
+        fontSize: fs,
+        color: const PdfColor(0.78, 0.80, 0.84),
+      );
+
+      // 선택된 프로젝트 목록 (번호/제목/회사명)
+      final List<Map<String, String>> selectedItems = [];
       for (int i = 0; i < _orderedProjects.length; i++) {
         if (_projectSelected[i]) {
-          selectedTitles.add(_orderedProjects[i].title);
+          selectedItems.add({
+            'title':   _orderedProjects[i].title,
+            'company': _orderedProjects[i].company ?? '',
+          });
         }
       }
 
-      // Encode each image individually and add as separate pages,
-      // except int_03 which gets an overlay with the project list.
-      //
-      // For a single-page long-strip layout (existing behavior),
-      // we only overlay text on the int_03 slice of the canvas.
-
-      // White-filled canvas for the entire document height
-      final canvas = img.Image(width: targetWInt, height: totalH);
-      img.fill(canvas, color: img.ColorRgba8(255, 255, 255, 255));
-
-      // Composite every image at its exact pixel start Y
+      // ─── 각 이미지를 개별 PDF 페이지로 추가 ─────────────────────────
       for (int i = 0; i < allImages.length; i++) {
-        img.compositeImage(
-          canvas,
-          allImages[i],
-          dstX: 0,
-          dstY: imageStartY[i],
-          blend: img.BlendMode.direct,
-        );
-      }
+        final curImg = allImages[i];
+        final double pageW = curImg.width.toDouble();
+        final double pageH = curImg.height.toDouble();
 
-      // Encode merged canvas as a single image
-      final Uint8List pageBytes = isLossless
-          ? Uint8List.fromList(img.encodePng(canvas))
-          : Uint8List.fromList(img.encodeJpg(canvas, quality: jpgQuality));
+        setState(() {
+          _statusMessage = 'Building page ${i + 1}/${allImages.length}...';
+          _progress = 0.85 + (i / allImages.length) * 0.12;
+        });
+        await Future.delayed(const Duration(milliseconds: 10));
 
-      // Determine int_03 area in PDF coordinates (points)
-      // PDF uses pt (1pt = 1/72 inch). We map canvas pixels 1:1 in the PDF page.
-      // int_03 starts at imageStartY[int03ImageIndex] and has height allImages[int03ImageIndex].height
-      double int03StartPt = 0;
-      double int03HeightPt = 0;
-      double int03ImgWidth = 0;
-      if (int03ImageIndex >= 0) {
-        // Ratio: canvas pixel → PDF point
-        // PDF page height = totalH pts, image height = totalH px → 1px = 1pt
-        int03StartPt = imageStartY[int03ImageIndex].toDouble();
-        int03HeightPt = allImages[int03ImageIndex].height.toDouble();
-        int03ImgWidth = allImages[int03ImageIndex].width.toDouble();
-      }
+        // 이미지를 JPEG/PNG 인코딩
+        final Uint8List imgBytes = isLossless
+            ? Uint8List.fromList(img.encodePng(curImg))
+            : Uint8List.fromList(img.encodeJpg(curImg, quality: jpgQuality));
 
-      if (int03ImageIndex >= 0 && selectedTitles.isNotEmpty) {
-        // ─── 피그마 CSS 기반 좌표 ───────────────────────────────────────
-        // 원본 이미지: 1920 × 1080 px
-        // Frame 735 (리스트 컨테이너): x = 1920 - 834.69 ≈ 1085px, width 834.69px
-        // 행 높이: 37px / 행 간격(gap): 66px
-        // 번호열 폭: 43px / 번호→제목 gap: 36.08px / 제목→회사명 gap: 20.62px
-        // 폰트: 30.9234px (Pretendard)
-        // ──────────────────────────────────────────────────────────────
+        final pwImg = pw.MemoryImage(imgBytes);
 
-        final double scaleRatio = targetW / 1920.0;
-        final double imgH = int03HeightPt; // 1px = 1pt
+        if (i == int03ImageIndex && selectedItems.isNotEmpty) {
+          // ── int_03 페이지: 텍스트 오버레이 ──────────────────────────
+          // 세로 위치: 이미지 상단 12% (≈130px for 1080px img) = "2009-2026" 레벨
+          final double firstRowY = pageH * 0.12;
 
-        // X 좌표
-        final double numX    = (1920.0 - 834.69) * scaleRatio; // ≈ 1085px scaled
-        final double numW    = 43.0  * scaleRatio;
-        final double gap1    = 36.08 * scaleRatio; // 번호 → 제목 간격
-        final double gap2    = 20.62 * scaleRatio; // 제목 → 회사명 간격
+          final List<pw.Widget> textWidgets = [];
+          for (int ti = 0; ti < selectedItems.length; ti++) {
+            final yPos       = firstRowY + ti * rowStep;
+            final numStr     = (ti + 1).toString().padLeft(2, '0');
+            final titleStr   = selectedItems[ti]['title']!;
+            final companyStr = selectedItems[ti]['company']!;
 
-        // 행 사이즈
-        final double rowH    = 37.0 * scaleRatio;
-        final double rowGap  = 66.0 * scaleRatio;
-        final double rowStep = rowH + rowGap; // 103px scaled
-
-        // 폰트 크기
-        final double fs = 30.9234 * scaleRatio;
-
-        // ─── 선택된 항목 수집 ───────────────────────────────────────────
-        final List<Map<String, String>> selectedItems = [];
-        for (int i = 0; i < _orderedProjects.length; i++) {
-          if (_projectSelected[i]) {
-            selectedItems.add({
-              'title':   _orderedProjects[i].title,
-              'company': _orderedProjects[i].company ?? '',
-            });
+            textWidgets.add(
+              pw.Positioned(
+                left: numX,
+                top: yPos,
+                child: pw.Row(
+                  crossAxisAlignment: pw.CrossAxisAlignment.center,
+                  children: [
+                    pw.SizedBox(
+                      width: numW,
+                      child: pw.Text(numStr, style: numStyle),
+                    ),
+                    pw.SizedBox(width: gap1),
+                    pw.Text(titleStr, style: titleStyle),
+                    pw.SizedBox(width: gap2),
+                    pw.Text(companyStr, style: companyStyle),
+                  ],
+                ),
+              ),
+            );
           }
-        }
-        final int n = selectedItems.length;
 
-        // ─── 세로 위치: 상단 고정 ──────────────────────────────────────
-        // int_03_blank 이미지 내 "2009-2026" 레이블과 동일한 Y 레벨로 맞춤
-        // 이미지 높이(1080px) 기준 약 12% ≈ 130px 지점
-        // (= Frame 735 컨테이너 top + padding-top 70px 합산 위치)
-        final double firstRowY = int03StartPt + imgH * 0.12;
-
-
-        // ─── 텍스트 스타일 ─────────────────────────────────────────────
-        // PDF 렌더러에서 이미지 위의 텍스트는 alpha 투명도가 무시되므로
-        // 실제 RGB 회색값으로 지정해야 시각적으로 연하게 보임
-        //
-        // 번호: 중간 청회색 (배경 대비 연하게 = opacity 효과)
-        final numStyle = pw.TextStyle(
-          font: pretendardBold,
-          fontSize: fs,
-          fontWeight: pw.FontWeight.bold,
-          color: const PdfColor(0.45, 0.48, 0.52), // 중간 청회색
-          letterSpacing: 0.02 * fs,
-        );
-        // 제목: 순백색 (가장 강조)
-        final titleStyle = pw.TextStyle(
-          font: pretendardBold,
-          fontSize: fs,
-          fontWeight: pw.FontWeight.bold,
-          color: PdfColors.white,
-        );
-        // 회사명: 밝은 회색 (흰색보다 살짝 연하게)
-        final companyStyle = pw.TextStyle(
-          font: pretendardRegular,
-          fontSize: fs,
-          color: const PdfColor(0.78, 0.80, 0.84), // 밝은 청회색
-        );
-
-
-        // ─── 각 행을 pw.Row 로 렌더 (한글/영문 폭 추정 불필요) ──────────
-        final List<pw.Widget> textWidgets = [];
-        for (int ti = 0; ti < n; ti++) {
-          final yPos      = firstRowY + ti * rowStep;
-          final numStr    = (ti + 1).toString().padLeft(2, '0');
-          final titleStr  = selectedItems[ti]['title']!;
-          final companyStr = selectedItems[ti]['company']!;
-
-          textWidgets.add(
-            pw.Positioned(
-              left: numX,
-              top: yPos,
-              child: pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.center,
+          pdf.addPage(
+            pw.Page(
+              pageFormat: PdfPageFormat(
+                pageW, pageH,
+                marginTop: 0, marginBottom: 0,
+                marginLeft: 0, marginRight: 0,
+              ),
+              margin: pw.EdgeInsets.zero,
+              build: (ctx) => pw.Stack(
                 children: [
-                  // 번호 (고정 폭)
-                  pw.SizedBox(
-                    width: numW,
-                    child: pw.Text(numStr, style: numStyle),
-                  ),
-                  pw.SizedBox(width: gap1),
-                  // 프로젝트명
-                  pw.Text(titleStr, style: titleStyle),
-                  pw.SizedBox(width: gap2),
-                  // 회사명
-                  pw.Text(companyStr, style: companyStyle),
+                  pw.Image(pwImg, width: pageW, height: pageH,
+                      fit: pw.BoxFit.fill),
+                  ...textWidgets,
                 ],
               ),
             ),
           );
+        } else {
+          // ── 일반 페이지: 이미지 그대로 ──────────────────────────────
+          pdf.addPage(
+            pw.Page(
+              pageFormat: PdfPageFormat(
+                pageW, pageH,
+                marginTop: 0, marginBottom: 0,
+                marginLeft: 0, marginRight: 0,
+              ),
+              margin: pw.EdgeInsets.zero,
+              build: (ctx) => pw.Image(pwImg,
+                  width: pageW, height: pageH, fit: pw.BoxFit.fill),
+            ),
+          );
         }
-
-        // PDF 페이지 생성 (pw.Stack으로 이미지 위에 텍스트 오버레이)
-        pdf.addPage(
-          pw.Page(
-            pageFormat: PdfPageFormat(
-              targetW,
-              totalH.toDouble(),
-              marginTop: 0,
-              marginBottom: 0,
-              marginLeft: 0,
-              marginRight: 0,
-            ),
-            margin: pw.EdgeInsets.zero,
-            build: (ctx) => pw.Stack(
-              children: [
-                pw.Image(
-                  pw.MemoryImage(pageBytes),
-                  width: targetW,
-                  height: totalH.toDouble(),
-                  fit: pw.BoxFit.contain,
-                ),
-                ...textWidgets,
-              ],
-            ),
-          ),
-        );
-      } else {
-        // No int_03 or no projects — just the plain image
-        pdf.addPage(
-          pw.Page(
-            pageFormat: PdfPageFormat(
-              targetW,
-              totalH.toDouble(),
-              marginTop: 0,
-              marginBottom: 0,
-              marginLeft: 0,
-              marginRight: 0,
-            ),
-            margin: pw.EdgeInsets.zero,
-            build: (ctx) => pw.Image(
-              pw.MemoryImage(pageBytes),
-              width: targetW,
-              height: totalH.toDouble(),
-              fit: pw.BoxFit.contain,
-            ),
-          ),
-        );
       }
 
       // 5. Save PDF
