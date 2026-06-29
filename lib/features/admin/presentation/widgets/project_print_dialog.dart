@@ -240,10 +240,11 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         }
       }      if (allImages.isEmpty) throw Exception('No images could be loaded.');
 
-      // 4. Build PDF — each image becomes its own page.
-      //    int_03 page gets a pw.Stack text overlay; all others are plain image pages.
+      // 4. Build PDF — single page, stacking all images in a Column
+      //    This avoids viewer gaps between pages and prevents memory overflow
+      //    (no giant single img.Image pixel buffer needed).
       setState(() {
-        _statusMessage = 'Building PDF...';
+        _statusMessage = 'Building PDF Layout...';
         _progress = 0.85;
       });
       await Future.delayed(const Duration(milliseconds: 50));
@@ -282,25 +283,29 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         color: const PdfColor(0.78, 0.80, 0.84),
       );
 
-      // 선택된 프로젝트 목록 (번호/제목/회사명)
+      // 선택된 프로젝트 목록
       final List<Map<String, String>> selectedItems = [];
       for (int i = 0; i < _orderedProjects.length; i++) {
         if (_projectSelected[i]) {
           selectedItems.add({
             'title':   _orderedProjects[i].title,
-            'company': _orderedProjects[i].company ?? '',
+            'company': _orderedProjects[i].company, // dead_code 경고 수정
           });
         }
       }
 
-      // ─── 각 이미지를 개별 PDF 페이지로 추가 ─────────────────────────
+      final List<pw.Widget> columnChildren = [];
+      final List<pw.Widget> textOverlays = [];
+      double cumY = 0;
+
+      // ─── 각 이미지를 Column 자식으로 추가하고, int_03 텍스트는 Positioned 로 추가
       for (int i = 0; i < allImages.length; i++) {
         final curImg = allImages[i];
         final double pageW = curImg.width.toDouble();
         final double pageH = curImg.height.toDouble();
 
         setState(() {
-          _statusMessage = 'Building page ${i + 1}/${allImages.length}...';
+          _statusMessage = 'Encoding image ${i + 1}/${allImages.length}...';
           _progress = 0.85 + (i / allImages.length) * 0.12;
         });
         await Future.delayed(const Duration(milliseconds: 10));
@@ -312,19 +317,23 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
 
         final pwImg = pw.MemoryImage(imgBytes);
 
-        if (i == int03ImageIndex && selectedItems.isNotEmpty) {
-          // ── int_03 페이지: 텍스트 오버레이 ──────────────────────────
-          // 세로 위치: 이미지 상단 12% (≈130px for 1080px img) = "2009-2026" 레벨
-          final double firstRowY = pageH * 0.12;
+        // 이미지 위젯 추가
+        columnChildren.add(
+          pw.Image(pwImg, width: pageW, height: pageH, fit: pw.BoxFit.fill)
+        );
 
-          final List<pw.Widget> textWidgets = [];
+        if (i == int03ImageIndex && selectedItems.isNotEmpty) {
+          // ── int_03 텍스트 오버레이 ──────────────────────────
+          // 세로 위치: 해당 이미지 상단(cumY) + 12% (≈130px for 1080px img)
+          final double firstRowY = cumY + (pageH * 0.12);
+
           for (int ti = 0; ti < selectedItems.length; ti++) {
             final yPos       = firstRowY + ti * rowStep;
             final numStr     = (ti + 1).toString().padLeft(2, '0');
             final titleStr   = selectedItems[ti]['title']!;
             final companyStr = selectedItems[ti]['company']!;
 
-            textWidgets.add(
+            textOverlays.add(
               pw.Positioned(
                 left: numX,
                 top: yPos,
@@ -344,40 +353,31 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
               ),
             );
           }
-
-          pdf.addPage(
-            pw.Page(
-              pageFormat: PdfPageFormat(
-                pageW, pageH,
-                marginTop: 0, marginBottom: 0,
-                marginLeft: 0, marginRight: 0,
-              ),
-              margin: pw.EdgeInsets.zero,
-              build: (ctx) => pw.Stack(
-                children: [
-                  pw.Image(pwImg, width: pageW, height: pageH,
-                      fit: pw.BoxFit.fill),
-                  ...textWidgets,
-                ],
-              ),
-            ),
-          );
-        } else {
-          // ── 일반 페이지: 이미지 그대로 ──────────────────────────────
-          pdf.addPage(
-            pw.Page(
-              pageFormat: PdfPageFormat(
-                pageW, pageH,
-                marginTop: 0, marginBottom: 0,
-                marginLeft: 0, marginRight: 0,
-              ),
-              margin: pw.EdgeInsets.zero,
-              build: (ctx) => pw.Image(pwImg,
-                  width: pageW, height: pageH, fit: pw.BoxFit.fill),
-            ),
-          );
         }
+
+        cumY += pageH;
       }
+
+      // 단일 PDF 페이지로 렌더링
+      pdf.addPage(
+        pw.Page(
+          pageFormat: PdfPageFormat(
+            targetW, cumY,
+            marginTop: 0, marginBottom: 0,
+            marginLeft: 0, marginRight: 0,
+          ),
+          margin: pw.EdgeInsets.zero,
+          build: (ctx) => pw.Stack(
+            children: [
+              pw.Column(
+                mainAxisSize: pw.MainAxisSize.min,
+                children: columnChildren,
+              ),
+              ...textOverlays,
+            ],
+          ),
+        ),
+      );
 
       // 5. Save PDF
       setState(() {
