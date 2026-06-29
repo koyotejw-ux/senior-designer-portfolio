@@ -346,22 +346,20 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         }
         final int n = selectedItems.length;
 
-        // ─── 세로 가운데 정렬 ─────────────────────────────────────────
-        // int_03 이미지 내 유효 콘텐츠 영역: 상단 25% ~ 95%
-        // (상단 25%는 "Contents" 타이틀 영역 제외)
-        final double contentAreaTop = int03StartPt + imgH * 0.25;
-        final double contentAreaBot = int03StartPt + imgH * 0.95;
-        final double totalListH = n * rowH + (n > 1 ? (n - 1) * rowGap : 0);
-        final double contentMidY = (contentAreaTop + contentAreaBot) / 2;
-        final double firstRowY   = contentMidY - totalListH / 2;
+        // ─── 세로 위치: 상단 고정 ──────────────────────────────────────
+        // int_03_blank 이미지 내 "2009-2026" 레이블과 동일한 Y 레벨로 맞춤
+        // 이미지 높이(1080px) 기준 약 12% ≈ 130px 지점
+        // (= Frame 735 컨테이너 top + padding-top 70px 합산 위치)
+        final double firstRowY = int03StartPt + imgH * 0.12;
+
 
         // ─── 텍스트 스타일 ─────────────────────────────────────────────
-        // 번호: Figma opacity 0.5 → 실제 렌더 시 더 눈에 띄어서 0.3으로 조정
+        // 번호: 배경이 어두우므로 white 18% opacity → 반투명 희미한 톤
         final numStyle = pw.TextStyle(
           font: pretendardBold,
           fontSize: fs,
           fontWeight: pw.FontWeight.bold,
-          color: const PdfColor(1, 1, 1, 0.3),
+          color: const PdfColor(1, 1, 1, 0.18),
           letterSpacing: 0.02 * fs,
         );
         final titleStyle = pw.TextStyle(
