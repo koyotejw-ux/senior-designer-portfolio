@@ -354,25 +354,31 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
 
 
         // ─── 텍스트 스타일 ─────────────────────────────────────────────
-        // 번호: 배경이 어두우므로 white 18% opacity → 반투명 희미한 톤
+        // PDF 렌더러에서 이미지 위의 텍스트는 alpha 투명도가 무시되므로
+        // 실제 RGB 회색값으로 지정해야 시각적으로 연하게 보임
+        //
+        // 번호: 중간 청회색 (배경 대비 연하게 = opacity 효과)
         final numStyle = pw.TextStyle(
           font: pretendardBold,
           fontSize: fs,
           fontWeight: pw.FontWeight.bold,
-          color: const PdfColor(1, 1, 1, 0.18),
+          color: const PdfColor(0.45, 0.48, 0.52), // 중간 청회색
           letterSpacing: 0.02 * fs,
         );
+        // 제목: 순백색 (가장 강조)
         final titleStyle = pw.TextStyle(
           font: pretendardBold,
           fontSize: fs,
           fontWeight: pw.FontWeight.bold,
           color: PdfColors.white,
         );
+        // 회사명: 밝은 회색 (흰색보다 살짝 연하게)
         final companyStyle = pw.TextStyle(
           font: pretendardRegular,
           fontSize: fs,
-          color: const PdfColor(1, 1, 1, 0.75),
+          color: const PdfColor(0.78, 0.80, 0.84), // 밝은 청회색
         );
+
 
         // ─── 각 행을 pw.Row 로 렌더 (한글/영문 폭 추정 불필요) ──────────
         final List<pw.Widget> textWidgets = [];
