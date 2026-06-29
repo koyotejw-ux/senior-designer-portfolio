@@ -309,53 +309,59 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       }
 
       if (int03ImageIndex >= 0 && selectedTitles.isNotEmpty) {
-        // --- Figma CSS 기반 정확한 좌표 계산 ---
-        // 원본 이미지: 1920 x 1080px
-        // Frame 735: width=834.69px, height=210px (우측 배치)
-        //   → listContainerX = imgW - 834.69 ≈ 1085px
-        // padding-top: 70px, gap between rows: 66px
-        // 첫 항목 y = int03StartPt + (int03HeightPt * 0.444) + 70
-        //   (0.444 = 480/1080 ≈ 컨테이너 상단 y 비율, 피그마 스크린샷 기준)
-        // row height: 37px, gap: 66px → nextRowY = currentY + 37 + 66 = +103px
-        // 번호: font 30.92px (scaleRatio 적용), weight 800, opacity 0.5
-        //   width 43px, 이후 gap 36.08px
-        // 제목: font 30.92px, weight 700
-        //   이후 gap 20.62px
-        // 회사명: font 30.92px, weight 400, opacity 0.8
+        // ─── 피그마 CSS 기반 좌표 ───────────────────────────────────────
+        // 원본 이미지: 1920 × 1080 px
+        // Frame 735 (리스트 컨테이너): x = 1920 - 834.69 ≈ 1085px, width 834.69px
+        // 행 높이: 37px / 행 간격(gap): 66px
+        // 번호열 폭: 43px / 번호→제목 gap: 36.08px / 제목→회사명 gap: 20.62px
+        // 폰트: 30.9234px (Pretendard)
+        // ──────────────────────────────────────────────────────────────
 
-        // Scale ratio: PDF canvas width / 1920
         final double scaleRatio = targetW / 1920.0;
-        final double imgH = int03HeightPt; // px = pt (1:1)
+        final double imgH = int03HeightPt; // 1px = 1pt
 
-        // 리스트 컨테이너 좌상단 (Figma 기준 1920px canvas)
-        final double containerX = 1920.0 - 834.69; // ≈ 1085.31
-        // int_03 내부에서 컨테이너 상단 y 위치 (Figma 스크린샷 기준 ~44.4%)
-        final double containerTopInImg = imgH * 0.444;
-        final double paddingTop = 70.0 * scaleRatio;
-        final double rowH = 37.0 * scaleRatio;
-        final double rowGap = 66.0 * scaleRatio;
+        // X 좌표
+        final double numX    = (1920.0 - 834.69) * scaleRatio; // ≈ 1085px scaled
+        final double numW    = 43.0  * scaleRatio;
+        final double gap1    = 36.08 * scaleRatio; // 번호 → 제목 간격
+        final double gap2    = 20.62 * scaleRatio; // 제목 → 회사명 간격
+
+        // 행 사이즈
+        final double rowH    = 37.0 * scaleRatio;
+        final double rowGap  = 66.0 * scaleRatio;
         final double rowStep = rowH + rowGap; // 103px scaled
 
-        // 폰트 크기 (1920 기준 30.92px → 스케일)
+        // 폰트 크기
         final double fs = 30.9234 * scaleRatio;
 
-        // x 좌표 (스케일 적용)
-        final double numX = containerX * scaleRatio;
-        final double numW = 43.0 * scaleRatio;
-        final double gap1 = 36.08 * scaleRatio; // 번호 → 제목 간격
-        final double titleX = numX + numW + gap1;
-        final double gap2 = 20.62 * scaleRatio; // 제목 → 회사명 간격
+        // ─── 선택된 항목 수집 ───────────────────────────────────────────
+        final List<Map<String, String>> selectedItems = [];
+        for (int i = 0; i < _orderedProjects.length; i++) {
+          if (_projectSelected[i]) {
+            selectedItems.add({
+              'title':   _orderedProjects[i].title,
+              'company': _orderedProjects[i].company ?? '',
+            });
+          }
+        }
+        final int n = selectedItems.length;
 
-        // 첫 항목 y 위치
-        final double firstRowY =
-            int03StartPt + containerTopInImg * scaleRatio + paddingTop;
+        // ─── 세로 가운데 정렬 ─────────────────────────────────────────
+        // int_03 이미지 내 유효 콘텐츠 영역: 상단 25% ~ 95%
+        // (상단 25%는 "Contents" 타이틀 영역 제외)
+        final double contentAreaTop = int03StartPt + imgH * 0.25;
+        final double contentAreaBot = int03StartPt + imgH * 0.95;
+        final double totalListH = n * rowH + (n > 1 ? (n - 1) * rowGap : 0);
+        final double contentMidY = (contentAreaTop + contentAreaBot) / 2;
+        final double firstRowY   = contentMidY - totalListH / 2;
 
-        // 스타일 정의
+        // ─── 텍스트 스타일 ─────────────────────────────────────────────
+        // 번호: Figma opacity 0.5 → 실제 렌더 시 더 눈에 띄어서 0.3으로 조정
         final numStyle = pw.TextStyle(
           font: pretendardBold,
           fontSize: fs,
           fontWeight: pw.FontWeight.bold,
-          color: const PdfColor(1, 1, 1, 0.5),
+          color: const PdfColor(1, 1, 1, 0.3),
           letterSpacing: 0.02 * fs,
         );
         final titleStyle = pw.TextStyle(
@@ -367,52 +373,37 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         final companyStyle = pw.TextStyle(
           font: pretendardRegular,
           fontSize: fs,
-          color: const PdfColor(1, 1, 1, 0.8),
+          color: const PdfColor(1, 1, 1, 0.75),
         );
 
-        // 선택된 프로젝트 + 회사명 수집
-        final List<Map<String, String>> selectedItems = [];
-        for (int i = 0; i < _orderedProjects.length; i++) {
-          if (_projectSelected[i]) {
-            selectedItems.add({
-              'title': _orderedProjects[i].title,
-              'company': _orderedProjects[i].company ?? '',
-            });
-          }
-        }
-
-        // Positioned 텍스트 위젯 생성
+        // ─── 각 행을 pw.Row 로 렌더 (한글/영문 폭 추정 불필요) ──────────
         final List<pw.Widget> textWidgets = [];
-        for (int ti = 0; ti < selectedItems.length; ti++) {
-          final yPos = firstRowY + ti * rowStep;
-          final numStr = (ti + 1).toString().padLeft(2, '0');
-          final titleStr = selectedItems[ti]['title']!;
+        for (int ti = 0; ti < n; ti++) {
+          final yPos      = firstRowY + ti * rowStep;
+          final numStr    = (ti + 1).toString().padLeft(2, '0');
+          final titleStr  = selectedItems[ti]['title']!;
           final companyStr = selectedItems[ti]['company']!;
 
-          // 번호
           textWidgets.add(
             pw.Positioned(
               left: numX,
               top: yPos,
-              child: pw.Text(numStr, style: numStyle),
-            ),
-          );
-          // 제목
-          textWidgets.add(
-            pw.Positioned(
-              left: titleX,
-              top: yPos,
-              child: pw.Text(titleStr, style: titleStyle),
-            ),
-          );
-          // 회사명 (제목 오른쪽, 동적 위치 계산 불가 → 고정 offset 사용)
-          // 제목 텍스트 width 추정: 한 글자 ≈ fs * 0.65
-          final double estTitleW = titleStr.length * fs * 0.65;
-          textWidgets.add(
-            pw.Positioned(
-              left: titleX + estTitleW + gap2,
-              top: yPos,
-              child: pw.Text(companyStr, style: companyStyle),
+              child: pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.center,
+                children: [
+                  // 번호 (고정 폭)
+                  pw.SizedBox(
+                    width: numW,
+                    child: pw.Text(numStr, style: numStyle),
+                  ),
+                  pw.SizedBox(width: gap1),
+                  // 프로젝트명
+                  pw.Text(titleStr, style: titleStyle),
+                  pw.SizedBox(width: gap2),
+                  // 회사명
+                  pw.Text(companyStr, style: companyStyle),
+                ],
+              ),
             ),
           );
         }
