@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../theme/app_colors.dart';
 import '../theme/theme_provider.dart';
+import '../../features/analytics/data/analytics_service.dart';
 
 class AppHeader extends ConsumerWidget {
   final bool showLogo;
@@ -60,6 +61,7 @@ class AppHeader extends ConsumerWidget {
     return InkWell(
       onTap: () {
         Navigator.pop(context);
+        analyticsService.logEvent('menu_click', parameters: {'menu': label, 'source': 'mobile_bottom_sheet'});
         if (onMenuClick != null) {
           onMenuClick!(label);
         }
@@ -170,6 +172,7 @@ class AppHeader extends ConsumerWidget {
   ) {
     return TextButton(
       onPressed: () {
+        analyticsService.logEvent('menu_click', parameters: {'menu': label, 'source': 'desktop_nav'});
         if (onMenuClick != null) {
           onMenuClick!(label);
         } else {

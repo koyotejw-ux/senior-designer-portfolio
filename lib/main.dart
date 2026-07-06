@@ -8,11 +8,15 @@ import 'core/constants/app_constants.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'features/analytics/data/analytics_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
+  // Record visit analytics
+  analyticsService.recordVisit();
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

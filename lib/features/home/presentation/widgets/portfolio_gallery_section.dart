@@ -11,6 +11,7 @@ import '../../data/models/project_model.dart';
 import '../../data/providers/content_provider.dart';
 import '../pages/project_detail_page.dart';
 import 'holographic_card.dart';
+import '../../../../features/analytics/data/analytics_service.dart';
 
 class PortfolioGallerySection extends ConsumerStatefulWidget {
   const PortfolioGallerySection({super.key});
@@ -171,6 +172,7 @@ class _PortfolioGallerySectionState
           cursor: SystemMouseCursors.click,
           child: GestureDetector(
             onTap: () {
+              analyticsService.logEvent('project_click', parameters: {'project_id': project.id, 'title': project.title});
               // Navigate to detail page
               Navigator.push(
                 context,
@@ -196,6 +198,7 @@ class _PortfolioGallerySectionState
                       if (project.imageUrl != null) ...[
                         GestureDetector(
                           onTap: () {
+                            analyticsService.logEvent('project_click', parameters: {'project_id': project.id, 'title': project.title, 'source': 'image'});
                             // Navigate to detail page when image is tapped
                             Navigator.push(
                               context,

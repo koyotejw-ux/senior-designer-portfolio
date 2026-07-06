@@ -19,6 +19,7 @@ import 'project_guide_page.dart';
 import 'project_templates_page.dart';
 import 'project_documents_page.dart';
 import '../widgets/atomic_design/atomic_design_editor.dart';
+import '../../../analytics/presentation/widgets/analytics_dashboard.dart';
 
 class AdminPage extends ConsumerStatefulWidget {
   const AdminPage({super.key});
@@ -31,7 +32,7 @@ class _AdminPageState extends ConsumerState<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 14,
+      length: 15,
       child: Scaffold(
         appBar: AppBar(
           title: Row(
@@ -116,6 +117,10 @@ class _AdminPageState extends ConsumerState<AdminPage> {
                 icon: Icon(Icons.auto_awesome_mosaic, size: 20),
                 text: 'Atomic',
               ),
+              Tab(
+                icon: Icon(Icons.analytics, size: 20),
+                text: 'Analytics',
+              ),
             ],
           ),
         ),
@@ -136,6 +141,7 @@ class _AdminPageState extends ConsumerState<AdminPage> {
             const ProjectGuidePage(),
             const ProjectTemplatesPage(),
             const AtomicDesignEditor(),
+            const AnalyticsDashboard(),
           ],
         ),
       ),
