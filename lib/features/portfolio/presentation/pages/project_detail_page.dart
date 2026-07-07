@@ -2601,15 +2601,15 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
       imagesToRender = [
         {
           'url': isNetwork ? 'http://localhost:8080/images/closers_1.jpg' : 'assets/images/closers_1.jpg',
-          'ratio': 6652 / 1920,
+          'ratio': 6653 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/closers_2.jpg' : 'assets/images/closers_2.jpg',
-          'ratio': 6652 / 1920,
+          'ratio': 6653 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/closers_3.jpg' : 'assets/images/closers_3.jpg',
-          'ratio': 6654 / 1920,
+          'ratio': 6652 / 1920,
         },
       ];
     } else if (isPromotion) {
@@ -2627,27 +2627,27 @@ class _ProjectDetailPageState extends ConsumerState<ProjectDetailPage>
       imagesToRender = [
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_1.jpg' : 'assets/images/aia_1.jpg',
-          'ratio': 2800 / 1920,
+          'ratio': 2765 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_2.jpg' : 'assets/images/aia_2.jpg',
-          'ratio': 2800 / 1920,
+          'ratio': 2765 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_3.jpg' : 'assets/images/aia_3.jpg',
-          'ratio': 2800 / 1920,
+          'ratio': 2765 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_4.jpg' : 'assets/images/aia_4.jpg',
-          'ratio': 2800 / 1920,
+          'ratio': 2765 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_5.jpg' : 'assets/images/aia_5.jpg',
-          'ratio': 2800 / 1920,
+          'ratio': 2765 / 1920,
         },
         {
           'url': isNetwork ? 'http://localhost:8080/images/aia_6.jpg' : 'assets/images/aia_6.jpg',
-          'ratio': 2589 / 1920,
+          'ratio': 2764 / 1920,
         },
       ];
     } else if (isSamMes) {
