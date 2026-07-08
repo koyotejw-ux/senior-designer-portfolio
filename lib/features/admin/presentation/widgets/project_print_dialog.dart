@@ -323,9 +323,19 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         );
 
         if (i == int03ImageIndex && selectedItems.isNotEmpty) {
-          // ── int_03 텍스트 오버레이 ──────────────────────────
-          // 세로 위치: 해당 이미지 상단(cumY) + 12% (≈130px for 1080px img)
-          final double firstRowY = cumY + (pageH * 0.12);
+          // ── int_03 텍스트 오버레이 (하단 정렬로 위로 쌓임) ─────────────────
+          // 좌측 육각형 하단 기준 Y 좌표 (대략 이미지 높이의 86% 지점으로 추정)
+          final double bottomAnchorY = cumY + (pageH * 0.86);
+
+          final double guideHeight = (20 + 12 + 24) * scaleRatio;
+          final double marginBelowList = 60.0 * scaleRatio;
+          
+          // 전체 블록의 총 높이 계산
+          final double totalListHeight = selectedItems.length * rowStep;
+          final double totalBlockHeight = totalListHeight + marginBelowList + guideHeight;
+          
+          // 리스트가 시작될 가장 상단의 Y 좌표 (바텀 앵커에서 총 높이를 뺀 값)
+          final double firstRowY = bottomAnchorY - totalBlockHeight;
 
           for (int ti = 0; ti < selectedItems.length; ti++) {
             final yPos       = firstRowY + ti * rowStep;
@@ -354,9 +364,8 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             );
           }
 
-          // Add friendly guide and URL at the bottom of the list
-          final double lastRowY = firstRowY + selectedItems.length * rowStep;
-          final double guideY = lastRowY + (60.0 * scaleRatio); // margin below the list
+          // 포트폴리오 사이트 안내 (가장 하단)
+          final double guideY = firstRowY + totalListHeight + marginBelowList;
 
           textOverlays.add(
             pw.Positioned(
