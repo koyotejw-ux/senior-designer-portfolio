@@ -132350,122 +132350,122 @@ break
 case 6:case 1:return A.Q(q,r)
 case 2:return A.P(o.at(-1),r)}})
 return A.R($async$AR,r)},
-lk(){var s=0,r=A.S(t.H),q=1,p=[],o=this,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,e0,e1,e2,e3,e4,e5,e6,e7,e8,e9,f0,f1,f2,f3,f4,f5,f6,f7,f8
-var $async$lk=A.N(function(f9,g0){if(f9===1){p.push(g0)
+lk(){var s=0,r=A.S(t.H),q=1,p=[],o=this,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,e0,e1,e2,e3,e4,e5,e6,e7,e8,e9,f0,f1,f2,f3,f4,f5,f6,f7,f8,f9,g0,g1,g2
+var $async$lk=A.N(function(g3,g4){if(g3===1){p.push(g4)
 s=q}while(true)switch(s){case 0:o.V(new A.b0s(o))
 q=3
-e6={}
+f0={}
 n=1920
 m=A.ro(o.x.a.a)
 if(m!=null&&m>0)n=m
 l=J.aS(n)
-e7=o.y
-k=e7>=10
-j=B.m.aD(B.o.D(e7*10),10,90)
+f1=o.y
+k=f1>=10
+j=B.m.aD(B.o.D(f1*10),10,90)
 o.V(new A.b0t(o))
 i=null
 h=null
 q=7
-e7=$.q8()
+f1=$.q8()
 s=10
-return A.J(e7.jB(0,"assets/fonts/Pretendard-Bold.ttf"),$async$lk)
-case 10:g=g0
+return A.J(f1.jB(0,"assets/fonts/Pretendard-Bold.ttf"),$async$lk)
+case 10:g=g4
 i=new A.Qc(J.eL(J.X3(g)),null)
 s=11
-return A.J(e7.jB(0,"assets/fonts/Pretendard-Regular.ttf"),$async$lk)
-case 11:f=g0
+return A.J(f1.jB(0,"assets/fonts/Pretendard-Regular.ttf"),$async$lk)
+case 11:f=g4
 h=new A.Qc(J.eL(J.X3(f)),null)
 q=3
 s=9
 break
 case 7:q=6
-f7=p.pop()
-e=A.ar(f7)
+g1=p.pop()
+e=A.ar(g1)
 A.ej().$1("Font load warning: "+A.j(e)+" \u2014 falling back to default font")
 s=9
 break
 case 6:s=3
 break
-case 9:e6.a=0
-e7=o.as
-e7===$&&A.a()
-e9=0
-for(;e9<3;++e9){d=e7[e9]
-if(d.b)++e6.a}c=0
-e7=t.s
-while(!0){f0=c
-f1=o.d
+case 9:f0.a=0
+f1=o.as
 f1===$&&A.a()
-if(!(f0<f1.length))break
-c$0:{f0=o.e
-f0===$&&A.a()
-if(!f0[c])break c$0
-b=f1[c]
-f0=e6.a
-if(b.ax.length!==0)f1=b.ax
-else if(b.x!=null){f1=b.x
-f1.toString
-f1=A.b([f1],e7)}else f1=[]
-e6.a=f0+f1.length}++c}if(e6.a===0){e7=A.cW("No items selected.")
-throw A.c(e7)}e6.b=0
+f3=0
+for(;f3<3;++f3){d=f1[f3]
+if(d.b)++f0.a}c=0
+f1=t.s
+while(!0){f4=c
+f5=o.d
+f5===$&&A.a()
+if(!(f4<f5.length))break
+c$0:{f4=o.e
+f4===$&&A.a()
+if(!f4[c])break c$0
+b=f5[c]
+f4=f0.a
+if(b.ax.length!==0)f5=b.ax
+else if(b.x!=null){f5=b.x
+f5.toString
+f5=A.b([f5],f1)}else f5=[]
+f0.a=f4+f5.length}++c}if(f0.a===0){f1=A.cW("No items selected.")
+throw A.c(f1)}f0.b=0
 a=A.b([],t.US)
 a0=-1
 a1=new A.b0C(l)
-a2=0,f0=t.z
-case 12:if(!(f1=a2,f2=o.as,f1<3)){s=14
-break}a3=f2[a2]
+a2=0,f4=t.z
+case 12:if(!(f5=a2,f6=o.as,f5<3)){s=14
+break}a3=f6[a2]
 if(!a3.b){s=13
-break}new A.b0u(e6,o,a3).$0()
+break}new A.b0u(f0,o,a3).$0()
 o.c.d9()
 s=15
-return A.J(A.kA(B.As,null,f0),$async$lk)
+return A.J(A.kA(B.As,null,f4),$async$lk)
 case 15:s=16
 return A.J(o.GI(a3),$async$lk)
-case 16:a4=g0
-if(a4!=null){f1=a4
-f3=A.akD(f1)
-a5=f3==null?null:f3.iN(0,f1,null)
-if(a5!=null){f1=a3.a
-if(A.wC(f1,"int_03",0))a0=J.bT(a)
-J.f5(a,a1.$1(a5))}}++e6.b
+case 16:a4=g4
+if(a4!=null){f5=a4
+f7=A.akD(f5)
+a5=f7==null?null:f7.iN(0,f5,null)
+if(a5!=null){f5=a3.a
+if(A.wC(f5,"int_03",0))a0=J.bT(a)
+J.f5(a,a1.$1(a5))}}++f0.b
 case 13:++a2
 s=12
 break
 case 14:a6=0
-case 17:if(!(f1=a6,f2=o.d,f1<f2.length)){s=19
-break}f1=o.e
-f1===$&&A.a()
-if(!f1[a6]){s=18
-break}a7=f2[a6]
-if(a7.ax.length!==0)f4=a7.ax
-else if(a7.x!=null){f1=a7.x
-f1.toString
-f1=A.b([f1],e7)
-f4=f1}else{f1=A.b([],e7)
-f4=f1}a8=f4
+case 17:if(!(f5=a6,f6=o.d,f5<f6.length)){s=19
+break}f5=o.e
+f5===$&&A.a()
+if(!f5[a6]){s=18
+break}a7=f6[a6]
+if(a7.ax.length!==0)f8=a7.ax
+else if(a7.x!=null){f5=a7.x
+f5.toString
+f5=A.b([f5],f1)
+f8=f5}else{f5=A.b([],f1)
+f8=f5}a8=f8
 a9=0
 case 20:if(!(a9<J.bT(a8))){s=22
-break}new A.b0v(e6,o,a7,a9,a8).$0()
+break}new A.b0v(f0,o,a7,a9,a8).$0()
 o.c.d9()
 s=23
-return A.J(A.kA(B.As,null,f0),$async$lk)
+return A.J(A.kA(B.As,null,f4),$async$lk)
 case 23:s=24
 return A.J(o.AR(J.n(a8,a9)),$async$lk)
-case 24:b0=g0
-if(b0!=null){f1=b0
-f3=A.akD(f1)
-b1=f3==null?null:f3.iN(0,f1,null)
-if(b1!=null)J.f5(a,a1.$1(b1))}++e6.b
+case 24:b0=g4
+if(b0!=null){f5=b0
+f7=A.akD(f5)
+b1=f7==null?null:f7.iN(0,f5,null)
+if(b1!=null)J.f5(a,a1.$1(b1))}++f0.b
 case 21:++a9
 s=20
 break
 case 22:case 18:++a6
 s=17
 break
-case 19:if(J.bT(a)===0){e7=A.cW("No images could be loaded.")
-throw A.c(e7)}o.V(new A.b0w(o))
+case 19:if(J.bT(a)===0){f1=A.cW("No images could be loaded.")
+throw A.c(f1)}o.V(new A.b0w(o))
 s=25
-return A.J(A.kA(B.fR,null,f0),$async$lk)
+return A.J(A.kA(B.fR,null,f4),$async$lk)
 case 25:b2=A.bhK()
 b3=n/1920
 b4=1085.31*b3
@@ -132480,58 +132480,62 @@ c2=A.FF(null,B.b3i,null,null,null,null,i,null,null,B.j5,null,null,c1,null,B.fT,n
 c3=A.FF(null,B.NM,null,null,null,null,i,null,null,B.j5,null,null,c1,null,B.fT,null,!0,null,null,null,null)
 c4=A.FF(null,B.NN,null,null,null,null,h,null,null,B.j5,null,null,c1,null,null,null,!0,null,null,null,null)
 c5=A.b([],t.m0)
-for(c6=0,e7=t.N;f1=c6,f2=o.d,f1<f2.length;++c6){f1=o.e
-f1===$&&A.a()
-if(f1[c6])J.f5(c5,A.w(["title",f2[c6].b,"company",f2[c6].d],e7,e7))}e7=t.n_
-c7=A.b([],e7)
-c8=A.b([],e7)
+for(c6=0,f1=t.N;f5=c6,f6=o.d,f5<f6.length;++c6){f5=o.e
+f5===$&&A.a()
+if(f5[c6])J.f5(c5,A.w(["title",f6[c6].b,"company",f6[c6].d],f1,f1))}f1=t.n_
+c7=A.b([],f1)
+c8=A.b([],f1)
 c9=0
 d0=0
 case 26:if(!(d0<J.bT(a))){s=28
 break}d1=J.n(a,d0)
-f1=d1.a
-f5=f1==null?null:f1.a
-d2=f5==null?0:f5
-f1=d1.a
-f6=f1==null?null:f1.b
-d3=f6==null?0:f6
+f5=d1.a
+f9=f5==null?null:f5.a
+d2=f9==null?0:f9
+f5=d1.a
+g0=f5==null?null:f5.b
+d3=g0==null?0:g0
 new A.b0x(o,d0,a).$0()
 o.c.d9()
 s=29
-return A.J(A.kA(B.Ap,null,f0),$async$lk)
+return A.J(A.kA(B.Ap,null,f4),$async$lk)
 case 29:d4=k?new Uint8Array(A.br(new A.aEn(B.b6_,6).aOv(d1,!1))):new Uint8Array(A.br(A.bc0(j).T9(d1,B.nh)))
 d5=A.bc9(d4)
 J.f5(c7,new A.uq(d5,B.yk,d2,d3))
-if(J.e(d0,a0)&&J.bT(c5)!==0){d6=c9+d3*0.12
-for(d7=0;d7<J.bT(c5);++d7){d8=d6+d7*c0
-d9=B.n.dJ(B.o.j(d7+1),2,"0")
-f1=J.n(c5,d7).h(0,"title")
-f1.toString
-e0=f1
-f1=J.n(c5,d7).h(0,"company")
-f1.toString
-e1=f1
-J.f5(c8,new A.zm(b4,d8,new A.a5c(B.qL,B.v9,B.vb,B.zZ,B.q8,new A.KL(),A.b([new A.rJ(b5,null,A.a6Z(d9,c2)),new A.rJ(b6,null,null),A.a6Z(e0,c3),new A.rJ(b7,null,null),A.a6Z(e1,c4)],e7))))}e2=d6+J.bT(c5)*c0
-e3=e2+60*b3
-J.f5(c8,new A.zm(b4,e3,new A.Jn(B.lX,B.v9,B.vb,B.zY,B.q8,new A.KL(),A.b([A.a6Z("\ub354 \ub9ce\uc740 \ud3ec\ud2b8\ud3f4\ub9ac\uc624\uc640 \uc0c1\uc138 \ub0b4\uc6a9\uc740 \uc544\ub798 \uc0ac\uc774\ud2b8 \uc8fc\uc18c\uc5d0\uc11c \ud655\uc778\ud558\uc2e4 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",A.FF(null,B.NN,null,null,null,null,h,null,null,B.j5,null,null,20*b3,null,null,null,!0,null,null,null,null)),new A.rJ(null,12*b3,null),A.a6Z("https://koyotejw-ux.github.io/senior-designer-portfolio",A.FF(null,B.NM,null,null,null,null,i,null,null,B.j5,null,null,24*b3,null,null,null,!0,null,null,null,null))],e7))))}c9+=d3
+if(J.e(d0,a0)&&J.bT(c5)!==0){d6=c9+d3*0.86
+d7=56*b3
+d8=60*b3
+d9=J.bT(c5)*c0
+e0=d9+d8+d7
+e1=d6-e0
+for(e2=0;e2<J.bT(c5);++e2){e3=e1+e2*c0
+e4=B.n.dJ(B.o.j(e2+1),2,"0")
+f5=J.n(c5,e2).h(0,"title")
+f5.toString
+e5=f5
+f5=J.n(c5,e2).h(0,"company")
+f5.toString
+e6=f5
+J.f5(c8,new A.zm(b4,e3,new A.a5c(B.qL,B.v9,B.vb,B.zZ,B.q8,new A.KL(),A.b([new A.rJ(b5,null,A.a6Z(e4,c2)),new A.rJ(b6,null,null),A.a6Z(e5,c3),new A.rJ(b7,null,null),A.a6Z(e6,c4)],f1))))}e7=e1+d9+d8
+J.f5(c8,new A.zm(b4,e7,new A.Jn(B.lX,B.v9,B.vb,B.zY,B.q8,new A.KL(),A.b([A.a6Z("\ub354 \ub9ce\uc740 \ud3ec\ud2b8\ud3f4\ub9ac\uc624\uc640 \uc0c1\uc138 \ub0b4\uc6a9\uc740 \uc544\ub798 \uc0ac\uc774\ud2b8 \uc8fc\uc18c\uc5d0\uc11c \ud655\uc778\ud558\uc2e4 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",A.FF(null,B.NN,null,null,null,null,h,null,null,B.j5,null,null,20*b3,null,null,null,!0,null,null,null,null)),new A.rJ(null,12*b3,null),A.a6Z("https://koyotejw-ux.github.io/senior-designer-portfolio",A.FF(null,B.NM,null,null,null,null,i,null,null,B.j5,null,null,24*b3,null,null,null,!0,null,null,null,null))],f1))))}c9+=d3
 case 27:++d0
 s=26
 break
 case 28:b2.a8j(A.bk5(new A.b0y(c7,c8),B.Ax,A.bko(n,c9,null,0,0,0,0)))
 o.V(new A.b0z(o))
 s=30
-return A.J(A.kA(B.bL,null,f0),$async$lk)
+return A.J(A.kA(B.bL,null,f4),$async$lk)
 case 30:s=31
 return A.J(J.bgl(b2),$async$lk)
-case 31:e4=g0
-if(o.c!=null)o.V(new A.b0A(o,e4))
+case 31:e8=g4
+if(o.c!=null)o.V(new A.b0A(o,e8))
 q=1
 s=5
 break
 case 3:q=2
-f8=p.pop()
-e5=A.ar(f8)
-if(o.c!=null)o.V(new A.b0B(o,e5))
+g2=p.pop()
+e9=A.ar(g2)
+if(o.c!=null)o.V(new A.b0B(o,e9))
 s=5
 break
 case 2:s=1
