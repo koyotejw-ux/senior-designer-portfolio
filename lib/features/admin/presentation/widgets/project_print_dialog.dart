@@ -49,7 +49,7 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
   final TextEditingController _widthController = TextEditingController(
     text: '1920',
   );
-  double _quality = 8.0;
+  double _quality = 16.0;
 
   Uint8List? _finalBytes;
   String? _blobUrl;
@@ -147,8 +147,8 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
       if (wInput != null && wInput > 0) targetW = wInput;
       final int targetWInt = targetW.toInt();
 
-      final isLossless = _quality >= 10.0;
-      final jpgQuality = (_quality * 10).toInt().clamp(10, 90);
+      final isLossless = _quality >= 20.0;
+      final jpgQuality = (_quality * 5).toInt().clamp(5, 100);
 
       // Load Pretendard font for Korean text rendering in PDF
       setState(() { _statusMessage = 'Loading font...'; });
@@ -771,8 +771,8 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
                   Slider(
                     value: _quality,
                     min: 1,
-                    max: 10,
-                    divisions: 9,
+                    max: 20,
+                    divisions: 19,
                     activeColor: AppColors.primaryBlue,
                     onChanged: (v) => setState(() => _quality = v),
                   ),
