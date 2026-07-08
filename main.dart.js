@@ -35971,7 +35971,7 @@ _.f=!1
 _.r=""
 _.w=0
 _.x=a
-_.y=8
+_.y=16
 _.Q=_.z=null
 _.as=$
 _.c=_.a=null},
@@ -132360,8 +132360,8 @@ m=A.ro(o.x.a.a)
 if(m!=null&&m>0)n=m
 l=J.aS(n)
 f1=o.y
-k=f1>=10
-j=B.m.aD(B.o.D(f1*10),10,90)
+k=f1>=20
+j=B.m.aD(B.o.D(f1*5),5,100)
 o.V(new A.b0t(o))
 i=null
 h=null
@@ -132591,7 +132591,7 @@ k=k?B.a2E:B.zI
 s.push(A.E(h,A.mm(!1,h,!0,h,!0,h,h,!0,h,m,h,h,!1,h,h,h,A.p(""+l+" images",h,h,h,h,h,new A.v(!0,k,h,h,h,h,10,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h),h,h),h,j,h,h,h),B.w,h,h,new A.X(o,h,h,new A.dG(n,n,n,n),h,h,B.G),h,h,new A.dq(p.a,r),B.Az,h,h,h,h));++q}f.push(A.bAW(s,new A.b0r(i),B.eA,!0))
 return A.ayr(f,h,h,!1)},
 aoK(){var s=this,r=null,q=A.aR(A.vH(r,B.dB,!1,r,!0,B.ab,r,A.Bm(),s.x,r,r,r,r,r,2,A.kG(r,new A.cO(4,A.a2(8),B.N),r,B.mJ,r,r,r,r,!0,r,r,r,r,r,r,B.ap,!0,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.wS,"Width (px)",!0,!0,r,r,r,r,r,r,r,r,r,r,r,r,r,r),B.a0,!0,r,!0,r,!1,r,B.dN,r,r,r,r,r,r,r,r,1,r,r,!1,"\u2022",r,r,r,r,r,!1,r,r,!1,r,!0,r,B.bd,r,r,r,r,r,r,r,r,r,r,r,B.beq,!0,B.bF,r,B.eY,r,r,r,r),1,r),p=s.y,o=t.p
-return A.a_(A.b([A.ag(A.b([q,B.b_,A.aR(A.a_(A.b([A.p("Quality: "+B.o.D(p),r,r,r,r,r,B.wY,r,r),new A.P_(p,new A.b0b(s),1,10,9,B.B,r)],o),B.M,B.r,B.u),1,r)],o),B.C,B.r,B.u,0),B.a_,A.ag(A.b([A.eI(!1,B.TQ,r,r,r,r,r,r,new A.b0c(s),r,r),B.SV,A.qA(B.a8c,B.TT,s.gaDL(),A.fq(r,r,B.B,r,r,r,r,r,r,B.x,r,B.b8W,r,r,r,r,r,r,r,r))],o),B.C,B.dV,B.u,0)],o),B.C,B.r,B.u)}}
+return A.a_(A.b([A.ag(A.b([q,B.b_,A.aR(A.a_(A.b([A.p("Quality: "+B.o.D(p),r,r,r,r,r,B.wY,r,r),new A.P_(p,new A.b0b(s),1,20,19,B.B,r)],o),B.M,B.r,B.u),1,r)],o),B.C,B.r,B.u,0),B.a_,A.ag(A.b([A.eI(!1,B.TQ,r,r,r,r,r,r,new A.b0c(s),r,r),B.SV,A.qA(B.a8c,B.TT,s.gaDL(),A.fq(r,r,B.B,r,r,r,r,r,r,B.x,r,B.b8W,r,r,r,r,r,r,r,r))],o),B.C,B.dV,B.u,0)],o),B.C,B.r,B.u)}}
 A.b0D.prototype={
 $0(){var s=this.a.as
 s===$&&A.a()
