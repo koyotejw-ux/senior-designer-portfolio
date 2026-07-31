@@ -364,37 +364,6 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
             );
           }
 
-          // 포트폴리오 사이트 안내 (가장 하단)
-          final double guideY = firstRowY + totalListHeight + marginBelowList;
-
-          textOverlays.add(
-            pw.Positioned(
-              left: numX,
-              top: guideY,
-              child: pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    '더 많은 포트폴리오와 상세 내용은 아래 사이트 주소에서 확인하실 수 있습니다.',
-                    style: pw.TextStyle(
-                      font: pretendardRegular,
-                      fontSize: 20 * scaleRatio,
-                      color: const PdfColor(0.78, 0.80, 0.84),
-                    ),
-                  ),
-                  pw.SizedBox(height: 12 * scaleRatio),
-                  pw.Text(
-                    'https://koyotejw-ux.github.io/senior-designer-portfolio',
-                    style: pw.TextStyle(
-                      font: pretendardBold,
-                      fontSize: 24 * scaleRatio,
-                      color: PdfColors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
         }
 
         cumY += pageH;
