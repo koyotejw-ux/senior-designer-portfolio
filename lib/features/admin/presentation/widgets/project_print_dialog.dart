@@ -323,19 +323,17 @@ class _ProjectPrintDialogState extends State<ProjectPrintDialog> {
         );
 
         if (i == int03ImageIndex && selectedItems.isNotEmpty) {
-          // ── int_03 텍스트 오버레이 (하단 정렬로 위로 쌓임) ─────────────────
-          // 좌측 육각형 하단 기준 Y 좌표 (대략 이미지 높이의 86% 지점으로 추정)
-          final double bottomAnchorY = cumY + (pageH * 0.86);
+          // ── int_03 텍스트 오버레이 (세로 가운데 정렬) ─────────────────
+          // 리스트 표시 영역: 이미지 상단 14% ~ 하단 86% 사이를 사용
+          final double areaTopY    = cumY + (pageH * 0.14);
+          final double areaBottomY = cumY + (pageH * 0.86);
 
-          final double guideHeight = (20 + 12 + 24) * scaleRatio;
-          final double marginBelowList = 60.0 * scaleRatio;
-          
-          // 전체 블록의 총 높이 계산
+          // 전체 리스트 높이 계산
           final double totalListHeight = selectedItems.length * rowStep;
-          final double totalBlockHeight = totalListHeight + marginBelowList + guideHeight;
-          
-          // 리스트가 시작될 가장 상단의 Y 좌표 (바텀 앵커에서 총 높이를 뺀 값)
-          final double firstRowY = bottomAnchorY - totalBlockHeight;
+
+          // 세로 가운데 정렬: 영역 중심에서 리스트 절반 높이만큼 위로 올림
+          final double centerY   = (areaTopY + areaBottomY) / 2;
+          final double firstRowY = centerY - totalListHeight / 2;
 
           for (int ti = 0; ti < selectedItems.length; ti++) {
             final yPos       = firstRowY + ti * rowStep;
